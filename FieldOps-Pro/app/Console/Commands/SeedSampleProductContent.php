@@ -78,7 +78,7 @@ class SeedSampleProductContent extends Command
     private function createSampleFiles($directory)
     {
         // Create a sample PDF file
-        $pdfContent = "Sample PDF Content\n\nThis is a sample PDF file for the FieldOps-Pro platform.";
+        $pdfContent = "Sample PDF Content\n\nThis is a sample PDF file for the FieldEngineer-Pro platform.";
         file_put_contents("{$directory}/sample-guide.pdf", $pdfContent);
         
         // Create a sample Excel file

@@ -2,6 +2,7 @@
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
+import TermsAndConditions from '@/Components/TermsAndConditions.vue';
 
 const props = defineProps({
     product: Object,
@@ -16,6 +17,8 @@ const cardElement = ref(null);
 const paymentProcessing = ref(false);
 const paymentError = ref('');
 const paymentMethod = ref('card'); // 'card' or 'ach'
+const termsAccepted = ref(false);
+const termsError = ref(false);
 
 const form = useForm({
     payment_method: 'card',
@@ -53,6 +56,12 @@ onMounted(() => {
 });
 
 const processPayment = async () => {
+    // Check if terms are accepted
+    if (!termsAccepted.value) {
+        termsError.value = true;
+        return;
+    }
+    
     paymentProcessing.value = true;
     paymentError.value = '';
     
@@ -94,7 +103,7 @@ const setPaymentMethod = (method) => {
 <template>
     <AppLayout>
         <Head>
-            <title>Checkout - FieldOps Pro</title>
+            <title>Checkout - FieldEngineer Pro</title>
         </Head>
 
         <div class="py-12">
@@ -122,6 +131,19 @@ const setPaymentMethod = (method) => {
                                     <div class="flex justify-between mt-4 pt-4 border-t border-gray-200 font-medium">
                                         <span>Total</span>
                                         <span>${{ finalPrice.toFixed(2) }}</span>
+                                    </div>
+                                    
+                                    <!-- Subscription terms -->
+                                    <div v-if="product.name !== 'FieldOps Scout'" class="mt-4 pt-4 border-t border-gray-200">
+                                        <p class="text-sm text-indigo-600 font-medium">
+                                            You will be billed ${{ product.price.toFixed(2) }} monthly for access to {{ product.name }}.
+                                        </p>
+                                    </div>
+                                    
+                                    <div v-else class="mt-4 pt-4 border-t border-gray-200">
+                                        <p class="text-sm text-indigo-600 font-medium">
+                                            One-time purchase, no recurring charges.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -175,6 +197,14 @@ const setPaymentMethod = (method) => {
                                     </p>
                                 </div>
                                 
+                                <!-- Terms and Conditions -->
+                                <TermsAndConditions
+                                    :is-subscription="product.name !== 'FieldOps Scout'"
+                                    subscription-frequency="monthly"
+                                    v-model:value="termsAccepted"
+                                    v-model:error="termsError"
+                                />
+
                                 <!-- Submit button -->
                                 <div class="mt-8">
                                     <button 

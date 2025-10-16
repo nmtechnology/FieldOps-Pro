@@ -1,7 +1,7 @@
 <template>
     <AppLayout title="Checkout">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 Checkout
             </h2>
         </template>
@@ -11,25 +11,25 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Order Summary -->
                     <div class="col-span-1">
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 bg-white border-b border-gray-200">
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Order Summary</h3>
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Order Summary</h3>
                                 
                                 <div class="mb-4">
                                     <div class="flex justify-between mb-2">
-                                        <span class="text-sm text-gray-600">Product:</span>
-                                        <span class="text-sm font-medium">{{ product.name }}</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Product:</span>
+                                        <span class="text-sm font-medium dark:text-gray-300">{{ product.name }}</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-sm text-gray-600">Price:</span>
-                                        <span class="text-sm font-medium">${{ product.price.toFixed(2) }}</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Price:</span>
+                                        <span class="text-sm font-medium dark:text-gray-300">${{ product.price.toFixed(2) }}</span>
                                     </div>
                                 </div>
                                 
                                 <!-- Discount Code Section -->
-                                <div class="border-t border-gray-200 pt-4 mb-4">
+                                <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-4">
                                     <div class="mb-2">
-                                        <label for="discount-code" class="block text-sm font-medium text-gray-700">Discount Code</label>
+                                        <label for="discount-code" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Discount Code</label>
                                         <div class="mt-1 flex rounded-md shadow-sm">
                                             <input type="text" name="discount-code" id="discount-code" v-model="discountCode" 
                                                 class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300"
@@ -50,8 +50,8 @@
                                 
                                 <div class="border-t border-gray-200 pt-4">
                                     <div class="flex justify-between">
-                                        <span class="text-base font-medium text-gray-900">Subtotal:</span>
-                                        <span class="text-base font-medium text-gray-900">${{ product.price.toFixed(2) }}</span>
+                                        <span class="text-base font-medium text-gray-900 dark:text-white">Subtotal:</span>
+                                        <span class="text-base font-medium text-gray-900 dark:text-white">${{ product.price.toFixed(2) }}</span>
                                     </div>
                                     
                                     <div v-if="discount" class="flex justify-between mt-2 text-green-600">
@@ -60,8 +60,8 @@
                                     </div>
                                     
                                     <div class="flex justify-between mt-4">
-                                        <span class="text-lg font-bold text-gray-900">Total:</span>
-                                        <span class="text-lg font-bold text-gray-900">${{ finalAmount.toFixed(2) }}</span>
+                                        <span class="text-lg font-bold text-gray-900 dark:text-white">Total:</span>
+                                        <span class="text-lg font-bold text-gray-900 dark:text-white">${{ finalAmount.toFixed(2) }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -70,9 +70,9 @@
                     
                     <!-- Payment Form -->
                     <div class="col-span-2">
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 bg-white border-b border-gray-200">
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Payment Method</h3>
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Payment Method</h3>
                                 
                                 <!-- Payment Method Selector -->
                                 <div class="mb-6">
@@ -98,7 +98,7 @@
                                 <div v-if="paymentMethod === 'card'" class="mt-4">
                                     <form @submit.prevent="processCardPayment">
                                         <div class="mb-4">
-                                            <label for="card-element" class="block text-sm font-medium text-gray-700 mb-2">Card Details</label>
+                                            <label for="card-element" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Card Details</label>
                                             <div id="card-element" class="border border-gray-300 rounded-md p-3"></div>
                                             <div id="card-errors" class="mt-2 text-sm text-red-600" role="alert"></div>
                                         </div>
@@ -117,25 +117,25 @@
                                 <div v-if="paymentMethod === 'ach'" class="mt-4">
                                     <form @submit.prevent="processAchPayment">
                                         <div class="mb-4">
-                                            <label for="ach-name" class="block text-sm font-medium text-gray-700">Account Holder Name</label>
+                                            <label for="ach-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Account Holder Name</label>
                                             <input type="text" id="ach-name" v-model="achForm.name" required
                                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         </div>
                                         
                                         <div class="mb-4">
-                                            <label for="ach-email" class="block text-sm font-medium text-gray-700">Email</label>
+                                            <label for="ach-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
                                             <input type="email" id="ach-email" v-model="achForm.email" required
                                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         </div>
                                         
                                         <div class="mb-4">
-                                            <label for="ach-routing" class="block text-sm font-medium text-gray-700">Routing Number</label>
+                                            <label for="ach-routing" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Routing Number</label>
                                             <input type="text" id="ach-routing" v-model="achForm.routing" required
                                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         </div>
                                         
                                         <div class="mb-4">
-                                            <label for="ach-account" class="block text-sm font-medium text-gray-700">Account Number</label>
+                                            <label for="ach-account" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Account Number</label>
                                             <input type="text" id="ach-account" v-model="achForm.account" required
                                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         </div>
@@ -144,8 +144,8 @@
                                             <div class="flex items-center">
                                                 <input id="ach-terms" type="checkbox" v-model="achForm.acceptedTerms" required
                                                     class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                                                <label for="ach-terms" class="ml-2 block text-sm text-gray-900">
-                                                    I authorize this payment and agree to the terms and conditions
+                                                <label for="ach-terms" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                                                    I authorize the payment and agree to the <a href="#" @click.prevent="showTerms = true" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">Terms and Conditions</a>
                                                 </label>
                                             </div>
                                         </div>

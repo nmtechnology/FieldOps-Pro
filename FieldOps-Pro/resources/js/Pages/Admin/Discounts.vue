@@ -7,21 +7,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto s        saveDiscount() {
-            if (this.isEdit) {
-                router.put(route('admin.discounts.update', this.selectedDiscount.id), this.form, {
-                    onSuccess: () => {
-                        this.closeDiscountModal();
-                    }
-                });
-            } else {
-                router.post(route('admin.discounts.store'), this.form, {
-                    onSuccess: () => {
-                        this.closeDiscountModal();
-                    }
-                });
-            }
-        },>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <!-- Flash Messages -->
@@ -322,13 +308,13 @@ export default defineComponent({
         },
         saveDiscount() {
             if (this.isEditMode) {
-                Inertia.put(route('admin.discounts.update', this.selectedDiscount.id), this.form, {
+                router.put(route('admin.discounts.update', this.selectedDiscount.id), this.form, {
                     onSuccess: () => {
                         this.closeDiscountModal();
                     }
                 });
             } else {
-                Inertia.post(route('admin.discounts.store'), this.form, {
+                router.post(route('admin.discounts.store'), this.form, {
                     onSuccess: () => {
                         this.closeDiscountModal();
                     }

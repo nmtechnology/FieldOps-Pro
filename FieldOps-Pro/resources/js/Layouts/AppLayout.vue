@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -8,9 +8,36 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 const showingNavigationDropdown = ref(false);
+const darkMode = ref(false);
 
-// Load Stripe.js when component mounts
+// Toggle dark mode function
+const toggleDarkMode = () => {
+    darkMode.value = !darkMode.value;
+    localStorage.setItem('darkMode', darkMode.value ? 'enabled' : 'disabled');
+    updateTheme();
+};
+
+// Update the document theme based on dark mode setting
+const updateTheme = () => {
+    if (darkMode.value) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+};
+
+// Load Stripe.js and initialize dark mode when component mounts
 onMounted(() => {
+    // Initialize dark mode from localStorage or system preference
+    const savedTheme = localStorage.getItem('darkMode');
+    if (savedTheme === 'enabled' || 
+        (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        darkMode.value = true;
+    }
+    
+    updateTheme();
+    
+    // Load Stripe.js
     if (!window.Stripe) {
         const script = document.createElement('script');
         script.src = 'https://js.stripe.com/v3/';
@@ -21,17 +48,18 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="border-b border-gray-100 bg-white">
+    <div class="bg-gray-900">
+        <div class="min-h-screen bg-gray-900">
+            <nav class="border-b border-gray-700 bg-gray-900">
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('home')">
-                                    <span class="text-2xl font-bold text-indigo-600">FieldOps Pro</span>
+                                <Link :href="route('home')" class="flex items-center">
+                                    <img src="/img/fieldengineer-logo.png" alt="FieldEngineer Pro Logo" class="h-8 w-auto mr-2" />
+                                    <span class="text-2xl font-bold text-orange-400">FieldEngineer Pro</span>
                                 </Link>
                             </div>
 
@@ -48,6 +76,22 @@ onMounted(() => {
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
+                            <!-- Dark Mode Toggle -->
+                            <button 
+                                @click="toggleDarkMode" 
+                                class="inline-flex items-center px-3 py-2 border border-orange-400 text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:text-orange-400 focus:outline-none transition ease-in-out duration-150 mr-2"
+                                :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+                            >
+                                <!-- Sun icon for light mode -->
+                                <svg v-if="darkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                                <!-- Moon icon for dark mode -->
+                                <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                </svg>
+                            </button>
+                            
                             <!-- Settings Dropdown -->
                             <div v-if="$page.props.auth.user" class="relative ms-3">
                                 <Dropdown align="right" width="48">
@@ -138,13 +182,31 @@ onMounted(() => {
                         </ResponsiveNavLink>
                     </div>
 
+                    <!-- Dark Mode Toggle (Mobile) -->
+                    <div class="border-t border-gray-700 pt-4 pb-1 px-4">
+                        <button 
+                            @click="toggleDarkMode" 
+                            class="flex items-center w-full py-2 text-left text-base font-medium text-white hover:text-orange-400 focus:outline-none focus:text-orange-400 transition duration-150 ease-in-out"
+                        >
+                            <!-- Sun icon for light mode -->
+                            <svg v-if="darkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <!-- Moon icon for dark mode -->
+                            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                            {{ darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}
+                        </button>
+                    </div>
+
                     <!-- Responsive Settings Options -->
-                    <div v-if="$page.props.auth.user" class="border-t border-gray-200 pb-1 pt-4">
+                    <div v-if="$page.props.auth.user" class="border-t border-gray-700 pb-1 pt-4">
                         <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">
+                            <div class="font-medium text-base text-orange-400">
                                 {{ $page.props.auth.user.name }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
+                            <div class="font-medium text-sm text-white">{{ $page.props.auth.user.email }}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
@@ -155,9 +217,9 @@ onMounted(() => {
                         </div>
                     </div>
                     
-                    <div v-else class="py-3 px-4 border-t border-gray-200 flex flex-col space-y-2">
-                        <Link :href="route('login')" class="w-full text-center py-2 text-sm text-gray-500 hover:text-gray-700">Log in</Link>
-                        <Link :href="route('register')" class="w-full text-center py-2 rounded-md bg-indigo-600 text-sm text-white hover:bg-indigo-500">Register</Link>
+                    <div v-else class="py-3 px-4 border-t border-gray-700 flex flex-col space-y-2">
+                        <Link :href="route('login')" class="w-full text-center py-2 text-sm text-white hover:text-orange-400">Log in</Link>
+                        <Link :href="route('register')" class="w-full text-center py-2 rounded-md bg-orange-500 text-sm text-white hover:bg-orange-600">Register</Link>
                     </div>
                 </div>
             </nav>

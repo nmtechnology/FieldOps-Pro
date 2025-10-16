@@ -11,13 +11,13 @@ const props = defineProps({
 <template>
     <AppLayout>
         <Head>
-            <title>Thank You - FieldOps Pro</title>
+            <title>Thank You - FieldEngineer Pro</title>
         </Head>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="p-6 sm:p-10 bg-white">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="p-6 sm:p-10 bg-white dark:bg-gray-800">
                         <div class="text-center">
                             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100">
                                 <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -25,36 +25,36 @@ const props = defineProps({
                                 </svg>
                             </div>
                             
-                            <h1 class="mt-4 text-2xl font-semibold text-gray-900 sm:text-3xl">Thank you for your purchase!</h1>
+                            <h1 class="mt-4 text-2xl font-semibold text-gray-900 dark:text-white sm:text-3xl">Thank you for your purchase!</h1>
                             
-                            <p class="mt-2 text-gray-600">
+                            <p class="mt-2 text-gray-600 dark:text-gray-300">
                                 Your order has been successfully processed and your access is now available.
                             </p>
                             
-                            <div class="mt-8 p-5 bg-gray-50 rounded-lg">
-                                <h2 class="text-lg font-medium text-gray-900">Order Details</h2>
+                            <div class="mt-8 p-5 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                <h2 class="text-lg font-medium text-gray-900 dark:text-white">Order Details</h2>
                                 <div class="mt-2 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
                                     <div class="flex justify-between sm:block">
-                                        <span class="text-gray-500">Order Number:</span>
-                                        <span class="font-medium">{{ order.order_number }}</span>
+                                        <span class="text-gray-500 dark:text-gray-400">Order Number:</span>
+                                        <span class="font-medium dark:text-gray-200">{{ order.order_number }}</span>
                                     </div>
                                     <div class="flex justify-between sm:block">
-                                        <span class="text-gray-500">Date:</span>
-                                        <span class="font-medium">{{ new Date(order.created_at).toLocaleDateString() }}</span>
+                                        <span class="text-gray-500 dark:text-gray-400">Date:</span>
+                                        <span class="font-medium dark:text-gray-200">{{ new Date(order.created_at).toLocaleDateString() }}</span>
                                     </div>
                                     <div class="flex justify-between sm:block">
-                                        <span class="text-gray-500">Total:</span>
-                                        <span class="font-medium">${{ order.amount.toFixed(2) }}</span>
+                                        <span class="text-gray-500 dark:text-gray-400">Total:</span>
+                                        <span class="font-medium dark:text-gray-200">${{ order.amount.toFixed(2) }}</span>
                                     </div>
                                     <div class="flex justify-between sm:block">
-                                        <span class="text-gray-500">Product:</span>
-                                        <span class="font-medium">{{ product.name }}</span>
+                                        <span class="text-gray-500 dark:text-gray-400">Product:</span>
+                                        <span class="font-medium dark:text-gray-200">{{ product.name }}</span>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="mt-10">
-                                <p class="text-gray-600 mb-6">
+                                <p class="text-gray-600 dark:text-gray-300 mb-6">
                                     You can access your purchase at any time from your dashboard.
                                 </p>
                                 
@@ -63,7 +63,7 @@ const props = defineProps({
                                         Go to Dashboard
                                     </Link>
                                     
-                                    <Link :href="route('home')" class="inline-flex items-center justify-center px-5 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    <Link :href="route('home')" class="inline-flex items-center justify-center px-5 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
                                         Return Home
                                     </Link>
                                 </div>

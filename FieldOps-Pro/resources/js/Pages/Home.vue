@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import PricingTiers from '@/Components/PricingTiers.vue';
 
 defineProps({
     canLogin: Boolean,
@@ -10,15 +11,15 @@ defineProps({
 
 <template>
     <Head>
-        <title>FieldOps Pro - Professional Info Products</title>
+        <title>FieldEngineer Pro - Professional Info Products</title>
         <meta name="description" content="High-quality info products for professionals">
     </Head>
 
-    <div class="min-h-screen bg-gray-100">
-        <div class="relative bg-white overflow-hidden">
+    <div class="min-h-screen bg-gray-900 dark:bg-gray-900">
+        <div class="relative bg-gray-900 dark:bg-gray-800 overflow-hidden">
             <div class="max-w-7xl mx-auto">
-                <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                    <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <div class="relative z-10 pb-8 bg-gray-900 bg-gradient-to-br dark:bg-gray-800 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                    <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-gray-700 dark:text-gray-800 transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                         <polygon points="50,0 100,0 50,100 0,100" />
                     </svg>
 
@@ -27,8 +28,10 @@ defineProps({
                             <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
                                 <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                                     <div class="flex items-center justify-between w-full md:w-auto">
-                                        <a href="#" class="text-2xl font-bold text-indigo-600">
-                                            FieldOps Pro
+                                        <a href="#" class="flex items-center text-2xl font-bold text-orange-500">
+                                            <img src="/img/fieldengineer-logo.png" alt="FieldEngineer Pro Logo" class="h-8 w-auto mr-2" />
+                                            FieldEngineer Pro
+
                                         </a>
                                     </div>
                                 </div>
@@ -38,11 +41,11 @@ defineProps({
                                     <a href="#about" class="font-medium text-gray-500 hover:text-gray-900">About</a>
                                     
                                     <template v-if="canLogin">
-                                        <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="font-medium text-indigo-600 hover:text-indigo-500">Dashboard</Link>
+                                        <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="font-medium text-orange-400 hover:text-orange-300">Dashboard</Link>
                                         <template v-else>
                                             <Link :href="route('login')" class="font-medium text-gray-500 hover:text-gray-900">Log in</Link>
 
-                                            <Link v-if="canRegister" :href="route('register')" class="font-medium text-indigo-600 hover:text-indigo-500">Register</Link>
+                                            <Link v-if="canRegister" :href="route('register')" class="font-medium text-orange-600 hover:text-orange-500">Register</Link>
                                         </template>
                                     </template>
                                 </div>
@@ -52,21 +55,21 @@ defineProps({
 
                     <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                         <div class="sm:text-center lg:text-left">
-                            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                                <span class="block xl:inline">Expert knowledge for</span>
-                                <span class="block text-indigo-600 xl:inline">professional success</span>
+                            <h1 class="text-4xl tracking-tight font-extrabold text-orange-600 sm:text-5xl md:text-6xl">
+                                <span class="block xl:inline">Unlock Your Potential as an</span>
+                                <span class="block text-orange-400 xl:inline"> Independent Field Engineer</span>
                             </h1>
-                            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                Access premium info products designed to help you excel in your field with practical knowledge and actionable insights.
+                            <p class="mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                                Learn how to set competitive rates, win bids on work platforms, and create sustainable self-employment opportunities in the low voltage contracting industry.
                             </p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                                 <div class="rounded-md shadow">
-                                    <Link :href="route('products.show', { product: featuredProduct.id })" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                                    <Link :href="route('products.show', { product: featuredProduct.id })" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-600 hover:bg-orange-500 md:py-4 md:text-lg md:px-10">
                                         Get started
                                     </Link>
                                 </div>
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
-                                    <a href="#featured" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                                    <a href="#featured" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-400 hover:bg-orange-700 md:py-4 md:text-lg md:px-10">
                                         Learn more
                                     </a>
                                 </div>
@@ -76,19 +79,19 @@ defineProps({
                 </div>
             </div>
             <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="Professional working environment">
+                <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2850&q=80" alt="Field engineer working with low voltage equipment">
             </div>
         </div>
 
         <!-- Featured Product Section -->
-        <div id="featured" class="py-12 bg-white">
+        <div id="featured" class="py-12 bg-gray-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="lg:text-center">
-                    <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Featured Product</h2>
-                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    <h2 class="text-base text-orange-400 font-semibold tracking-wide uppercase">Featured Product</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-orange-400 sm:text-4xl">
                         {{ featuredProduct.name }}
                     </p>
-                    <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    <p class="mt-4 max-w-2xl text-xl text-white lg:mx-auto">
                         {{ featuredProduct.description }}
                     </p>
                 </div>
@@ -96,37 +99,96 @@ defineProps({
                 <div class="mt-10">
                     <div class="lg:grid lg:grid-cols-2 lg:gap-x-8">
                         <div>
-                            <div class="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-                                <img v-if="featuredProduct.image_path" :src="featuredProduct.image_path" alt="Product image" class="w-full h-full object-center object-cover">
-                                <div v-else class="w-full h-full bg-indigo-100 flex items-center justify-center">
-                                    <span class="text-indigo-600 text-xl font-medium">{{ featuredProduct.name }}</span>
+                            <div class="relative max-w-sm mx-auto lg:mx-0">
+                                <!-- Book Cover with 3D effect -->
+                                <div class="relative transform perspective-1000 rotate-y-0 hover:rotate-y-10 transition-transform duration-500">
+                                    <div class="w-full aspect-[3/4] bg-gradient-to-br from-slate-800 via-slate-700 to-slate-600 rounded-lg shadow-xl overflow-hidden relative">
+                                        <!-- Book Cover Lighting Effects -->
+                                        <div class="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-white/10 opacity-70"></div>
+                                        <div class="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-white/10 to-transparent opacity-20"></div>
+                                        
+                                        <!-- Book Spine Effect -->
+                                        <div class="absolute left-0 top-0 h-full w-[15px] bg-gradient-to-r from-slate-900 to-slate-800"></div>
+                                        
+                                        <!-- Book Content -->
+                                        <div class="flex flex-col h-full p-6 pl-10 relative">
+                                            <!-- Logo at the top -->
+                                            <!-- <div class="flex justify-center mb-8 mt-12">
+                                                <img src="/img/fieldengineer-logo.png" alt="FieldEngineer Pro Logo" class="h-16 w-auto" />
+                                            </div> -->
+                                            
+                                            <!-- Icons at the top similar to cover.png but with orange theme and 3D effects -->
+                                            <div class="flex items-center gap-4 mb-8">
+                                                <!-- Square with circle icon with gradient and shadow -->
+                                                <div class="h-14 w-14 bg-gradient-to-br from-orange-300 to-orange-500 rounded-md flex items-center justify-center shadow-md relative">
+                                                    <div class="absolute inset-0 bg-gradient-to-tr from-black/10 to-white/30 rounded-md"></div>
+                                                    <div class="h-8 w-8 bg-slate-700 rounded-full shadow-inner"></div>
+                                                </div>
+                                                <!-- Circle with square icon with gradient and shadow -->
+                                                <div class="h-14 w-14 bg-gradient-to-br from-orange-300 to-orange-500 rounded-full flex items-center justify-center shadow-md relative">
+                                                    <div class="absolute inset-0 bg-gradient-to-tr from-black/10 to-white/30 rounded-full"></div>
+                                                    <div class="h-8 w-8 bg-slate-700 rounded-md shadow-inner"></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Title with enhanced 3D effects -->
+                                            <div class="mt-auto mb-4 relative">
+                                                <!-- Subtle glow effect behind title -->
+                                                <div class="absolute -left-2 -top-2 w-full h-full blur-md bg-orange-400/10"></div>
+                                                
+                                                <!-- Title text with gradient and text shadow -->
+                                                <h3 class="text-4xl leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-orange-500 mb-2 relative drop-shadow-sm">FieldEngineer</h3>
+                                                <h4 class="text-4xl leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-300 mb-4 drop-shadow-sm">Pro</h4>
+                                                
+                                                <!-- Separator line with gradient -->
+                                                <div class="w-24 h-1 bg-gradient-to-r from-orange-300 to-orange-500 mb-4 rounded-full"></div>
+                                                
+                                                <p class="text-lg font-light text-gray-300 mb-12 leading-relaxed relative">
+                                                    The definitive method to mastering field operations.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Book Shadow - more realistic with multiple layers -->
+                                <div class="absolute -bottom-3 left-0 right-8 h-4 bg-black/30 blur-sm rounded-full"></div>
+                                <div class="absolute -bottom-2 left-4 right-6 h-6 bg-black/20 blur-md rounded-full"></div>
+                                
+                                <!-- Book Pages Edge with more dimension -->
+                                <div class="absolute top-[2%] bottom-[2%] right-0 w-[6px] bg-gradient-to-l from-gray-100 via-gray-200 to-gray-300 rounded-r transform translate-x-[3px]">
+                                    <!-- Subtle page separator lines with better dimension -->
+                                    <div class="h-full w-full opacity-30" style="background-image: repeating-linear-gradient(to bottom, transparent, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px);"></div>
+                                    <!-- Top and bottom shading -->
+                                    <div class="absolute top-0 left-0 right-0 h-[15%] bg-gradient-to-b from-gray-400/30 to-transparent"></div>
+                                    <div class="absolute bottom-0 left-0 right-0 h-[15%] bg-gradient-to-t from-gray-400/30 to-transparent"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-10 lg:mt-0">
-                            <h3 class="text-2xl font-extrabold text-gray-900">Key Benefits</h3>
-                            <div class="mt-4 text-gray-500">
+                            <h3 class="text-2xl font-extrabold text-orange-400">Key Benefits</h3>
+                            <div class="mt-4 text-white">
                                 <ul class="mt-6 space-y-6">
                                     <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
                                         <span class="ml-3">Expert knowledge from industry professionals</span>
                                     </li>
                                     <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
                                         <span class="ml-3">Practical templates and resources</span>
                                     </li>
                                     <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
                                         <span class="ml-3">Step-by-step implementation guides</span>
                                     </li>
                                     <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
                                         <span class="ml-3">Lifetime access to all content and updates</span>
@@ -134,9 +196,9 @@ defineProps({
                                 </ul>
                                 
                                 <div class="mt-10">
-                                    <h4 class="text-lg font-medium text-gray-900">Price: ${{ featuredProduct.price.toFixed(2) }}</h4>
+                                    <h4 class="text-lg font-medium text-white">Price: ${{ featuredProduct.price.toFixed(2) }}</h4>
                                     <div class="mt-4">
-                                        <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                                        <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
                                             Learn More
                                         </Link>
                                     </div>
@@ -148,12 +210,15 @@ defineProps({
             </div>
         </div>
 
+        <!-- Pricing Tiers section -->
+        <PricingTiers />
+
         <!-- Testimonial section -->
-        <div id="testimonials" class="bg-gray-50 py-16 lg:py-24">
+        <div id="testimonials" class="bg-gray-900 py-16 lg:py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="lg:text-center">
-                    <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Testimonials</h2>
-                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    <h2 class="text-base text-orange-400 font-semibold tracking-wide uppercase">Testimonials</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-orange-400 sm:text-4xl">
                         What our customers are saying
                     </p>
                 </div>
@@ -161,23 +226,23 @@ defineProps({
                 <div class="mt-12">
                     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                         <!-- Testimonial 1 -->
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
                             <div class="px-6 py-8">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-10 w-10 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-10 w-10 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"></path>
                                             <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z"></path>
                                         </svg>
                                     </div>
                                     <div class="ml-4">
-                                        <h3 class="text-lg font-medium text-gray-900">Sarah Johnson</h3>
-                                        <p class="text-sm text-gray-500">Marketing Director</p>
+                                        <h3 class="text-lg font-medium text-orange-400">Mike Ramirez</h3>
+                                        <p class="text-sm text-white">Independent Low Voltage Technician</p>
                                     </div>
                                 </div>
                                 <div class="mt-4">
-                                    <p class="text-gray-600">
-                                        "This info product was exactly what I needed to take my marketing strategy to the next level. The practical templates saved me hours of work."
+                                    <p class="text-white">
+                                        "The FieldOps Pro guide completely changed how I approach bidding for contracts. Within 2 weeks of applying these strategies, I landed 3 new clients and increased my rates by 30%."
                                     </p>
                                 </div>
                                 <div class="mt-4 flex">
@@ -201,22 +266,22 @@ defineProps({
                         </div>
                         
                         <!-- Testimonial 2 -->
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
                             <div class="px-6 py-8">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-10 w-10 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-10 w-10 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"></path>
                                             <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z"></path>
                                         </svg>
                                     </div>
                                     <div class="ml-4">
-                                        <h3 class="text-lg font-medium text-gray-900">Michael Chen</h3>
-                                        <p class="text-sm text-gray-500">Small Business Owner</p>
+                                        <h3 class="text-lg font-medium text-orange-400">Michael Chen</h3>
+                                        <p class="text-sm text-white">Small Business Owner</p>
                                     </div>
                                 </div>
                                 <div class="mt-4">
-                                    <p class="text-gray-600">
+                                    <p class="text-white">
                                         "Worth every penny! The strategies I learned helped me increase my business revenue by 30% in just three months."
                                     </p>
                                 </div>
@@ -241,22 +306,22 @@ defineProps({
                         </div>
                         
                         <!-- Testimonial 3 -->
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
                             <div class="px-6 py-8">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-10 w-10 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-10 w-10 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"></path>
                                             <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z"></path>
                                         </svg>
                                     </div>
                                     <div class="ml-4">
-                                        <h3 class="text-lg font-medium text-gray-900">Jessica Rodriguez</h3>
-                                        <p class="text-sm text-gray-500">Freelance Consultant</p>
+                                        <h3 class="text-lg font-medium text-orange-400">Jessica Rodriguez</h3>
+                                        <p class="text-sm text-white">Freelance Consultant</p>
                                     </div>
                                 </div>
                                 <div class="mt-4">
-                                    <p class="text-gray-600">
+                                    <p class="text-white">
                                         "As a freelancer, this info product gave me the structure I needed to approach client projects more professionally and efficiently."
                                     </p>
                                 </div>
@@ -285,28 +350,28 @@ defineProps({
         </div>
 
         <!-- About section -->
-        <div id="about" class="bg-white py-16 lg:py-24">
+        <div id="about" class="bg-gray-900 py-16 lg:py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="lg:text-center">
-                    <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">About Us</h2>
-                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    <h2 class="text-base text-orange-400 font-semibold tracking-wide uppercase">About Us</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-orange-400 sm:text-4xl">
                         Expert Knowledge, Delivered Digitally
                     </p>
-                    <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    <p class="mt-4 max-w-2xl text-xl text-white lg:mx-auto">
                         We create premium info products designed to help professionals succeed in their fields.
                     </p>
                 </div>
 
                 <div class="mt-10">
-                    <div class="prose prose-indigo prose-lg text-gray-500 mx-auto">
+                    <div class="prose prose-orange prose-lg text-white mx-auto">
                         <p>
-                            At FieldOps Pro, we believe that knowledge should be accessible, practical, and transformative. Our team of industry experts has years of experience and insights that we've distilled into comprehensive info products.
+                            At FieldEngineer Pro, I'm sharing my years of hands-on experience as a successful field engineer in the low voltage industry. I've developed proven strategies for bidding, winning contracts, and setting competitive rates that maximize earnings on various work platforms.
                         </p>
                         <p>
-                            What makes our products different is our focus on real-world application. Each product is designed with actionable steps, templates, and resources that you can implement immediately to see tangible results.
+                            What makes my info products different is that they're based on real-world success stories and techniques I've personally used to create a sustainable self-employment business. Whether you're a seasoned contractor looking to expand, or someone seeking to break into the field for extra income, these resources provide the exact roadmap I followed.
                         </p>
                         <p>
-                            Our commitment to quality means that we continuously update our materials with the latest industry trends and best practices, ensuring that your one-time purchase delivers value for years to come.
+                            From optimizing your profile to stand out on bidding platforms, to pricing strategies that win contracts while maintaining profitability, to managing client relationships that lead to repeat business—my comprehensive guides cover everything you need to succeed as an independent low voltage contractor.
                         </p>
                     </div>
                 </div>
@@ -314,29 +379,29 @@ defineProps({
         </div>
 
         <!-- Newsletter section -->
-        <div class="bg-gray-50 py-16">
+        <div class="bg-gray-800 py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="max-w-xl">
-                        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-orange-400 sm:text-4xl">
                             Subscribe to our newsletter
                         </h2>
-                        <p class="mt-3 text-lg text-gray-500">
+                        <p class="mt-3 text-lg text-white">
                             Get free tips, strategies, and occasional special offers delivered directly to your inbox.
                         </p>
                     </div>
                     <div class="mt-8 lg:mt-0 lg:ml-8">
                         <form class="sm:flex">
                             <label for="email-address" class="sr-only">Email address</label>
-                            <input id="email-address" name="email" type="email" autocomplete="email" required class="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs rounded-md" placeholder="Enter your email">
+                            <input id="email-address" name="email" type="email" autocomplete="email" required class="w-full px-5 py-3 border border-gray-700 bg-gray-800 shadow-sm text-white placeholder-gray-400 focus:ring-1 focus:ring-orange-400 focus:border-orange-400 sm:max-w-xs rounded-md" placeholder="Enter your email">
                             <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                                <button type="submit" class="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <button type="submit" class="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-400 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400">
                                     Subscribe
                                 </button>
                             </div>
                         </form>
-                        <p class="mt-3 text-sm text-gray-500">
-                            We care about your data. Read our <a href="#" class="font-medium text-gray-900 underline">Privacy Policy</a>.
+                        <p class="mt-3 text-sm text-gray-300">
+                            We care about your data. Read our <a href="#" class="font-medium text-orange-400 underline">Privacy Policy</a>.
                         </p>
                     </div>
                 </div>
@@ -344,14 +409,14 @@ defineProps({
         </div>
 
         <!-- Footer -->
-        <footer class="bg-white">
+        <footer class="bg-gray-900">
             <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
                 <nav class="flex flex-wrap justify-center -mx-5 -my-2">
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-gray-500 hover:text-gray-900">About</a>
+                        <a href="#" class="text-base text-white hover:text-orange-400">About</a>
                     </div>
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-gray-500 hover:text-gray-900">Products</a>
+                        <a href="#" class="text-base text-white hover:text-orange-400">Products</a>
                     </div>
                     <div class="px-5 py-2">
                         <a href="#" class="text-base text-gray-500 hover:text-gray-900">Contact</a>
@@ -384,9 +449,27 @@ defineProps({
                     </a>
                 </div>
                 <p class="mt-8 text-center text-base text-gray-400">
-                    &copy; 2025 FieldOps Pro. All rights reserved.
+                    &copy; 2025 FieldEngineer Pro. All rights reserved. 
+                    <Link :href="route('terms')" class="text-orange-400 hover:text-orange-500 ml-1">Terms & Conditions</Link>
                 </p>
             </div>
         </footer>
     </div>
 </template>
+
+<style>
+/* Book Effect CSS */
+.perspective-1000 {
+    perspective: 1000px;
+}
+.rotate-y-0 {
+    transform: rotateY(0deg);
+}
+.rotate-y-10 {
+    transform: rotateY(10deg);
+}
+.bg-pattern {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+    background-size: 15px 15px;
+}
+</style>

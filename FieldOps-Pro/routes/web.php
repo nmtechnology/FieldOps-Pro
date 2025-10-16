@@ -10,6 +10,11 @@ use Inertia\Inertia;
 // Homepage
 Route::get('/', [ProductController::class, 'home'])->name('home');
 
+// Terms and Conditions
+Route::get('/terms', function() {
+    return Inertia::render('TermsAndConditions');
+})->name('terms');
+
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

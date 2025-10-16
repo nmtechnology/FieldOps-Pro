@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // Seed product content if running in a development environment
         if (app()->environment('local', 'development')) {
             $this->call([
+                UpdateProductTiersSeeder::class,
                 ProductContentSeeder::class,
             ]);
         }

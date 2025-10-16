@@ -1,36 +1,36 @@
 <template>
     <AppLayout :title="product.name + ' - Table of Contents'">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ product.name }} - Table of Contents
             </h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <!-- Product Information Header -->
-                    <div class="p-6 bg-blue-50 border-b border-gray-200">
+                    <div class="p-6 bg-blue-50 dark:bg-blue-900 border-b border-gray-200 dark:border-gray-700">
                         <div class="flex items-center">
                             <div class="flex-shrink-0" v-if="product.image_path">
                                 <img :src="product.image_path" alt="Product image" class="h-24 w-auto rounded-md">
                             </div>
                             <div class="ml-4">
-                                <h2 class="text-xl font-bold text-gray-900">{{ product.name }}</h2>
-                                <p class="mt-1 text-gray-600">{{ product.description }}</p>
+                                <h2 class="text-xl font-bold text-gray-900 dark:text-white">{{ product.name }}</h2>
+                                <p class="mt-1 text-gray-600 dark:text-gray-300">{{ product.description }}</p>
                             </div>
                         </div>
                         
-                        <div v-if="!hasPurchased" class="mt-6 bg-yellow-50 border border-yellow-100 p-4 rounded-md">
+                        <div v-if="!hasPurchased" class="mt-6 bg-yellow-50 dark:bg-yellow-900 border border-yellow-100 dark:border-yellow-800 p-4 rounded-md">
                             <div class="flex">
                                 <div class="flex-shrink-0">
-                                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <svg class="h-5 w-5 text-yellow-400 dark:text-yellow-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <h3 class="text-sm font-medium text-yellow-800">Premium Content Notice</h3>
-                                    <div class="mt-2 text-sm text-yellow-700">
+                                    <h3 class="text-sm font-medium text-yellow-800 dark:text-yellow-300">Premium Content Notice</h3>
+                                    <div class="mt-2 text-sm text-yellow-700 dark:text-yellow-400">
                                         <p>Some sections of this content are only available after purchase. Purchase this product to access all premium content.</p>
                                     </div>
                                     <div class="mt-4">
@@ -44,20 +44,20 @@
                     </div>
                     
                     <!-- Table of Contents -->
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Table of Contents</h3>
+                    <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Table of Contents</h3>
                         
-                        <ul class="divide-y divide-gray-200">
+                        <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                             <li v-for="content in contents" :key="content.id" class="py-4">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center">
-                                        <span class="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 text-xs font-medium">
+                                        <span class="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 dark:bg-blue-800 flex items-center justify-center text-blue-800 dark:text-blue-300 text-xs font-medium">
                                             {{ getSectionIcon(content.section_type) }}
                                         </span>
-                                        <span class="ml-3 text-sm font-medium text-gray-900">
+                                        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-white">
                                             {{ content.title }}
                                         </span>
-                                        <span v-if="content.is_premium && !hasPurchased" class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        <span v-if="content.is_premium && !hasPurchased" class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300">
                                             Premium
                                         </span>
                                     </div>
@@ -87,12 +87,12 @@
                     
                     <!-- Downloads Section -->
                     <div v-if="hasPurchased" class="p-6 bg-gray-50">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Downloads</h3>
+                        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Downloads</h3>
                         
-                        <div class="bg-white shadow overflow-hidden sm:rounded-md">
-                            <ul role="list" class="divide-y divide-gray-200">
+                        <div class="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-md">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 <li>
-                                    <Link :href="route('products.downloads', product.id)" class="block hover:bg-gray-50">
+                                    <Link :href="route('products.downloads', product.id)" class="block hover:bg-gray-50 dark:hover:bg-gray-700">
                                         <div class="px-4 py-4 sm:px-6">
                                             <div class="flex items-center justify-between">
                                                 <div class="flex items-center">

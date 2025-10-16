@@ -2,10 +2,10 @@
     <AppLayout :title="content.title">
         <template #header>
             <div class="flex items-center justify-between">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                     {{ content.title }}
                 </h2>
-                <Link :href="route('products.toc', product.id)" class="text-sm text-blue-600 hover:text-blue-800">
+                <Link :href="route('products.toc', product.id)" class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300">
                     Back to Table of Contents
                 </Link>
             </div>
@@ -16,7 +16,7 @@
                 <!-- Navigation Links -->
                 <div class="flex justify-between mb-4 px-4 sm:px-0">
                     <div>
-                        <Link v-if="prevSection" :href="route('products.content.show', { productId: product.id, slug: prevSection.slug })" class="text-sm text-blue-600 hover:text-blue-800 inline-flex items-center">
+                        <Link v-if="prevSection" :href="route('products.content.show', { productId: product.id, slug: prevSection.slug })" class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center">
                             <svg class="mr-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
@@ -24,7 +24,7 @@
                         </Link>
                     </div>
                     <div>
-                        <Link v-if="nextSection" :href="route('products.content.show', { productId: product.id, slug: nextSection.slug })" class="text-sm text-blue-600 hover:text-blue-800 inline-flex items-center">
+                        <Link v-if="nextSection" :href="route('products.content.show', { productId: product.id, slug: nextSection.slug })" class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center">
                             {{ nextSection.title }}
                             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
@@ -33,31 +33,31 @@
                     </div>
                 </div>
                 
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <!-- Content Header -->
-                    <div class="p-6 bg-blue-50 border-b border-gray-200">
-                        <h1 class="text-2xl font-bold text-gray-900">{{ content.title }}</h1>
+                    <div class="p-6 bg-blue-50 dark:bg-blue-900 border-b border-gray-200 dark:border-gray-700">
+                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ content.title }}</h1>
                         <div class="mt-2 flex">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-100 text-blue-800">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200">
                                 {{ getSectionTypeName(content.section_type) }}
                             </span>
-                            <span v-if="content.is_premium" class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-purple-100 text-purple-800">
+                            <span v-if="content.is_premium" class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200">
                                 Premium Content
                             </span>
                         </div>
                     </div>
                     
                     <!-- Main Content -->
-                    <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                         <!-- Content is rendered as HTML -->
-                        <div class="prose max-w-none" v-html="content.content"></div>
+                        <div class="prose dark:prose-invert max-w-none" v-html="content.content"></div>
                         
                         <!-- Media Section if available -->
-                        <div v-if="content.media && content.media.length > 0" class="mt-8 border-t border-gray-200 pt-8">
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">Media Resources</h3>
+                        <div v-if="content.media && content.media.length > 0" class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Media Resources</h3>
                             
                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                                <div v-for="(media, index) in content.media" :key="index" class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400">
+                                <div v-for="(media, index) in content.media" :key="index" class="relative rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 dark:hover:border-gray-500">
                                     <div class="flex-shrink-0">
                                         <img v-if="media.type === 'image'" :src="media.url" :alt="media.caption || 'Media content'" class="h-10 w-10 rounded-full">
                                         <svg v-else class="h-10 w-10 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -102,17 +102,17 @@
                     </div>
                     
                     <!-- Navigation Footer -->
-                    <div class="p-6 bg-gray-50 flex items-center justify-between">
+                    <div class="p-6 bg-gray-50 dark:bg-gray-700 flex items-center justify-between">
                         <div>
-                            <Link v-if="prevSection" :href="route('products.content.show', { productId: product.id, slug: prevSection.slug })" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <Link v-if="prevSection" :href="route('products.content.show', { productId: product.id, slug: prevSection.slug })" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
                                 Previous
                             </Link>
                         </div>
                         
-                        <Link :href="route('products.toc', product.id)" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <Link :href="route('products.toc', product.id)" class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             Table of Contents
                         </Link>
                         
