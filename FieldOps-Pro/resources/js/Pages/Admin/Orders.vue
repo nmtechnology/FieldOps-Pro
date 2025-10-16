@@ -146,8 +146,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { Link } from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia';
+import { Link, router } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 export default defineComponent({
@@ -181,7 +180,7 @@ export default defineComponent({
                 return;
             }
             
-            Inertia.post(route('admin.orders.refund', this.selectedOrder.id), {
+            router.post(route('admin.orders.refund', this.selectedOrder.id), {
                 reason: this.refundReason
             }, {
                 onSuccess: () => {

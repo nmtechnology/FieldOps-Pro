@@ -170,7 +170,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import axios from 'axios';
 
@@ -276,7 +276,7 @@ export default defineComponent({
                     this.isProcessing = false;
                 } else {
                     // Payment succeeded - redirect to thank you page
-                    Inertia.visit(route('checkout.thankyou', response.data.order_id));
+                    router.visit(route('checkout.thankyou', response.data.order_id));
                 }
             } catch (error) {
                 console.error('Payment error:', error);
@@ -300,7 +300,7 @@ export default defineComponent({
                 });
                 
                 // Redirect to thank you page
-                Inertia.visit(route('checkout.thankyou', response.data.order_id));
+                router.visit(route('checkout.thankyou', response.data.order_id));
             } catch (error) {
                 console.error('ACH Payment error:', error);
                 alert('An error occurred while processing your payment. Please try again.');
