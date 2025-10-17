@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\ProductContent;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class ProductController extends Controller
+{
+    /**
+     * Display a listing of the products.
+     *
+     * @return \Inertia\Response
+     */
+    public function index()
+    {
+        $products = Product::withCount(['orders'])
+            ->latest()
+            ->paginate(10);
+        
+        return Inertia::render('Admin/Products/Index', [
+            'products' => $products
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new product.
+     *
+     * @return \Inertia\Response
+     */
+    public function create()
+    {
+        return Inertia::render('Admin/Products/Create');
+    }
+
+    /**
+     * Store a newly created product in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'tier' => 'required|string|in:basic,standard,premium',
+            'image_url' => 'nullable|string|url',
+            'active' => 'boolean'
+        ]);
+
+        Product::create($validated);
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Product created successfully.');
+    }
+
+    /**
+     * Display the specified product.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Inertia\Response
+     */
+    public function show(Product $product)
+    {
+        $product->load(['contents']);
+        $product->loadCount(['orders']);
+        
+        return Inertia::render('Admin/Products/Show', [
+            'product' => $product
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified product.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Inertia\Response
+     */
+    public function edit(Product $product)
+    {
+        return Inertia::render('Admin/Products/Edit', [
+            'product' => $product
+        ]);
+    }
+
+    /**
+     * Update the specified product in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'description' => 'sometimes|string',
+            'price' => 'sometimes|numeric|min:0',
+            'tier' => 'sometimes|string|in:basic,standard,premium',
+            'image_url' => 'nullable|string|url',
+            'active' => 'sometimes|boolean'
+        ]);
+
+        $product->update($validated);
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Product updated successfully.');
+    }
+
+    /**
+     * Remove the specified product from storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Product $product)
+    {
+        // Check if the product has associated orders
+        if ($product->orders()->exists()) {
+            return redirect()->route('admin.products.index')
+                ->with('error', 'Cannot delete product with existing orders.');
+        }
+        
+        // Delete associated content first
+        $product->contents()->delete();
+        
+        // Delete the product
+        $product->delete();
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Product deleted successfully.');
+    }
+}
