@@ -19,10 +19,10 @@ use Inertia\Inertia;
 */
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    // Admin Dashboard
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
-        ->middleware([App\Http\Middleware\AdminMiddleware::class])
-        ->name('dashboard');
+    // Admin Dashboard route is defined in admin_web.php
+    // Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+    //    ->middleware([App\Http\Middleware\AdminMiddleware::class])
+    //    ->name('dashboard');
     
     // Orders Management
     Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function () {

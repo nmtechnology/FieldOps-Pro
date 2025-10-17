@@ -18,7 +18,7 @@ use Inertia\Inertia;
 Route::redirect('/', '/login');
 
 // Admin routes (protected by auth and admin middleware)
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
     // Admin dashboard
     Route::get('/dashboard', function() {
         return Inertia::render('Admin/Dashboard');

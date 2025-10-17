@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 // Stripe Webhook Route (exclude from CSRF verification)
-Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook'])->name('stripe.webhook');
+Route::post('/stripe/webhook', [App\Http\Controllers\StripeWebhookController::class, 'handleWebhook'])->name('stripe.webhook');
 
 // Checkout Routes
 Route::middleware('auth')->group(function () {
@@ -54,17 +54,31 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout/thank-you/{order}', [CheckoutController::class, 'thankYou'])->name('checkout.thankyou');
     
     // Discount code validation
-    Route::post('/discount/validate', [DiscountController::class, 'validateCode'])->name('discount.validate');
+    Route::post('/discount/validate', [App\Http\Controllers\DiscountController::class, 'validateCode'])->name('discount.validate');
     
     // Admin Routes (add middleware for admin check)
     Route::middleware('admin')->group(function () {
         // Product management
         Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products.index');
         
-        // Order management
-        Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
-        Route::get('/admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
-        Route::post('/admin/orders/{order}/refund', [OrderController::class, 'refund'])->name('admin.orders.refund');
+                // Order management
+        Route::get('/admin/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/admin/orders/{order}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.orders.show');
+        Route::post('/admin/orders/{order}/refund', [App\Http\Controllers\Admin\OrderController::class, 'refund'])->name('admin.orders.refund');
+        
+        // Users Management
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+        Route::post('users/{user}/toggle-admin', [App\Http\Controllers\Admin\UserController::class, 'toggleAdminStatus'])->name('users.toggle-admin');
+        Route::get('users/{user}/orders', [App\Http\Controllers\Admin\UserController::class, 'orders'])->name('users.orders');
+        
+        // Products Management
+        Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+        
+        // Discounts Management
+        Route::get('/admin/discounts', [App\Http\Controllers\Admin\DiscountController::class, 'index'])->name('admin.discounts.index');
+        Route::post('/admin/discounts', [App\Http\Controllers\Admin\DiscountController::class, 'store'])->name('admin.discounts.store');
+        Route::put('/admin/discounts/{discount}', [App\Http\Controllers\Admin\DiscountController::class, 'update'])->name('admin.discounts.update');
+        Route::delete('/admin/discounts/{discount}', [App\Http\Controllers\Admin\DiscountController::class, 'destroy'])->name('admin.discounts.destroy');
         
         // Discount management
         Route::get('/admin/discounts', [DiscountController::class, 'index'])->name('admin.discounts.index');
@@ -75,3 +89,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/admin_web.php';
