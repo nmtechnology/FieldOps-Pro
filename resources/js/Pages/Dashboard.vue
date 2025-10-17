@@ -21,7 +21,7 @@ const props = defineProps({
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg p-6">
+                <div class="overflow-hidden bg-gray-900 dark:bg-gray-800 shadow-xl sm:rounded-lg p-6">
                     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Your Purchases</h1>
                     
                     <div v-if="purchases && purchases.length > 0">
@@ -82,7 +82,7 @@ const props = defineProps({
                             You haven't made any purchases yet. Check out our products to get started.
                         </p>
                         <div class="mt-6">
-                            <a href="/" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            <a :href="route('products')" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 Browse Products
                             </a>
                         </div>

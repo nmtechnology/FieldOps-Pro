@@ -68,27 +68,27 @@ onMounted(() => {
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-6 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
+                                <NavLink href="/admin/dashboard" :active="$page.url.startsWith('/admin/dashboard')">
                                     Dashboard
                                 </NavLink>
                                 
-                                <NavLink :href="route('admin.orders.index')" :active="route().current('admin.orders.*')">
+                                <NavLink href="/admin/orders" :active="$page.url.startsWith('/admin/orders')">
                                     Orders
                                 </NavLink>
 
-                                <NavLink :href="route('admin.users.index')" :active="route().current('admin.users.*')">
+                                <NavLink href="/admin/users" :active="$page.url.startsWith('/admin/users')">
                                     Users
                                 </NavLink>
                                 
-                                <NavLink :href="route('admin.products.index')" :active="route().current('admin.products.*')">
+                                <NavLink href="/admin/products" :active="$page.url.startsWith('/admin/products')">
                                     Products
                                 </NavLink>
                                 
-                                <NavLink :href="route('admin.discounts.index')" :active="route().current('admin.discounts.*')">
+                                <NavLink href="/admin/discounts" :active="$page.url.startsWith('/admin/discounts')">
                                     Discounts
                                 </NavLink>
 
-                                <NavLink :href="route('admin.reports')" :active="route().current('admin.reports')">
+                                <NavLink href="/admin/reports" :active="$page.url.startsWith('/admin/reports')">
                                     Reports
                                 </NavLink>
                             </div>
@@ -192,27 +192,27 @@ onMounted(() => {
                     class="sm:hidden"
                 >
                     <div class="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
+                        <ResponsiveNavLink href="/admin/dashboard" :active="$page.url.startsWith('/admin/dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
                         
-                        <ResponsiveNavLink :href="route('admin.orders.index')" :active="route().current('admin.orders.*')">
+                        <ResponsiveNavLink href="/admin/orders" :active="$page.url.startsWith('/admin/orders')">
                             Orders
                         </ResponsiveNavLink>
 
-                        <ResponsiveNavLink :href="route('admin.users.index')" :active="route().current('admin.users.*')">
+                        <ResponsiveNavLink href="/admin/users" :active="$page.url.startsWith('/admin/users')">
                             Users
                         </ResponsiveNavLink>
                         
-                        <ResponsiveNavLink :href="route('admin.products.index')" :active="route().current('admin.products.*')">
+                        <ResponsiveNavLink href="/admin/products" :active="$page.url.startsWith('/admin/products')">
                             Products
                         </ResponsiveNavLink>
                         
-                        <ResponsiveNavLink :href="route('admin.discounts.index')" :active="route().current('admin.discounts.*')">
+                        <ResponsiveNavLink href="/admin/discounts" :active="$page.url.startsWith('/admin/discounts')">
                             Discounts
                         </ResponsiveNavLink>
 
-                        <ResponsiveNavLink :href="route('admin.reports')" :active="route().current('admin.reports')">
+                        <ResponsiveNavLink href="/admin/reports" :active="$page.url.startsWith('/admin/reports')">
                             Reports
                         </ResponsiveNavLink>
                     </div>

@@ -1,11 +1,19 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import PricingTiers from '@/Components/PricingTiers.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { ref } from 'vue';
+
+// For the mobile menu toggle
+const mobileMenuOpen = ref(false);
 
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     featuredProduct: Object,
+    products: Array,
+    guestCheckout: Boolean,
 });
 </script>
 
@@ -15,43 +23,64 @@ defineProps({
         <meta name="description" content="High-quality info products for professionals">
     </Head>
 
+    <!-- Navigation - Full width at the top level -->
+    <nav class="fixed top-0 left-0 right-0 z-50 w-full bg-gray-800 bg-opacity-90 backdrop-blur-sm border-b border-gray-700 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <Link href="/" class="flex items-center">
+                            <ApplicationLogo class="h-10 w-10 fill-current text-orange-500 mr-2" />
+                            <span class="text-xl font-bold text-orange-500">FieldEngineer Pro</span>
+                        </Link>
+                    </div>
+                </div>
+                
+                <!-- Desktop navigation menu -->
+                <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
+                    <Link href="#products" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Products</Link>
+                    <Link href="#testimonials" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Testimonials</Link>
+                    <Link href="#about" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">About</Link>
+                    <Link href="/register" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign Up</Link>
+                    <Link href="/login" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign In</Link>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="flex items-center sm:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div v-if="mobileMenuOpen" class="sm:hidden pt-2 pb-3 space-y-1">
+                <Link href="#products" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Products</Link>
+                <Link href="#testimonials" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Testimonials</Link>
+                <Link href="#about" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">About</Link>
+                <div class="flex space-x-2 px-3 py-2">
+                    <Link href="/register" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign Up</Link>
+                    <Link href="/login" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign In</Link>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
     <div class="min-h-screen bg-gray-900 dark:bg-gray-900">
-        <div class="relative bg-gray-900 dark:bg-gray-800 overflow-hidden">
+        <div class="h-16"><!-- Spacer to account for fixed navbar --></div>
+        
+        <!-- Hero section -->
+        <div class="relative bg-gray-900 overflow-hidden">
             <div class="max-w-7xl mx-auto">
-                <div class="relative z-10 pb-8 bg-gray-900 bg-gradient-to-br dark:bg-gray-800 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                    <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-gray-700 dark:text-gray-800 transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <div class="relative z-10 pb-8 bg-gray-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                    <!-- Simple polygon SVG -->
+                    <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-gray-800 transform translate-x-1/2" 
+                         fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                         <polygon points="50,0 100,0 50,100 0,100" />
                     </svg>
-
-                    <div>
-                        <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
-                            <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
-                                <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
-                                    <div class="flex items-center justify-between w-full md:w-auto">
-                                        <a href="#" class="flex items-center text-2xl font-bold text-orange-500">
-                                            <img src="/img/fieldengineer-logo.png" alt="FieldEngineer Pro Logo" class="h-8 w-auto mr-2" />
-                                            FieldEngineer Pro
-
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                                    <a href="#featured" class="font-medium text-gray-500 hover:text-gray-900">Products</a>
-                                    <a href="#testimonials" class="font-medium text-gray-500 hover:text-gray-900">Testimonials</a>
-                                    <a href="#about" class="font-medium text-gray-500 hover:text-gray-900">About</a>
-                                    
-                                    <template v-if="canLogin">
-                                        <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="font-medium text-orange-400 hover:text-orange-300">Dashboard</Link>
-                                        <template v-else>
-                                            <Link :href="route('login')" class="font-medium text-gray-500 hover:text-gray-900">Log in</Link>
-
-                                            <Link v-if="canRegister" :href="route('register')" class="font-medium text-orange-600 hover:text-orange-500">Register</Link>
-                                        </template>
-                                    </template>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
 
                     <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                         <div class="sm:text-center lg:text-left">
@@ -64,8 +93,8 @@ defineProps({
                             </p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                                 <div class="rounded-md shadow">
-                                    <Link :href="route('products.show', { product: featuredProduct.id })" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-600 hover:bg-orange-500 md:py-4 md:text-lg md:px-10">
-                                        Get started
+                                    <Link :href="route('guest.checkout', { product: featuredProduct.id })" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-600 hover:bg-orange-500 md:py-4 md:text-lg md:px-10">
+                                        Buy Now
                                     </Link>
                                 </div>
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
@@ -197,9 +226,12 @@ defineProps({
                                 
                                 <div class="mt-10">
                                     <h4 class="text-lg font-medium text-white">Price: ${{ featuredProduct.price.toFixed(2) }}</h4>
-                                    <div class="mt-4">
-                                        <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
+                                    <div class="mt-4 flex space-x-4">
+                                        <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700">
                                             Learn More
+                                        </Link>
+                                        <Link :href="route('guest.checkout', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
+                                            Buy Now
                                         </Link>
                                     </div>
                                 </div>

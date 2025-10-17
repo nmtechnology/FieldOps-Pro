@@ -13,9 +13,9 @@ class DashboardController extends Controller
         // Get authenticated user
         $user = auth()->user();
         
-        // Fetch user's orders with products and payments
+        // Fetch user's orders with products and payment
         $purchases = Order::where('user_id', $user->id)
-            ->with(['product', 'payments'])
+            ->with(['product', 'payment'])
             ->latest()
             ->get()
             ->map(function ($order) {
@@ -27,11 +27,12 @@ class DashboardController extends Controller
                         'description' => $order->product->description,
                         'access_url' => $order->product->access_url,
                     ],
-                    'total_amount' => $order->total_amount,
+                    'total_amount' => $order->amount,
                     'status' => $order->status,
-                    'purchase_date' => $order->created_at->format('F j, Y'),
-                    'payment_status' => $order->payments->isNotEmpty() ? 
-                        ($order->payments->first()->status === 'completed' ? 'paid' : 'pending') : 'unpaid',
+                    'created_at' => $order->created_at,
+                    'order_number' => $order->order_number,
+                    'payment_status' => $order->payment ? 
+                        ($order->payment->status === 'completed' ? 'paid' : 'pending') : 'unpaid',
                 ];
             });
         

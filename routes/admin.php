@@ -18,11 +18,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth'])->group(function () {
     // Admin Dashboard route is defined in admin_web.php
-    // Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
-    //    ->middleware([App\Http\Middleware\AdminMiddleware::class])
-    //    ->name('dashboard');
+    // These routes are loaded inside admin_web.php which already has prefix('admin') and name('admin.')
     
     // Orders Management
     Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function () {
@@ -31,7 +29,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::post('orders/{order}/refund', [OrderController::class, 'processRefund'])->name('orders.refund');
         
         // Users Management
-        Route::resource('users', UserController::class);
+        // Route::resource('users', UserController::class); // Moved to admin_web.php
         Route::post('users/{user}/toggle-admin', [UserController::class, 'toggleAdminStatus'])->name('users.toggle-admin');
         Route::get('users/{user}/orders', [UserController::class, 'orders'])->name('users.orders');
         

@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-gray-900 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <!-- Content Header -->
                     <div class="p-6 bg-blue-50 dark:bg-blue-900 border-b border-gray-200 dark:border-gray-700">
                         <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ content.title }}</h1>
@@ -48,7 +48,7 @@
                     </div>
                     
                     <!-- Main Content -->
-                    <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <div class="p-6 bg-gray-900 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                         <!-- Content is rendered as HTML -->
                         <div class="prose dark:prose-invert max-w-none" v-html="content.content"></div>
                         

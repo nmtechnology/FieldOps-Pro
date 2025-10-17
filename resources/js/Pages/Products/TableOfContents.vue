@@ -8,7 +8,7 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-gray-900 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <!-- Product Information Header -->
                     <div class="p-6 bg-blue-50 dark:bg-blue-900 border-b border-gray-200 dark:border-gray-700">
                         <div class="flex items-center">

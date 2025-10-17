@@ -3,8 +3,12 @@ import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     orders: {
-        type: Object,
+        type: [Object, Array],
         required: true
+    },
+    activeTab: {
+        type: String,
+        default: 'all'
     }
 });
 
@@ -46,12 +50,12 @@ const statusColors = {
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                <tr v-if="orders.data.length === 0">
+                <tr v-if="!orders || (Array.isArray(orders) ? orders.length === 0 : (orders.data && orders.data.length === 0))">
                     <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">
                         No orders found
                     </td>
                 </tr>
-                <tr v-for="order in orders.data" :key="order.id" class="hover:bg-gray-50">
+                <tr v-for="order in (Array.isArray(orders) ? orders : (orders.data || []))" :key="order.id" class="hover:bg-gray-50">
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm font-medium text-gray-900">
                             #{{ order.id }}

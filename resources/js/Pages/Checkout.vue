@@ -11,8 +11,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Order Summary -->
                     <div class="col-span-1">
-                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                        <div class="bg-gray-900 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="p-6 bg-gray-900 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                                 <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Order Summary</h3>
                                 
                                 <div class="mb-4">

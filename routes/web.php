@@ -7,7 +7,12 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Homepage
+// Include auth routes first, but our home route will override the default behavior
+require __DIR__.'/auth.php';
+require __DIR__.'/admin_web.php';
+
+// Homepage - This is the default landing page for all visitors
+// Make sure this route is defined at the top to take precedence
 Route::get('/', [ProductController::class, 'home'])->name('home');
 
 // Terms and Conditions
@@ -15,9 +20,22 @@ Route::get('/terms', function() {
     return Inertia::render('TermsAndConditions');
 })->name('terms');
 
+// Guest checkout routes
+Route::prefix('guest')->name('guest.')->group(function() {
+    Route::get('/checkout/{product}', [CheckoutController::class, 'guestCheckout'])->name('checkout');
+    Route::post('/process-payment', [CheckoutController::class, 'processGuestPayment'])->name('process-payment');
+    Route::get('/thank-you', [CheckoutController::class, 'guestThankYou'])->name('thank-you');
+    Route::get('/complete-registration', [CheckoutController::class, 'completeRegistration'])->name('complete-registration');
+    Route::post('/register', [CheckoutController::class, 'registerAfterPurchase'])->name('register');
+});
+
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::get('/products-catalog', [App\Http\Controllers\ProductController::class, 'catalog'])
+    ->middleware(['auth', 'verified'])
+    ->name('products');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -57,14 +75,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/discount/validate', [App\Http\Controllers\DiscountController::class, 'validateCode'])->name('discount.validate');
     
     // Admin Routes (add middleware for admin check)
-    Route::middleware('admin')->group(function () {
-        // Product management
-        Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products.index');
+    Route::middleware(\App\Http\Middleware\AdminMiddleware::class)->group(function () {
+        // Product management is now defined in routes/admin.php
+        // No longer defining product routes here to avoid conflicts
         
-                // Order management
-        Route::get('/admin/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders.index');
-        Route::get('/admin/orders/{order}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.orders.show');
-        Route::post('/admin/orders/{order}/refund', [App\Http\Controllers\Admin\OrderController::class, 'refund'])->name('admin.orders.refund');
+        // Order management routes are now defined in routes/admin.php
+        // No longer defining order routes here to avoid conflicts
         
         // Users Management
         Route::resource('users', App\Http\Controllers\Admin\UserController::class);
@@ -74,19 +90,7 @@ Route::middleware('auth')->group(function () {
         // Products Management
         Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
         
-        // Discounts Management
-        Route::get('/admin/discounts', [App\Http\Controllers\Admin\DiscountController::class, 'index'])->name('admin.discounts.index');
-        Route::post('/admin/discounts', [App\Http\Controllers\Admin\DiscountController::class, 'store'])->name('admin.discounts.store');
-        Route::put('/admin/discounts/{discount}', [App\Http\Controllers\Admin\DiscountController::class, 'update'])->name('admin.discounts.update');
-        Route::delete('/admin/discounts/{discount}', [App\Http\Controllers\Admin\DiscountController::class, 'destroy'])->name('admin.discounts.destroy');
-        
-        // Discount management
-        Route::get('/admin/discounts', [DiscountController::class, 'index'])->name('admin.discounts.index');
-        Route::post('/admin/discounts', [DiscountController::class, 'store'])->name('admin.discounts.store');
-        Route::put('/admin/discounts/{discount}', [DiscountController::class, 'update'])->name('admin.discounts.update');
-        Route::delete('/admin/discounts/{discount}', [DiscountController::class, 'destroy'])->name('admin.discounts.destroy');
+        // Discounts Management is now defined in routes/admin.php
+        // No longer defining discount routes here to avoid conflicts
     });
 });
-
-require __DIR__.'/auth.php';
-require __DIR__.'/admin_web.php';

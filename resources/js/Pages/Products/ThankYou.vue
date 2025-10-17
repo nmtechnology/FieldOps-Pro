@@ -16,8 +16,8 @@ const props = defineProps({
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="p-6 sm:p-10 bg-white dark:bg-gray-800">
+                <div class="bg-gray-900 dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="p-6 sm:p-10 bg-gray-900 dark:bg-gray-800">
                         <div class="text-center">
                             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100">
                                 <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

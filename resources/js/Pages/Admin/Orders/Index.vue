@@ -127,7 +127,7 @@ function setTab(tab) {
                         </div>
 
                         <!-- Orders Table -->
-                        <OrdersTable :orders="orders.data" :activeTab="activeTab" />
+                        <OrdersTable :orders="orders" :activeTab="activeTab" />
 
                         <!-- Pagination -->
                         <div class="mt-6 flex items-center justify-between border-t border-gray-700 pt-4">

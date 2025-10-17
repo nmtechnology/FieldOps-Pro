@@ -82,7 +82,10 @@ import { Link } from '@inertiajs/vue3';
         >
             <div class="z-10">
                 <Link href="/">
-                    <ApplicationLogo class="h-20 w-20 fill-current text-orange-500" />
+                    <div class="flex flex-col items-center">
+                        <ApplicationLogo class="h-20 w-20 fill-current text-orange-500" />
+                        <h1 class="mt-2 text-2xl font-bold text-white">FieldEngineer Pro</h1>
+                    </div>
                 </Link>
             </div>
 

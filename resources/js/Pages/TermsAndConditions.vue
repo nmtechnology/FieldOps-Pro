@@ -7,9 +7,9 @@
     <AppLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="bg-gray-900 dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="p-6 sm:p-8">
-                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Terms and Conditions</h1>
+                        <h1 class="text-3xl font-bold text-white dark:text-white mb-6">Terms and Conditions</h1>
                         
                         <div class="prose prose-indigo dark:prose-invert max-w-none dark:text-gray-300">
                             <h2>1. Subscription Terms</h2>
