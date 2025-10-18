@@ -155,16 +155,33 @@ defineProps({
                                 <div class="absolute w-2 h-2 bg-white/80 rounded-full blur-sm animate-star-twinkle" style="animation-delay: -1.5s; top: 5%; left: 50%;"></div>
                                 <div class="absolute w-1.5 h-1.5 bg-white/85 rounded-full blur-sm animate-star-twinkle" style="animation-delay: -0.5s; top: 85%; left: 40%;"></div>
                                 
-                                <!-- Stardust particles -->
-                                <div class="absolute bottom-0 left-1/4 w-0.5 h-16 bg-gradient-to-t from-transparent via-purple-300/50 to-white/90 rounded-full blur-sm animate-stardust"></div>
-                                <div class="absolute bottom-0 left-1/2 w-0.5 h-12 bg-gradient-to-t from-transparent via-indigo-300/60 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -3s;"></div>
-                                <div class="absolute bottom-0 left-3/4 w-0.5 h-20 bg-gradient-to-t from-transparent via-violet-300/70 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -6s;"></div>
-                                <div class="absolute bottom-10 left-1/3 w-0.5 h-14 bg-gradient-to-t from-transparent via-blue-300/50 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -9s;"></div>
-                                <div class="absolute bottom-14 left-2/3 w-0.5 h-10 bg-gradient-to-t from-transparent via-purple-200/60 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -12s;"></div>
+                                <!-- Enhanced magical stardust particles -->
+                                <div class="absolute bottom-0 left-1/4 w-0.5 h-20 bg-gradient-to-t from-transparent via-cyan-400/70 to-white/90 rounded-full blur-sm animate-stardust"></div>
+                                <div class="absolute bottom-0 left-1/2 w-0.5 h-24 bg-gradient-to-t from-transparent via-blue-400/80 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -3s;"></div>
+                                <div class="absolute bottom-0 left-3/4 w-0.5 h-28 bg-gradient-to-t from-transparent via-violet-400/90 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -6s;"></div>
+                                <div class="absolute bottom-10 left-1/3 w-0.5 h-18 bg-gradient-to-t from-transparent via-blue-300/80 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -9s;"></div>
+                                <div class="absolute bottom-14 left-2/3 w-0.5 h-16 bg-gradient-to-t from-transparent via-cyan-300/80 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -12s;"></div>
+                                
+                                <!-- Additional magical particles -->
+                                <div class="absolute bottom-2 left-[45%] w-1 h-1 bg-blue-300 rounded-full animate-float-particle blur-sm"></div>
+                                <div class="absolute bottom-6 left-[55%] w-1.5 h-1.5 bg-cyan-200 rounded-full animate-float-particle-slow blur-sm" style="animation-delay: -2s;"></div>
+                                <div class="absolute bottom-10 left-[35%] w-1 h-1 bg-violet-200 rounded-full animate-float-particle blur-sm" style="animation-delay: -4s;"></div>
+                                <div class="absolute bottom-8 left-[65%] w-2 h-2 bg-white rounded-full animate-float-particle-slow blur-sm" style="animation-delay: -6s;"></div>
+                                <div class="absolute bottom-12 left-[40%] w-1.5 h-1.5 bg-blue-100 rounded-full animate-float-particle blur-sm" style="animation-delay: -8s;"></div>
+                                
+                                <!-- Magical light rays -->
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-36 bg-white/90 blur-sm transform rotate-[20deg] origin-bottom translate-y-[-10%] translate-x-[-50%] animate-pulse-slow"></div>
+                                <div class="absolute top-1/2 left-[45%] w-0.5 h-32 bg-cyan-100/90 blur-sm transform rotate-[10deg] origin-bottom translate-y-[-20%] animate-pulse-slow" style="animation-delay: -2s;"></div>
+                                <div class="absolute top-1/2 left-[55%] w-0.5 h-28 bg-blue-100/90 blur-sm transform rotate-[-15deg] origin-bottom translate-y-[-15%] animate-pulse-slow" style="animation-delay: -4s;"></div>
+                                
+                                <!-- Magical focal point - matches the example image -->
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full opacity-70 blur-xl animate-pulse-slow"></div>
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-10 h-10 bg-cyan-200 rounded-full opacity-80 blur-lg animate-pulse-fast" style="animation-delay: -1s;"></div>
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-6 h-6 bg-blue-100 rounded-full opacity-90 blur-md animate-pulse-fast" style="animation-delay: -2s;"></div>
                                 
                                 <!-- Ethereal light beams -->
-                                <div class="absolute -top-20 -left-10 w-60 h-96 bg-gradient-to-b from-purple-300/20 via-indigo-400/10 to-transparent rotate-30 blur-3xl transform-gpu animate-pulse-slow"></div>
-                                <div class="absolute -bottom-16 -right-10 w-60 h-80 bg-gradient-to-t from-indigo-400/20 via-violet-300/15 to-transparent -rotate-30 blur-3xl transform-gpu animate-pulse-slow" style="animation-delay: -4s;"></div>
+                                <div class="absolute top-[20%] -left-10 w-60 h-96 bg-gradient-to-b from-blue-400/30 via-indigo-400/20 to-transparent rotate-30 blur-3xl transform-gpu animate-pulse-slow"></div>
+                                <div class="absolute top-[30%] -right-10 w-60 h-80 bg-gradient-to-t from-cyan-500/30 via-blue-400/20 to-transparent -rotate-30 blur-3xl transform-gpu animate-pulse-slow" style="animation-delay: -4s;"></div>
                                 
                                 <!-- Book Cover with 3D effect -->
                                 <div class="relative transform perspective-1000 rotate-y-0 hover:rotate-y-10 transition-transform duration-500 shadow-2xl">
@@ -181,12 +198,12 @@ defineProps({
                                             <!-- Icons at the top -->
                                             <div class="flex items-center gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-5 md:mb-8 mt-6 sm:mt-8 md:mt-12">
                                                 <!-- Square with circle icon -->
-                                                <div class="h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-md flex items-center justify-center shadow-md">
-                                                    <div class="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 bg-slate-800 rounded-full shadow-inner"></div>
+                                                <div class="h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-gradient-to-br from-orange-300 to-orange-500 rounded-md flex items-center justify-center shadow-md">
+                                                    <div class="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 bg-gray-700 rounded-full shadow-inner"></div>
                                                 </div>
                                                 <!-- Circle with square icon -->
-                                                <div class="h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center shadow-md">
-                                                    <div class="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 bg-slate-800 rounded-md shadow-inner"></div>
+                                                <div class="h-8 w-8 sm:h-10 sm:w-10 md:h-14 md:w-14 bg-gradient-to-br from-orange-300 to-orange-500 rounded-full flex items-center justify-center shadow-md">
+                                                    <div class="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 bg-gray-600 rounded-md shadow-inner"></div>
                                                 </div>
                                             </div>
                                             
@@ -196,7 +213,7 @@ defineProps({
                                                 <h4 class="text-2xl sm:text-3xl md:text-4xl leading-tight font-bold text-white mb-2 sm:mb-3 md:mb-4">Pro</h4>
                                                 
                                                 <!-- Separator line -->
-                                                <div class="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-purple-400 to-purple-600 mb-2 sm:mb-3 md:mb-4 rounded-full"></div>
+                                                <div class="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-300 to-orange-500 mb-2 sm:mb-3 md:mb-4 rounded-full"></div>
                                                 
                                                 <p class="text-sm sm:text-base md:text-lg font-light text-white mb-6 sm:mb-8 md:mb-12 leading-relaxed">
                                                     {{ featuredProduct.short_description || "The definitive method to mastering field operations." }}
@@ -209,10 +226,21 @@ defineProps({
                                 <!-- Cosmic shadow effects -->
                                 <div class="absolute -bottom-3 left-0 right-8 h-4 bg-black/20 blur-sm rounded-full"></div>
                                 <div class="absolute -bottom-2 left-4 right-6 h-6 bg-black/15 blur-md rounded-full"></div>
-                                <!-- Ethereal glow beneath -->
-                                <div class="absolute -bottom-6 left-2 right-2 h-8 bg-gradient-to-r from-purple-600/40 via-indigo-500/50 to-violet-600/40 blur-xl rounded-full animate-nebula-pulse"></div>
-                                <!-- Cosmic energy pool -->
-                                <div class="absolute -bottom-8 left-1/4 right-1/4 h-6 bg-gradient-to-r from-purple-500/50 via-white/50 to-purple-500/50 blur-xl rounded-full animate-pulse-slow" style="animation-delay: -3s;"></div>
+                                
+                                <!-- Magical book glow - primary glow -->
+                                <div class="absolute -bottom-10 -left-10 -right-10 h-24 bg-gradient-to-r from-cyan-500/60 via-blue-400/70 to-purple-600/60 blur-2xl rounded-full animate-nebula-pulse"></div>
+                                
+                                <!-- Ethereal glow beneath - secondary layer -->
+                                <div class="absolute -bottom-14 -left-8 -right-8 h-20 bg-gradient-to-r from-blue-600/70 via-cyan-400/80 to-indigo-600/70 blur-3xl rounded-full animate-pulse-slow" style="animation-delay: -2s;"></div>
+                                
+                                <!-- Cosmic energy pool - tertiary layer -->
+                                <div class="absolute -bottom-8 left-[15%] right-[15%] h-14 bg-gradient-to-r from-violet-500/80 via-white/90 to-blue-500/80 blur-xl rounded-full animate-pulse-slow" style="animation-delay: -3s;"></div>
+                                
+                                <!-- Center bright glow -->
+                                <div class="absolute -bottom-6 left-[25%] right-[25%] h-10 bg-gradient-to-r from-cyan-300/90 via-white/100 to-cyan-300/90 blur-md rounded-full animate-pulse-fast"></div>
+                                
+                                <!-- Intense center light source -->
+                                <div class="absolute -bottom-4 left-[40%] right-[40%] h-8 bg-white shadow-lg shadow-cyan-500/50 blur-sm rounded-full animate-pulse-fast" style="animation-delay: -1s;"></div>
                                 
                                 <!-- Book Pages Edge -->
                                 <div class="absolute top-[2%] bottom-[2%] right-0 w-[6px] bg-gradient-to-l from-gray-100 via-gray-200 to-gray-300 rounded-r transform translate-x-[3px]">
@@ -222,17 +250,17 @@ defineProps({
                             </div>
                         </div>
                         <div class="mt-10 lg:mt-0">
-                            <h3 class="text-2xl font-extrabold text-purple-400">Key Benefits</h3>
+                            <h3 class="text-2xl font-extrabold text-orange-400">Key Benefits</h3>
                             <div class="mt-4 text-white">
                                 <ul class="mt-6 space-y-6">
                                     <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
                                         <span class="ml-3">Expert knowledge from industry professionals</span>
                                     </li>
                                     <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
                                         <span class="ml-3">Practical templates and resources</span>
@@ -244,7 +272,7 @@ defineProps({
                                         <span class="ml-3">Step-by-step implementation guides</span>
                                     </li>
                                     <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
                                         <span class="ml-3">Lifetime access to all content and updates</span>
