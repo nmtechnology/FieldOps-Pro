@@ -9,7 +9,7 @@ const props = defineProps({
 
 const showRefundModal = ref(false);
 const refundForm = useForm({
-    amount: props.order.total,
+    amount: props.order.amount || 0,
     reason: '',
 });
 
@@ -212,12 +212,12 @@ const getStatusClass = (status) => {
                                         <!-- Subtotal row -->
                                         <tr class="bg-gray-900">
                                             <td colspan="3" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-right text-white sm:pl-6">Subtotal</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white">${{ order.subtotal.toFixed(2) }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white">${{ (order.amount && order.discount_amount ? (parseFloat(order.amount) + parseFloat(order.discount_amount)).toFixed(2) : order.amount ? order.amount.toFixed(2) : '0.00') }}</td>
                                         </tr>
                                         <!-- Tax row -->
                                         <tr class="bg-gray-900">
-                                            <td colspan="3" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-right text-white sm:pl-6">Tax ({{ order.tax_rate }}%)</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white">${{ order.tax_amount.toFixed(2) }}</td>
+                                            <td colspan="3" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-right text-white sm:pl-6">Tax</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-white">$0.00</td>
                                         </tr>
                                         <!-- Discount row if applicable -->
                                         <tr v-if="order.discount_amount > 0" class="bg-gray-900">
@@ -227,7 +227,7 @@ const getStatusClass = (status) => {
                                         <!-- Total row -->
                                         <tr class="bg-gray-900">
                                             <td colspan="3" class="whitespace-nowrap py-4 pl-4 pr-3 text-base font-bold text-right text-white sm:pl-6">Total</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-base font-bold text-white">${{ order.total.toFixed(2) }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-base font-bold text-white">${{ order.amount ? order.amount.toFixed(2) : '0.00' }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -275,7 +275,7 @@ const getStatusClass = (status) => {
                                             <div class="mt-1">
                                                 <input type="number" step="0.01" name="amount" id="amount" v-model="refundForm.amount" class="block w-full rounded-md border-0 bg-gray-700 py-1.5 text-white shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-orange-500 sm:text-sm sm:leading-6" />
                                             </div>
-                                            <p class="mt-1 text-xs text-gray-400">Maximum amount: ${{ order.total.toFixed(2) }}</p>
+                                            <p class="mt-1 text-xs text-gray-400">Maximum amount: ${{ order.amount ? order.amount.toFixed(2) : '0.00' }}</p>
                                         </div>
                                         <div>
                                             <label for="reason" class="block text-sm font-medium text-gray-300">Reason for Refund</label>
