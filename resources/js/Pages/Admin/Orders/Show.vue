@@ -149,7 +149,7 @@ const getStatusClass = (status) => {
                                     </div>
                                     <div>
                                         <p class="font-medium text-gray-300">Total Amount</p>
-                                        <p class="text-xl font-bold text-white">${{ order.total.toFixed(2) }}</p>
+                                        <p class="text-xl font-bold text-white">${{ order.amount ? order.amount.toFixed(2) : '0.00' }}</p>
                                     </div>
                                 </div>
                             </div>

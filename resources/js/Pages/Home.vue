@@ -130,7 +130,7 @@ defineProps({
                         <!-- Left Side: Book Cover with 3D effect -->
                         <div class="mb-10 lg:mb-0 flex justify-center lg:justify-start">
                             <!-- Ambient glow effect container -->
-                            <div class="relative w-44 sm:w-56 md:w-72 lg:w-auto max-w-xs mx-auto lg:mx-0 book-container">
+                            <div class="relative w-44 sm:w-56 md:w-72 lg:w-auto max-w-xs mx-auto lg:mx-0 book-container isolate">
                                 <!-- Cosmic nebula backdrop -->
                                 <div class="absolute -inset-6 sm:-inset-8 md:-inset-10 bg-gradient-to-br from-indigo-600/30 via-purple-500/20 to-violet-400/30 rounded-full blur-3xl opacity-60 animate-nebula-pulse"></div>
                                 <div class="absolute -inset-12 sm:-inset-16 md:-inset-20 bg-gradient-to-tr from-purple-500/15 via-white/10 to-blue-400/15 rounded-full blur-3xl opacity-40 animate-cosmic-drift"></div>
@@ -163,35 +163,77 @@ defineProps({
                                 <div class="absolute bottom-14 left-2/3 w-0.5 h-16 bg-gradient-to-t from-transparent via-cyan-300/80 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -12s;"></div>
                                 
                                 <!-- Additional magical particles -->
-                                <div class="absolute bottom-2 left-[45%] w-1 h-1 bg-blue-300 rounded-full animate-float-particle blur-sm"></div>
-                                <div class="absolute bottom-6 left-[55%] w-1.5 h-1.5 bg-cyan-200 rounded-full animate-float-particle-slow blur-sm" style="animation-delay: -2s;"></div>
-                                <div class="absolute bottom-10 left-[35%] w-1 h-1 bg-violet-200 rounded-full animate-float-particle blur-sm" style="animation-delay: -4s;"></div>
-                                <div class="absolute bottom-8 left-[65%] w-2 h-2 bg-white rounded-full animate-float-particle-slow blur-sm" style="animation-delay: -6s;"></div>
-                                <div class="absolute bottom-12 left-[40%] w-1.5 h-1.5 bg-blue-100 rounded-full animate-float-particle blur-sm" style="animation-delay: -8s;"></div>
+                                <div class="absolute bottom-2 left-[45%] w-1 h-1 bg-blue-300 rounded-full animate-float-particle blur-sm z-0"></div>
+                                <div class="absolute bottom-6 left-[55%] w-1.5 h-1.5 bg-cyan-200 rounded-full animate-float-particle-slow blur-sm z-0" style="animation-delay: -2s;"></div>
+                                <div class="absolute bottom-10 left-[35%] w-1 h-1 bg-violet-200 rounded-full animate-float-particle blur-sm z-0" style="animation-delay: -4s;"></div>
+                                <div class="absolute bottom-8 left-[65%] w-2 h-2 bg-white rounded-full animate-float-particle-slow blur-sm z-0" style="animation-delay: -6s;"></div>
+                                <div class="absolute bottom-12 left-[40%] w-1.5 h-1.5 bg-blue-100 rounded-full animate-float-particle blur-sm z-0" style="animation-delay: -8s;"></div>
                                 
-                                <!-- Magical light rays -->
-                                <div class="absolute top-1/2 left-1/2 w-0.5 h-36 bg-white/90 blur-sm transform rotate-[20deg] origin-bottom translate-y-[-10%] translate-x-[-50%] animate-pulse-slow"></div>
-                                <div class="absolute top-1/2 left-[45%] w-0.5 h-32 bg-cyan-100/90 blur-sm transform rotate-[10deg] origin-bottom translate-y-[-20%] animate-pulse-slow" style="animation-delay: -2s;"></div>
-                                <div class="absolute top-1/2 left-[55%] w-0.5 h-28 bg-blue-100/90 blur-sm transform rotate-[-15deg] origin-bottom translate-y-[-15%] animate-pulse-slow" style="animation-delay: -4s;"></div>
+                                <!-- Small magical particles -->
+                                <div class="absolute bottom-4 left-[30%] w-0.5 h-0.5 bg-cyan-100 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -1s;"></div>
+                                <div class="absolute bottom-7 left-[28%] w-0.5 h-0.5 bg-blue-200 rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -3.5s;"></div>
+                                <div class="absolute bottom-10 left-[27%] w-1 h-1 bg-indigo-200 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -5.2s;"></div>
+                                <div class="absolute bottom-8 left-[32%] w-0.5 h-0.5 bg-violet-100 rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -7.3s;"></div>
                                 
-                                <!-- Magical focal point - matches the example image -->
-                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full opacity-70 blur-xl animate-pulse-slow"></div>
-                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-10 h-10 bg-cyan-200 rounded-full opacity-80 blur-lg animate-pulse-fast" style="animation-delay: -1s;"></div>
-                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-6 h-6 bg-blue-100 rounded-full opacity-90 blur-md animate-pulse-fast" style="animation-delay: -2s;"></div>
+                                <div class="absolute bottom-3 left-[60%] w-0.5 h-0.5 bg-blue-100 rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -2.2s;"></div>
+                                <div class="absolute bottom-7 left-[62%] w-1 h-1 bg-cyan-200 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -4.7s;"></div>
+                                <div class="absolute bottom-11 left-[64%] w-0.5 h-0.5 bg-white rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -6.8s;"></div>
+                                <div class="absolute bottom-14 left-[66%] w-0.5 h-0.5 bg-purple-100 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -8.9s;"></div>
+                                
+                                <div class="absolute bottom-5 left-[48%] w-0.5 h-0.5 bg-blue-50 rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -1.5s;"></div>
+                                <div class="absolute bottom-9 left-[52%] w-0.5 h-0.5 bg-indigo-50 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -3.7s;"></div>
+                                
+                                <!-- Micro magical particles -->
+                                <div class="absolute bottom-7 left-[42%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-slow z-0" style="animation-delay: -1.2s;"></div>
+                                <div class="absolute bottom-9 left-[43%] w-[2px] h-[2px] bg-blue-100 rounded-full animate-float-particle z-0" style="animation-delay: -2.4s;"></div>
+                                <div class="absolute bottom-11 left-[44%] w-[2px] h-[2px] bg-cyan-50 rounded-full animate-float-particle-slow z-0" style="animation-delay: -3.6s;"></div>
+                                <div class="absolute bottom-13 left-[45%] w-[2px] h-[2px] bg-indigo-100 rounded-full animate-float-particle z-0" style="animation-delay: -4.8s;"></div>
+                                
+                                <div class="absolute bottom-6 left-[57%] w-[2px] h-[2px] bg-purple-50 rounded-full animate-float-particle z-0" style="animation-delay: -1.8s;"></div>
+                                <div class="absolute bottom-8 left-[58%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-slow z-0" style="animation-delay: -3.0s;"></div>
+                                <div class="absolute bottom-10 left-[59%] w-[2px] h-[2px] bg-blue-50 rounded-full animate-float-particle z-0" style="animation-delay: -4.2s;"></div>
+                                
+                                <div class="absolute bottom-4 left-[38%] w-[1px] h-[1px] bg-cyan-100 rounded-full animate-float-particle-slow z-0" style="animation-delay: -2.1s;"></div>
+                                <div class="absolute bottom-6 left-[39%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle z-0" style="animation-delay: -3.3s;"></div>
+                                <div class="absolute bottom-8 left-[40%] w-[1px] h-[1px] bg-indigo-50 rounded-full animate-float-particle-slow z-0" style="animation-delay: -4.5s;"></div>
+                                
+                                <div class="absolute bottom-5 left-[62%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-float-particle z-0" style="animation-delay: -1.6s;"></div>
+                                <div class="absolute bottom-7 left-[63%] w-[1px] h-[1px] bg-cyan-100 rounded-full animate-float-particle-slow z-0" style="animation-delay: -2.8s;"></div>
+                                <div class="absolute bottom-9 left-[64%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle z-0" style="animation-delay: -4.0s;"></div>
+                                
+                                <!-- Additional varied animation particles -->
+                                <div class="absolute bottom-3 left-[47%] w-[2px] h-[2px] bg-cyan-100 rounded-full animate-float-particle-micro z-0" style="animation-delay: -0.7s;"></div>
+                                <div class="absolute bottom-5 left-[48%] w-[2px] h-[2px] bg-indigo-50 rounded-full animate-float-particle-tiny z-0" style="animation-delay: -1.4s;"></div>
+                                <div class="absolute bottom-7 left-[49%] w-[1px] h-[1px] bg-white rounded-full animate-sparkle z-0" style="animation-delay: -2.1s;"></div>
+                                
+                                <div class="absolute bottom-4 left-[51%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-sparkle z-0" style="animation-delay: -0.5s;"></div>
+                                <div class="absolute bottom-6 left-[52%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle-micro z-0" style="animation-delay: -1.0s;"></div>
+                                <div class="absolute bottom-8 left-[53%] w-[1px] h-[1px] bg-cyan-50 rounded-full animate-float-particle-tiny z-0" style="animation-delay: -1.5s;"></div>
+                                
+                                <div class="absolute bottom-6 left-[32%] w-[1px] h-[1px] bg-indigo-50 rounded-full animate-sparkle z-0" style="animation-delay: -0.3s;"></div>
+                                <div class="absolute bottom-8 left-[33%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-float-particle-micro z-0" style="animation-delay: -0.9s;"></div>
+                                <div class="absolute bottom-10 left-[34%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-tiny z-0" style="animation-delay: -1.8s;"></div>
+                                
+                                <div class="absolute bottom-7 left-[67%] w-[1px] h-[1px] bg-white rounded-full animate-sparkle z-0" style="animation-delay: -0.6s;"></div>
+                                <div class="absolute bottom-9 left-[68%] w-[1px] h-[1px] bg-cyan-50 rounded-full animate-float-particle-micro z-0" style="animation-delay: -1.2s;"></div>
+                                <div class="absolute bottom-11 left-[69%] w-[2px] h-[2px] bg-blue-50 rounded-full animate-float-particle-tiny z-0" style="animation-delay: -2.4s;"></div>
+                                
+                                <!-- Magical glow effects moved to be behind the book -->
+                                <!-- Will be positioned but invisible until we add z-index to the book -->
                                 
                                 <!-- Ethereal light beams -->
                                 <div class="absolute top-[20%] -left-10 w-60 h-96 bg-gradient-to-b from-blue-400/30 via-indigo-400/20 to-transparent rotate-30 blur-3xl transform-gpu animate-pulse-slow"></div>
                                 <div class="absolute top-[30%] -right-10 w-60 h-80 bg-gradient-to-t from-cyan-500/30 via-blue-400/20 to-transparent -rotate-30 blur-3xl transform-gpu animate-pulse-slow" style="animation-delay: -4s;"></div>
                                 
                                 <!-- Book Cover with 3D effect -->
-                                <div class="relative transform perspective-1000 rotate-y-0 hover:rotate-y-10 transition-transform duration-500 shadow-2xl">
-                                    <div class="w-full aspect-[3/4] bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900 rounded-lg shadow-xl overflow-hidden relative">
+                                <div class="relative transform perspective-1000 rotate-y-0 hover:rotate-y-10 transition-transform duration-500 shadow-2xl z-10">
+                                    <div class="w-full aspect-[3/4] bg-gradient-to-br from-slate-800 via-gray-900 to-slate-900 rounded-lg shadow-xl overflow-hidden relative">
                                         <!-- Book Cover Pattern -->
                                         <div class="absolute inset-0 opacity-20 bg-pattern"></div>
                                         <div class="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10"></div>
                                         
                                         <!-- Book Spine Effect -->
-                                        <div class="absolute left-0 top-0 h-full w-[8px] sm:w-[10px] md:w-[15px] bg-gradient-to-r from-slate-900 to-blue-900"></div>
+                                        <div class="absolute left-0 top-0 h-full w-[8px] sm:w-[10px] md:w-[15px] bg-gradient-to-r from-slate-700 to-gray-900"></div>
                                         
                                         <!-- Book Content -->
                                         <div class="flex flex-col h-full p-3 sm:p-4 md:p-6 pl-6 sm:pl-8 md:pl-10 relative">
@@ -213,7 +255,7 @@ defineProps({
                                                 <h4 class="text-2xl sm:text-3xl md:text-4xl leading-tight font-bold text-white mb-2 sm:mb-3 md:mb-4">Pro</h4>
                                                 
                                                 <!-- Separator line -->
-                                                <div class="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-300 to-orange-500 mb-2 sm:mb-3 md:mb-4 rounded-full"></div>
+                                                <div class="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-500 mb-2 sm:mb-3 md:mb-4 rounded-full"></div>
                                                 
                                                 <p class="text-sm sm:text-base md:text-lg font-light text-white mb-6 sm:mb-8 md:mb-12 leading-relaxed">
                                                     {{ featuredProduct.short_description || "The definitive method to mastering field operations." }}
@@ -223,24 +265,35 @@ defineProps({
                                     </div>
                                 </div>
                                 
+                                <!-- All magical glow effects with explicit z-index to keep them behind the book -->
                                 <!-- Cosmic shadow effects -->
-                                <div class="absolute -bottom-3 left-0 right-8 h-4 bg-black/20 blur-sm rounded-full"></div>
-                                <div class="absolute -bottom-2 left-4 right-6 h-6 bg-black/15 blur-md rounded-full"></div>
+                                <div class="absolute -bottom-3 left-0 right-8 h-4 bg-black/20 blur-sm rounded-full z-0"></div>
+                                <div class="absolute -bottom-2 left-4 right-6 h-6 bg-black/15 blur-md rounded-full z-0"></div>
+                                
+                                <!-- Magical light rays behind book -->
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-36 bg-white/90 blur-sm transform rotate-[20deg] origin-bottom translate-y-[-10%] translate-x-[-50%] animate-pulse-slow z-0"></div>
+                                <div class="absolute top-1/2 left-[45%] w-0.5 h-32 bg-cyan-100/90 blur-sm transform rotate-[10deg] origin-bottom translate-y-[-20%] animate-pulse-slow z-0" style="animation-delay: -2s;"></div>
+                                <div class="absolute top-1/2 left-[55%] w-0.5 h-28 bg-blue-100/90 blur-sm transform rotate-[-15deg] origin-bottom translate-y-[-15%] animate-pulse-slow z-0" style="animation-delay: -4s;"></div>
+                                
+                                <!-- Magical focal point behind book -->
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full opacity-70 blur-xl animate-pulse-slow z-0"></div>
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-10 h-10 bg-cyan-200 rounded-full opacity-80 blur-lg animate-pulse-fast z-0" style="animation-delay: -1s;"></div>
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-6 h-6 bg-blue-100 rounded-full opacity-90 blur-md animate-pulse-fast z-0" style="animation-delay: -2s;"></div>
                                 
                                 <!-- Magical book glow - primary glow -->
-                                <div class="absolute -bottom-10 -left-10 -right-10 h-24 bg-gradient-to-r from-cyan-500/60 via-blue-400/70 to-purple-600/60 blur-2xl rounded-full animate-nebula-pulse"></div>
+                                <div class="absolute -bottom-10 -left-10 -right-10 h-24 bg-gradient-to-r from-cyan-300/60 via-blue-400/70 to-purple-600/60 blur-2xl rounded-full animate-nebula-pulse z-0"></div>
                                 
                                 <!-- Ethereal glow beneath - secondary layer -->
-                                <div class="absolute -bottom-14 -left-8 -right-8 h-20 bg-gradient-to-r from-blue-600/70 via-cyan-400/80 to-indigo-600/70 blur-3xl rounded-full animate-pulse-slow" style="animation-delay: -2s;"></div>
+                                <div class="absolute -bottom-14 -left-8 -right-8 h-20 bg-gradient-to-r from-blue-600/70 via-cyan-400/80 to-indigo-600/70 blur-3xl rounded-full animate-pulse-slow z-0" style="animation-delay: -2s;"></div>
                                 
                                 <!-- Cosmic energy pool - tertiary layer -->
-                                <div class="absolute -bottom-8 left-[15%] right-[15%] h-14 bg-gradient-to-r from-violet-500/80 via-white/90 to-blue-500/80 blur-xl rounded-full animate-pulse-slow" style="animation-delay: -3s;"></div>
+                                <div class="absolute -bottom-8 left-[15%] right-[15%] h-14 bg-gradient-to-r from-violet-500/80 via-white/90 to-blue-500/80 blur-xl rounded-full animate-pulse-slow z-0" style="animation-delay: -3s;"></div>
                                 
                                 <!-- Center bright glow -->
-                                <div class="absolute -bottom-6 left-[25%] right-[25%] h-10 bg-gradient-to-r from-cyan-300/90 via-white/100 to-cyan-300/90 blur-md rounded-full animate-pulse-fast"></div>
+                                <div class="absolute -bottom-6 left-[25%] right-[25%] h-10 bg-gradient-to-r from-cyan-300/90 via-white/100 to-cyan-300/90 blur-md rounded-full animate-pulse-fast z-0"></div>
                                 
                                 <!-- Intense center light source -->
-                                <div class="absolute -bottom-4 left-[40%] right-[40%] h-8 bg-white shadow-lg shadow-cyan-500/50 blur-sm rounded-full animate-pulse-fast" style="animation-delay: -1s;"></div>
+                                <div class="absolute -bottom-1 left-[40%] right-[40%] h-8 bg-white shadow-lg shadow-cyan-500/50 blur-sm rounded-full animate-pulse-fast z-0" style="animation-delay: -1s;"></div>
                                 
                                 <!-- Book Pages Edge -->
                                 <div class="absolute top-[2%] bottom-[2%] right-0 w-[6px] bg-gradient-to-l from-gray-100 via-gray-200 to-gray-300 rounded-r transform translate-x-[3px]">
@@ -266,7 +319,7 @@ defineProps({
                                         <span class="ml-3">Practical templates and resources</span>
                                     </li>
                                     <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
                                         <span class="ml-3">Step-by-step implementation guides</span>

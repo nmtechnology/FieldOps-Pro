@@ -26,6 +26,9 @@ export default {
                 'stardust': 'float 8s ease-in-out infinite alternate',
                 'float-particle': 'floatUp 5s ease-in-out infinite alternate',
                 'float-particle-slow': 'floatUp 8s ease-in-out infinite alternate',
+                'float-particle-micro': 'floatUp 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate',
+                'float-particle-tiny': 'floatUpShort 3s ease-in-out infinite alternate',
+                'sparkle': 'sparkle 3s ease-in-out infinite alternate',
             },
             keyframes: {
                 pulse: {
@@ -47,6 +50,15 @@ export default {
                 floatUp: {
                     '0%': { transform: 'translateY(0)', opacity: 0.5 },
                     '100%': { transform: 'translateY(-50px)', opacity: 0.9 },
+                },
+                floatUpShort: {
+                    '0%': { transform: 'translateY(0)', opacity: 0.4 },
+                    '100%': { transform: 'translateY(-20px)', opacity: 0.8 },
+                },
+                sparkle: {
+                    '0%': { opacity: 0.2, transform: 'scale(0.6)' },
+                    '50%': { opacity: 0.9, transform: 'scale(1.1)' },
+                    '100%': { opacity: 0.2, transform: 'scale(0.7)' },
                 },
             },
         },
