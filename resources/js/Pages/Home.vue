@@ -38,7 +38,7 @@ defineProps({
                 
                 <!-- Desktop navigation menu -->
                 <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
-                    <Link :href="route('products.show', featuredProduct)" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Products</Link>
+                    <Link v-if="featuredProduct" :href="route('products.show', featuredProduct)" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Products</Link>
                     <Link href="#testimonials" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Testimonials</Link>
                     <Link href="#about" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">About</Link>
                     <Link href="/register" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign Up</Link>
@@ -47,7 +47,10 @@ defineProps({
                 
                 <!-- Mobile menu button -->
                 <div class="flex items-center sm:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-300 hover:text-white focus:outline-none">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                            class="text-gray-300 hover:text-white focus:outline-none"
+                            :aria-expanded="mobileMenuOpen"
+                            aria-label="Toggle navigation menu">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -58,7 +61,7 @@ defineProps({
             
             <!-- Mobile menu -->
             <div v-if="mobileMenuOpen" class="sm:hidden pt-2 pb-3 space-y-1">
-                <Link :href="route('products.show', featuredProduct)" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Products</Link>
+                <Link v-if="featuredProduct" :href="route('products.show', featuredProduct)" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Products</Link>
                 <Link href="#testimonials" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Testimonials</Link>
                 <Link href="#about" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">About</Link>
                 <div class="flex space-x-2 px-3 py-2">
@@ -98,9 +101,9 @@ defineProps({
                                     </Link>
                                 </div>
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
-                                    <a href="#featured" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-400 hover:bg-orange-700 md:py-4 md:text-lg md:px-10">
+                                    <Link :href="route('products.show', { product: featuredProduct.id })" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-400 hover:bg-orange-700 md:py-4 md:text-lg md:px-10">
                                         Learn more
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +129,7 @@ defineProps({
                 </div>
 
                 <div class="mt-10">
-                    <div class="lg:grid lg:grid-cols-2 lg:gap-x-8">
+                    <div class="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
                         <!-- Left Side: Book Cover with 3D effect -->
                         <div class="mb-10 lg:mb-0 flex justify-center lg:justify-start">
                             <!-- Ambient glow effect container -->
@@ -559,13 +562,13 @@ defineProps({
                         <a href="#" class="text-base text-white hover:text-orange-400">Products</a>
                     </div>
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-gray-500 hover:text-gray-900">Contact</a>
+                        <a href="#" class="text-base text-white hover:text-orange-400">Contact</a>
                     </div>
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-gray-500 hover:text-gray-900">Terms</a>
+                        <a href="#" class="text-base text-white hover:text-orange-400">Terms</a>
                     </div>
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-gray-500 hover:text-gray-900">Privacy</a>
+                        <a href="#" class="text-base text-white hover:text-orange-400">Privacy</a>
                     </div>
                 </nav>
                 <div class="mt-8 flex justify-center space-x-6">
