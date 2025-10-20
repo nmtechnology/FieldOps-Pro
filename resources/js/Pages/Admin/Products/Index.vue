@@ -50,10 +50,10 @@ const formatDate = (dateString) => {
     <AdminLayout>
         <template #header>
             <div class="flex justify-between items-center">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">Products Management</h2>
+                <h2 class="font-semibold text-xl text-white leading-tight">Products Management</h2>
                 <Link 
                     href="/admin/products/create"
-                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+                    class="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-500 transition"
                 >
                     Add New Product
                 </Link>
@@ -62,27 +62,29 @@ const formatDate = (dateString) => {
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
+                <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-200">
+                        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-700">
+                                <thead class="bg-gray-700">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Orders</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">ID</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Name</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Price</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Orders</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Created</th>
+                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                            <span class="sr-only">Actions</span>
+                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr v-for="product in products.data" :key="product.id" class="hover:bg-gray-50">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.id }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ product.name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatCurrency(product.price) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                <tbody class="divide-y divide-gray-700 bg-gray-800">
+                                    <tr v-for="product in products.data" :key="product.id" class="hover:bg-gray-700">
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-6">{{ product.id }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-white">{{ product.name }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ formatCurrency(product.price) }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm">
                                             <span 
                                                 :class="[
                                                     'px-2 inline-flex text-xs leading-5 font-semibold rounded-full',
@@ -94,36 +96,38 @@ const formatDate = (dateString) => {
                                                 {{ product.active ? 'Active' : 'Inactive' }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.orders_count }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatDate(product.created_at) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex gap-2">
-                                            <Link 
-                                                :href="`/admin/products/${product.id}`" 
-                                                class="text-blue-600 hover:text-blue-900 px-2 py-1"
-                                                title="View"
-                                            >
-                                                View
-                                            </Link>
-                                            <Link 
-                                                :href="`/admin/products/${product.id}/edit`" 
-                                                class="text-indigo-600 hover:text-indigo-900 px-2 py-1"
-                                                title="Edit"
-                                            >
-                                                Edit
-                                            </Link>
-                                            <button 
-                                                @click="openDeleteModal(product)" 
-                                                class="text-red-600 hover:text-red-900 px-2 py-1"
-                                                title="Delete"
-                                                :disabled="product.orders_count > 0"
-                                                :class="{'opacity-50 cursor-not-allowed': product.orders_count > 0}"
-                                            >
-                                                Delete
-                                            </button>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ product.orders_count }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">{{ formatDate(product.created_at) }}</td>
+                                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                            <div class="flex justify-end space-x-2">
+                                                <Link 
+                                                    :href="`/admin/products/${product.id}`" 
+                                                    class="text-blue-400 hover:text-blue-300"
+                                                    title="View"
+                                                >
+                                                    View
+                                                </Link>
+                                                <Link 
+                                                    :href="`/admin/products/${product.id}/edit`" 
+                                                    class="text-orange-400 hover:text-orange-300"
+                                                    title="Edit"
+                                                >
+                                                    Edit
+                                                </Link>
+                                                <button 
+                                                    @click="openDeleteModal(product)" 
+                                                    class="text-red-400 hover:text-red-300"
+                                                    title="Delete"
+                                                    :disabled="product.orders_count > 0"
+                                                    :class="{'opacity-50 cursor-not-allowed': product.orders_count > 0}"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr v-if="products.data.length === 0">
-                                        <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                        <td colspan="7" class="py-10 text-center text-gray-400">
                                             No products found
                                         </td>
                                     </tr>
@@ -132,17 +136,17 @@ const formatDate = (dateString) => {
                         </div>
 
                         <!-- Pagination Links -->
-                        <div class="mt-4 flex justify-between">
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-700 pt-4">
                             <div v-if="products.prev_page_url" class="flex items-center">
-                                <Link :href="products.prev_page_url" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                                <Link :href="products.prev_page_url" class="relative inline-flex items-center rounded-md border border-gray-700 bg-gray-800 px-4 py-2 text-sm font-medium text-gray-400 hover:bg-gray-700">
                                     Previous
                                 </Link>
                             </div>
-                            <div class="text-sm text-gray-700 py-2">
+                            <div class="text-sm text-gray-400 py-2">
                                 Showing {{ products.from }} to {{ products.to }} of {{ products.total }} products
                             </div>
                             <div v-if="products.next_page_url" class="flex items-center">
-                                <Link :href="products.next_page_url" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                                <Link :href="products.next_page_url" class="relative inline-flex items-center rounded-md border border-gray-700 bg-gray-800 px-4 py-2 text-sm font-medium text-gray-400 hover:bg-gray-700">
                                     Next
                                 </Link>
                             </div>

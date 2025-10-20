@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     orders: {
@@ -19,70 +20,75 @@ const statusColors = {
     cancelled: 'bg-red-100 text-red-800',
     refunded: 'bg-purple-100 text-purple-800'
 };
+
+// Handle row click to navigate to order details
+const viewOrder = (orderId) => {
+    router.visit(route('admin.orders.show', orderId));
+};
 </script>
 
 <template>
-    <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+    <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-700">
+            <thead class="bg-gray-700">
                 <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">
                         Order ID
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">
                         Customer
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">
                         Product
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">
                         Amount
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">
                         Status
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">
                         Date
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
                     </th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-700 bg-gray-800">
                 <tr v-if="!orders || (Array.isArray(orders) ? orders.length === 0 : (orders.data && orders.data.length === 0))">
-                    <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">
+                    <td colspan="6" class="py-10 text-center text-gray-400">
                         No orders found
                     </td>
                 </tr>
-                <tr v-for="order in (Array.isArray(orders) ? orders : (orders.data || []))" :key="order.id" class="hover:bg-gray-50">
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">
+                <tr v-for="(order, index) in (Array.isArray(orders) ? orders : (orders.data || []))" 
+                    :key="order.id" 
+                    @click="viewOrder(order.id)"
+                    class="hover:bg-gray-700 cursor-pointer transition-colors duration-150 ease-in-out">
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                        <div class="font-medium text-white">
                             #{{ order.id }}
                         </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                        <div class="text-white">
                             {{ order.user.name }}
                         </div>
-                        <div class="text-sm text-gray-500">
+                        <div class="text-gray-400">
                             {{ order.user.email }}
                         </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                        <div class="text-white">
                             {{ order.product.name }}
                         </div>
-                        <div class="text-sm text-gray-500">
+                        <div class="text-gray-400">
                             {{ order.product.tier }}
                         </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                        <div class="font-medium">
                             ${{ order.amount.toFixed(2) }}
                         </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                         <span :class="[
                             'px-2 inline-flex text-xs leading-5 font-semibold rounded-full',
                             statusColors[order.status] || 'bg-gray-100 text-gray-800'
@@ -90,21 +96,18 @@ const statusColors = {
                             {{ order.status }}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300 relative">
+                        <div>
                             {{ new Date(order.created_at).toLocaleDateString() }}
                         </div>
-                        <div class="text-sm text-gray-500">
+                        <div class="text-gray-400">
                             {{ new Date(order.created_at).toLocaleTimeString() }}
                         </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <Link :href="route('admin.orders.show', order.id)" class="text-indigo-600 hover:text-indigo-900 mr-2">
-                            View
-                        </Link>
+                        <!-- Edit button for pending orders, positioned to avoid interfering with row click -->
                         <Link v-if="order.status === 'pending'" 
                               :href="route('admin.orders.edit', order.id)" 
-                              class="text-blue-600 hover:text-blue-900 mr-2">
+                              @click.stop
+                              class="absolute top-2 right-2 text-xs text-orange-400 hover:text-orange-300 bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded transition-colors duration-150">
                             Edit
                         </Link>
                     </td>
