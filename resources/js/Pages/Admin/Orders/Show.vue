@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, useForm, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 const props = defineProps({
@@ -98,6 +98,12 @@ const getStatusClass = (status) => {
                     >
                         Process Refund
                     </button>
+                    <Link 
+                        :href="route('admin.orders.index')"
+                        class="inline-flex items-center rounded bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                    >
+                        Back to Orders
+                    </Link>
                 </div>
 
                 <!-- Order details grid -->

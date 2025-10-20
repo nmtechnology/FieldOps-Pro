@@ -1,11 +1,13 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { ref } from 'vue';
 
 const props = defineProps({
     user: Object,
 });
+
+const showDeleteModal = ref(false);
 
 // Format date for display
 const formatDate = (dateString) => {
@@ -19,6 +21,26 @@ const formatRole = (isAdmin) => {
     return isAdmin ? 'Administrator' : 'Customer';
 };
 
+const openDeleteModal = () => {
+    showDeleteModal.value = true;
+};
+
+const closeDeleteModal = () => {
+    showDeleteModal.value = false;
+};
+
+const deleteUser = () => {
+    router.delete(route('admin.users.destroy', props.user.id), {
+        onSuccess: () => {
+            router.visit(route('admin.users.index'));
+        }
+    });
+};
+
+const toggleAdminStatus = () => {
+    router.post(route('admin.users.toggle-admin', props.user.id));
+};
+
 </script>
 
 <template>
@@ -30,9 +52,32 @@ const formatRole = (isAdmin) => {
                 <h2 class="text-xl font-semibold leading-tight text-white">
                     User Details
                 </h2>
-                <Link :href="route('admin.users.index')" class="rounded-md bg-gray-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500">
-                    Back to Users
-                </Link>
+                <div class="flex gap-2">
+                    <Link :href="route('admin.users.edit', user.id)" class="rounded-md bg-blue-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+                        Edit User
+                    </Link>
+                    <button 
+                        @click="toggleAdminStatus"
+                        :class="[
+                            'rounded-md px-3.5 py-2 text-sm font-semibold text-white shadow-sm',
+                            user.is_admin ? 'bg-yellow-600 hover:bg-yellow-500' : 'bg-indigo-600 hover:bg-indigo-500'
+                        ]"
+                    >
+                        {{ user.is_admin ? 'Remove Admin' : 'Make Admin' }}
+                    </button>
+                    <button 
+                        @click="openDeleteModal"
+                        class="rounded-md bg-red-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500"
+                        :disabled="user.orders && user.orders.length > 0"
+                        :class="{'opacity-50 cursor-not-allowed': user.orders && user.orders.length > 0}"
+                        :title="user.orders && user.orders.length > 0 ? 'Cannot delete user with existing orders' : 'Delete user'"
+                    >
+                        Delete User
+                    </button>
+                    <Link :href="route('admin.users.index')" class="rounded-md bg-gray-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500">
+                        Back to Users
+                    </Link>
+                </div>
             </div>
         </template>
         
@@ -104,13 +149,12 @@ const formatRole = (isAdmin) => {
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Date</th>
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Amount</th>
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status</th>
-                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                            <span class="sr-only">Actions</span>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-700 bg-gray-800">
-                                    <tr v-for="order in user.orders" :key="order.id" class="hover:bg-gray-700">
+                                    <tr v-for="order in user.orders" :key="order.id" 
+                                        @click="$inertia.visit(route('admin.orders.show', order.id))"
+                                        class="hover:bg-gray-700 cursor-pointer transition-colors duration-150">
                                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-6">
                                             {{ order.order_number }}
                                         </td>
@@ -134,11 +178,6 @@ const formatRole = (isAdmin) => {
                                                 {{ order.status.charAt(0).toUpperCase() + order.status.slice(1) }}
                                             </span>
                                         </td>
-                                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <Link :href="route('admin.orders.show', order.id)" class="text-blue-400 hover:text-blue-300">
-                                                View
-                                            </Link>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -146,6 +185,43 @@ const formatRole = (isAdmin) => {
                         <div v-else class="rounded-md bg-gray-700 p-6 text-center">
                             <p class="text-gray-300">This user has no orders yet.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div v-if="showDeleteModal" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click="closeDeleteModal"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div class="inline-block align-bottom bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                </svg>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-white" id="modal-title">
+                                    Delete User
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-300">
+                                        Are you sure you want to delete "{{ user.name }}"? This action cannot be undone.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button @click="deleteUser" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                            Delete
+                        </button>
+                        <button @click="closeDeleteModal" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-800 text-base font-medium text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            Cancel
+                        </button>
                     </div>
                 </div>
             </div>

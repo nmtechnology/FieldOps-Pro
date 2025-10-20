@@ -15,7 +15,7 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
@@ -25,6 +25,31 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+        ];
+
+        // Check if sensitive information is being changed
+        $user = $this->user();
+        $nameChanged = $this->input('name') !== $user->name;
+        $emailChanged = $this->input('email') !== $user->email;
+
+        // If sensitive information is changing, require current password
+        if ($nameChanged || $emailChanged) {
+            $rules['current_password'] = ['required', 'current_password'];
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'current_password.required' => 'Please enter your current password to verify changes to your account information.',
+            'current_password.current_password' => 'The provided password does not match your current password.',
         ];
     }
 }

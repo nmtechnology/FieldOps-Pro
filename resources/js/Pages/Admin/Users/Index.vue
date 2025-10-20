@@ -149,18 +149,17 @@ function timeAgo(timestamp) {
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Last Login</th>
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Registered</th>
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Orders</th>
-                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                            <span class="sr-only">Actions</span>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-700 bg-gray-800">
                                     <tr v-if="users.data.length === 0">
-                                        <td colspan="7" class="py-10 text-center text-gray-400">
+                                        <td colspan="6" class="py-10 text-center text-gray-400">
                                             No users found matching the selected filter.
                                         </td>
                                     </tr>
-                                    <tr v-for="user in users.data" :key="user.id" class="hover:bg-gray-700">
+                                    <tr v-for="user in users.data" :key="user.id" 
+                                        @click="$inertia.visit(route('admin.users.show', user.id))"
+                                        class="hover:bg-gray-700 cursor-pointer transition-colors duration-150">
                                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                             <div class="flex items-center">
                                                 <div class="h-10 w-10 flex-shrink-0">
@@ -194,22 +193,6 @@ function timeAgo(timestamp) {
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                                             {{ user.orders_count || 0 }}
-                                        </td>
-                                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <div class="flex justify-end space-x-2">
-                                                <Link :href="route('admin.users.edit', user.id)" class="text-orange-400 hover:text-orange-300">
-                                                    Edit
-                                                </Link>
-                                                <Link :href="route('admin.users.show', user.id)" class="text-blue-400 hover:text-blue-300">
-                                                    View
-                                                </Link>
-                                                <button v-if="!user.is_admin" @click="$emit('toggle-admin', user.id)" class="text-indigo-400 hover:text-indigo-300">
-                                                    Make Admin
-                                                </button>
-                                                <button v-else @click="$emit('toggle-admin', user.id)" class="text-yellow-400 hover:text-yellow-300">
-                                                    Remove Admin
-                                                </button>
-                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
