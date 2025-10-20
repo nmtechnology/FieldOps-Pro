@@ -148,48 +148,48 @@ const formatCurrency = (value) => {
 
     <AdminLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Reports & Analytics</h2>
+            <h2 class="font-semibold text-xl text-white leading-tight">Reports & Analytics</h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!-- Summary Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <div class="text-sm font-medium text-gray-500 mb-1">Total Sales (Month)</div>
-                        <div class="text-2xl font-bold">{{ monthlySummary?.sales_count || 0 }}</div>
-                        <div class="text-xs text-gray-500 mt-1">
-                            <span :class="monthlySummary?.sales_trend > 0 ? 'text-green-600' : 'text-red-600'">
+                    <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <div class="text-sm font-medium text-gray-400 mb-1">Total Sales (Month)</div>
+                        <div class="text-2xl font-bold text-white">{{ monthlySummary?.sales_count || 0 }}</div>
+                        <div class="text-xs text-gray-400 mt-1">
+                            <span :class="monthlySummary?.sales_trend > 0 ? 'text-green-400' : 'text-red-400'">
                                 {{ monthlySummary?.sales_trend > 0 ? '↑' : '↓' }} {{ Math.abs(monthlySummary?.sales_trend || 0) }}%
                             </span>
                             vs last month
                         </div>
                     </div>
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <div class="text-sm font-medium text-gray-500 mb-1">Revenue (Month)</div>
-                        <div class="text-2xl font-bold">{{ formatCurrency(monthlySummary?.revenue || 0) }}</div>
-                        <div class="text-xs text-gray-500 mt-1">
-                            <span :class="monthlySummary?.revenue_trend > 0 ? 'text-green-600' : 'text-red-600'">
+                    <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <div class="text-sm font-medium text-gray-400 mb-1">Revenue (Month)</div>
+                        <div class="text-2xl font-bold text-white">{{ formatCurrency(monthlySummary?.revenue || 0) }}</div>
+                        <div class="text-xs text-gray-400 mt-1">
+                            <span :class="monthlySummary?.revenue_trend > 0 ? 'text-green-400' : 'text-red-400'">
                                 {{ monthlySummary?.revenue_trend > 0 ? '↑' : '↓' }} {{ Math.abs(monthlySummary?.revenue_trend || 0) }}%
                             </span>
                             vs last month
                         </div>
                     </div>
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <div class="text-sm font-medium text-gray-500 mb-1">Avg. Order Value</div>
-                        <div class="text-2xl font-bold">{{ formatCurrency(monthlySummary?.avg_order_value || 0) }}</div>
-                        <div class="text-xs text-gray-500 mt-1">
-                            <span :class="monthlySummary?.aov_trend > 0 ? 'text-green-600' : 'text-red-600'">
+                    <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <div class="text-sm font-medium text-gray-400 mb-1">Avg. Order Value</div>
+                        <div class="text-2xl font-bold text-white">{{ formatCurrency(monthlySummary?.avg_order_value || 0) }}</div>
+                        <div class="text-xs text-gray-400 mt-1">
+                            <span :class="monthlySummary?.aov_trend > 0 ? 'text-green-400' : 'text-red-400'">
                                 {{ monthlySummary?.aov_trend > 0 ? '↑' : '↓' }} {{ Math.abs(monthlySummary?.aov_trend || 0) }}%
                             </span>
                             vs last month
                         </div>
                     </div>
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <div class="text-sm font-medium text-gray-500 mb-1">Discount Usage</div>
-                        <div class="text-2xl font-bold">{{ monthlySummary?.discount_usage || 0 }}</div>
-                        <div class="text-xs text-gray-500 mt-1">
-                            <span :class="monthlySummary?.discount_trend > 0 ? 'text-green-600' : 'text-red-600'">
+                    <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <div class="text-sm font-medium text-gray-400 mb-1">Discount Usage</div>
+                        <div class="text-2xl font-bold text-white">{{ monthlySummary?.discount_usage || 0 }}</div>
+                        <div class="text-xs text-gray-400 mt-1">
+                            <span :class="monthlySummary?.discount_trend > 0 ? 'text-green-400' : 'text-red-400'">
                                 {{ monthlySummary?.discount_trend > 0 ? '↑' : '↓' }} {{ Math.abs(monthlySummary?.discount_trend || 0) }}%
                             </span>
                             vs last month
@@ -199,14 +199,14 @@ const formatCurrency = (value) => {
 
                 <!-- Charts Row 1 -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <h3 class="text-lg font-semibold mb-4">Sales Trend</h3>
+                    <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-white">Sales Trend</h3>
                         <div class="h-64">
                             <canvas ref="monthlySalesChart"></canvas>
                         </div>
                     </div>
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <h3 class="text-lg font-semibold mb-4">Revenue Trend</h3>
+                    <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-white">Revenue Trend</h3>
                         <div class="h-64">
                             <canvas ref="revenueChart"></canvas>
                         </div>
@@ -215,33 +215,38 @@ const formatCurrency = (value) => {
 
                 <!-- Charts Row 2 -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 lg:col-span-1">
-                        <h3 class="text-lg font-semibold mb-4">Top Products</h3>
+                    <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 lg:col-span-1">
+                        <h3 class="text-lg font-semibold mb-4 text-white">Top Products</h3>
                         <div class="h-64">
                             <canvas ref="topProductsChart"></canvas>
                         </div>
                     </div>
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 lg:col-span-2">
-                        <h3 class="text-lg font-semibold mb-4">Top Selling Products</h3>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
+                    <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 lg:col-span-2">
+                        <h3 class="text-lg font-semibold mb-4 text-white">Top Selling Products</h3>
+                        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-700">
+                                <thead class="bg-gray-700">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sales</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Revenue</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Avg. Price</th>
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Product</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Sales</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Revenue</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Avg. Price</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr v-for="(product, index) in topProducts" :key="index" class="hover:bg-gray-50">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ product.name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ product.sales_count }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatCurrency(product.revenue) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatCurrency(product.avg_price) }}</td>
+                                <tbody class="divide-y divide-gray-700 bg-gray-800">
+                                    <tr v-for="(product, index) in topProducts" :key="index" 
+                                        @click="product.id ? $inertia.visit(`/admin/products/${product.id}/edit`) : null"
+                                        :class="[
+                                            'transition-colors duration-150',
+                                            product.id ? 'hover:bg-gray-700 cursor-pointer' : 'hover:bg-gray-700'
+                                        ]">
+                                        <td class="py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-6">{{ product.name }}</td>
+                                        <td class="px-3 py-4 text-sm text-gray-300">{{ product.sales_count }}</td>
+                                        <td class="px-3 py-4 text-sm text-gray-300">{{ formatCurrency(product.revenue) }}</td>
+                                        <td class="px-3 py-4 text-sm text-gray-300">{{ formatCurrency(product.avg_price) }}</td>
                                     </tr>
                                     <tr v-if="!topProducts || topProducts.length === 0">
-                                        <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No data available</td>
+                                        <td colspan="4" class="px-6 py-4 text-sm text-gray-400 text-center">No data available</td>
                                     </tr>
                                 </tbody>
                             </table>
