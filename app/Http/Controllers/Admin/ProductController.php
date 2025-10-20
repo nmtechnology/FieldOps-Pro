@@ -47,10 +47,12 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
+            'short_description' => 'nullable|string',
+            'type' => 'required|string|in:info,service,physical',
             'price' => 'required|numeric|min:0',
-            'tier' => 'required|string|in:basic,standard,premium',
-            'image_url' => 'nullable|string|url',
-            'active' => 'boolean'
+            'image_path' => 'nullable|string|url',
+            'active' => 'boolean',
+            'content_sections' => 'nullable|array'
         ]);
 
         Product::create($validated);
@@ -100,10 +102,12 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'description' => 'sometimes|string',
+            'short_description' => 'nullable|string',
+            'type' => 'sometimes|string|in:info,service,physical',
             'price' => 'sometimes|numeric|min:0',
-            'tier' => 'sometimes|string|in:basic,standard,premium',
-            'image_url' => 'nullable|string|url',
-            'active' => 'sometimes|boolean'
+            'image_path' => 'nullable|string|url',
+            'active' => 'sometimes|boolean',
+            'content_sections' => 'nullable|array'
         ]);
 
         $product->update($validated);

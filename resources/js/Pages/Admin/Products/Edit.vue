@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -15,17 +15,38 @@ const props = defineProps({
 const form = useForm({
     name: props.product.name,
     description: props.product.description,
+    short_description: props.product.short_description || '',
+    type: props.product.type || 'info',
     price: props.product.price,
-    tier: props.product.tier || 'standard',
-    image_url: props.product.image_url || '',
-    active: props.product.active
+    image_path: props.product.image_path || '',
+    active: props.product.active,
+    content_sections: props.product.content_sections || []
 });
 
-const tiers = [
-    { value: 'basic', label: 'Basic' },
-    { value: 'standard', label: 'Standard' },
-    { value: 'premium', label: 'Premium' }
+const types = [
+    { value: 'info', label: 'Info Product' },
+    { value: 'service', label: 'Service' },
+    { value: 'physical', label: 'Physical Product' }
 ];
+
+// Handle content sections as JSON text
+const contentSectionsText = computed({
+    get() {
+        try {
+            return JSON.stringify(form.content_sections, null, 2);
+        } catch (e) {
+            return '[]';
+        }
+    },
+    set(value) {
+        try {
+            form.content_sections = JSON.parse(value);
+        } catch (e) {
+            // Keep the form value as is if JSON is invalid
+            console.warn('Invalid JSON in content sections');
+        }
+    }
+});
 
 const submit = () => {
     form.put(`/admin/products/${props.product.id}`);
@@ -81,6 +102,33 @@ const submit = () => {
                             </div>
 
                             <div>
+                                <InputLabel for="short_description" value="Short Description" />
+                                <textarea
+                                    id="short_description"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    v-model="form.short_description"
+                                    rows="3"
+                                    placeholder="Brief description used in product previews and home page"
+                                ></textarea>
+                                <InputError class="mt-2" :message="form.errors.short_description" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="type" value="Product Type" />
+                                <select
+                                    id="type"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    v-model="form.type"
+                                    required
+                                >
+                                    <option v-for="type in types" :key="type.value" :value="type.value">
+                                        {{ type.label }}
+                                    </option>
+                                </select>
+                                <InputError class="mt-2" :message="form.errors.type" />
+                            </div>
+
+                            <div>
                                 <InputLabel for="price" value="Price ($)" />
                                 <TextInput
                                     id="price"
@@ -110,15 +158,30 @@ const submit = () => {
                             </div>
 
                             <div>
-                                <InputLabel for="image_url" value="Image URL (optional)" />
+                                <InputLabel for="image_path" value="Image URL (optional)" />
                                 <TextInput
-                                    id="image_url"
+                                    id="image_path"
                                     type="url"
                                     class="mt-1 block w-full"
-                                    v-model="form.image_url"
+                                    v-model="form.image_path"
                                     placeholder="https://example.com/image.jpg"
                                 />
-                                <InputError class="mt-2" :message="form.errors.image_url" />
+                                <InputError class="mt-2" :message="form.errors.image_path" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="content_sections" value="Content Sections (JSON)" />
+                                <textarea
+                                    id="content_sections"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm font-mono text-sm"
+                                    v-model="contentSectionsText"
+                                    rows="10"
+                                    placeholder='[{"heading": "Section Title", "content": "Section content here"}]'
+                                ></textarea>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    JSON array of content sections. Each section should have "heading" and "content" properties.
+                                </p>
+                                <InputError class="mt-2" :message="form.errors.content_sections" />
                             </div>
 
                             <div class="flex items-center mt-4">

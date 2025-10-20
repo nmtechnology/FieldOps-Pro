@@ -11,16 +11,18 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 const form = useForm({
     name: '',
     description: '',
+    short_description: '',
+    type: 'info',
     price: '',
-    tier: 'standard', // Default value
-    image_url: '',
-    active: true
+    image_path: '',
+    active: true,
+    content_sections: []
 });
 
-const tiers = [
-    { value: 'basic', label: 'Basic' },
-    { value: 'standard', label: 'Standard' },
-    { value: 'premium', label: 'Premium' }
+const types = [
+    { value: 'info', label: 'Info Product' },
+    { value: 'service', label: 'Service' },
+    { value: 'physical', label: 'Physical Product' }
 ];
 
 const submit = () => {
@@ -75,6 +77,33 @@ const submit = () => {
                             </div>
 
                             <div>
+                                <InputLabel for="short_description" value="Short Description" />
+                                <textarea
+                                    id="short_description"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    v-model="form.short_description"
+                                    rows="3"
+                                    placeholder="Brief description used in product previews and home page"
+                                ></textarea>
+                                <InputError class="mt-2" :message="form.errors.short_description" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="type" value="Product Type" />
+                                <select
+                                    id="type"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    v-model="form.type"
+                                    required
+                                >
+                                    <option v-for="type in types" :key="type.value" :value="type.value">
+                                        {{ type.label }}
+                                    </option>
+                                </select>
+                                <InputError class="mt-2" :message="form.errors.type" />
+                            </div>
+
+                            <div>
                                 <InputLabel for="price" value="Price ($)" />
                                 <TextInput
                                     id="price"
@@ -104,15 +133,15 @@ const submit = () => {
                             </div>
 
                             <div>
-                                <InputLabel for="image_url" value="Image URL (optional)" />
+                                <InputLabel for="image_path" value="Image URL (optional)" />
                                 <TextInput
-                                    id="image_url"
+                                    id="image_path"
                                     type="url"
                                     class="mt-1 block w-full"
-                                    v-model="form.image_url"
+                                    v-model="form.image_path"
                                     placeholder="https://example.com/image.jpg"
                                 />
-                                <InputError class="mt-2" :message="form.errors.image_url" />
+                                <InputError class="mt-2" :message="form.errors.image_path" />
                             </div>
 
                             <div class="flex items-center mt-4">
