@@ -33,7 +33,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Products/Create');
+        // Get available default images
+        $defaultImages = Product::getAvailableDefaultImages();
+        
+        return Inertia::render('Admin/Products/Create', [
+            'defaultImages' => $defaultImages
+        ]);
     }
 
     /**
@@ -55,7 +60,10 @@ class ProductController extends Controller
             'content_sections' => 'nullable|array'
         ]);
 
-        Product::create($validated);
+        $product = Product::create($validated);
+        
+        // Assign default image if no image was provided
+        $product->assignDefaultImageIfNeeded();
 
         return redirect()->route('admin.products.index')
             ->with('success', 'Product created successfully.');
@@ -85,8 +93,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        // Get available default images
+        $defaultImages = Product::getAvailableDefaultImages();
+        
         return Inertia::render('Admin/Products/Edit', [
-            'product' => $product
+            'product' => $product,
+            'defaultImages' => $defaultImages
         ]);
     }
 

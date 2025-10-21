@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\CustomerProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -35,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
         
         // Products Management
         Route::resource('products', ProductController::class);
+        Route::get('products/{product}/preview', [CustomerProductController::class, 'show'])->name('products.preview');
+        Route::get('products/{product}/preview/content/{content}', [CustomerProductController::class, 'showContent'])->name('products.preview.content');
         
         // Discounts Management
         Route::resource('discounts', DiscountController::class);

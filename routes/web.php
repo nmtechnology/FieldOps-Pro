@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerProductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -45,6 +46,12 @@ Route::middleware('auth')->group(function () {
     // Product access
     Route::get('/products/access/{productId}', [App\Http\Controllers\DashboardController::class, 'accessProduct'])
         ->name('products.access');
+        
+    // Customer product experience (purchased products)
+    Route::get('/my-products/{product}', [CustomerProductController::class, 'show'])
+        ->name('customer.products.show');
+    Route::get('/my-products/{product}/content/{content}', [CustomerProductController::class, 'showContent'])
+        ->name('customer.products.content');
         
     // Premium content routes (require authentication)
     Route::get('/products/{productId}/toc', [App\Http\Controllers\ProductContentController::class, 'tableOfContents'])

@@ -37,9 +37,17 @@ function timeAgo(timestamp) {
 
     <AdminLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-white">
-                Users Management
-            </h2>
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-semibold leading-tight text-white">
+                    Users Management
+                </h2>
+                <Link
+                    :href="route('admin.users.create')"
+                    class="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-500 transition"
+                >
+                    Add New User
+                </Link>
+            </div>
         </template>
 
         <div class="py-6">

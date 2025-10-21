@@ -9,7 +9,11 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 const props = defineProps({
-    product: Object
+    product: Object,
+    defaultImages: {
+        type: Array,
+        default: () => []
+    }
 });
 
 const form = useForm({
@@ -28,6 +32,14 @@ const types = [
     { value: 'service', label: 'Service' },
     { value: 'physical', label: 'Physical Product' }
 ];
+
+const useDefaultImage = (imageFile) => {
+    form.image_path = `/img/${imageFile}`;
+};
+
+const useArtificialBook = () => {
+    form.image_path = 'artificial-book';
+};
 
 // Handle content sections as JSON text
 const contentSectionsText = computed({
@@ -166,14 +178,84 @@ const submit = () => {
                             </div>
 
                             <div>
-                                <InputLabel for="image_path" value="Image URL (optional)" />
-                                <TextInput
-                                    id="image_path"
-                                    type="url"
-                                    class="mt-1 block w-full"
-                                    v-model="form.image_path"
-                                    placeholder="https://example.com/image.jpg"
-                                />
+                                <InputLabel for="image_path" value="Product Image" />
+                                
+                                <!-- Current Image Preview -->
+                                <div v-if="form.image_path" class="mt-2 mb-4">
+                                    <p class="text-sm text-gray-400 mb-2">Current image:</p>
+                                    <div v-if="form.image_path === 'artificial-book'" class="p-4 border border-gray-600 rounded-lg bg-gray-700">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-16 h-16 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 rounded flex items-center justify-center text-xs text-orange-400 font-bold">
+                                                FIELD<br/>GUIDE
+                                            </div>
+                                            <div>
+                                                <div class="font-medium text-white">Artificial Book Design</div>
+                                                <div class="text-sm text-gray-400">Special design for Field Operations Guide</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <img 
+                                        v-else
+                                        :src="form.image_path" 
+                                        :alt="form.name"
+                                        class="w-32 h-24 object-cover rounded border border-gray-600"
+                                    />
+                                </div>
+                                
+                                <!-- Default Image Options -->
+                                <div v-if="defaultImages.length > 0" class="mt-2 mb-4">
+                                    <p class="text-sm text-gray-400 mb-3">Choose from available images:</p>
+                                    
+                                    <!-- Artificial Book Option for Field Operations Guide -->
+                                    <div class="mb-4">
+                                        <button
+                                            type="button"
+                                            @click="useArtificialBook"
+                                            class="p-3 border rounded-lg hover:bg-gray-700 transition-colors flex items-center space-x-3 w-full text-left"
+                                            :class="form.image_path === 'artificial-book' ? 'border-indigo-500 bg-gray-700' : 'border-gray-600'"
+                                        >
+                                            <div class="w-16 h-16 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 rounded flex items-center justify-center text-xs text-orange-400 font-bold">
+                                                FIELD<br/>GUIDE
+                                            </div>
+                                            <div>
+                                                <div class="font-medium text-white">Artificial Book Design</div>
+                                                <div class="text-sm text-gray-400">Perfect for the Field Operations Guide</div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Default Images Grid -->
+                                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                                        <button
+                                            v-for="image in defaultImages"
+                                            :key="image"
+                                            type="button"
+                                            @click="useDefaultImage(image)"
+                                            class="p-2 border rounded-lg hover:bg-gray-700 transition-colors"
+                                            :class="form.image_path === `/img/${image}` ? 'border-indigo-500 bg-gray-700' : 'border-gray-600'"
+                                        >
+                                            <img
+                                                :src="`/img/${image}`"
+                                                :alt="image"
+                                                class="w-full h-20 object-cover rounded mb-2"
+                                            />
+                                            <div class="text-xs text-gray-300 text-center truncate">{{ image.replace(/\.[^/.]+$/, "") }}</div>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Custom Image URL -->
+                                <div>
+                                    <InputLabel for="image_path" value="Or enter custom image URL:" />
+                                    <TextInput
+                                        id="image_path"
+                                        type="url"
+                                        class="mt-1 block w-full"
+                                        v-model="form.image_path"
+                                        placeholder="https://example.com/image.jpg"
+                                    />
+                                    <p class="text-sm text-gray-400 mt-1">Leave empty to automatically assign a default image</p>
+                                </div>
                                 <InputError class="mt-2" :message="form.errors.image_path" />
                             </div>
 

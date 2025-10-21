@@ -97,11 +97,29 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validated = $request->validate([
+        // Check if any sensitive information is being changed
+        $nameChanged = $request->input('name') !== $user->name;
+        $emailChanged = $request->input('email') !== $user->email;
+        $adminStatusChanged = $request->input('is_admin') !== $user->is_admin;
+        $passwordChanged = !empty($request->input('password'));
+        
+        $hasChanges = $nameChanged || $emailChanged || $adminStatusChanged || $passwordChanged;
+
+        $rules = [
             'name' => 'sometimes|string|max:255',
             'email' => 'sometimes|string|email|max:255|unique:users,email,'.$user->id,
             'password' => 'sometimes|nullable|string|min:8|confirmed',
             'is_admin' => 'sometimes|boolean'
+        ];
+
+        // Require admin password verification for any changes
+        if ($hasChanges) {
+            $rules['current_password'] = 'required|current_password';
+        }
+
+        $validated = $request->validate($rules, [
+            'current_password.required' => 'Please enter your admin password to verify changes to user account information.',
+            'current_password.current_password' => 'The provided password does not match your current password.',
         ]);
 
         $userData = [
@@ -116,7 +134,7 @@ class UserController extends Controller
 
         $user->update($userData);
 
-        return redirect()->route('admin.users.index')
+        return redirect()->route('admin.users.show', $user)
             ->with('success', 'User updated successfully.');
     }
 

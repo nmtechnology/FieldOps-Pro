@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import ProductImage from '@/Components/ProductImage.vue';
 import { ref } from 'vue';
 
 const props = defineProps({
@@ -47,6 +48,12 @@ const deleteProduct = () => {
                     Product Details: {{ product.name }}
                 </h2>
                 <div class="flex gap-2">
+                    <Link
+                        :href="`/admin/products/${product.id}/preview`"
+                        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+                    >
+                        Preview as Customer
+                    </Link>
                     <Link
                         :href="`/admin/products/${product.id}/edit`"
                         class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
@@ -129,8 +136,15 @@ const deleteProduct = () => {
                             
                             <!-- Product Image and Description -->
                             <div>
-                                <div v-if="product.image_url" class="mb-4">
-                                    <img :src="product.image_url" :alt="product.name" class="rounded-lg max-h-64 mx-auto">
+                                <div class="mb-4">
+                                    <h3 class="text-lg font-semibold mb-2 text-white">Product Image</h3>
+                                    <div class="max-w-sm mx-auto">
+                                        <ProductImage 
+                                            :product="product" 
+                                            :alt="product.name"
+                                            image-class="w-full h-64 object-cover rounded-lg shadow-lg"
+                                        />
+                                    </div>
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-semibold mb-2 text-white">Description</h3>
