@@ -1,7 +1,7 @@
 <template>
     <div v-if="show" class="loading-screen">
         <div class="game-container">
-            <!-- Score/Loading Text -->
+            <!-- Loading Text Above Circle -->
             <div class="loading-text">
                 <h2 class="pixel-text">LOADING...</h2>
                 <div class="loading-bar">
@@ -9,15 +9,10 @@
                 </div>
             </div>
 
-            <!-- Game Scene -->
-            <div class="game-scene">
-                <!-- Sky Background -->
-                <div class="sky"></div>
-                
-                <!-- Clouds -->
-                <div class="cloud cloud-1"></div>
-                <div class="cloud cloud-2"></div>
-                <div class="cloud cloud-3"></div>
+            <!-- Large Orange Circle Container -->
+            <div class="circle-container">
+                <!-- Game Scene Inside Circle -->
+                <div class="game-scene">
                 
                 <!-- Character (Running and Jumping) -->
                 <div class="character" :class="{ jumping: isJumping }">
@@ -94,10 +89,11 @@
                     </svg>
                 </div>
                 
-                <!-- Ground (Moving Bricks) -->
-                <div class="ground">
-                    <div class="bricks" :style="{ transform: 'translateX(' + brickOffset + 'px)' }">
-                        <div v-for="n in 30" :key="n" class="brick"></div>
+                    <!-- Ground (Moving Bricks) -->
+                    <div class="ground">
+                        <div class="bricks" :style="{ transform: 'translateX(' + brickOffset + 'px)' }">
+                            <div v-for="n in 30" :key="n" class="brick"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,9 +115,9 @@ export default {
             isJumping: false,
             brickOffset: 0,
             laptops: [
-                { position: 600 },
-                { position: 1100 },
-                { position: 1600 }
+                { position: 500 },
+                { position: 900 },
+                { position: 1300 }
             ],
             animationFrame: null
         };
@@ -147,16 +143,16 @@ export default {
                 this.laptops = this.laptops.map(laptop => {
                     let newPos = laptop.position - 5;
                     if (newPos < -100) {
-                        newPos = 800 + Math.random() * 400;
+                        newPos = 600 + Math.random() * 300;
                     }
                     return { position: newPos };
                 });
                 
-                // Auto jump when laptop approaches
-                const characterPosition = 200; // Character is at 200px from left
+                // Auto jump when laptop approaches (character is centered)
+                const characterPosition = 250; // Center position in circle
                 const nearbyLaptop = this.laptops.find(laptop => 
-                    laptop.position > characterPosition - 50 && 
-                    laptop.position < characterPosition + 100
+                    laptop.position > characterPosition - 80 && 
+                    laptop.position < characterPosition + 50
                 );
                 
                 if (nearbyLaptop && !this.isJumping) {
@@ -185,27 +181,25 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, #5eade2 0%, #5eade2 70%, #f4a460 70%, #d2691e 100%);
+    background: #111827; /* gray-900 */
     z-index: 9999;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .game-container {
     width: 100%;
-    height: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
 }
 
 .loading-text {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
     text-align: center;
     z-index: 100;
 }
@@ -214,8 +208,8 @@ export default {
     font-family: 'Courier New', monospace;
     font-size: 2.5rem;
     font-weight: bold;
-    color: #ffffff;
-    text-shadow: 4px 4px 0 #000000;
+    color: #f97316; /* Orange text */
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
     letter-spacing: 4px;
     animation: pulse 1s ease-in-out infinite;
 }
@@ -230,14 +224,15 @@ export default {
     height: 20px;
     background: #1e293b;
     border: 3px solid #f97316;
-    margin: 20px auto;
+    margin: 20px auto 0;
     position: relative;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .loading-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #f97316 0%, #fbbf24 100%);
+    background: linear-gradient(90deg, #f97316 0%, #fb923c 100%);
     animation: loading 2s ease-in-out infinite;
 }
 
@@ -247,78 +242,45 @@ export default {
     100% { width: 0%; }
 }
 
+/* Large Orange Circle Container */
+.circle-container {
+    width: 500px;
+    height: 500px;
+    max-width: 90vw;
+    max-height: 90vw;
+    border-radius: 50%;
+    background: #f97316; /* Orange circle */
+    border: 8px solid #ea580c; /* Darker orange border */
+    box-shadow: 0 0 60px rgba(249, 115, 22, 0.6), 
+                inset 0 0 40px rgba(234, 88, 12, 0.3);
+    overflow: hidden;
+    position: relative;
+    animation: circleGlow 2s ease-in-out infinite;
+}
+
+@keyframes circleGlow {
+    0%, 100% { 
+        box-shadow: 0 0 60px rgba(249, 115, 22, 0.6), 
+                    inset 0 0 40px rgba(234, 88, 12, 0.3);
+    }
+    50% { 
+        box-shadow: 0 0 80px rgba(249, 115, 22, 0.8), 
+                    inset 0 0 60px rgba(234, 88, 12, 0.5);
+    }
+}
+
 .game-scene {
     width: 100%;
     height: 100%;
     position: relative;
-}
-
-.sky {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 70%;
-    background: linear-gradient(to bottom, #5eade2 0%, #87ceeb 100%);
-}
-
-.cloud {
-    position: absolute;
-    width: 80px;
-    height: 40px;
-    background: white;
-    border-radius: 40px;
-    opacity: 0.8;
-}
-
-.cloud::before,
-.cloud::after {
-    content: '';
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-}
-
-.cloud::before {
-    width: 40px;
-    height: 40px;
-    top: -20px;
-    left: 10px;
-}
-
-.cloud::after {
-    width: 50px;
-    height: 50px;
-    top: -25px;
-    right: 10px;
-}
-
-.cloud-1 {
-    top: 80px;
-    animation: float 20s linear infinite;
-}
-
-.cloud-2 {
-    top: 140px;
-    animation: float 25s linear infinite;
-    animation-delay: -10s;
-}
-
-.cloud-3 {
-    top: 100px;
-    animation: float 18s linear infinite;
-    animation-delay: -5s;
-}
-
-@keyframes float {
-    from { left: -100px; }
-    to { left: 100%; }
+    background: linear-gradient(to bottom, #5eade2 0%, #5eade2 60%, #87ceeb 60%, #f4a460 85%, #d2691e 100%);
 }
 
 .character {
     position: absolute;
-    bottom: 150px;
-    left: 200px;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 64px;
     height: 64px;
     transition: bottom 0.3s ease-out;
@@ -326,7 +288,7 @@ export default {
 }
 
 .character.jumping {
-    bottom: 280px;
+    bottom: 220px;
     animation: jumpRotate 0.6s ease-in-out;
 }
 
@@ -356,7 +318,7 @@ export default {
 
 .obstacle {
     position: absolute;
-    bottom: 150px;
+    bottom: 120px;
     width: 48px;
     height: 48px;
     z-index: 5;
@@ -376,7 +338,7 @@ export default {
 
 .ground {
     position: absolute;
-    bottom: 80px;
+    bottom: 50px;
     left: 0;
     right: 0;
     height: 70px;

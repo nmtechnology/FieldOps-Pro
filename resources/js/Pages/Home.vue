@@ -198,7 +198,7 @@ defineProps({
                         </h1>
 
                         <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
-                            Master the art of field engineering and build a <strong class="text-white">profitable side business</strong> with proven low voltage contracting strategies. No experience needed—start earning within weeks.
+                            Master the art of field engineering and build a <strong class="text-white">profitable side hustle</strong> with proven independent contracting strategies. No experience needed—start earning within weeks.
                         </p>
 
                         <!-- Stats Bar -->
@@ -915,7 +915,7 @@ defineProps({
         </div>
 
         <!-- Business Development Service Section -->
-        <div class="relative py-24 bg-gradient-to-br from-gray-900 via-orange-900/20 to-gray-900 overflow-hidden">
+        <div class="relative py-24 bg-gradient-to-br from-gray-900 to-amber-900 overflow-hidden">
             <!-- Background decoration -->
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute top-0 right-1/4 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
@@ -1098,8 +1098,8 @@ defineProps({
             </div>
         </div>
 
-        <!-- Free Registration Benefits Section -->
-        <div class="relative py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+        <!-- Create Your Free Account Section -->
+        <div class="relative py-24 bg-gray-900 overflow-hidden">
             <!-- Background decoration -->
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
@@ -1135,13 +1135,13 @@ defineProps({
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-3">Preview Training Materials</h3>
-                            <p class="text-gray-400 leading-relaxed">Browse our comprehensive training library and course previews. See exactly what you'll learn before making any purchase decision.</p>
+                            <h3 class="text-xl font-bold text-white mb-3">Exclusive Content Previews</h3>
+                            <p class="text-gray-400 leading-relaxed">Get a sneak peek at our training materials, sample lessons, and success stories before you buy. See exactly what you're getting.</p>
                         </div>
                     </div>
 
                     <!-- Benefit 2 -->
-                    <div class="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-1">
+                    <div class="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1">
                         <div class="absolute -top-4 -right-4 w-24 h-24 bg-cyan-500/10 rounded-full filter blur-2xl group-hover:bg-cyan-500/20 transition-all duration-300"></div>
                         <div class="relative">
                             <div class="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -1155,7 +1155,7 @@ defineProps({
                     </div>
 
                     <!-- Benefit 3 -->
-                    <div class="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1">
+                    <div class="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1">
                         <div class="absolute -top-4 -right-4 w-24 h-24 bg-purple-500/10 rounded-full filter blur-2xl group-hover:bg-purple-500/20 transition-all duration-300"></div>
                         <div class="relative">
                             <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">

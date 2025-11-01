@@ -12,17 +12,32 @@ use Inertia\Inertia;
 require __DIR__.'/auth.php';
 require __DIR__.'/admin_web.php';
 
-// Homepage - This is the default landing page for all visitors
-// Make sure this route is defined at the top to take precedence
-Route::get('/', [ProductController::class, 'home'])->name('home');
+// Bot verification page - THE FIRST PAGE at root
+Route::get('/', function() {
+    // If already verified, go to home
+    if (session()->has('human_verified')) {
+        return app(ProductController::class)->home();
+    }
+    return Inertia::render('BotCheck');
+})->name('bot-check');
+
+Route::post('/verify', function() {
+    session(['human_verified' => true]);
+    return response()->json(['success' => true]);
+})->name('verify');
+
+// Homepage - Real home page after verification
+Route::get('/home', [ProductController::class, 'home'])
+    ->middleware('verify.human')
+    ->name('home');
 
 // Terms and Conditions
 Route::get('/terms', function() {
     return Inertia::render('TermsAndConditions');
-})->name('terms');
+})->middleware('verify.human')->name('terms');
 
-// Guest checkout routes
-Route::prefix('guest')->name('guest.')->group(function() {
+// Guest checkout routes - all protected by verification
+Route::prefix('guest')->name('guest.')->middleware('verify.human')->group(function() {
     Route::get('/checkout/{product}', [CheckoutController::class, 'guestCheckout'])->name('checkout');
     Route::post('/process-payment', [CheckoutController::class, 'processGuestPayment'])->name('process-payment');
     Route::get('/thank-you', [CheckoutController::class, 'guestThankYou'])->name('thank-you');
@@ -31,11 +46,11 @@ Route::prefix('guest')->name('guest.')->group(function() {
 });
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'verify.human'])
     ->name('dashboard');
 
 Route::get('/products-catalog', [App\Http\Controllers\ProductController::class, 'catalog'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'verify.human'])
     ->name('products');
 
 Route::middleware('auth')->group(function () {
@@ -65,7 +80,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // Product Routes
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/products/{product}', [ProductController::class, 'show'])
+    ->middleware('verify.human')
+    ->name('products.show');
 
 // Stripe Webhook Route (exclude from CSRF verification)
 Route::post('/stripe/webhook', [App\Http\Controllers\StripeWebhookController::class, 'handleWebhook'])->name('stripe.webhook');

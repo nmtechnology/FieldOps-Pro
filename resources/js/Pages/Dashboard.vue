@@ -1,10 +1,56 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const props = defineProps({
     purchases: Array,
 });
+
+const openFaq = ref(null);
+
+const toggleFaq = (index) => {
+    openFaq.value = openFaq.value === index ? null : index;
+};
+
+const faqs = [
+    {
+        question: "Why is 2026 the perfect time to start a field tech side hustle?",
+        answer: "2026 marks a critical inflection point: the skilled trades shortage is at an all-time high with 650,000+ open positions, baby boomer retirements are accelerating, and businesses are desperate for reliable technicians. Early movers in 2026 will establish themselves before competition increases, lock in premium rates, and build client bases that will sustain them for years."
+    },
+    {
+        question: "What makes field tech work more profitable than other side hustles?",
+        answer: "Field tech work commands $50-150/hour because you're solving urgent, high-value problems that businesses can't ignore. Unlike gig economy work, you're positioning yourself as a specialized professional, not a commodity. Plus, overhead is minimal—you likely already own most tools needed, and clients come to you through word-of-mouth and simple online listings."
+    },
+    {
+        question: "Do I need years of experience to start earning?",
+        answer: "No! Many successful field tech side hustlers start with basic skills and learn as they grow. The key is starting with services you're confident in (even simple ones like equipment setup, basic repairs, or preventive maintenance), then expanding your offerings as you gain experience. Your first clients care more about reliability and professionalism than having 10 years of experience."
+    },
+    {
+        question: "How does a side hustle benefit my main career?",
+        answer: "Running your own field tech business makes you more valuable in your day job. You'll develop client management skills, business acumen, and problem-solving abilities that employers highly value. Many find their side hustle income gives them leverage to negotiate better terms at their main job, or even transition to full-time entrepreneurship when the time is right."
+    },
+    {
+        question: "What are the market conditions for 2026?",
+        answer: "Market conditions are exceptionally strong: small businesses are struggling to find reliable technicians, equipment complexity is increasing (more opportunities for specialized knowledge), and remote/hybrid work means businesses need more on-site support. Economic uncertainty actually drives demand as companies prefer hiring contractors over full-time employees. Starting in 2026 positions you ahead of the inevitable wave of new technicians."
+    },
+    {
+        question: "Can I really maintain work-life balance with a side hustle?",
+        answer: "Absolutely. Field tech side hustles are uniquely flexible—you choose which jobs to accept, when to work, and how much to charge. Most successful side hustlers work 10-20 hours per week on weekends or evenings, earning $2K-5K monthly. You control your schedule completely, and since you're servicing local businesses, travel time is minimal. Start small with one client, then scale at your own pace."
+    },
+    {
+        question: "Won't the market get saturated if everyone starts doing this?",
+        answer: "The skilled trades shortage is massive—650,000+ open positions currently, growing every year. Even if 10,000 people started field tech side hustles tomorrow, it wouldn't make a dent. Plus, this work is inherently local and relationship-based. Your competition isn't everyone nationwide; it's the handful of people in your specific area offering your specific services. Quality providers always have more work than they can handle."
+    },
+    {
+        question: "How quickly can I start making money?",
+        answer: "Many of our students land their first paid client within 2-4 weeks of starting. The initial setup is simple: create basic listings on Google My Business and local directories, reach out to your network, and start accepting jobs. Unlike complex online businesses, field tech work has immediate demand. Once you complete a few jobs successfully, word-of-mouth referrals create a steady stream of opportunities."
+    },
+    {
+        question: "Can AI or robots replace field engineers?",
+        answer: "Not anytime soon—and possibly never. Field tech work requires physical presence, hands-on problem-solving, adaptability to unique situations, and human judgment that AI simply cannot replicate. While AI might help with diagnostics or documentation, someone still needs to physically install equipment, troubleshoot complex systems in unpredictable environments, and make on-the-spot decisions. Unlike desk jobs vulnerable to automation, field tech work is one of the most future-proof careers available. The physical, hands-on nature of this work makes it irreplaceable by technology."
+    }
+];
 </script>
 
 <template>
@@ -166,6 +212,57 @@ const props = defineProps({
                                 <div class="text-center">
                                     <div class="text-3xl font-bold text-green-400 mb-1">100%</div>
                                     <div class="text-sm text-gray-400">Your Schedule</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Section -->
+                        <div class="bg-gray-800 border border-gray-700 rounded-xl p-6">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white">Why Start in 2026?</h4>
+                                    <p class="text-sm text-gray-400">Your questions about timing and opportunity answered</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div 
+                                    v-for="(faq, index) in faqs" 
+                                    :key="index"
+                                    class="border border-gray-700 rounded-lg overflow-hidden hover:border-orange-500/50 transition-all duration-200"
+                                >
+                                    <button
+                                        @click="toggleFaq(index)"
+                                        class="w-full px-5 py-4 flex items-center justify-between text-left bg-gray-800/50 hover:bg-gray-800 transition-colors duration-200"
+                                    >
+                                        <span class="font-medium text-white pr-4">{{ faq.question }}</span>
+                                        <svg 
+                                            class="w-5 h-5 text-orange-400 flex-shrink-0 transform transition-transform duration-200"
+                                            :class="{ 'rotate-180': openFaq === index }"
+                                            fill="none" 
+                                            stroke="currentColor" 
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <transition
+                                        enter-active-class="transition-all duration-200 ease-out"
+                                        enter-from-class="opacity-0 max-h-0"
+                                        enter-to-class="opacity-100 max-h-96"
+                                        leave-active-class="transition-all duration-200 ease-in"
+                                        leave-from-class="opacity-100 max-h-96"
+                                        leave-to-class="opacity-0 max-h-0"
+                                    >
+                                        <div v-show="openFaq === index" class="px-5 py-4 bg-gray-900/50 border-t border-gray-700">
+                                            <p class="text-gray-300 leading-relaxed">{{ faq.answer }}</p>
+                                        </div>
+                                    </transition>
                                 </div>
                             </div>
                         </div>

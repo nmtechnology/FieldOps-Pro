@@ -9,23 +9,31 @@ import LoadingScreen from './Components/LoadingScreen.vue';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
-// Create loading screen container
-const loadingContainer = document.createElement('div');
-loadingContainer.id = 'loading-screen-container';
-document.body.appendChild(loadingContainer);
+// Check if we should show loading screen (coming from bot verification)
+const showLoadingScreen = window.location.pathname === '/home' && document.referrer.includes(window.location.origin);
 
-const loadingApp = createApp({
-    data() {
-        return {
-            show: true
-        };
-    },
-    render() {
-        return h(LoadingScreen, { show: this.show });
-    }
-});
+let loadingInstance = null;
+let loadingContainer = null;
 
-const loadingInstance = loadingApp.mount(loadingContainer);
+if (showLoadingScreen) {
+    // Create loading screen container
+    loadingContainer = document.createElement('div');
+    loadingContainer.id = 'loading-screen-container';
+    document.body.appendChild(loadingContainer);
+
+    const loadingApp = createApp({
+        data() {
+            return {
+                show: true
+            };
+        },
+        render() {
+            return h(LoadingScreen, { show: this.show });
+        }
+    });
+
+    loadingInstance = loadingApp.mount(loadingContainer);
+}
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -35,13 +43,17 @@ createInertiaApp({
             import.meta.glob('./Pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
-        // Hide loading screen when app is ready
-        setTimeout(() => {
-            loadingInstance.show = false;
+        // Hide loading screen when app is ready (only if it was shown)
+        if (showLoadingScreen && loadingInstance) {
             setTimeout(() => {
-                loadingContainer.remove();
-            }, 500);
-        }, 2000);
+                loadingInstance.show = false;
+                setTimeout(() => {
+                    if (loadingContainer) {
+                        loadingContainer.remove();
+                    }
+                }, 500);
+            }, 2000);
+        }
         
         return createApp({ render: () => h(App, props) })
             .use(plugin)
