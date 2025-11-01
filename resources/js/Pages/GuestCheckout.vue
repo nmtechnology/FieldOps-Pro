@@ -1,69 +1,145 @@
 <template>
     <GuestLayout>
         <Head>
-            <title>Checkout - FieldEngineer Pro</title>
-            <meta name="description" content="Checkout for FieldEngineer Pro">
+            <title>Start Your Side Hustle - Secure Checkout | FieldEngineer Pro</title>
+            <meta name="description" content="Complete your purchase and start your field tech side hustle journey today. Secure checkout with instant access.">
         </Head>
 
         <div class="w-full">
-            <h2 class="font-semibold text-xl text-white text-center mb-6">
-                Checkout
-            </h2>
+            <!-- Progress Header -->
+            <div class="mb-8 text-center">
+                <h2 class="font-bold text-3xl text-white mb-2">
+                    You're Almost There!
+                </h2>
+                <p class="text-gray-400">Complete your order to unlock your side hustle training</p>
+                
+                <!-- Trust Badges -->
+                <div class="flex items-center justify-center gap-6 mt-4 text-sm text-gray-400">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        Secure Payment
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        Instant Access
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 012 0v4a1 1 0 11-2 0V7zm1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+                        </svg>
+                        Money-Back Guarantee
+                    </div>
+                </div>
+            </div>
 
-            <div class="grid grid-cols-1 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Order Summary -->
                 <div class="w-full">
-                    <div class="bg-gray-800 bg-opacity-70 overflow-hidden shadow-md rounded-lg backdrop-blur-sm border border-gray-700">
-                        <div class="p-6">
-                            <h3 class="text-lg font-medium text-orange-400 mb-4">Order Summary</h3>
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-2xl backdrop-blur-sm border border-gray-700">
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-xl font-bold text-white">Order Summary</h3>
+                                <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-xs font-bold">Limited Time</span>
+                            </div>
                             
-                            <div class="mb-4">
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-sm text-gray-300">Product:</span>
-                                    <span class="text-sm font-medium text-white">{{ product.name }}</span>
+                            <!-- Product Info -->
+                            <div class="bg-gray-900/50 rounded-xl p-4 mb-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-white mb-1">{{ product.name }}</h4>
+                                        <p class="text-xs text-gray-400">Digital Training Program • Lifetime Access</p>
+                                    </div>
                                 </div>
-                                <div class="flex justify-between">
-                                    <span class="text-sm text-gray-300">Price:</span>
-                                    <span class="text-sm font-medium text-white">${{ product.price.toFixed(2) }}</span>
+                            </div>
+                            
+                            <!-- Price Breakdown -->
+                            <div class="space-y-3 mb-6">
+                                <div class="flex justify-between text-gray-300">
+                                    <span>Subtotal</span>
+                                    <span class="font-medium">${{ product.price.toFixed(2) }}</span>
                                 </div>
                             </div>
                             
                             <!-- Discount Code Section -->
-                            <div class="border-t border-gray-700 pt-4 mb-4">
-                                <div class="mb-2">
-                                    <label for="discount-code" class="block text-sm font-medium text-gray-300">Discount Code</label>
-                                    <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="text" name="discount-code" id="discount-code" v-model="discountCode" 
-                                            class="focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-600 bg-gray-700 text-white"
-                                            placeholder="Enter code">
-                                        <button type="button" @click="applyDiscount"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-r-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                                            Apply
-                                        </button>
+                            <div class="border-t border-gray-700 pt-6 mb-6">
+                                <label for="discount-code" class="block text-sm font-medium text-gray-300 mb-2">
+                                    <span class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Have a Discount Code?
+                                    </span>
+                                </label>
+                                <div class="flex gap-2">
+                                    <input type="text" name="discount-code" id="discount-code" v-model="discountCode" 
+                                        class="focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full rounded-lg sm:text-sm border-gray-600 bg-gray-900 text-white placeholder-gray-500"
+                                        placeholder="Enter discount code">
+                                    <button type="button" @click="applyDiscount"
+                                        class="inline-flex items-center px-6 py-2 border border-transparent text-sm font-bold rounded-lg text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200">
+                                        Apply
+                                    </button>
+                                </div>
+                                <div v-if="discountError" class="mt-2 flex items-center text-sm text-red-400">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    {{ discountError }}
+                                </div>
+                                <div v-if="discount" class="mt-2 flex items-center text-sm text-green-400 bg-green-500/10 rounded-lg p-2">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    {{ discountDescription }}
+                                </div>
+                            </div>
+                            
+                            <!-- Total Section -->
+                            <div class="border-t border-gray-700 pt-6">
+                                <div v-if="discount" class="flex justify-between mb-3 text-green-400">
+                                    <span class="font-medium">Savings:</span>
+                                    <span class="font-bold">-${{ discountAmount.toFixed(2) }}</span>
+                                </div>
+                                
+                                <div class="flex justify-between items-center bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-xl p-4">
+                                    <div>
+                                        <p class="text-sm text-gray-400">Total Due Today</p>
+                                        <p class="text-3xl font-bold text-white">${{ finalAmount.toFixed(2) }}</p>
                                     </div>
-                                    <div v-if="discountError" class="mt-1 text-sm text-red-400">
-                                        {{ discountError }}
-                                    </div>
-                                    <div v-if="discount" class="mt-1 text-sm text-green-400">
-                                        Discount applied: {{ discountDescription }}
+                                    <div class="text-right">
+                                        <p class="text-xs text-gray-400">One-time payment</p>
+                                        <p class="text-xs text-green-400 font-bold">Lifetime access</p>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="border-t border-gray-700 pt-4">
-                                <div class="flex justify-between">
-                                    <span class="text-base font-medium text-white">Subtotal:</span>
-                                    <span class="text-base font-medium text-white">${{ product.price.toFixed(2) }}</span>
+                            <!-- Value Props -->
+                            <div class="mt-6 space-y-2">
+                                <div class="flex items-center text-sm text-gray-300">
+                                    <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Instant digital access
                                 </div>
-                                
-                                <div v-if="discount" class="flex justify-between mt-2 text-green-400">
-                                    <span class="text-sm font-medium">Discount:</span>
-                                    <span class="text-sm font-medium">-${{ discountAmount.toFixed(2) }}</span>
+                                <div class="flex items-center text-sm text-gray-300">
+                                    <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    All future updates included
                                 </div>
-                                
-                                <div class="flex justify-between mt-4">
-                                    <span class="text-lg font-bold text-white">Total:</span>
-                                    <span class="text-lg font-bold text-white">${{ finalAmount.toFixed(2) }}</span>
+                                <div class="flex items-center text-sm text-gray-300">
+                                    <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    30-day money-back guarantee
                                 </div>
                             </div>
                         </div>
@@ -72,56 +148,127 @@
                 
                 <!-- Payment Form -->
                 <div class="w-full">
-                    <div class="bg-gray-800 bg-opacity-70 overflow-hidden shadow-md rounded-lg backdrop-blur-sm border border-gray-700">
-                        <div class="p-6">
-                            <h3 class="text-lg font-medium text-orange-400 mb-4">Guest Checkout</h3>
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-2xl backdrop-blur-sm border border-gray-700">
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-xl font-bold text-white">Payment Details</h3>
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-8 h-8 text-gray-600" viewBox="0 0 48 32" fill="currentColor">
+                                        <rect width="48" height="32" rx="4" fill="#1A1F36"/>
+                                        <circle cx="15" cy="16" r="8" fill="#EB001B"/>
+                                        <circle cx="33" cy="16" r="8" fill="#FF5F00"/>
+                                        <circle cx="24" cy="16" r="8" fill="#F79E1B" opacity="0.8"/>
+                                    </svg>
+                                    <svg class="w-10 h-10 text-blue-600" viewBox="0 0 48 32" fill="currentColor">
+                                        <rect width="48" height="32" rx="4" fill="currentColor"/>
+                                        <path d="M17 11h14v10H17z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
                             
                             <!-- Email Input -->
                             <div class="mb-6">
-                                <label for="email" class="block text-sm font-medium text-gray-300">Email Address</label>
-                                <input type="email" id="email" v-model="email" required
-                                    class="mt-1 block w-full border-gray-600 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm bg-gray-700 text-white"
-                                    placeholder="your@email.com">
-                                <p class="mt-2 text-sm text-gray-400">
-                                    We'll send your receipt and order details to this email address.
+                                <label for="email" class="block text-sm font-bold text-gray-300 mb-2">
+                                    Email Address <span class="text-red-400">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="email" id="email" v-model="email" required
+                                        class="pl-10 block w-full border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 sm:text-sm bg-gray-900 text-white placeholder-gray-500"
+                                        placeholder="your@email.com">
+                                </div>
+                                <p class="mt-2 text-xs text-gray-400 flex items-center">
+                                    <svg class="w-4 h-4 mr-1 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Your receipt and training access will be sent to this email
                                 </p>
                             </div>
                             
-                            <!-- Payment Method Selector -->
+                            <!-- Payment Method -->
                             <div class="mb-6">
-                                <div class="flex items-center space-x-4">
-                                    <div class="flex items-center">
-                                        <input id="payment-card" type="radio" v-model="paymentMethod" value="card" 
-                                            class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600">
-                                        <label for="payment-card" class="ml-2 block text-sm text-gray-300">
-                                            Credit/Debit Card
-                                        </label>
+                                <label class="block text-sm font-bold text-gray-300 mb-3">
+                                    Payment Method <span class="text-red-400">*</span>
+                                </label>
+                                <div class="bg-gray-900 rounded-lg border-2 border-orange-500 p-4">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <input id="payment-card" type="radio" v-model="paymentMethod" value="card" checked
+                                                class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600">
+                                            <label for="payment-card" class="ml-3 flex items-center text-sm font-medium text-white">
+                                                <svg class="w-5 h-5 mr-2 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                                </svg>
+                                                Credit / Debit Card
+                                            </label>
+                                        </div>
+                                        <div class="flex gap-1">
+                                            <svg class="w-8 h-6" viewBox="0 0 32 20" fill="none">
+                                                <rect width="32" height="20" rx="2" fill="#1434CB"/>
+                                                <path d="M11.5 5h9v10h-9z" fill="#FF5F00"/>
+                                                <circle cx="11.5" cy="10" r="5" fill="#EB001B"/>
+                                                <circle cx="20.5" cy="10" r="5" fill="#F79E1B"/>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Card Payment Form -->
-                            <div v-if="paymentMethod === 'card'" class="mt-4">
-                                <div class="mb-4">
-                                    <label for="card-element" class="block text-sm font-medium text-gray-300 mb-2">Card Details</label>
-                                    <div id="card-element" class="border border-gray-600 rounded-md p-3 bg-gray-700"></div>
-                                    <div id="card-errors" class="mt-2 text-sm text-red-400" role="alert"></div>
+                            <div v-if="paymentMethod === 'card'" class="space-y-6">
+                                <div>
+                                    <label for="card-element" class="block text-sm font-bold text-gray-300 mb-2">
+                                        Card Information <span class="text-red-400">*</span>
+                                    </label>
+                                    <div id="card-element" class="border-2 border-gray-600 rounded-lg p-4 bg-gray-900 focus-within:border-orange-500 transition-colors"></div>
+                                    <div id="card-errors" class="mt-2 text-sm text-red-400 flex items-center" role="alert">
+                                        <svg v-if="cardErrors" class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
                                 </div>
                                 
-                                <div class="mt-6">
+                                <!-- Security Badge -->
+                                <div class="flex items-center justify-center p-3 bg-green-500/10 rounded-lg border border-green-500/30">
+                                    <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-sm text-green-400 font-medium">Secured by Stripe • Your information is encrypted</span>
+                                </div>
+                                
+                                <!-- Submit Button -->
+                                <div>
                                     <button type="button" @click="processCardPayment" :disabled="isProcessing" 
-                                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50">
-                                        <span v-if="isProcessing">Processing...</span>
-                                        <span v-else>Pay ${{ finalAmount.toFixed(2) }}</span>
+                                        class="group relative w-full flex justify-center items-center py-4 px-6 border border-transparent rounded-lg text-lg font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105">
+                                        <span v-if="isProcessing" class="flex items-center">
+                                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Processing...
+                                        </span>
+                                        <span v-else class="flex items-center">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                            </svg>
+                                            Complete Purchase • ${{ finalAmount.toFixed(2) }}
+                                        </span>
                                     </button>
+                                    <p class="mt-3 text-center text-xs text-gray-400">
+                                        By completing your purchase, you agree to our terms of service
+                                    </p>
                                 </div>
                             </div>
 
-                            <div class="mt-6 border-t border-gray-700 pt-4 text-center">
+                            <div class="mt-8 border-t border-gray-700 pt-6 text-center">
                                 <p class="text-sm text-gray-400">
                                     Already have an account? 
-                                    <a :href="route('login')" class="text-orange-400 hover:text-orange-300">
-                                        Sign in
+                                    <a :href="route('login')" class="text-orange-400 hover:text-orange-300 font-medium">
+                                        Sign in here
                                     </a>
                                 </p>
                             </div>

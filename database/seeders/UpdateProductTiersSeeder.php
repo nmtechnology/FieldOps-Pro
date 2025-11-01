@@ -14,22 +14,23 @@ class UpdateProductTiersSeeder extends Seeder
     {
         // FieldOps Scout tier - one-time fee
         $scoutProduct = Product::updateOrCreate(
-            ['name' => 'FieldOps Scout'],
+            ['name' => 'Field Operations Guide - Complete Side Hustle Training'],
             [
-                'description' => 'Entry-level tier for beginners looking to set up their profile and gain access to the low voltage contracting market. Learn the essentials of field engineering platforms and how to present yourself professionally.',
+                'description' => 'Your complete roadmap to launching a profitable field tech side hustle. This comprehensive digital guide provides lifetime access to proven strategies for establishing your skills, building your toolkit, defining your territory, setting up on work platforms, and maintaining a 5-star reputation. Everything you need to start earning $2000-5000+ monthly in your spare time.',
                 'type' => 'info',
-                'price' => 22.99,
+                'price' => 75.99,
                 'active' => true,
                 'content_sections' => [
-                    'Profile Setup Guide',
-                    'Market Access Fundamentals',
-                    'Platform Navigation Tutorial',
-                    'Getting Your First Job',
+                    'Section 1: Skills Assessment & Development - Identify and establish your expertise in computer PC support, smart home technology, and low voltage troubleshooting and service',
+                    'Section 2: Essential Tools & Equipment - Specially compiled tool list with purchasing guides, detailed explanations of each tool\'s use, and field troubleshooting applications',
+                    'Section 3: Territory Establishment - Define your service area, learn what types of work to accept and avoid, and establish your business boundaries',
+                    'Section 4: Platform Setup & Activation - Complete walkthrough of work platforms, profile optimization, insurance requirements, pay rate establishment, and account activation',
+                    'Section 5: Reputation Management - Master the best practices for maintaining a strong profile and achieving the highest possible ratings to maximize your earning potential',
                 ]
             ]
         );
         
-        $this->command->info("Updated/Created FieldOps Scout tier: $22.99 one-time fee");
+        $this->command->info("Updated/Created Field Operations Guide: $75.99 one-time fee (lifetime access)");
         
         // FieldOps Pro tier - monthly subscription
         $proProduct = Product::updateOrCreate(

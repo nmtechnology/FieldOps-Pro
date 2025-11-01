@@ -19,36 +19,88 @@ defineProps({
 
 <template>
     <Head>
-        <title>FieldEngineer Pro - Professional Info Products</title>
-        <meta name="description" content="High-quality info products for professionals">
+        <title>Side Hustle Field Tech Work - Earn Extra Income as Low Voltage Contractor | FieldEngineer Pro</title>
+        <meta name="description" content="Start your profitable side hustle in field engineering. Learn low voltage contracting skills to earn $2000-5000+ monthly. Perfect side business for extra income - no experience required.">
+        <meta name="keywords" content="side hustle, extra income, field tech work, low voltage contractor, side business, part time work, electrical side hustle, contracting side gig, make extra money, field engineer side work">
+        <meta property="og:title" content="Side Hustle Field Tech Work - Earn Extra Income as Low Voltage Contractor">
+        <meta property="og:description" content="Start your profitable side hustle in field engineering. Learn low voltage contracting skills to earn $2000-5000+ monthly.">
+        <meta property="og:type" content="website">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Side Hustle Field Tech Work - Earn Extra Income">
+        <meta name="twitter:description" content="Start your profitable side hustle in field engineering. Learn low voltage contracting skills to earn $2000-5000+ monthly.">
     </Head>
 
-    <!-- Navigation - Full width at the top level -->
-    <nav class="fixed top-0 left-0 right-0 z-50 w-full bg-gray-800 bg-opacity-90 backdrop-blur-sm border-b border-gray-700 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <Link href="/" class="flex items-center">
-                            <ApplicationLogo class="h-10 w-10 fill-current text-orange-500 mr-2" />
-                            <span class="text-xl font-bold text-orange-500">FieldEngineer Pro</span>
-                        </Link>
-                    </div>
+    <!-- Modern Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 w-ful backdrop-blur-md border-b border-white/10 shadow-2xl">
+        <!-- Top announcement bar (optional) -->
+        <div class="bg-gradient-to-r from-orange-600 to-orange-500 text-white text-center py-2 text-sm font-medium">
+            <span class="hidden sm:inline">🚀 Limited Time: Start Your Side Hustle Today - </span>
+            <span class="font-bold">Earn $2K-$5K+ Monthly</span>
+            <span class="hidden sm:inline"> in Your Spare Time</span>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 backdrop-blur-md">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo and Brand -->
+                <div class="flex items-center">
+                    <Link href="/" class="flex items-center group">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-orange-500 rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                            <ApplicationLogo class="relative h-12 w-12 fill-current text-orange-500 mr-3 transform group-hover:scale-110 transition-transform duration-300" />
+                        </div>
+                        <div>
+                            <span class="text-2xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">FieldEngineer Pro</span>
+                            <span class="hidden md:block text-xs text-gray-400 font-medium">Your Side Hustle Success Path</span>
+                        </div>
+                    </Link>
                 </div>
                 
-                <!-- Desktop navigation menu -->
-                <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
-                    <Link v-if="featuredProduct" :href="route('products.show', featuredProduct)" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Products</Link>
-                    <Link href="#testimonials" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Testimonials</Link>
-                    <Link href="#about" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">About</Link>
-                    <Link href="/register" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign Up</Link>
-                    <Link href="/login" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign In</Link>
+                <!-- Desktop Navigation Menu -->
+                <div class="hidden lg:flex items-center space-x-1">
+                    <Link v-if="featuredProduct" 
+                          :href="route('products.show', featuredProduct)" 
+                          class="group relative px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors duration-200">
+                        <span class="relative z-10">Training Guide</span>
+                        <div class="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/10 rounded-lg transition-colors duration-200"></div>
+                    </Link>
+                    
+                    <Link href="#testimonials" 
+                          class="group relative px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors duration-200">
+                        <span class="relative z-10">Success Stories</span>
+                        <div class="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/10 rounded-lg transition-colors duration-200"></div>
+                    </Link>
+                    
+                    <Link href="#about" 
+                          class="group relative px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors duration-200">
+                        <span class="relative z-10">About</span>
+                        <div class="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/10 rounded-lg transition-colors duration-200"></div>
+                    </Link>
+                    
+                    <!-- Divider -->
+                    <div class="h-8 w-px bg-gray-700 mx-2"></div>
+                    
+                    <!-- Auth Buttons -->
+                    <Link href="/login" 
+                          class="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors duration-200">
+                        Sign In
+                    </Link>
+                    
+                    <Link href="/register" 
+                          class="group relative inline-flex items-center px-6 py-2.5 overflow-hidden rounded-lg bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
+                        <span class="relative z-10 flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            Start Free
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                    </Link>
                 </div>
                 
-                <!-- Mobile menu button -->
-                <div class="flex items-center sm:hidden">
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center lg:hidden">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                            class="text-gray-300 hover:text-white focus:outline-none"
+                            class="relative p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-200"
                             :aria-expanded="mobileMenuOpen"
                             aria-label="Toggle navigation menu">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,14 +111,58 @@ defineProps({
                 </div>
             </div>
             
-            <!-- Mobile menu -->
-            <div v-if="mobileMenuOpen" class="sm:hidden pt-2 pb-3 space-y-1">
-                <Link v-if="featuredProduct" :href="route('products.show', featuredProduct)" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Products</Link>
-                <Link href="#testimonials" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Testimonials</Link>
-                <Link href="#about" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">About</Link>
-                <div class="flex space-x-2 px-3 py-2">
-                    <Link href="/register" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign Up</Link>
-                    <Link href="/login" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign In</Link>
+            <!-- Mobile Menu Dropdown -->
+            <div v-if="mobileMenuOpen" 
+                 class="lg:hidden absolute left-0 right-0 top-full bg-gray-900/95 backdrop-blur-lg border-t border-white/10 shadow-2xl"
+                 style="animation: slideDown 0.3s ease-out;">
+                <div class="px-4 py-6 space-y-3">
+                    <Link v-if="featuredProduct" 
+                          :href="route('products.show', featuredProduct)" 
+                          class="block px-4 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all duration-200">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                            Training Guide
+                        </div>
+                    </Link>
+                    
+                    <Link href="#testimonials" 
+                          class="block px-4 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all duration-200">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            Success Stories
+                        </div>
+                    </Link>
+                    
+                    <Link href="#about" 
+                          class="block px-4 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all duration-200">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            About
+                        </div>
+                    </Link>
+                    
+                    <div class="pt-4 space-y-2 border-t border-gray-800">
+                        <Link href="/login" 
+                              class="block w-full px-4 py-3 text-center font-medium text-gray-300 hover:text-white border-2 border-gray-700 hover:border-gray-600 rounded-lg transition-all duration-200">
+                            Sign In
+                        </Link>
+                        
+                        <Link href="/register" 
+                              class="block w-full px-4 py-3 text-center font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 rounded-lg shadow-lg hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105">
+                            <span class="flex items-center justify-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                Start Your Side Hustle
+                            </span>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,42 +172,231 @@ defineProps({
         <div class="h-16"><!-- Spacer to account for fixed navbar --></div>
         
         <!-- Hero section -->
-        <div class="relative bg-gray-900 overflow-hidden">
-            <div class="max-w-7xl mx-auto">
-                <div class="relative z-10 pb-8 bg-gray-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                    <!-- Simple polygon SVG -->
-                    <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-gray-800 transform translate-x-1/2" 
-                         fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                        <polygon points="50,0 100,0 50,100 0,100" />
-                    </svg>
+        <div class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+            <!-- Animated background elements -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/20 rounded-full blur-3xl animate-pulse-slow"></div>
+                <div class="absolute top-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: -2s;"></div>
+                <div class="absolute bottom-20 right-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: -4s;"></div>
+            </div>
 
-                    <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                        <div class="sm:text-center lg:text-left">
-                            <h1 class="text-4xl tracking-tight font-extrabold text-orange-600 sm:text-5xl md:text-6xl">
-                                <span class="block xl:inline">Unlock Your Potential as an</span>
-                                <span class="block text-orange-400 xl:inline"> Independent Field Engineer</span>
-                            </h1>
-                            <p class="mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                Learn how to set competitive rates, win bids on work platforms, and create sustainable self-employment opportunities in the low voltage contracting industry.
-                            </p>
-                            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                <div class="rounded-md shadow">
-                                    <Link :href="route('guest.checkout', { product: featuredProduct.id })" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-600 hover:bg-orange-500 md:py-4 md:text-lg md:px-10">
-                                        Buy Now
-                                    </Link>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left Content -->
+                    <div class="text-center lg:text-left">
+                        <!-- Badge -->
+                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-orange-500/20 border border-orange-500/30 mb-6">
+                            <svg class="w-4 h-4 text-orange-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                            </svg>
+                            <span class="text-orange-300 font-semibold text-sm">The #1 Field Tech Side Hustle Training</span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+                            <span class="block text-white">Turn Spare Time Into</span>
+                            <span class="block bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">$2K-$5K+ Monthly Income</span>
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
+                            Master the art of field engineering and build a <strong class="text-white">profitable side business</strong> with proven low voltage contracting strategies. No experience needed—start earning within weeks.
+                        </p>
+
+                        <!-- Stats Bar -->
+                        <div class="grid grid-cols-3 gap-4 mb-8 p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+                            <div class="text-center">
+                                <div class="text-2xl sm:text-3xl font-bold text-orange-400">$50-150</div>
+                                <div class="text-xs sm:text-sm text-gray-400">Per Hour</div>
+                            </div>
+                            <div class="text-center border-l border-r border-gray-700">
+                                <div class="text-2xl sm:text-3xl font-bold text-orange-400">100%</div>
+                                <div class="text-xs sm:text-sm text-gray-400">Remote Ready</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl sm:text-3xl font-bold text-orange-400">0</div>
+                                <div class="text-xs sm:text-sm text-gray-400">Experience Needed</div>
+                            </div>
+                        </div>
+
+                        <!-- Feature List -->
+                        <div class="grid sm:grid-cols-2 gap-3 mb-8 text-left">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-0.5">
+                                    <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
                                 </div>
-                                <div class="mt-3 sm:mt-0 sm:ml-3">
-                                    <Link :href="route('products.show', { product: featuredProduct.id })" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-orange-400 hover:bg-orange-700 md:py-4 md:text-lg md:px-10">
-                                        Learn more
-                                    </Link>
+                                <span class="ml-3 text-gray-300">Work your own schedule</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-0.5">
+                                    <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <span class="ml-3 text-gray-300">Set your own rates</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-0.5">
+                                    <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <span class="ml-3 text-gray-300">Keep your day job</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-0.5">
+                                    <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <span class="ml-3 text-gray-300">Available in all 50 states</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <Link :href="route('guest.checkout', { product: featuredProduct.id })" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg overflow-hidden shadow-xl hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
+                                <span class="relative z-10 flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                    Start Your Side Hustle
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                            </Link>
+                            <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-orange-400 bg-white/5 backdrop-blur-sm border-2 border-orange-500/30 rounded-lg hover:bg-white/10 hover:border-orange-500/50 transition-all duration-300">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                See How It Works
+                            </Link>
+                        </div>
+
+                        <!-- Trust Indicators -->
+                        <div class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-gray-400">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                Instant Access
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                Lifetime Updates
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                Money-Back Guarantee
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Content - Image with decorative elements -->
+                    <div class="relative hidden lg:block">
+                        <div class="relative">
+                            <!-- Decorative gradient border -->
+                            <div class="absolute -inset-4 bg-gradient-to-r from-orange-500 to-cyan-500 rounded-2xl blur-xl opacity-30 animate-pulse-slow"></div>
+                            
+                            <!-- Main image -->
+                            <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                                <img class="w-full h-[600px] object-cover" src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2850&q=80" alt="Field engineer working with low voltage equipment">
+                                
+                                <!-- Overlay badge -->
+                                <div class="absolute bottom-6 left-6 right-6 bg-gray-900/90 backdrop-blur-sm rounded-xl p-4 border border-orange-500/30">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="text-orange-400 font-bold text-lg">Start Earning Fast</div>
+                                            <div class="text-gray-300 text-sm">Complete training included</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-white font-bold text-2xl">$5K+</div>
+                                            <div class="text-gray-400 text-xs">Monthly Potential</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </main>
+                    </div>
                 </div>
             </div>
-            <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2850&q=80" alt="Field engineer working with low voltage equipment">
+        </div>
+
+        <!-- Engaging Questions Section -->
+        <div class="bg-gradient-to-r from-gray-800 to-gray-900 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        What If You Could...
+                    </h2>
+                    <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                        <!-- Question 1 -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-orange-600 mx-auto mb-4">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Make Your Own Schedule?</h3>
+                            <p class="text-orange-100">Choose exactly when you want to work - mornings, evenings, or weekends only</p>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-orange-600 mx-auto mb-4">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Delegate What Work You Want?</h3>
+                            <p class="text-orange-100">Pick and choose the projects that interest you and fit your skills</p>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-orange-600 mx-auto mb-4">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Select Your Hourly Rate?</h3>
+                            <p class="text-orange-100">Set competitive rates based on your skills - $50-150+ per hour</p>
+                        </div>
+
+                        <!-- Question 4 -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-orange-600 mx-auto mb-4">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Own Your Business Without the Weight?</h3>
+                            <p class="text-orange-100">Harness business ownership power without heavy overhead, employees, or stress</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 bg-white/20 backdrop-blur-sm rounded-xl p-8 max-w-4xl mx-auto">
+                        <h3 class="text-2xl font-bold text-white mb-4">We Can Show You How to Do Exactly That!</h3>
+                        <p class="text-xl text-orange-100 mb-6">
+                            Our proven field engineering strategies give you complete control over your time, income, and business decisions. 
+                            Experience the freedom of entrepreneurship without the traditional business burdens.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link :href="route('guest.checkout', { product: featuredProduct.id })" class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-orange-600 bg-white hover:bg-orange-50 transition-colors duration-200">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                Start Your Freedom Journey
+                            </Link>
+                            <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center px-8 py-4 border-2 border-white text-lg font-medium rounded-md text-white hover:bg-white hover:text-orange-600 transition-colors duration-200">
+                                Learn How It Works
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -119,12 +404,12 @@ defineProps({
         <div id="featured" class="py-12 bg-gray-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="lg:text-center">
-                    <h2 class="text-base text-orange-400 font-semibold tracking-wide uppercase">Featured Product</h2>
+                    <h2 class="text-base text-orange-400 font-semibold tracking-wide uppercase">Side Hustle Training Guide</h2>
                     <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-orange-400 sm:text-4xl">
                         {{ featuredProduct.name }}
                     </p>
                     <p class="mt-4 max-w-2xl text-xl text-white lg:mx-auto">
-                        {{ featuredProduct.description }}
+                        Complete side business blueprint for field engineering work. Learn how to earn extra income on weekends and evenings with proven low voltage contracting strategies. Turn your spare time into $2000-5000+ monthly income.
                     </p>
                 </div>
 
@@ -166,60 +451,60 @@ defineProps({
                                 <div class="absolute bottom-14 left-2/3 w-0.5 h-16 bg-gradient-to-t from-transparent via-cyan-300/80 to-white/90 rounded-full blur-sm animate-stardust" style="animation-delay: -12s;"></div>
                                 
                                 <!-- Additional magical particles -->
-                                <div class="absolute bottom-2 left-[45%] w-1 h-1 bg-blue-300 rounded-full animate-float-particle blur-sm z-0"></div>
-                                <div class="absolute bottom-6 left-[55%] w-1.5 h-1.5 bg-cyan-200 rounded-full animate-float-particle-slow blur-sm z-0" style="animation-delay: -2s;"></div>
-                                <div class="absolute bottom-10 left-[35%] w-1 h-1 bg-violet-200 rounded-full animate-float-particle blur-sm z-0" style="animation-delay: -4s;"></div>
-                                <div class="absolute bottom-8 left-[65%] w-2 h-2 bg-white rounded-full animate-float-particle-slow blur-sm z-0" style="animation-delay: -6s;"></div>
-                                <div class="absolute bottom-12 left-[40%] w-1.5 h-1.5 bg-blue-100 rounded-full animate-float-particle blur-sm z-0" style="animation-delay: -8s;"></div>
+                                <div class="absolute bottom-2 left-[45%] w-1 h-1 bg-blue-300 rounded-full animate-float-particle blur-sm -z-10"></div>
+                                <div class="absolute bottom-6 left-[55%] w-1.5 h-1.5 bg-cyan-200 rounded-full animate-float-particle-slow blur-sm -z-10" style="animation-delay: -2s;"></div>
+                                <div class="absolute bottom-10 left-[35%] w-1 h-1 bg-violet-200 rounded-full animate-float-particle blur-sm -z-10" style="animation-delay: -4s;"></div>
+                                <div class="absolute bottom-8 left-[65%] w-2 h-2 bg-white rounded-full animate-float-particle-slow blur-sm -z-10" style="animation-delay: -6s;"></div>
+                                <div class="absolute bottom-12 left-[40%] w-1.5 h-1.5 bg-blue-100 rounded-full animate-float-particle blur-sm -z-10" style="animation-delay: -8s;"></div>
                                 
                                 <!-- Small magical particles -->
-                                <div class="absolute bottom-4 left-[30%] w-0.5 h-0.5 bg-cyan-100 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -1s;"></div>
-                                <div class="absolute bottom-7 left-[28%] w-0.5 h-0.5 bg-blue-200 rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -3.5s;"></div>
-                                <div class="absolute bottom-10 left-[27%] w-1 h-1 bg-indigo-200 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -5.2s;"></div>
-                                <div class="absolute bottom-8 left-[32%] w-0.5 h-0.5 bg-violet-100 rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -7.3s;"></div>
+                                <div class="absolute bottom-4 left-[30%] w-0.5 h-0.5 bg-cyan-100 rounded-full animate-float-particle blur-[0.5px] -z-10" style="animation-delay: -1s;"></div>
+                                <div class="absolute bottom-7 left-[28%] w-0.5 h-0.5 bg-blue-200 rounded-full animate-float-particle-slow blur-[0.5px] -z-10" style="animation-delay: -3.5s;"></div>
+                                <div class="absolute bottom-10 left-[27%] w-1 h-1 bg-indigo-200 rounded-full animate-float-particle blur-[0.5px] -z-10" style="animation-delay: -5.2s;"></div>
+                                <div class="absolute bottom-8 left-[32%] w-0.5 h-0.5 bg-violet-100 rounded-full animate-float-particle-slow blur-[0.5px] -z-10" style="animation-delay: -7.3s;"></div>
                                 
-                                <div class="absolute bottom-3 left-[60%] w-0.5 h-0.5 bg-blue-100 rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -2.2s;"></div>
-                                <div class="absolute bottom-7 left-[62%] w-1 h-1 bg-cyan-200 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -4.7s;"></div>
-                                <div class="absolute bottom-11 left-[64%] w-0.5 h-0.5 bg-white rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -6.8s;"></div>
-                                <div class="absolute bottom-14 left-[66%] w-0.5 h-0.5 bg-purple-100 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -8.9s;"></div>
+                                <div class="absolute bottom-3 left-[60%] w-0.5 h-0.5 bg-blue-100 rounded-full animate-float-particle-slow blur-[0.5px] -z-10" style="animation-delay: -2.2s;"></div>
+                                <div class="absolute bottom-7 left-[62%] w-1 h-1 bg-cyan-200 rounded-full animate-float-particle blur-[0.5px] -z-10" style="animation-delay: -4.7s;"></div>
+                                <div class="absolute bottom-11 left-[64%] w-0.5 h-0.5 bg-white rounded-full animate-float-particle-slow blur-[0.5px] -z-10" style="animation-delay: -6.8s;"></div>
+                                <div class="absolute bottom-14 left-[66%] w-0.5 h-0.5 bg-purple-100 rounded-full animate-float-particle blur-[0.5px] -z-10" style="animation-delay: -8.9s;"></div>
                                 
-                                <div class="absolute bottom-5 left-[48%] w-0.5 h-0.5 bg-blue-50 rounded-full animate-float-particle-slow blur-[0.5px] z-0" style="animation-delay: -1.5s;"></div>
-                                <div class="absolute bottom-9 left-[52%] w-0.5 h-0.5 bg-indigo-50 rounded-full animate-float-particle blur-[0.5px] z-0" style="animation-delay: -3.7s;"></div>
+                                <div class="absolute bottom-5 left-[48%] w-0.5 h-0.5 bg-blue-50 rounded-full animate-float-particle-slow blur-[0.5px] -z-10" style="animation-delay: -1.5s;"></div>
+                                <div class="absolute bottom-9 left-[52%] w-0.5 h-0.5 bg-indigo-50 rounded-full animate-float-particle blur-[0.5px] -z-10" style="animation-delay: -3.7s;"></div>
                                 
                                 <!-- Micro magical particles -->
-                                <div class="absolute bottom-7 left-[42%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-slow z-0" style="animation-delay: -1.2s;"></div>
-                                <div class="absolute bottom-9 left-[43%] w-[2px] h-[2px] bg-blue-100 rounded-full animate-float-particle z-0" style="animation-delay: -2.4s;"></div>
-                                <div class="absolute bottom-11 left-[44%] w-[2px] h-[2px] bg-cyan-50 rounded-full animate-float-particle-slow z-0" style="animation-delay: -3.6s;"></div>
-                                <div class="absolute bottom-13 left-[45%] w-[2px] h-[2px] bg-indigo-100 rounded-full animate-float-particle z-0" style="animation-delay: -4.8s;"></div>
+                                <div class="absolute bottom-7 left-[42%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-slow -z-10" style="animation-delay: -1.2s;"></div>
+                                <div class="absolute bottom-9 left-[43%] w-[2px] h-[2px] bg-blue-100 rounded-full animate-float-particle -z-10" style="animation-delay: -2.4s;"></div>
+                                <div class="absolute bottom-11 left-[44%] w-[2px] h-[2px] bg-cyan-50 rounded-full animate-float-particle-slow -z-10" style="animation-delay: -3.6s;"></div>
+                                <div class="absolute bottom-13 left-[45%] w-[2px] h-[2px] bg-indigo-100 rounded-full animate-float-particle -z-10" style="animation-delay: -4.8s;"></div>
                                 
-                                <div class="absolute bottom-6 left-[57%] w-[2px] h-[2px] bg-purple-50 rounded-full animate-float-particle z-0" style="animation-delay: -1.8s;"></div>
-                                <div class="absolute bottom-8 left-[58%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-slow z-0" style="animation-delay: -3.0s;"></div>
-                                <div class="absolute bottom-10 left-[59%] w-[2px] h-[2px] bg-blue-50 rounded-full animate-float-particle z-0" style="animation-delay: -4.2s;"></div>
+                                <div class="absolute bottom-6 left-[57%] w-[2px] h-[2px] bg-purple-50 rounded-full animate-float-particle -z-10" style="animation-delay: -1.8s;"></div>
+                                <div class="absolute bottom-8 left-[58%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-slow -z-10" style="animation-delay: -3.0s;"></div>
+                                <div class="absolute bottom-10 left-[59%] w-[2px] h-[2px] bg-blue-50 rounded-full animate-float-particle -z-10" style="animation-delay: -4.2s;"></div>
                                 
-                                <div class="absolute bottom-4 left-[38%] w-[1px] h-[1px] bg-cyan-100 rounded-full animate-float-particle-slow z-0" style="animation-delay: -2.1s;"></div>
-                                <div class="absolute bottom-6 left-[39%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle z-0" style="animation-delay: -3.3s;"></div>
-                                <div class="absolute bottom-8 left-[40%] w-[1px] h-[1px] bg-indigo-50 rounded-full animate-float-particle-slow z-0" style="animation-delay: -4.5s;"></div>
+                                <div class="absolute bottom-4 left-[38%] w-[1px] h-[1px] bg-cyan-100 rounded-full animate-float-particle-slow -z-10" style="animation-delay: -2.1s;"></div>
+                                <div class="absolute bottom-6 left-[39%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle -z-10" style="animation-delay: -3.3s;"></div>
+                                <div class="absolute bottom-8 left-[40%] w-[1px] h-[1px] bg-indigo-50 rounded-full animate-float-particle-slow -z-10" style="animation-delay: -4.5s;"></div>
                                 
-                                <div class="absolute bottom-5 left-[62%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-float-particle z-0" style="animation-delay: -1.6s;"></div>
-                                <div class="absolute bottom-7 left-[63%] w-[1px] h-[1px] bg-cyan-100 rounded-full animate-float-particle-slow z-0" style="animation-delay: -2.8s;"></div>
-                                <div class="absolute bottom-9 left-[64%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle z-0" style="animation-delay: -4.0s;"></div>
+                                <div class="absolute bottom-5 left-[62%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-float-particle -z-10" style="animation-delay: -1.6s;"></div>
+                                <div class="absolute bottom-7 left-[63%] w-[1px] h-[1px] bg-cyan-100 rounded-full animate-float-particle-slow -z-10" style="animation-delay: -2.8s;"></div>
+                                <div class="absolute bottom-9 left-[64%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle -z-10" style="animation-delay: -4.0s;"></div>
                                 
                                 <!-- Additional varied animation particles -->
-                                <div class="absolute bottom-3 left-[47%] w-[2px] h-[2px] bg-cyan-100 rounded-full animate-float-particle-micro z-0" style="animation-delay: -0.7s;"></div>
-                                <div class="absolute bottom-5 left-[48%] w-[2px] h-[2px] bg-indigo-50 rounded-full animate-float-particle-tiny z-0" style="animation-delay: -1.4s;"></div>
-                                <div class="absolute bottom-7 left-[49%] w-[1px] h-[1px] bg-white rounded-full animate-sparkle z-0" style="animation-delay: -2.1s;"></div>
+                                <div class="absolute bottom-3 left-[47%] w-[2px] h-[2px] bg-cyan-100 rounded-full animate-float-particle-micro -z-10" style="animation-delay: -0.7s;"></div>
+                                <div class="absolute bottom-5 left-[48%] w-[2px] h-[2px] bg-indigo-50 rounded-full animate-float-particle-tiny -z-10" style="animation-delay: -1.4s;"></div>
+                                <div class="absolute bottom-7 left-[49%] w-[1px] h-[1px] bg-white rounded-full animate-sparkle -z-10" style="animation-delay: -2.1s;"></div>
                                 
-                                <div class="absolute bottom-4 left-[51%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-sparkle z-0" style="animation-delay: -0.5s;"></div>
-                                <div class="absolute bottom-6 left-[52%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle-micro z-0" style="animation-delay: -1.0s;"></div>
-                                <div class="absolute bottom-8 left-[53%] w-[1px] h-[1px] bg-cyan-50 rounded-full animate-float-particle-tiny z-0" style="animation-delay: -1.5s;"></div>
+                                <div class="absolute bottom-4 left-[51%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-sparkle -z-10" style="animation-delay: -0.5s;"></div>
+                                <div class="absolute bottom-6 left-[52%] w-[1px] h-[1px] bg-white rounded-full animate-float-particle-micro -z-10" style="animation-delay: -1.0s;"></div>
+                                <div class="absolute bottom-8 left-[53%] w-[1px] h-[1px] bg-cyan-50 rounded-full animate-float-particle-tiny -z-10" style="animation-delay: -1.5s;"></div>
                                 
-                                <div class="absolute bottom-6 left-[32%] w-[1px] h-[1px] bg-indigo-50 rounded-full animate-sparkle z-0" style="animation-delay: -0.3s;"></div>
-                                <div class="absolute bottom-8 left-[33%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-float-particle-micro z-0" style="animation-delay: -0.9s;"></div>
-                                <div class="absolute bottom-10 left-[34%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-tiny z-0" style="animation-delay: -1.8s;"></div>
+                                <div class="absolute bottom-6 left-[32%] w-[1px] h-[1px] bg-indigo-50 rounded-full animate-sparkle -z-10" style="animation-delay: -0.3s;"></div>
+                                <div class="absolute bottom-8 left-[33%] w-[1px] h-[1px] bg-blue-50 rounded-full animate-float-particle-micro -z-10" style="animation-delay: -0.9s;"></div>
+                                <div class="absolute bottom-10 left-[34%] w-[2px] h-[2px] bg-white rounded-full animate-float-particle-tiny -z-10" style="animation-delay: -1.8s;"></div>
                                 
-                                <div class="absolute bottom-7 left-[67%] w-[1px] h-[1px] bg-white rounded-full animate-sparkle z-0" style="animation-delay: -0.6s;"></div>
-                                <div class="absolute bottom-9 left-[68%] w-[1px] h-[1px] bg-cyan-50 rounded-full animate-float-particle-micro z-0" style="animation-delay: -1.2s;"></div>
-                                <div class="absolute bottom-11 left-[69%] w-[2px] h-[2px] bg-blue-50 rounded-full animate-float-particle-tiny z-0" style="animation-delay: -2.4s;"></div>
+                                <div class="absolute bottom-7 left-[67%] w-[1px] h-[1px] bg-white rounded-full animate-sparkle -z-10" style="animation-delay: -0.6s;"></div>
+                                <div class="absolute bottom-9 left-[68%] w-[1px] h-[1px] bg-cyan-50 rounded-full animate-float-particle-micro -z-10" style="animation-delay: -1.2s;"></div>
+                                <div class="absolute bottom-11 left-[69%] w-[2px] h-[2px] bg-blue-50 rounded-full animate-float-particle-tiny -z-10" style="animation-delay: -2.4s;"></div>
                                 
                                 <!-- Magical glow effects moved to be behind the book -->
                                 <!-- Will be positioned but invisible until we add z-index to the book -->
@@ -270,33 +555,33 @@ defineProps({
                                 
                                 <!-- All magical glow effects with explicit z-index to keep them behind the book -->
                                 <!-- Cosmic shadow effects -->
-                                <div class="absolute -bottom-3 left-0 right-8 h-4 bg-black/20 blur-sm rounded-full z-0"></div>
-                                <div class="absolute -bottom-2 left-4 right-6 h-6 bg-black/15 blur-md rounded-full z-0"></div>
+                                <div class="absolute -bottom-3 left-0 right-8 h-4 bg-black/20 blur-sm rounded-full -z-10"></div>
+                                <div class="absolute -bottom-2 left-4 right-6 h-6 bg-black/15 blur-md rounded-full -z-10"></div>
                                 
                                 <!-- Magical light rays behind book -->
-                                <div class="absolute top-1/2 left-1/2 w-0.5 h-36 bg-white/90 blur-sm transform rotate-[20deg] origin-bottom translate-y-[-10%] translate-x-[-50%] animate-pulse-slow z-0"></div>
-                                <div class="absolute top-1/2 left-[45%] w-0.5 h-32 bg-cyan-100/90 blur-sm transform rotate-[10deg] origin-bottom translate-y-[-20%] animate-pulse-slow z-0" style="animation-delay: -2s;"></div>
-                                <div class="absolute top-1/2 left-[55%] w-0.5 h-28 bg-blue-100/90 blur-sm transform rotate-[-15deg] origin-bottom translate-y-[-15%] animate-pulse-slow z-0" style="animation-delay: -4s;"></div>
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-36 bg-white/90 blur-sm transform rotate-[20deg] origin-bottom translate-y-[-10%] translate-x-[-50%] animate-pulse-slow -z-10"></div>
+                                <div class="absolute top-1/2 left-[45%] w-0.5 h-32 bg-cyan-100/90 blur-sm transform rotate-[10deg] origin-bottom translate-y-[-20%] animate-pulse-slow -z-10" style="animation-delay: -2s;"></div>
+                                <div class="absolute top-1/2 left-[55%] w-0.5 h-28 bg-blue-100/90 blur-sm transform rotate-[-15deg] origin-bottom translate-y-[-15%] animate-pulse-slow -z-10" style="animation-delay: -4s;"></div>
                                 
                                 <!-- Magical focal point behind book -->
-                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full opacity-70 blur-xl animate-pulse-slow z-0"></div>
-                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-10 h-10 bg-cyan-200 rounded-full opacity-80 blur-lg animate-pulse-fast z-0" style="animation-delay: -1s;"></div>
-                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-6 h-6 bg-blue-100 rounded-full opacity-90 blur-md animate-pulse-fast z-0" style="animation-delay: -2s;"></div>
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full opacity-70 blur-xl animate-pulse-slow -z-10"></div>
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-10 h-10 bg-cyan-200 rounded-full opacity-80 blur-lg animate-pulse-fast -z-10" style="animation-delay: -1s;"></div>
+                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 w-6 h-6 bg-blue-100 rounded-full opacity-90 blur-md animate-pulse-fast -z-10" style="animation-delay: -2s;"></div>
                                 
                                 <!-- Magical book glow - primary glow -->
-                                <div class="absolute -bottom-10 -left-10 -right-10 h-24 bg-gradient-to-r from-cyan-300/60 via-blue-400/70 to-purple-600/60 blur-2xl rounded-full animate-nebula-pulse z-0"></div>
+                                <div class="absolute -bottom-10 -left-10 -right-10 h-24 bg-gradient-to-r from-cyan-300/60 via-blue-400/70 to-purple-600/60 blur-2xl rounded-full animate-nebula-pulse -z-10"></div>
                                 
                                 <!-- Ethereal glow beneath - secondary layer -->
-                                <div class="absolute -bottom-14 -left-8 -right-8 h-20 bg-gradient-to-r from-blue-600/70 via-cyan-400/80 to-indigo-600/70 blur-3xl rounded-full animate-pulse-slow z-0" style="animation-delay: -2s;"></div>
+                                <div class="absolute -bottom-14 -left-8 -right-8 h-20 bg-gradient-to-r from-blue-600/70 via-cyan-400/80 to-indigo-600/70 blur-3xl rounded-full animate-pulse-slow -z-10" style="animation-delay: -2s;"></div>
                                 
                                 <!-- Cosmic energy pool - tertiary layer -->
-                                <div class="absolute -bottom-8 left-[15%] right-[15%] h-14 bg-gradient-to-r from-violet-500/80 via-white/90 to-blue-500/80 blur-xl rounded-full animate-pulse-slow z-0" style="animation-delay: -3s;"></div>
+                                <div class="absolute -bottom-8 left-[15%] right-[15%] h-14 bg-gradient-to-r from-violet-500/80 via-white/90 to-blue-500/80 blur-xl rounded-full animate-pulse-slow -z-10" style="animation-delay: -3s;"></div>
                                 
                                 <!-- Center bright glow -->
-                                <div class="absolute -bottom-6 left-[25%] right-[25%] h-10 bg-gradient-to-r from-cyan-300/90 via-white/100 to-cyan-300/90 blur-md rounded-full animate-pulse-fast z-0"></div>
+                                <div class="absolute -bottom-6 left-[25%] right-[25%] h-10 bg-gradient-to-r from-cyan-300/90 via-white/100 to-cyan-300/90 blur-md rounded-full animate-pulse-fast -z-10"></div>
                                 
                                 <!-- Intense center light source -->
-                                <div class="absolute -bottom-1 left-[40%] right-[40%] h-8 bg-white shadow-lg shadow-cyan-500/50 blur-sm rounded-full animate-pulse-fast z-0" style="animation-delay: -1s;"></div>
+                                <div class="absolute -bottom-1 left-[40%] right-[40%] h-8 bg-white shadow-lg shadow-cyan-500/50 blur-sm rounded-full animate-pulse-fast -z-10" style="animation-delay: -1s;"></div>
                                 
                                 <!-- Book Pages Edge -->
                                 <div class="absolute top-[2%] bottom-[2%] right-0 w-[6px] bg-gradient-to-l from-gray-100 via-gray-200 to-gray-300 rounded-r transform translate-x-[3px]">
@@ -306,43 +591,55 @@ defineProps({
                             </div>
                         </div>
                         <div class="mt-10 lg:mt-0">
-                            <h3 class="text-2xl font-extrabold text-orange-400">Key Benefits</h3>
+                            <h3 class="text-2xl font-extrabold text-orange-400">Professional Field Engineering Excellence</h3>
                             <div class="mt-4 text-white">
                                 <ul class="mt-6 space-y-6">
                                     <li class="flex">
                                         <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"></path>
                                         </svg>
-                                        <span class="ml-3">Expert knowledge from industry professionals</span>
+                                        <span class="ml-3">Essential troubleshooting tools and methodologies for efficient field work</span>
+                                    </li>
+                                    <li class="flex">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                        </svg>
+                                        <span class="ml-3">Proven strategies for competitive pricing and sustainable income growth</span>
+                                    </li>
+                                    <li class="flex">
+                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                        </svg>
+                                        <span class="ml-3">Accessible for technicians at any experience level - from newcomers to experts</span>
                                     </li>
                                     <li class="flex">
                                         <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
-                                        <span class="ml-3">Practical templates and resources</span>
+                                        <span class="ml-3">Step-by-step implementation guides for immediate professional results</span>
                                     </li>
                                     <li class="flex">
                                         <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                         </svg>
-                                        <span class="ml-3">Step-by-step implementation guides</span>
-                                    </li>
-                                    <li class="flex">
-                                        <svg class="flex-shrink-0 h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span class="ml-3">Lifetime access to all content and updates</span>
+                                        <span class="ml-3">Lifetime access to all strategies and future content updates</span>
                                     </li>
                                 </ul>
                                 
+                                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-700 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-blue-400 mb-2">� Professional Growth</h4>
+                                    <p class="text-blue-200">Master the skills and business strategies that successful field engineers use to build thriving independent contracting businesses with potential earnings up to $5,000+ monthly.</p>
+                                </div>
+                                
                                 <div class="mt-10">
-                                    <h4 class="text-lg font-medium text-white">Price: ${{ featuredProduct.price.toFixed(2) }}</h4>
+                                    <h4 class="text-lg font-medium text-white">Investment: ${{ featuredProduct.price.toFixed(2) }}</h4>
+                                    <p class="text-gray-300 text-sm mt-1">Professional development that pays for itself</p>
                                     <div class="mt-4 flex space-x-4">
                                         <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700">
-                                            Learn More
+                                            View Details
                                         </Link>
                                         <Link :href="route('guest.checkout', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
-                                            Buy Now
+                                            Get Started
                                         </Link>
                                     </div>
                                 </div>
@@ -355,6 +652,102 @@ defineProps({
 
         <!-- Pricing Tiers section -->
         <PricingTiers />
+
+        <!-- Side Hustle Benefits Section -->
+        <div class="bg-gray-800 py-16 lg:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-base text-orange-400 font-semibold tracking-wide uppercase">Perfect Side Business</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-orange-400 sm:text-4xl">
+                        Why Field Tech Work is the Ultimate Side Hustle
+                    </p>
+                    <p class="mt-4 max-w-2xl text-xl text-white lg:mx-auto">
+                        Discover why thousands are choosing field engineering as their go-to side business for reliable extra income.
+                    </p>
+                </div>
+                
+                <div class="mt-16">
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        <!-- Benefit 1 -->
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white mx-auto">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                </svg>
+                            </div>
+                            <h3 class="mt-4 text-xl font-medium text-white">High Hourly Rates</h3>
+                            <p class="mt-2 text-gray-300">Earn $50-150+ per hour for field tech work. Much higher than typical side hustle opportunities like delivery or retail work.</p>
+                        </div>
+
+                        <!-- Benefit 2 -->
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white mx-auto">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="mt-4 text-xl font-medium text-white">Flexible Schedule</h3>
+                            <p class="mt-2 text-gray-300">Work weekends, evenings, or whenever fits your schedule. Perfect for people with day jobs looking for extra income.</p>
+                        </div>
+
+                        <!-- Benefit 3 -->
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white mx-auto">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="mt-4 text-xl font-medium text-white">Low Startup Costs</h3>
+                            <p class="mt-2 text-gray-300">Start with basic tools you may already have. No expensive equipment or inventory required to begin earning.</p>
+                        </div>
+
+                        <!-- Benefit 4 -->
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white mx-auto">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="mt-4 text-xl font-medium text-white">Skill-Based Work</h3>
+                            <p class="mt-2 text-gray-300">Build valuable technical skills that increase your earning potential over time. More rewarding than gig economy jobs.</p>
+                        </div>
+
+                        <!-- Benefit 5 -->
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white mx-auto">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="mt-4 text-xl font-medium text-white">Local Market Demand</h3>
+                            <p class="mt-2 text-gray-300">High demand for field tech services in every US state. Businesses always need reliable technical support and installations.</p>
+                        </div>
+
+                        <!-- Benefit 6 -->
+                        <div class="text-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white mx-auto">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="mt-4 text-xl font-medium text-white">Scalable Income</h3>
+                            <p class="mt-2 text-gray-300">Start part-time earning $2000+ monthly, then scale to $5000+ or even transition to full-time contracting when ready.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <div class="bg-orange-600/20 border border-orange-500/30 rounded-lg p-6 max-w-4xl mx-auto">
+                        <h3 class="text-2xl font-bold text-orange-400 mb-4">Ready to Start Your Side Hustle?</h3>
+                        <p class="text-white text-lg mb-6">Join thousands earning extra income with field engineering work. Perfect for anyone looking to supplement their current income with high-paying, flexible side work.</p>
+                        <Link :href="route('guest.checkout', { product: featuredProduct.id })" class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700">
+                            Start My Side Hustle Today
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Testimonial section -->
         <div id="testimonials" class="bg-gray-900 py-16 lg:py-24">
