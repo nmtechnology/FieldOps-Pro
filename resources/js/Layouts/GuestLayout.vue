@@ -1,6 +1,17 @@
 <script setup>
+import { onMounted } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
+
+// Load Stripe.js
+onMounted(() => {
+    if (!window.Stripe) {
+        const script = document.createElement('script');
+        script.src = 'https://js.stripe.com/v3/';
+        script.async = true;
+        document.head.appendChild(script);
+    }
+});
 </script>
 
 <template>

@@ -1,20 +1,30 @@
 <template>
-    <GuestLayout>
-        <Head>
-            <title>Start Your Side Hustle - Secure Checkout | FieldEngineer Pro</title>
-            <meta name="description" content="Complete your purchase and start your field tech side hustle journey today. Secure checkout with instant access.">
-        </Head>
+    <Head>
+        <title>Start Your Side Hustle - Secure Checkout | FieldEngineer Pro</title>
+        <meta name="description" content="Complete your purchase and start your field tech side hustle journey today. Secure checkout with instant access.">
+    </Head>
 
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen bg-gray-900 py-8 sm:py-12">
+        <!-- Header with Logo -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+            <div class="text-center">
+                <a href="/" class="inline-flex items-center hover:opacity-80 transition-opacity">
+                    <ApplicationLogo class="h-12 w-12" />
+                    <span class="ml-3 text-2xl font-bold text-white">FieldEngineer Pro</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Progress Header -->
-            <div class="mb-6 sm:mb-8 text-center">
-                <h2 class="font-bold text-2xl sm:text-3xl text-white mb-2">
+            <div class="mb-8 lg:mb-12 text-center">
+                <h2 class="font-bold text-2xl sm:text-3xl lg:text-4xl text-white mb-2">
                     You're Almost There!
                 </h2>
-                <p class="text-sm sm:text-base text-gray-400">Complete your order to unlock your side hustle training</p>
+                <p class="text-sm sm:text-base lg:text-lg text-gray-400">Complete your order to unlock your side hustle training</p>
                 
                 <!-- Trust Badges -->
-                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mt-4 text-xs sm:text-sm text-gray-400">
+                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 lg:gap-8 mt-4 lg:mt-6 text-xs sm:text-sm text-gray-400">
                     <div class="flex items-center">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-1 sm:mr-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
@@ -36,11 +46,11 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
                 <!-- Order Summary -->
-                <div class="w-full order-2 lg:order-1 lg:col-span-2">
-                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-xl sm:rounded-2xl backdrop-blur-sm border border-gray-700 lg:sticky lg:top-24">
-                        <div class="p-4 sm:p-6">
+                <div class="w-full order-2 lg:order-1 lg:col-span-1">
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-xl sm:rounded-2xl backdrop-blur-sm border border-gray-700 lg:sticky lg:top-8">
+                        <div class="p-6 lg:p-8">
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-xl font-bold text-white">Order Summary</h3>
                                 <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">Limited Time</span>
@@ -147,11 +157,11 @@
                 </div>
                 
                 <!-- Payment Form -->
-                <div class="w-full order-1 lg:order-2 lg:col-span-3">
+                <div class="w-full order-1 lg:order-2 lg:col-span-2">
                     <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-xl sm:rounded-2xl backdrop-blur-sm border border-gray-700">
-                        <div class="p-4 sm:p-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-xl font-bold text-white">Payment Details</h3>
+                        <div class="p-6 lg:p-8">
+                            <div class="flex items-center justify-between mb-6 lg:mb-8">
+                                <h3 class="text-xl lg:text-2xl font-bold text-white">Payment Details</h3>
                                 <div class="hidden sm:flex items-center gap-2">
                                     <svg class="w-8 h-8 text-gray-600" viewBox="0 0 48 32" fill="currentColor">
                                         <rect width="48" height="32" rx="4" fill="#1A1F36"/>
@@ -167,18 +177,18 @@
                             </div>
                             
                             <!-- Email Input -->
-                            <div class="mb-4 sm:mb-6">
-                                <label for="email" class="block text-xs sm:text-sm font-bold text-gray-300 mb-2">
+                            <div class="mb-6 lg:mb-8">
+                                <label for="email" class="block text-sm lg:text-base font-bold text-gray-300 mb-2 lg:mb-3">
                                     Email Address <span class="text-red-400">*</span>
                                 </label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="absolute inset-y-0 left-0 pl-3 lg:pl-4 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
                                         </svg>
                                     </div>
                                     <input type="email" id="email" v-model="email" required
-                                        class="pl-10 block w-full border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm bg-gray-900 text-white placeholder-gray-500 py-2.5"
+                                        class="pl-10 lg:pl-12 block w-full border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base bg-gray-900 text-white placeholder-gray-500 py-3 lg:py-4"
                                         placeholder="your@email.com">
                                 </div>
                                 <p class="mt-2 text-xs text-gray-400 flex items-start sm:items-center">
@@ -190,11 +200,11 @@
                             </div>
                             
                             <!-- Payment Method -->
-                            <div class="mb-4 sm:mb-6">
-                                <label class="block text-xs sm:text-sm font-bold text-gray-300 mb-2 sm:mb-3">
+                            <div class="mb-6 lg:mb-8">
+                                <label class="block text-sm lg:text-base font-bold text-gray-300 mb-3">
                                     Payment Method <span class="text-red-400">*</span>
                                 </label>
-                                <div class="bg-gray-900 rounded-lg border-2 border-orange-500 p-3 sm:p-4">
+                                <div class="bg-gray-900 rounded-lg border-2 border-orange-500 p-4 lg:p-5">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center">
                                             <input id="payment-card" type="radio" v-model="paymentMethod" value="card" checked
@@ -219,13 +229,13 @@
                             </div>
                             
                             <!-- Card Payment Form -->
-                            <div v-if="paymentMethod === 'card'" class="space-y-4 sm:space-y-6">
+                            <div v-if="paymentMethod === 'card'" class="space-y-6 lg:space-y-8">
                                 <div>
-                                    <label for="card-element" class="block text-xs sm:text-sm font-bold text-gray-300 mb-2">
+                                    <label for="card-element" class="block text-sm lg:text-base font-bold text-gray-300 mb-2 lg:mb-3">
                                         Card Information <span class="text-red-400">*</span>
                                     </label>
-                                    <div id="card-element" class="border-2 border-gray-600 rounded-lg p-3 sm:p-4 bg-gray-900 focus-within:border-orange-500 transition-colors"></div>
-                                    <div id="card-errors" class="mt-2 text-xs sm:text-sm text-red-400 flex items-start sm:items-center" role="alert">
+                                    <div id="card-element" class="border-2 border-gray-600 rounded-lg p-4 lg:p-5 bg-gray-900 focus-within:border-orange-500 transition-colors"></div>
+                                    <div id="card-errors" class="mt-2 text-sm text-red-400 flex items-center" role="alert">
                                         <svg v-if="cardErrors" class="w-4 h-4 mr-1 flex-shrink-0 mt-0.5 sm:mt-0" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                         </svg>
@@ -243,22 +253,22 @@
                                 <!-- Submit Button -->
                                 <div>
                                     <button type="button" @click="processCardPayment" :disabled="isProcessing" 
-                                        class="group relative w-full flex justify-center items-center py-3 sm:py-4 px-4 sm:px-6 border border-transparent rounded-lg text-base sm:text-lg font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 active:scale-100">
+                                        class="group relative w-full flex justify-center items-center py-4 lg:py-5 px-6 border border-transparent rounded-lg text-lg lg:text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 active:scale-100">
                                         <span v-if="isProcessing" class="flex items-center">
-                                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                            <svg class="animate-spin -ml-1 mr-3 h-6 w-6 text-white" fill="none" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                             </svg>
                                             Processing...
                                         </span>
                                         <span v-else class="flex items-center">
-                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                                             </svg>
                                             Complete Purchase • ${{ finalAmount.toFixed(2) }}
                                         </span>
                                     </button>
-                                    <p class="mt-3 text-center text-xs text-gray-400">
+                                    <p class="mt-4 text-center text-sm text-gray-400">
                                         By completing your purchase, you agree to our terms of service
                                     </p>
                                 </div>
@@ -277,19 +287,19 @@
                 </div>
             </div>
         </div>
-    </GuestLayout>
+    </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 import { Head, router } from '@inertiajs/vue3';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import axios from 'axios';
 
 export default defineComponent({
     components: {
-        GuestLayout,
-        Head
+        Head,
+        ApplicationLogo
     },
     props: {
         product: Object,
@@ -301,6 +311,7 @@ export default defineComponent({
             isProcessing: false,
             stripe: null,
             card: null,
+            cardErrors: '',
             email: '',
             discountCode: '',
             discount: null,
@@ -331,31 +342,59 @@ export default defineComponent({
         }
     },
     mounted() {
-        this.loadStripe();
+        // Load Stripe script if not already loaded
+        if (!window.Stripe) {
+            const script = document.createElement('script');
+            script.src = 'https://js.stripe.com/v3/';
+            script.async = true;
+            script.onload = () => {
+                this.loadStripe();
+            };
+            document.head.appendChild(script);
+        } else {
+            this.loadStripe();
+        }
     },
     methods: {
         loadStripe() {
-            // Load Stripe.js
-            this.stripe = Stripe(this.stripeKey);
-            
-            // Create card element
-            const elements = this.stripe.elements();
-            this.card = elements.create('card');
-            
-            // Mount card element
-            this.$nextTick(() => {
-                this.card.mount('#card-element');
+            // Wait for Stripe to be available
+            const initStripe = () => {
+                if (!window.Stripe) {
+                    setTimeout(initStripe, 100);
+                    return;
+                }
                 
-                // Handle validation errors
-                this.card.addEventListener('change', event => {
-                    const displayError = document.getElementById('card-errors');
-                    if (event.error) {
-                        displayError.textContent = event.error.message;
-                    } else {
-                        displayError.textContent = '';
-                    }
+                // Load Stripe.js
+                this.stripe = window.Stripe(this.stripeKey);
+                
+                // Create card element
+                const elements = this.stripe.elements();
+                this.card = elements.create('card');
+                
+                // Mount card element
+                this.$nextTick(() => {
+                    this.card.mount('#card-element');
+                    
+                    // Handle validation errors
+                    this.card.addEventListener('change', event => {
+                        if (event.error) {
+                            this.cardErrors = event.error.message;
+                            const displayError = document.getElementById('card-errors');
+                            if (displayError) {
+                                displayError.textContent = event.error.message;
+                            }
+                        } else {
+                            this.cardErrors = '';
+                            const displayError = document.getElementById('card-errors');
+                            if (displayError) {
+                                displayError.textContent = '';
+                            }
+                        }
+                    });
                 });
-            });
+            };
+            
+            initStripe();
         },
         async processCardPayment() {
             if (this.isProcessing) return;

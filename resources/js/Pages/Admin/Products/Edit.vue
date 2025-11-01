@@ -163,21 +163,6 @@ const submit = () => {
                             </div>
 
                             <div>
-                                <InputLabel for="tier" value="Tier" />
-                                <select
-                                    id="tier"
-                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                    v-model="form.tier"
-                                    required
-                                >
-                                    <option v-for="tier in tiers" :key="tier.value" :value="tier.value">
-                                        {{ tier.label }}
-                                    </option>
-                                </select>
-                                <InputError class="mt-2" :message="form.errors.tier" />
-                            </div>
-
-                            <div>
                                 <InputLabel for="image_path" value="Product Image" />
                                 
                                 <!-- Current Image Preview -->

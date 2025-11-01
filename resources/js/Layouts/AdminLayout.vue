@@ -60,8 +60,8 @@ onMounted(() => {
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('home')" class="flex items-center">
-                                    <img src="/img/fieldengineer-logo.png" alt="FieldEngineer Pro Logo" class="h-8 w-auto mr-2" />
+                                <Link :href="route('home')" class="flex items-center hover:opacity-80 transition-opacity">
+                                    <ApplicationLogo class="h-9 w-auto mr-2" />
                                     <span class="text-2xl font-bold text-orange-400">Admin Portal</span>
                                 </Link>
                             </div>
