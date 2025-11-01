@@ -5,45 +5,45 @@
             <meta name="description" content="Complete your purchase and start your field tech side hustle journey today. Secure checkout with instant access.">
         </Head>
 
-        <div class="w-full">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Progress Header -->
-            <div class="mb-8 text-center">
-                <h2 class="font-bold text-3xl text-white mb-2">
+            <div class="mb-6 sm:mb-8 text-center">
+                <h2 class="font-bold text-2xl sm:text-3xl text-white mb-2">
                     You're Almost There!
                 </h2>
-                <p class="text-gray-400">Complete your order to unlock your side hustle training</p>
+                <p class="text-sm sm:text-base text-gray-400">Complete your order to unlock your side hustle training</p>
                 
                 <!-- Trust Badges -->
-                <div class="flex items-center justify-center gap-6 mt-4 text-sm text-gray-400">
+                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mt-4 text-xs sm:text-sm text-gray-400">
                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-1 sm:mr-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
                         </svg>
-                        Secure Payment
+                        <span class="whitespace-nowrap">Secure Payment</span>
                     </div>
                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-1 sm:mr-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                         </svg>
-                        Instant Access
+                        <span class="whitespace-nowrap">Instant Access</span>
                     </div>
                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-1 sm:mr-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 012 0v4a1 1 0 11-2 0V7zm1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
                         </svg>
-                        Money-Back Guarantee
+                        <span class="whitespace-nowrap">Money-Back Guarantee</span>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
                 <!-- Order Summary -->
-                <div class="w-full">
-                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-2xl backdrop-blur-sm border border-gray-700">
-                        <div class="p-6 sm:p-8">
+                <div class="w-full order-2 lg:order-1 lg:col-span-2">
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-xl sm:rounded-2xl backdrop-blur-sm border border-gray-700 lg:sticky lg:top-24">
+                        <div class="p-4 sm:p-6">
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-xl font-bold text-white">Order Summary</h3>
-                                <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-xs font-bold">Limited Time</span>
+                                <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">Limited Time</span>
                             </div>
                             
                             <!-- Product Info -->
@@ -54,7 +54,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                         </svg>
                                     </div>
-                                    <div class="flex-1">
+                                    <div class="flex-1 min-w-0">
                                         <h4 class="font-bold text-white mb-1">{{ product.name }}</h4>
                                         <p class="text-xs text-gray-400">Digital Training Program • Lifetime Access</p>
                                     </div>
@@ -73,7 +73,7 @@
                             <div class="border-t border-gray-700 pt-6 mb-6">
                                 <label for="discount-code" class="block text-sm font-medium text-gray-300 mb-2">
                                     <span class="flex items-center">
-                                        <svg class="w-4 h-4 mr-2 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-4 h-4 mr-2 text-orange-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                         </svg>
                                         Have a Discount Code?
@@ -81,10 +81,10 @@
                                 </label>
                                 <div class="flex gap-2">
                                     <input type="text" name="discount-code" id="discount-code" v-model="discountCode" 
-                                        class="focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full rounded-lg sm:text-sm border-gray-600 bg-gray-900 text-white placeholder-gray-500"
+                                        class="focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full rounded-lg text-sm border-gray-600 bg-gray-900 text-white placeholder-gray-500 px-3 py-2"
                                         placeholder="Enter discount code">
                                     <button type="button" @click="applyDiscount"
-                                        class="inline-flex items-center px-6 py-2 border border-transparent text-sm font-bold rounded-lg text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200">
+                                        class="inline-flex items-center justify-center px-4 sm:px-6 py-2 border border-transparent text-sm font-bold rounded-lg text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-200 whitespace-nowrap">
                                         Apply
                                     </button>
                                 </div>
@@ -147,12 +147,12 @@
                 </div>
                 
                 <!-- Payment Form -->
-                <div class="w-full">
-                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-2xl backdrop-blur-sm border border-gray-700">
-                        <div class="p-6 sm:p-8">
+                <div class="w-full order-1 lg:order-2 lg:col-span-3">
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden shadow-2xl rounded-xl sm:rounded-2xl backdrop-blur-sm border border-gray-700">
+                        <div class="p-4 sm:p-6">
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-xl font-bold text-white">Payment Details</h3>
-                                <div class="flex items-center gap-2">
+                                <div class="hidden sm:flex items-center gap-2">
                                     <svg class="w-8 h-8 text-gray-600" viewBox="0 0 48 32" fill="currentColor">
                                         <rect width="48" height="32" rx="4" fill="#1A1F36"/>
                                         <circle cx="15" cy="16" r="8" fill="#EB001B"/>
@@ -167,46 +167,46 @@
                             </div>
                             
                             <!-- Email Input -->
-                            <div class="mb-6">
-                                <label for="email" class="block text-sm font-bold text-gray-300 mb-2">
+                            <div class="mb-4 sm:mb-6">
+                                <label for="email" class="block text-xs sm:text-sm font-bold text-gray-300 mb-2">
                                     Email Address <span class="text-red-400">*</span>
                                 </label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
                                         </svg>
                                     </div>
                                     <input type="email" id="email" v-model="email" required
-                                        class="pl-10 block w-full border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 sm:text-sm bg-gray-900 text-white placeholder-gray-500"
+                                        class="pl-10 block w-full border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm bg-gray-900 text-white placeholder-gray-500 py-2.5"
                                         placeholder="your@email.com">
                                 </div>
-                                <p class="mt-2 text-xs text-gray-400 flex items-center">
-                                    <svg class="w-4 h-4 mr-1 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                <p class="mt-2 text-xs text-gray-400 flex items-start sm:items-center">
+                                    <svg class="w-4 h-4 mr-1 text-blue-400 flex-shrink-0 mt-0.5 sm:mt-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Your receipt and training access will be sent to this email
+                                    <span>Your receipt and training access will be sent to this email</span>
                                 </p>
                             </div>
                             
                             <!-- Payment Method -->
-                            <div class="mb-6">
-                                <label class="block text-sm font-bold text-gray-300 mb-3">
+                            <div class="mb-4 sm:mb-6">
+                                <label class="block text-xs sm:text-sm font-bold text-gray-300 mb-2 sm:mb-3">
                                     Payment Method <span class="text-red-400">*</span>
                                 </label>
-                                <div class="bg-gray-900 rounded-lg border-2 border-orange-500 p-4">
+                                <div class="bg-gray-900 rounded-lg border-2 border-orange-500 p-3 sm:p-4">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center">
                                             <input id="payment-card" type="radio" v-model="paymentMethod" value="card" checked
-                                                class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600">
-                                            <label for="payment-card" class="ml-3 flex items-center text-sm font-medium text-white">
-                                                <svg class="w-5 h-5 mr-2 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600 flex-shrink-0">
+                                            <label for="payment-card" class="ml-2 sm:ml-3 flex items-center text-xs sm:text-sm font-medium text-white">
+                                                <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                                                 </svg>
-                                                Credit / Debit Card
+                                                <span class="whitespace-nowrap">Credit / Debit Card</span>
                                             </label>
                                         </div>
-                                        <div class="flex gap-1">
+                                        <div class="hidden sm:flex gap-1">
                                             <svg class="w-8 h-6" viewBox="0 0 32 20" fill="none">
                                                 <rect width="32" height="20" rx="2" fill="#1434CB"/>
                                                 <path d="M11.5 5h9v10h-9z" fill="#FF5F00"/>
@@ -219,31 +219,31 @@
                             </div>
                             
                             <!-- Card Payment Form -->
-                            <div v-if="paymentMethod === 'card'" class="space-y-6">
+                            <div v-if="paymentMethod === 'card'" class="space-y-4 sm:space-y-6">
                                 <div>
-                                    <label for="card-element" class="block text-sm font-bold text-gray-300 mb-2">
+                                    <label for="card-element" class="block text-xs sm:text-sm font-bold text-gray-300 mb-2">
                                         Card Information <span class="text-red-400">*</span>
                                     </label>
-                                    <div id="card-element" class="border-2 border-gray-600 rounded-lg p-4 bg-gray-900 focus-within:border-orange-500 transition-colors"></div>
-                                    <div id="card-errors" class="mt-2 text-sm text-red-400 flex items-center" role="alert">
-                                        <svg v-if="cardErrors" class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <div id="card-element" class="border-2 border-gray-600 rounded-lg p-3 sm:p-4 bg-gray-900 focus-within:border-orange-500 transition-colors"></div>
+                                    <div id="card-errors" class="mt-2 text-xs sm:text-sm text-red-400 flex items-start sm:items-center" role="alert">
+                                        <svg v-if="cardErrors" class="w-4 h-4 mr-1 flex-shrink-0 mt-0.5 sm:mt-0" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
                                 </div>
                                 
                                 <!-- Security Badge -->
-                                <div class="flex items-center justify-center p-3 bg-green-500/10 rounded-lg border border-green-500/30">
-                                    <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <div class="flex items-start sm:items-center justify-center p-2 sm:p-3 bg-green-500/10 rounded-lg border border-green-500/30">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5 sm:mt-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    <span class="text-sm text-green-400 font-medium">Secured by Stripe • Your information is encrypted</span>
+                                    <span class="text-xs sm:text-sm text-green-400 font-medium">Secured by Stripe • Your information is encrypted</span>
                                 </div>
                                 
                                 <!-- Submit Button -->
                                 <div>
                                     <button type="button" @click="processCardPayment" :disabled="isProcessing" 
-                                        class="group relative w-full flex justify-center items-center py-4 px-6 border border-transparent rounded-lg text-lg font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105">
+                                        class="group relative w-full flex justify-center items-center py-3 sm:py-4 px-4 sm:px-6 border border-transparent rounded-lg text-base sm:text-lg font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 active:scale-100">
                                         <span v-if="isProcessing" class="flex items-center">
                                             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

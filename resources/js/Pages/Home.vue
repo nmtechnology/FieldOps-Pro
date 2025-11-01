@@ -89,9 +89,9 @@ defineProps({
                           class="group relative inline-flex items-center px-6 py-2.5 overflow-hidden rounded-lg bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
                         <span class="relative z-10 flex items-center">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
                             </svg>
-                            Start Free
+                            Register Free
                         </span>
                         <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                     </Link>
@@ -157,9 +157,9 @@ defineProps({
                               class="block w-full px-4 py-3 text-center font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 rounded-lg shadow-lg hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105">
                             <span class="flex items-center justify-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
                                 </svg>
-                                Start Your Side Hustle
+                                Register Free
                             </span>
                         </Link>
                     </div>
@@ -910,6 +910,331 @@ defineProps({
                             From optimizing your profile to stand out on bidding platforms, to pricing strategies that win contracts while maintaining profitability, to managing client relationships that lead to repeat business—my comprehensive guides cover everything you need to succeed as an independent low voltage contractor.
                         </p>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Development Service Section -->
+        <div class="relative py-24 bg-gradient-to-br from-gray-900 via-orange-900/20 to-gray-900 overflow-hidden">
+            <!-- Background decoration -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 right-1/4 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
+                <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-500 rounded-full filter blur-3xl"></div>
+            </div>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500/20 to-cyan-500/20 border border-orange-500/30 rounded-full mb-4">
+                        <svg class="w-5 h-5 text-orange-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <span class="text-orange-400 font-semibold text-sm">PREMIUM SERVICE</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                        We'll Build Your <span class="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">Field Tech Business</span> For You
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        Skip the learning curve. Let us handle everything while you focus on what you do best—earning money in the field.
+                    </p>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                    <!-- Left: Service Details -->
+                    <div class="space-y-8">
+                        <div class="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
+                            <h3 class="text-2xl font-bold text-white mb-6">Complete Business Setup Package</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Service Item 1 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white mb-2">Business Name & Branding</h4>
+                                        <p class="text-gray-400">Professional business name development, logo design, and complete brand identity package that makes you stand out.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Service Item 2 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white mb-2">Professional Website</h4>
+                                        <p class="text-gray-400">Custom-designed website with mobile optimization, contact forms, service listings, and professional portfolio showcase.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Service Item 3 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white mb-2">Complete Business Plan</h4>
+                                        <p class="text-gray-400">Detailed business strategy, financial projections, marketing roadmap, and growth plan tailored to your local market.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Service Item 4 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white mb-2">Legal & Compliance Setup</h4>
+                                        <p class="text-gray-400">Business registration guidance, insurance recommendations, contract templates, and compliance documentation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Pricing & CTA -->
+                    <div class="space-y-6">
+                        <!-- Pricing Card -->
+                        <div class="relative bg-gradient-to-br from-orange-500/10 to-cyan-500/10 backdrop-blur-sm border-2 border-orange-500/50 rounded-2xl p-8 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300">
+                            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                                <span class="bg-gradient-to-r from-orange-600 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+                                    MOST POPULAR
+                                </span>
+                            </div>
+
+                            <div class="text-center mb-8 mt-4">
+                                <div class="text-gray-400 text-sm font-medium mb-2">STARTING AT</div>
+                                <div class="flex items-baseline justify-center">
+                                    <span class="text-5xl font-bold text-white">$399</span>
+                                    <span class="text-2xl text-gray-400 ml-1">.99</span>
+                                    <span class="text-xl text-gray-400 ml-2">+</span>
+                                </div>
+                                <p class="text-gray-400 text-sm mt-2">Customized based on your needs</p>
+                            </div>
+
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-center text-white">
+                                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>2-3 week turnaround time</span>
+                                </div>
+                                <div class="flex items-center text-white">
+                                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Unlimited revisions included</span>
+                                </div>
+                                <div class="flex items-center text-white">
+                                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>30-day satisfaction guarantee</span>
+                                </div>
+                                <div class="flex items-center text-white">
+                                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Ongoing support & consultation</span>
+                                </div>
+                            </div>
+
+                            <button class="w-full py-4 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold rounded-xl hover:from-orange-500 hover:to-orange-600 shadow-lg hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 flex items-center justify-center group">
+                                <svg class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                Request Free Consultation
+                            </button>
+                        </div>
+
+                        <!-- Trust Badge -->
+                        <div class="bg-gray-800/50 border border-gray-700 rounded-xl p-6 text-center">
+                            <div class="flex items-center justify-center space-x-2 mb-3">
+                                <svg class="w-6 h-6 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <h4 class="text-lg font-bold text-white">Backed by Experience</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Over 50+ successful field tech businesses launched using our proven system and templates.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Features -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 text-center hover:border-orange-500/50 transition-all duration-200">
+                        <div class="text-3xl font-bold text-orange-400 mb-2">10x</div>
+                        <div class="text-gray-300">Faster Business Launch</div>
+                    </div>
+                    <div class="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 text-center hover:border-cyan-500/50 transition-all duration-200">
+                        <div class="text-3xl font-bold text-cyan-400 mb-2">100%</div>
+                        <div class="text-gray-300">Professional Setup</div>
+                    </div>
+                    <div class="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 text-center hover:border-purple-500/50 transition-all duration-200">
+                        <div class="text-3xl font-bold text-purple-400 mb-2">$0</div>
+                        <div class="text-gray-300">Hidden Fees</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Free Registration Benefits Section -->
+        <div class="relative py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+            <!-- Background decoration -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
+                <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500 rounded-full filter blur-3xl"></div>
+            </div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center px-4 py-2 bg-orange-500/10 border border-orange-500/30 rounded-full mb-4">
+                        <svg class="w-5 h-5 text-orange-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-orange-400 font-semibold text-sm">100% FREE • NO CREDIT CARD</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                        Create Your <span class="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">Free Account</span>
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        Join thousands exploring their side hustle potential. No payment required—unlock exclusive features and explore at your own pace.
+                    </p>
+                </div>
+
+                <!-- Benefits Grid -->
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <!-- Benefit 1 -->
+                    <div class="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1">
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-orange-500/10 rounded-full filter blur-2xl group-hover:bg-orange-500/20 transition-all duration-300"></div>
+                        <div class="relative">
+                            <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">Preview Training Materials</h3>
+                            <p class="text-gray-400 leading-relaxed">Browse our comprehensive training library and course previews. See exactly what you'll learn before making any purchase decision.</p>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 2 -->
+                    <div class="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-1">
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-cyan-500/10 rounded-full filter blur-2xl group-hover:bg-cyan-500/20 transition-all duration-300"></div>
+                        <div class="relative">
+                            <div class="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">Save Your Favorites</h3>
+                            <p class="text-gray-400 leading-relaxed">Bookmark products and resources you're interested in. Build your personalized learning roadmap and come back anytime.</p>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 3 -->
+                    <div class="group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1">
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-purple-500/10 rounded-full filter blur-2xl group-hover:bg-purple-500/20 transition-all duration-300"></div>
+                        <div class="relative">
+                            <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">Track Your Journey</h3>
+                            <p class="text-gray-400 leading-relaxed">Access your personalized dashboard to track progress, view completed sections, and see how far you've come on your path to success.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Features -->
+                <div class="bg-gradient-to-r from-gray-800/60 to-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 mb-12">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Early Access to New Features</h4>
+                                <p class="text-gray-400 text-sm">Be the first to try new tools, resources, and training modules as we release them.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Community Access</h4>
+                                <p class="text-gray-400 text-sm">Connect with other aspiring field engineers and share experiences (coming soon).</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Special Offers & Discounts</h4>
+                                <p class="text-gray-400 text-sm">Receive exclusive member-only deals and promotional pricing on training programs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Personalized Dashboard</h4>
+                                <p class="text-gray-400 text-sm">Your own space to manage purchases, track learning, and plan your side hustle journey.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="text-center">
+                    <Link href="/register" 
+                          class="group relative inline-flex items-center px-10 py-5 overflow-hidden rounded-xl bg-gradient-to-r from-orange-600 to-orange-500 text-white text-lg font-bold shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
+                        <span class="relative z-10 flex items-center">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                            </svg>
+                            Create Your Free Account Now
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                    </Link>
+                    <p class="mt-4 text-gray-400 text-sm">Takes less than 60 seconds • No credit card required • Cancel anytime</p>
                 </div>
             </div>
         </div>

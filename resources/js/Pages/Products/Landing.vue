@@ -199,6 +199,188 @@ const tierPrices = {
             </div>
         </div>
 
+        <!-- Content Preview Section for Registered Users -->
+        <div class="py-20 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center px-4 py-2 bg-orange-500/10 border border-orange-500/30 rounded-full mb-4">
+                        <svg class="w-5 h-5 text-orange-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-orange-400 font-semibold text-sm">SNEAK PEEK</span>
+                    </div>
+                    <h2 class="text-4xl font-bold text-white mb-4">What's Inside the Training</h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">Get a preview of the comprehensive content that will transform your field tech career</p>
+                </div>
+
+                <!-- Preview Content Grid -->
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Module Preview 1 -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-3">Module 1: Skills Assessment</h3>
+                                <p class="text-gray-300 mb-4">Learn to evaluate your existing skills and identify high-demand service areas where you can excel.</p>
+                                <div class="space-y-2">
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        PC Support & Troubleshooting fundamentals
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Smart home installation techniques
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Low voltage wiring and cable management
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module Preview 2 -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-300">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-3">Module 2: Essential Tools</h3>
+                                <p class="text-gray-300 mb-4">Discover exactly which tools you need (and which to skip) to start earning immediately.</p>
+                                <div class="space-y-2">
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Complete tool kit recommendations
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Budget-friendly purchasing guides
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Field applications and best practices
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module Preview 3 -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-3">Module 3: Territory Setup</h3>
+                                <p class="text-gray-300 mb-4">Strategic guidance on defining your service area and maximizing your earning potential.</p>
+                                <div class="space-y-2">
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Define your optimal service radius
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Job acceptance criteria strategies
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Scheduling optimization tips
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module Preview 4 -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:border-green-500/50 transition-all duration-300">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-3">Module 4: Platform & Reputation</h3>
+                                <p class="text-gray-300 mb-4">Master the art of building a 5-star reputation and attracting high-paying clients consistently.</p>
+                                <div class="space-y-2">
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Profile optimization secrets
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Rate setting strategies ($50-150/hr)
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-400">
+                                        <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        Review generation techniques
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA for Preview -->
+                <div class="text-center bg-gradient-to-r from-orange-500/10 to-cyan-500/10 border border-orange-500/30 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-3">Ready to Access the Full Training?</h3>
+                    <p class="text-gray-300 mb-6">Join hundreds of successful field engineers who started with just $75.99</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#pricing" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold rounded-lg hover:from-orange-500 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            View Pricing Options
+                        </a>
+                        <span class="text-gray-400 text-sm">One-time payment • Lifetime access • Money-back guarantee</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Pricing Section with 3 Tiers -->
         <div id="pricing" class="py-16 bg-gray-900">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -218,8 +400,8 @@ const tierPrices = {
                         <div class="flex-1">
                             <h3 class="text-xl font-semibold text-orange-400">FieldOps Scout</h3>
                             <p class="mt-4 flex items-baseline text-orange-400">
-                                <span class="text-5xl font-extrabold tracking-tight">$22.99</span>
-                                <span class="ml-1 text-xl font-semibold">one-time</span>
+                                <span class="text-5xl font-extrabold tracking-tight">$69.99</span>
+                                <span class="ml-1 text-xl font-semibold">/month</span>
                             </p>
                             <p class="mt-6 text-white">
                                 Perfect for beginners looking to break into field engineering and low voltage contracting.
@@ -265,7 +447,7 @@ const tierPrices = {
                             <h3 class="text-xl font-semibold text-orange-400">FieldOps Pro</h3>
                             <p class="mt-4 flex items-baseline text-orange-400">
                                 <span class="text-5xl font-extrabold tracking-tight">$33.99</span>
-                                <span class="ml-1 text-xl font-semibold">one-time</span>
+                                <span class="ml-1 text-xl font-semibold">/month</span>
                             </p>
                             <p class="mt-6 text-white">
                                 For contractors seeking to establish a consistent income stream and build a reputation.
@@ -311,7 +493,7 @@ const tierPrices = {
                             <h3 class="text-xl font-semibold text-orange-400">FieldOps Elite</h3>
                             <p class="mt-4 flex items-baseline text-orange-400">
                                 <span class="text-5xl font-extrabold tracking-tight">$44.99</span>
-                                <span class="ml-1 text-xl font-semibold">one-time</span>
+                                <span class="ml-1 text-xl font-semibold">/month</span>
                             </p>
                             <p class="mt-6 text-white">
                                 Premium tier for serious field engineers looking to maximize earnings and scale their business.

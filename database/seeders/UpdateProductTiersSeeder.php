@@ -12,13 +12,13 @@ class UpdateProductTiersSeeder extends Seeder
      */
     public function run(): void
     {
-        // FieldOps Scout tier - one-time fee
+        // FieldOps Scout tier - monthly subscription
         $scoutProduct = Product::updateOrCreate(
             ['name' => 'Field Operations Guide - Complete Side Hustle Training'],
             [
                 'description' => 'Your complete roadmap to launching a profitable field tech side hustle. This comprehensive digital guide provides lifetime access to proven strategies for establishing your skills, building your toolkit, defining your territory, setting up on work platforms, and maintaining a 5-star reputation. Everything you need to start earning $2000-5000+ monthly in your spare time.',
                 'type' => 'info',
-                'price' => 75.99,
+                'price' => 69.99,
                 'active' => true,
                 'content_sections' => [
                     'Section 1: Skills Assessment & Development - Identify and establish your expertise in computer PC support, smart home technology, and low voltage troubleshooting and service',
@@ -30,7 +30,7 @@ class UpdateProductTiersSeeder extends Seeder
             ]
         );
         
-        $this->command->info("Updated/Created Field Operations Guide: $75.99 one-time fee (lifetime access)");
+        $this->command->info("Updated/Created Field Operations Guide: $69.99/month");
         
         // FieldOps Pro tier - monthly subscription
         $proProduct = Product::updateOrCreate(
