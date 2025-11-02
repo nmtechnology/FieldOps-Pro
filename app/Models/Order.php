@@ -14,6 +14,10 @@ class Order extends Model
         'order_number',
         'discount_id',
         'discount_amount',
+        'buyer_state',
+        'subtotal',
+        'tax_rate',
+        'tax_amount',
     ];
 
     public function user()

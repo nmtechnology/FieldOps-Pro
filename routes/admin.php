@@ -39,6 +39,21 @@ Route::middleware(['auth'])->group(function () {
         Route::get('products/{product}/preview', [CustomerProductController::class, 'show'])->name('products.preview');
         Route::get('products/{product}/preview/content/{content}', [CustomerProductController::class, 'showContent'])->name('products.preview.content');
         
+        // Product Content Management
+        Route::get('products/{product}/content', [\App\Http\Controllers\Admin\ProductContentController::class, 'index'])->name('products.content.index');
+        Route::get('products/{product}/content/create', [\App\Http\Controllers\Admin\ProductContentController::class, 'create'])->name('products.content.create');
+        Route::post('products/{product}/content', [\App\Http\Controllers\Admin\ProductContentController::class, 'store'])->name('products.content.store');
+        Route::get('products/{product}/content/{content}/edit', [\App\Http\Controllers\Admin\ProductContentController::class, 'edit'])->name('products.content.edit');
+        Route::put('products/{product}/content/{content}', [\App\Http\Controllers\Admin\ProductContentController::class, 'update'])->name('products.content.update');
+        Route::delete('products/{product}/content/{content}', [\App\Http\Controllers\Admin\ProductContentController::class, 'destroy'])->name('products.content.destroy');
+        Route::post('products/{product}/content/reorder', [\App\Http\Controllers\Admin\ProductContentController::class, 'reorder'])->name('products.content.reorder');
+        
+        // Content Blocks Management
+        Route::post('products/{product}/content/{content}/blocks', [\App\Http\Controllers\Admin\ProductContentController::class, 'storeBlock'])->name('products.content.blocks.store');
+        Route::put('products/{product}/content/{content}/blocks/{block}', [\App\Http\Controllers\Admin\ProductContentController::class, 'updateBlock'])->name('products.content.blocks.update');
+        Route::delete('products/{product}/content/{content}/blocks/{block}', [\App\Http\Controllers\Admin\ProductContentController::class, 'destroyBlock'])->name('products.content.blocks.destroy');
+        Route::post('products/{product}/content/{content}/blocks/reorder', [\App\Http\Controllers\Admin\ProductContentController::class, 'reorderBlocks'])->name('products.content.blocks.reorder');
+        
         // Discounts Management
         Route::resource('discounts', DiscountController::class);
         

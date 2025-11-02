@@ -49,6 +49,12 @@ const deleteProduct = () => {
                 </h2>
                 <div class="flex gap-2">
                     <Link
+                        :href="`/admin/products/${product.id}/content`"
+                        class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition"
+                    >
+                        Manage Content
+                    </Link>
+                    <Link
                         :href="`/admin/products/${product.id}/preview`"
                         class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
                     >
