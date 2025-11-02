@@ -21,9 +21,20 @@ Route::get('/', function() {
     return Inertia::render('BotCheck');
 })->name('bot-check');
 
-Route::post('/verify', function() {
-    session(['human_verified' => true]);
-    return response()->json(['success' => true]);
+Route::post('/verify', function(Illuminate\Http\Request $request) {
+    // Set verification in session
+    $request->session()->put('human_verified', true);
+    $request->session()->save();
+    
+    // Log for debugging
+    \Log::info('Verification set', [
+        'session_id' => session()->getId(),
+        'has_verified' => session()->has('human_verified'),
+        'verified_value' => session()->get('human_verified')
+    ]);
+    
+    // Redirect to loading screen using Inertia redirect
+    return redirect()->route('loading-to-home');
 })->name('verify');
 
 // Homepage - Real home page after verification
@@ -40,10 +51,35 @@ Route::get('/terms', function() {
 Route::prefix('guest')->name('guest.')->middleware('verify.human')->group(function() {
     Route::get('/checkout/{product}', [CheckoutController::class, 'guestCheckout'])->name('checkout');
     Route::post('/process-payment', [CheckoutController::class, 'processGuestPayment'])->name('process-payment');
+    Route::post('/coinbase-payment', [App\Http\Controllers\CoinbasePaymentController::class, 'guestCheckout'])->name('coinbase-payment');
     Route::get('/thank-you', [CheckoutController::class, 'guestThankYou'])->name('thank-you');
     Route::get('/complete-registration', [CheckoutController::class, 'completeRegistration'])->name('complete-registration');
     Route::post('/register', [CheckoutController::class, 'registerAfterPurchase'])->name('register');
 });
+
+// Loading screen after login
+Route::get('/loading', function() {
+    return Inertia::render('Auth/Loading');
+})->middleware('auth')->name('loading');
+
+// Loading screen after bot verification (redirects to home)
+// No middleware here - session was just set by /verify endpoint
+Route::get('/loading-to-home', function(Illuminate\Http\Request $request) {
+    // Log for debugging
+    \Log::info('Loading-to-home accessed', [
+        'session_id' => session()->getId(),
+        'has_verified' => session()->has('human_verified'),
+        'verified_value' => session()->get('human_verified'),
+        'all_session' => $request->session()->all()
+    ]);
+    
+    // Double check session is set, if not redirect back to verification
+    if (!session()->has('human_verified')) {
+        \Log::warning('No verification in session at loading-to-home');
+        return redirect('/');
+    }
+    return Inertia::render('Auth/LoadingToHome');
+})->name('loading-to-home');
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
     ->middleware(['auth', 'verified', 'verify.human'])
@@ -87,6 +123,9 @@ Route::get('/products/{product}', [ProductController::class, 'show'])
 // Stripe Webhook Route (exclude from CSRF verification)
 Route::post('/stripe/webhook', [App\Http\Controllers\StripeWebhookController::class, 'handleWebhook'])->name('stripe.webhook');
 
+// Coinbase Commerce Webhook Route (exclude from CSRF verification)
+Route::post('/coinbase/webhook', [App\Http\Controllers\CoinbaseWebhookController::class, 'handle'])->name('coinbase.webhook');
+
 // Checkout Routes
 Route::middleware('auth')->group(function () {
     // Checkout requires authentication
@@ -94,6 +133,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/payment/process', [CheckoutController::class, 'processPayment'])->name('process.payment');
     Route::post('/payment/process/ach', [CheckoutController::class, 'processAchPayment'])->name('process.payment.ach');
     Route::get('/checkout/thank-you/{order}', [CheckoutController::class, 'thankYou'])->name('checkout.thankyou');
+    
+    // Coinbase Commerce payment routes
+    Route::post('/payment/coinbase', [App\Http\Controllers\CoinbasePaymentController::class, 'checkout'])->name('payment.coinbase');
     
     // Discount code validation
     Route::post('/discount/validate', [App\Http\Controllers\DiscountController::class, 'validateCode'])->name('discount.validate');

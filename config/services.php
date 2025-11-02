@@ -37,6 +37,12 @@ return [
         ],
     ],
 
+    'coinbase' => [
+        'api_key' => env('COINBASE_COMMERCE_API_KEY'),
+        'webhook_secret' => env('COINBASE_COMMERCE_WEBHOOK_SECRET'),
+        'api_url' => 'https://api.commerce.coinbase.com',
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

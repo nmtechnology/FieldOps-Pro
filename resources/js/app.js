@@ -9,8 +9,9 @@ import LoadingScreen from './Components/LoadingScreen.vue';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
-// Check if we should show loading screen (coming from bot verification)
-const showLoadingScreen = window.location.pathname === '/home' && document.referrer.includes(window.location.origin);
+// Check if we should show loading screen
+const showLoadingScreen = window.location.pathname === '/loading' || 
+                         window.location.pathname === '/loading-to-home';
 
 let loadingInstance = null;
 let loadingContainer = null;

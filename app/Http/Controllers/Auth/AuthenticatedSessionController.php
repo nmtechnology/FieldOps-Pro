@@ -38,7 +38,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended('/admin/dashboard');
         }
 
-        return redirect()->intended('/dashboard');
+        // Redirect to loading screen which will then redirect to dashboard
+        return redirect()->intended('/loading');
     }
 
     /**

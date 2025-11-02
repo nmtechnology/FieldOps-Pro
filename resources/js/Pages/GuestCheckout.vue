@@ -204,25 +204,49 @@
                                 <label class="block text-sm lg:text-base font-bold text-gray-300 mb-3">
                                     Payment Method <span class="text-red-400">*</span>
                                 </label>
-                                <div class="bg-gray-900 rounded-lg border-2 border-orange-500 p-4 lg:p-5">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center">
-                                            <input id="payment-card" type="radio" v-model="paymentMethod" value="card" checked
-                                                class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600 flex-shrink-0">
-                                            <label for="payment-card" class="ml-2 sm:ml-3 flex items-center text-xs sm:text-sm font-medium text-white">
-                                                <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                <div class="space-y-3">
+                                    <!-- Card Payment -->
+                                    <div class="bg-gray-900 rounded-lg border-2 cursor-pointer transition-all p-4 lg:p-5"
+                                        :class="paymentMethod === 'card' ? 'border-orange-500' : 'border-gray-700 hover:border-gray-600'"
+                                        @click="paymentMethod = 'card'">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <input id="payment-card" type="radio" v-model="paymentMethod" value="card"
+                                                    class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600 flex-shrink-0">
+                                                <label for="payment-card" class="ml-2 sm:ml-3 flex items-center text-xs sm:text-sm font-medium text-white cursor-pointer">
+                                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                                    </svg>
+                                                    <span class="whitespace-nowrap">Credit / Debit Card</span>
+                                                </label>
+                                            </div>
+                                            <div class="hidden sm:flex gap-1">
+                                                <svg class="w-8 h-6" viewBox="0 0 32 20" fill="none">
+                                                    <rect width="32" height="20" rx="2" fill="#1434CB"/>
+                                                    <path d="M11.5 5h9v10h-9z" fill="#FF5F00"/>
+                                                    <circle cx="11.5" cy="10" r="5" fill="#EB001B"/>
+                                                    <circle cx="20.5" cy="10" r="5" fill="#F79E1B"/>
                                                 </svg>
-                                                <span class="whitespace-nowrap">Credit / Debit Card</span>
-                                            </label>
+                                            </div>
                                         </div>
-                                        <div class="hidden sm:flex gap-1">
-                                            <svg class="w-8 h-6" viewBox="0 0 32 20" fill="none">
-                                                <rect width="32" height="20" rx="2" fill="#1434CB"/>
-                                                <path d="M11.5 5h9v10h-9z" fill="#FF5F00"/>
-                                                <circle cx="11.5" cy="10" r="5" fill="#EB001B"/>
-                                                <circle cx="20.5" cy="10" r="5" fill="#F79E1B"/>
-                                            </svg>
+                                    </div>
+                                    
+                                    <!-- Crypto Payment -->
+                                    <div class="bg-gray-900 rounded-lg border-2 cursor-pointer transition-all p-4 lg:p-5"
+                                        :class="paymentMethod === 'crypto' ? 'border-orange-500' : 'border-gray-700 hover:border-gray-600'"
+                                        @click="paymentMethod = 'crypto'">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <input id="payment-crypto" type="radio" v-model="paymentMethod" value="crypto"
+                                                    class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600 flex-shrink-0">
+                                                <label for="payment-crypto" class="ml-2 sm:ml-3 flex items-center text-xs sm:text-sm font-medium text-white cursor-pointer">
+                                                    <span class="text-lg mr-2">₿</span>
+                                                    <span class="whitespace-nowrap">Bitcoin / Cryptocurrency</span>
+                                                </label>
+                                            </div>
+                                            <div class="hidden sm:flex items-center text-xs text-gray-400">
+                                                <span>Powered by Coinbase</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -252,7 +276,8 @@
                                 
                                 <!-- Submit Button -->
                                 <div>
-                                    <button type="button" @click="processCardPayment" :disabled="isProcessing" 
+                                    <!-- Card Payment Button -->
+                                    <button v-if="paymentMethod === 'card'" type="button" @click="processCardPayment" :disabled="isProcessing" 
                                         class="group relative w-full flex justify-center items-center py-4 lg:py-5 px-6 border border-transparent rounded-lg text-lg lg:text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 active:scale-100">
                                         <span v-if="isProcessing" class="flex items-center">
                                             <svg class="animate-spin -ml-1 mr-3 h-6 w-6 text-white" fill="none" viewBox="0 0 24 24">
@@ -268,6 +293,23 @@
                                             Complete Purchase • ${{ finalAmount.toFixed(2) }}
                                         </span>
                                     </button>
+                                    
+                                    <!-- Crypto Payment Button -->
+                                    <button v-if="paymentMethod === 'crypto'" type="button" @click="processCryptoPayment" :disabled="isProcessing" 
+                                        class="group relative w-full flex justify-center items-center py-4 lg:py-5 px-6 border border-transparent rounded-lg text-lg lg:text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 active:scale-100">
+                                        <span v-if="isProcessing" class="flex items-center">
+                                            <svg class="animate-spin -ml-1 mr-3 h-6 w-6 text-white" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Redirecting to Coinbase...
+                                        </span>
+                                        <span v-else class="flex items-center">
+                                            <span class="text-2xl mr-2">₿</span>
+                                            Pay with Crypto • ${{ finalAmount.toFixed(2) }}
+                                        </span>
+                                    </button>
+                                    
                                     <p class="mt-4 text-center text-sm text-gray-400">
                                         By completing your purchase, you agree to our terms of service
                                     </p>
@@ -437,6 +479,33 @@ export default defineComponent({
                 console.error('Payment error:', error);
                 document.getElementById('card-errors').textContent = error.response?.data?.message || 
                     'An error occurred while processing your payment. Please try again.';
+                this.isProcessing = false;
+            }
+        },
+        async processCryptoPayment() {
+            if (this.isProcessing) return;
+            
+            // Validate email
+            if (!this.email || !this.validateEmail(this.email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            this.isProcessing = true;
+            
+            try {
+                // Process crypto payment through Coinbase Commerce
+                await axios.post(route('guest.coinbase-payment'), {
+                    product_id: this.product.id,
+                    email: this.email,
+                    discount_code: this.discount ? this.discountCode : null,
+                });
+                
+                // Coinbase Commerce will redirect via Inertia::location()
+                // The controller handles the redirect to hosted checkout page
+            } catch (error) {
+                console.error('Crypto Payment error:', error);
+                alert('An error occurred while creating the payment. Please try again.');
                 this.isProcessing = false;
             }
         },

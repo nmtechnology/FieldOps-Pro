@@ -76,19 +76,32 @@
                                 
                                 <!-- Payment Method Selector -->
                                 <div class="mb-6">
-                                    <div class="flex items-center space-x-4">
-                                        <div class="flex items-center">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all"
+                                            :class="paymentMethod === 'card' ? 'border-orange-500 bg-orange-500/10' : 'border-gray-600 hover:border-gray-500'"
+                                            @click="paymentMethod = 'card'">
                                             <input id="payment-card" type="radio" v-model="paymentMethod" value="card" 
                                                 class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600">
-                                            <label for="payment-card" class="ml-2 block text-sm text-white">
-                                                Credit/Debit Card
+                                            <label for="payment-card" class="ml-3 block text-sm text-white font-medium cursor-pointer">
+                                                💳 Credit/Debit Card
                                             </label>
                                         </div>
-                                        <div class="flex items-center">
+                                        <div class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all"
+                                            :class="paymentMethod === 'ach' ? 'border-orange-500 bg-orange-500/10' : 'border-gray-600 hover:border-gray-500'"
+                                            @click="paymentMethod = 'ach'">
                                             <input id="payment-ach" type="radio" v-model="paymentMethod" value="ach" 
                                                 class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600">
-                                            <label for="payment-ach" class="ml-2 block text-sm text-white">
-                                                Bank Transfer (ACH)
+                                            <label for="payment-ach" class="ml-3 block text-sm text-white font-medium cursor-pointer">
+                                                🏦 Bank Transfer (ACH)
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all"
+                                            :class="paymentMethod === 'crypto' ? 'border-orange-500 bg-orange-500/10' : 'border-gray-600 hover:border-gray-500'"
+                                            @click="paymentMethod = 'crypto'">
+                                            <input id="payment-crypto" type="radio" v-model="paymentMethod" value="crypto" 
+                                                class="focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-600">
+                                            <label for="payment-crypto" class="ml-3 block text-sm text-white font-medium cursor-pointer">
+                                                ₿ Bitcoin / Crypto
                                             </label>
                                         </div>
                                     </div>
@@ -158,6 +171,34 @@
                                             </button>
                                         </div>
                                     </form>
+                                </div>
+                                
+                                <!-- Crypto Payment -->
+                                <div v-if="paymentMethod === 'crypto'" class="mt-4">
+                                    <div class="bg-gray-900 rounded-lg p-6 mb-4 border border-gray-700">
+                                        <div class="flex items-start space-x-3 mb-4">
+                                            <svg class="w-6 h-6 text-orange-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <div>
+                                                <h4 class="text-white font-semibold mb-2">Pay with Bitcoin or Cryptocurrency</h4>
+                                                <ul class="text-sm text-gray-400 space-y-1">
+                                                    <li>✓ Accepts Bitcoin, Ethereum, Litecoin, and more</li>
+                                                    <li>✓ Secure payment through Coinbase Commerce</li>
+                                                    <li>✓ Instant access once payment is confirmed</li>
+                                                    <li>✓ No credit card required</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button @click="processCryptoPayment" :disabled="isProcessing" 
+                                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-base font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 transition-all duration-200 transform hover:scale-105">
+                                        <span v-if="isProcessing">Redirecting to Coinbase...</span>
+                                        <span v-else>
+                                            <span class="mr-2">₿</span> Pay ${{ finalAmount.toFixed(2) }} with Crypto
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -304,6 +345,25 @@ export default defineComponent({
             } catch (error) {
                 console.error('ACH Payment error:', error);
                 alert('An error occurred while processing your payment. Please try again.');
+                this.isProcessing = false;
+            }
+        },
+        async processCryptoPayment() {
+            if (this.isProcessing) return;
+            this.isProcessing = true;
+            
+            try {
+                // Process crypto payment through Coinbase Commerce
+                const response = await axios.post(route('payment.coinbase'), {
+                    product_id: this.product.id,
+                    discount_code: this.discount ? this.discountCode : null,
+                });
+                
+                // Coinbase Commerce will redirect via Inertia::location()
+                // The controller handles the redirect to hosted checkout page
+            } catch (error) {
+                console.error('Crypto Payment error:', error);
+                alert('An error occurred while creating the payment. Please try again.');
                 this.isProcessing = false;
             }
         },

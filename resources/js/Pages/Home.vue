@@ -3,6 +3,8 @@ import { Head, Link } from '@inertiajs/vue3';
 import PricingTiers from '@/Components/PricingTiers.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import CountdownTimer from '@/Components/CountdownTimer.vue';
+import PurchaseNotifications from '@/Components/PurchaseNotifications.vue';
 import { ref } from 'vue';
 
 // For the mobile menu toggle
@@ -1269,6 +1271,10 @@ defineProps({
             </div>
         </div>
 
+        <!-- Urgency Components -->
+        <CountdownTimer />
+        <PurchaseNotifications />
+        
         <!-- Footer -->
         <footer class="bg-gray-900">
             <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
