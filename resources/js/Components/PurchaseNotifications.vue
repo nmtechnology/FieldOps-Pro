@@ -25,7 +25,7 @@
                             </span>
                         </div>
                         <p class="text-xs text-gray-600 mt-1">
-                            Just purchased <span class="font-bold text-orange-600">{{ notification.product }}</span>
+                            Just {{ notification.action }} <span class="font-bold text-orange-600">{{ notification.product }}</span>
                         </p>
                         <div class="flex items-center mt-2 space-x-2">
                             <span class="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-green-100 text-green-800">
@@ -53,6 +53,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
+// Accept products as a prop from the parent component
+const props = defineProps({
+    products: {
+        type: Array,
+        default: () => []
+    }
+});
+
 const activeNotifications = ref([]);
 let notificationId = 0;
 let interval = null;
@@ -71,13 +79,6 @@ const cities = [
     'Memphis, TN', 'Louisville, KY', 'Baltimore, MD', 'Milwaukee, WI', 'Atlanta, GA'
 ];
 
-const products = [
-    { name: 'Field Engineer\'s Operations Guide', price: '$297' },
-    { name: 'Starter Package', price: '$197' },
-    { name: 'Complete Bundle', price: '$497' },
-    { name: 'Premium Training Package', price: '$397' }
-];
-
 const timeAgoOptions = ['Just now', '2 min ago', '5 min ago', '8 min ago', '12 min ago'];
 
 const getRandomItem = (array) => {
@@ -87,14 +88,34 @@ const getRandomItem = (array) => {
 const generateNotification = () => {
     const firstName = getRandomItem(firstNames);
     const lastInitial = getRandomItem(lastNames).charAt(0);
-    const product = getRandomItem(products);
+    
+    // Use actual products from props if available, otherwise use fallback
+    let productName = 'Training Guide';
+    let productPrice = '$297.00';
+    let action = 'purchased';
+    
+    if (props.products && props.products.length > 0) {
+        const product = getRandomItem(props.products);
+        productName = product.name;
+        
+        // Calculate price with 7.5% sales tax
+        const basePrice = parseFloat(product.price);
+        const priceWithTax = basePrice * 1.075; // Add 7.5% tax
+        productPrice = `$${priceWithTax.toFixed(2)}`;
+        
+        // Determine if it's a subscription based on product name
+        // FieldOps Pro and FieldOps Elite are monthly subscriptions
+        const isSubscription = productName.includes('FieldOps Pro') || productName.includes('FieldOps Elite');
+        action = isSubscription ? 'subscribed to' : 'purchased';
+    }
 
     return {
         id: ++notificationId,
         name: `${firstName} ${lastInitial}.`,
         location: getRandomItem(cities),
-        product: product.name,
-        price: product.price,
+        product: productName,
+        price: productPrice,
+        action: action,
         timeAgo: getRandomItem(timeAgoOptions)
     };
 };

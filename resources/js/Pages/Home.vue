@@ -36,8 +36,8 @@ defineProps({
     <nav class="fixed top-0 left-0 right-0 z-50 w-ful backdrop-blur-md border-b border-white/10 shadow-2xl">
         <!-- Top announcement bar (optional) -->
         <div class="bg-gradient-to-r from-orange-600 to-orange-500 text-white text-center py-2 text-sm font-medium">
-            <span class="hidden sm:inline">🚀 Limited Time: Start Your Side Hustle Today - </span>
-            <span class="font-bold">Earn $2K-$5K+ Monthly</span>
+            <span class="hidden sm:inline">🚀 Limited Time: Start Your Journey Today - </span>
+            <span class="font-bold">Earn $100k+ yearly</span>
             <span class="hidden sm:inline"> in Your Spare Time</span>
         </div>
         
@@ -195,8 +195,8 @@ defineProps({
                         </div>
 
                         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-                            <span class="block text-white">Turn Spare Time Into</span>
-                            <span class="block bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">$2K-$5K+ Monthly Income</span>
+                            <span class="block text-white">Master the art of field engineering</span>
+                            <span class="block bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">Earn $2K-$5K+ Monthly Income</span>
                         </h1>
 
                         <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
@@ -1273,7 +1273,7 @@ defineProps({
 
         <!-- Urgency Components -->
         <CountdownTimer />
-        <PurchaseNotifications />
+        <PurchaseNotifications :products="products" />
         
         <!-- Footer -->
         <footer class="bg-gray-900">

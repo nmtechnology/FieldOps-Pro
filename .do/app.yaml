@@ -1,0 +1,143 @@
+name: fieldengineerpro
+region: nyc
+
+# Database
+databases:
+  - name: db
+    engine: MYSQL
+    version: "8"
+    production: true
+    
+# Services
+services:
+  # Main Laravel Web Application
+  - name: web
+    github:
+      repo: nmtechnology/FieldOps-Pro
+      branch: main
+      deploy_on_push: true
+    
+    # Build configuration
+    build_command: |
+      composer install --no-dev --optimize-autoloader
+      npm ci
+      npm run build
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+    
+    # Run configuration  
+    run_command: |
+      php artisan migrate --force
+      php artisan storage:link
+      heroku-php-apache2 public/
+    
+    # Environment
+    envs:
+      - key: APP_NAME
+        value: "FieldEngineer Pro"
+      - key: APP_ENV
+        value: "production"
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        value: "https://fieldengineerpro.com"
+      - key: APP_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+      - key: DB_CONNECTION
+        value: "mysql"
+      - key: DB_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: "${db.HOSTNAME}"
+      - key: DB_PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "${db.PORT}"
+      - key: DB_DATABASE
+        scope: RUN_AND_BUILD_TIME
+        value: "${db.DATABASE}"
+      - key: DB_USERNAME
+        scope: RUN_AND_BUILD_TIME
+        value: "${db.USERNAME}"
+      - key: DB_PASSWORD
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: "${db.PASSWORD}"
+      - key: SESSION_DRIVER
+        value: "database"
+      - key: QUEUE_CONNECTION
+        value: "database"
+      - key: CACHE_DRIVER
+        value: "database"
+      - key: LOG_CHANNEL
+        value: "stack"
+      - key: STRIPE_KEY
+        type: SECRET
+      - key: STRIPE_SECRET
+        type: SECRET
+      - key: STRIPE_WEBHOOK_SECRET
+        type: SECRET
+      - key: COINBASE_COMMERCE_API_KEY
+        type: SECRET
+      - key: COINBASE_COMMERCE_WEBHOOK_SECRET
+        type: SECRET
+    
+    # HTTP configuration
+    http_port: 8080
+    
+    # Health check
+    health_check:
+      http_path: /
+    
+    # Resources
+    instance_count: 1
+    instance_size_slug: basic-xs
+    
+  # Queue Worker
+  - name: worker
+    github:
+      repo: nmtechnology/FieldOps-Pro
+      branch: main
+      deploy_on_push: true
+    
+    build_command: |
+      composer install --no-dev --optimize-autoloader
+    
+    run_command: php artisan queue:work --tries=3 --timeout=90
+    
+    envs:
+      - key: APP_ENV
+        value: "production"
+      - key: APP_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+      - key: DB_CONNECTION
+        value: "mysql"
+      - key: DB_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: "${db.HOSTNAME}"
+      - key: DB_PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "${db.PORT}"
+      - key: DB_DATABASE
+        scope: RUN_AND_BUILD_TIME
+        value: "${db.DATABASE}"
+      - key: DB_USERNAME
+        scope: RUN_AND_BUILD_TIME
+        value: "${db.USERNAME}"
+      - key: DB_PASSWORD
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: "${db.PASSWORD}"
+      - key: QUEUE_CONNECTION
+        value: "database"
+    
+    instance_count: 1
+    instance_size_slug: basic-xxs
+
+# Domain
+domains:
+  - domain: fieldengineerpro.com
+    type: PRIMARY
+  - domain: www.fieldengineerpro.com
+    type: ALIAS
