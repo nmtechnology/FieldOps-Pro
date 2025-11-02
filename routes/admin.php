@@ -61,5 +61,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
         Route::get('reports/sales', [ReportController::class, 'sales'])->name('reports.sales');
         Route::get('reports/customers', [ReportController::class, 'customers'])->name('reports.customers');
+        Route::get('reports/sales-tax', [\App\Http\Controllers\Admin\SalesTaxReportController::class, 'index'])->name('reports.sales-tax');
+        Route::get('reports/sales-tax/export', [\App\Http\Controllers\Admin\SalesTaxReportController::class, 'export'])->name('reports.sales-tax.export');
     });
 });

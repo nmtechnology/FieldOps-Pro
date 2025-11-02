@@ -50,6 +50,7 @@ Route::get('/terms', function() {
 // Guest checkout routes - all protected by verification
 Route::prefix('guest')->name('guest.')->middleware('verify.human')->group(function() {
     Route::get('/checkout/{product}', [CheckoutController::class, 'guestCheckout'])->name('checkout');
+    Route::post('/checkout/calculate-tax', [CheckoutController::class, 'calculateTax'])->name('checkout.calculate-tax');
     Route::post('/process-payment', [CheckoutController::class, 'processGuestPayment'])->name('process-payment');
     Route::post('/coinbase-payment', [App\Http\Controllers\CoinbasePaymentController::class, 'guestCheckout'])->name('coinbase-payment');
     Route::get('/thank-you', [CheckoutController::class, 'guestThankYou'])->name('thank-you');
@@ -130,6 +131,7 @@ Route::post('/coinbase/webhook', [App\Http\Controllers\CoinbaseWebhookController
 Route::middleware('auth')->group(function () {
     // Checkout requires authentication
     Route::get('/checkout/{product}', [CheckoutController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout/calculate-tax', [CheckoutController::class, 'calculateTax'])->name('checkout.calculate-tax');
     Route::post('/payment/process', [CheckoutController::class, 'processPayment'])->name('process.payment');
     Route::post('/payment/process/ach', [CheckoutController::class, 'processAchPayment'])->name('process.payment.ach');
     Route::get('/checkout/thank-you/{order}', [CheckoutController::class, 'thankYou'])->name('checkout.thankyou');

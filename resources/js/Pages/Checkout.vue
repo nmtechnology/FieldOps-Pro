@@ -51,12 +51,17 @@
                                 <div class="border-t border-gray-700 pt-4">
                                     <div class="flex justify-between">
                                         <span class="text-base font-medium text-white">Subtotal:</span>
-                                        <span class="text-base font-medium text-white">${{ product.price.toFixed(2) }}</span>
+                                        <span class="text-base font-medium text-white">${{ subtotalAmount.toFixed(2) }}</span>
                                     </div>
                                     
                                     <div v-if="discount" class="flex justify-between mt-2 text-green-400">
                                         <span class="text-sm font-medium">Discount:</span>
                                         <span class="text-sm font-medium">-${{ discountAmount.toFixed(2) }}</span>
+                                    </div>
+                                    
+                                    <div v-if="taxAmount > 0" class="flex justify-between mt-2">
+                                        <span class="text-sm text-gray-400">Sales Tax ({{ selectedState }} {{ (taxRate * 100).toFixed(2) }}%):</span>
+                                        <span class="text-sm text-gray-300">${{ taxAmount.toFixed(2) }}</span>
                                     </div>
                                     
                                     <div class="flex justify-between mt-4">
@@ -111,13 +116,22 @@
                                 <div v-if="paymentMethod === 'card'" class="mt-4">
                                     <form @submit.prevent="processCardPayment">
                                         <div class="mb-4">
+                                            <label for="state" class="block text-sm font-medium text-gray-300">State</label>
+                                            <select id="state" v-model="selectedState" @change="calculateTax" required
+                                                class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                                                <option value="">Select your state</option>
+                                                <option v-for="(name, code) in states" :key="code" :value="code">{{ name }}</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-4">
                                             <label for="card-element" class="block text-sm font-medium text-gray-300 mb-2">Card Details</label>
                                             <div id="card-element" class="border border-gray-600 rounded-md p-3 bg-gray-700"></div>
                                             <div id="card-errors" class="mt-2 text-sm text-red-400" role="alert"></div>
                                         </div>
                                         
                                         <div class="mt-6">
-                                            <button type="submit" :disabled="isProcessing" 
+                                            <button type="submit" :disabled="isProcessing || !selectedState" 
                                                 class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-base font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 transition-all duration-200 transform hover:scale-105">
                                                 <span v-if="isProcessing">Processing...</span>
                                                 <span v-else>Pay ${{ finalAmount.toFixed(2) }}</span>
@@ -221,7 +235,8 @@ export default defineComponent({
     },
     props: {
         product: Object,
-        stripeKey: String
+        stripeKey: String,
+        states: Object
     },
     data() {
         return {
@@ -229,6 +244,9 @@ export default defineComponent({
             isProcessing: false,
             stripe: null,
             card: null,
+            selectedState: '',
+            taxRate: 0,
+            taxAmount: 0,
             achForm: {
                 name: '',
                 email: '',
@@ -260,8 +278,11 @@ export default defineComponent({
                 return Math.min(this.discount.value, this.product.price);
             }
         },
-        finalAmount() {
+        subtotalAmount() {
             return Math.max(0, this.product.price - this.discountAmount);
+        },
+        finalAmount() {
+            return this.subtotalAmount + this.taxAmount;
         }
     },
     mounted() {
@@ -291,6 +312,28 @@ export default defineComponent({
                 });
             });
         },
+        async calculateTax() {
+            if (!this.selectedState) {
+                this.taxRate = 0;
+                this.taxAmount = 0;
+                return;
+            }
+            
+            try {
+                const response = await axios.post(route('checkout.calculate-tax'), {
+                    product_id: this.product.id,
+                    state: this.selectedState,
+                    discount_code: this.discount ? this.discountCode : null,
+                });
+                
+                this.taxRate = response.data.tax_rate;
+                this.taxAmount = response.data.tax_amount;
+            } catch (error) {
+                console.error('Tax calculation error:', error);
+                this.taxRate = 0;
+                this.taxAmount = 0;
+            }
+        },
         async processCardPayment() {
             if (this.isProcessing) return;
             this.isProcessing = true;
@@ -299,6 +342,7 @@ export default defineComponent({
                 // Create payment intent
                 const response = await axios.post(route('process.payment'), {
                     product_id: this.product.id,
+                    state: this.selectedState,
                     discount_code: this.discount ? this.discountCode : null,
                 });
                 
@@ -383,6 +427,10 @@ export default defineComponent({
                 
                 if (response.data.valid) {
                     this.discount = response.data.discount;
+                    // Recalculate tax with new discount
+                    if (this.selectedState) {
+                        await this.calculateTax();
+                    }
                 } else {
                     this.discountError = response.data.message || 'Invalid discount code';
                     this.discount = null;

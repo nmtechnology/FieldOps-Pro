@@ -75,7 +75,11 @@
                             <div class="space-y-3 mb-6">
                                 <div class="flex justify-between text-gray-300">
                                     <span>Subtotal</span>
-                                    <span class="font-medium">${{ product.price.toFixed(2) }}</span>
+                                    <span class="font-medium">${{ subtotalAmount.toFixed(2) }}</span>
+                                </div>
+                                <div v-if="taxAmount > 0" class="flex justify-between text-sm text-gray-400">
+                                    <span>Sales Tax ({{ selectedState }} {{ (taxRate * 100).toFixed(2) }}%)</span>
+                                    <span class="font-medium">${{ taxAmount.toFixed(2) }}</span>
                                 </div>
                             </div>
                             
@@ -199,6 +203,24 @@
                                 </p>
                             </div>
                             
+                            <!-- State Selection -->
+                            <div class="mb-6 lg:mb-8">
+                                <label for="state" class="block text-sm lg:text-base font-bold text-gray-300 mb-2 lg:mb-3">
+                                    State <span class="text-red-400">*</span>
+                                </label>
+                                <select id="state" v-model="selectedState" @change="calculateTax" required
+                                    class="block w-full border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base bg-gray-900 text-white py-3 lg:py-4">
+                                    <option value="">Select your state</option>
+                                    <option v-for="(name, code) in states" :key="code" :value="code">{{ name }}</option>
+                                </select>
+                                <p class="mt-2 text-xs text-gray-400 flex items-start sm:items-center">
+                                    <svg class="w-4 h-4 mr-1 text-blue-400 flex-shrink-0 mt-0.5 sm:mt-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1 a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Required for sales tax calculation</span>
+                                </p>
+                            </div>
+                            
                             <!-- Payment Method -->
                             <div class="mb-6 lg:mb-8">
                                 <label class="block text-sm lg:text-base font-bold text-gray-300 mb-3">
@@ -277,7 +299,7 @@
                                 <!-- Submit Button -->
                                 <div>
                                     <!-- Card Payment Button -->
-                                    <button v-if="paymentMethod === 'card'" type="button" @click="processCardPayment" :disabled="isProcessing" 
+                                    <button v-if="paymentMethod === 'card'" type="button" @click="processCardPayment" :disabled="isProcessing || !selectedState" 
                                         class="group relative w-full flex justify-center items-center py-4 lg:py-5 px-6 border border-transparent rounded-lg text-lg lg:text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 active:scale-100">
                                         <span v-if="isProcessing" class="flex items-center">
                                             <svg class="animate-spin -ml-1 mr-3 h-6 w-6 text-white" fill="none" viewBox="0 0 24 24">
@@ -345,7 +367,8 @@ export default defineComponent({
     },
     props: {
         product: Object,
-        stripeKey: String
+        stripeKey: String,
+        states: Object
     },
     data() {
         return {
@@ -355,6 +378,9 @@ export default defineComponent({
             card: null,
             cardErrors: '',
             email: '',
+            selectedState: '',
+            taxRate: 0,
+            taxAmount: 0,
             discountCode: '',
             discount: null,
             discountError: ''
@@ -379,8 +405,11 @@ export default defineComponent({
                 return Math.min(this.discount.value, this.product.price);
             }
         },
-        finalAmount() {
+        subtotalAmount() {
             return Math.max(0, this.product.price - this.discountAmount);
+        },
+        finalAmount() {
+            return this.subtotalAmount + this.taxAmount;
         }
     },
     mounted() {
@@ -470,6 +499,7 @@ export default defineComponent({
                     product_id: this.product.id,
                     payment_method_id: result.paymentMethod.id,
                     email: this.email,
+                    state: this.selectedState,
                     discount_code: this.discount ? this.discountCode : null,
                 });
                 
@@ -513,6 +543,28 @@ export default defineComponent({
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(String(email).toLowerCase());
         },
+        async calculateTax() {
+            if (!this.selectedState) {
+                this.taxRate = 0;
+                this.taxAmount = 0;
+                return;
+            }
+            
+            try {
+                const response = await axios.post(route('guest.checkout.calculate-tax'), {
+                    product_id: this.product.id,
+                    state: this.selectedState,
+                    discount_code: this.discount ? this.discountCode : null,
+                });
+                
+                this.taxRate = response.data.tax_rate;
+                this.taxAmount = response.data.tax_amount;
+            } catch (error) {
+                console.error('Tax calculation error:', error);
+                this.taxRate = 0;
+                this.taxAmount = 0;
+            }
+        },
         async applyDiscount() {
             if (!this.discountCode.trim()) {
                 this.discountError = 'Please enter a discount code';
@@ -529,6 +581,10 @@ export default defineComponent({
                 
                 if (response.data.valid) {
                     this.discount = response.data.discount;
+                    // Recalculate tax with new discount
+                    if (this.selectedState) {
+                        await this.calculateTax();
+                    }
                 } else {
                     this.discountError = response.data.message || 'Invalid discount code';
                     this.discount = null;

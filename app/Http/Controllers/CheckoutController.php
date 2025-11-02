@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Payment;
 use App\Models\Discount;
+use App\Services\TaxService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -17,6 +18,13 @@ use Stripe\Stripe;
 
 class CheckoutController extends Controller
 {
+    protected $taxService;
+
+    public function __construct(TaxService $taxService)
+    {
+        $this->taxService = $taxService;
+    }
+
     /**
      * Show the checkout page for a product for authenticated users
      */
@@ -25,6 +33,7 @@ class CheckoutController extends Controller
         return Inertia::render('Checkout', [
             'product' => $product,
             'stripeKey' => config('services.stripe.key'),
+            'states' => $this->taxService->getStateNames(),
         ]);
     }
     
@@ -39,7 +48,77 @@ class CheckoutController extends Controller
         return Inertia::render('GuestCheckout', [
             'product' => $product,
             'stripeKey' => config('services.stripe.key'),
+            'states' => $this->taxService->getStateNames(),
         ]);
+    }
+    
+    /**
+     * Calculate tax for a product based on state
+     */
+    public function calculateTax(Request $request)
+    {
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'state' => 'nullable|string|size:2',
+            'discount_code' => 'nullable|string',
+        ]);
+        
+        $product = Product::findOrFail($validated['product_id']);
+        $price = $product->price;
+        
+        // Apply discount if provided
+        $discountAmount = 0;
+        if (!empty($validated['discount_code'])) {
+            $discount = Discount::where('code', $validated['discount_code'])
+                ->where('is_active', true)
+                ->first();
+                
+            if ($discount && $this->isDiscountValid($discount)) {
+                if ($discount->type === 'percentage') {
+                    $discountAmount = $price * ($discount->value / 100);
+                } else {
+                    $discountAmount = $discount->value;
+                }
+                
+                $price = $price - $discountAmount;
+                if ($price < 0) {
+                    $price = 0;
+                }
+            }
+        }
+        
+        // Calculate tax
+        $taxCalculation = $this->taxService->calculateTax($price, $validated['state'] ?? null);
+        
+        return response()->json([
+            'subtotal' => $price,
+            'tax_rate' => $taxCalculation['tax_rate'],
+            'tax_amount' => $taxCalculation['tax_amount'],
+            'total' => $taxCalculation['total'],
+            'discount_amount' => $discountAmount,
+        ]);
+    }
+    
+    /**
+     * Check if a discount is valid
+     */
+    private function isDiscountValid($discount)
+    {
+        // Check date validity
+        if ($discount->valid_from && $discount->valid_from > now()) {
+            return false;
+        }
+        
+        if ($discount->valid_until && $discount->valid_until < now()) {
+            return false;
+        }
+        
+        // Check usage limit
+        if ($discount->max_uses && $discount->usage_count >= $discount->max_uses) {
+            return false;
+        }
+        
+        return true;
     }
     
     /**
@@ -50,6 +129,7 @@ class CheckoutController extends Controller
         $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
             'discount_code' => 'nullable|string',
+            'state' => 'required|string|size:2',
         ]);
         
         $product = Product::findOrFail($validated['product_id']);
@@ -57,7 +137,7 @@ class CheckoutController extends Controller
         
         // Calculate price with discount if applicable
         $discountAmount = 0;
-        $finalPrice = $product->price;
+        $subtotal = $product->price;
         $discount = null;
         
         if (!empty($validated['discount_code'])) {
@@ -65,48 +145,36 @@ class CheckoutController extends Controller
                 ->where('is_active', true)
                 ->first();
                 
-            if ($discount) {
-                // Check if discount is valid
-                $isValid = true;
-                
-                // Check date validity
-                if ($discount->valid_from && $discount->valid_from > now()) {
-                    $isValid = false;
+            if ($discount && $this->isDiscountValid($discount)) {
+                if ($discount->type === 'percentage') {
+                    $discountAmount = $product->price * ($discount->value / 100);
+                } else {
+                    $discountAmount = $discount->value;
                 }
                 
-                if ($discount->valid_until && $discount->valid_until < now()) {
-                    $isValid = false;
+                $subtotal = $product->price - $discountAmount;
+                if ($subtotal < 0) {
+                    $subtotal = 0;
                 }
                 
-                // Check usage limit
-                if ($discount->max_uses && $discount->usage_count >= $discount->max_uses) {
-                    $isValid = false;
-                }
-                
-                if ($isValid) {
-                    if ($discount->type === 'percentage') {
-                        $discountAmount = $product->price * ($discount->value / 100);
-                    } else {
-                        $discountAmount = $discount->value;
-                    }
-                    
-                    $finalPrice = $product->price - $discountAmount;
-                    if ($finalPrice < 0) {
-                        $finalPrice = 0;
-                    }
-                    
-                    // Increment the usage count
-                    $discount->usage_count += 1;
-                    $discount->save();
-                }
+                // Increment the usage count
+                $discount->usage_count += 1;
+                $discount->save();
             }
         }
+        
+        // Calculate tax
+        $taxCalculation = $this->taxService->calculateTax($subtotal, $validated['state']);
         
         // Create the order
         $order = new Order([
             'user_id' => $user->id,
             'product_id' => $product->id,
-            'amount' => $finalPrice,
+            'amount' => $taxCalculation['total'], // Total including tax
+            'subtotal' => $taxCalculation['subtotal'],
+            'tax_rate' => $taxCalculation['tax_rate'],
+            'tax_amount' => $taxCalculation['tax_amount'],
+            'buyer_state' => strtoupper($validated['state']),
             'status' => 'pending',
             'order_number' => 'ORD-' . Str::random(10),
         ]);
@@ -122,14 +190,20 @@ class CheckoutController extends Controller
             // Set your Stripe secret key
             Stripe::setApiKey(config('services.stripe.secret'));
             
-            if ($finalPrice > 0) {
+            $totalAmount = $taxCalculation['total'];
+            
+            if ($totalAmount > 0) {
                 // Create a payment intent
                 $intent = PaymentIntent::create([
-                    'amount' => (int)($finalPrice * 100), // Amount in cents
+                    'amount' => (int)($totalAmount * 100), // Amount in cents (includes tax)
                     'currency' => 'usd',
                     'metadata' => [
                         'order_id' => $order->id,
                         'order_number' => $order->order_number,
+                        'subtotal' => $taxCalculation['subtotal'],
+                        'tax_amount' => $taxCalculation['tax_amount'],
+                        'tax_rate' => $taxCalculation['tax_rate'],
+                        'buyer_state' => $validated['state'],
                     ],
                 ]);
                 
@@ -140,7 +214,7 @@ class CheckoutController extends Controller
                     'payment_method' => 'card',
                     'stripe_payment_id' => $intent->id,
                     'status' => 'pending',
-                    'amount' => $finalPrice,
+                    'amount' => $totalAmount,
                     'currency' => 'USD',
                 ]);
                 
@@ -378,6 +452,7 @@ class CheckoutController extends Controller
             'product_id' => 'required|exists:products,id',
             'payment_method_id' => 'required|string',
             'email' => 'required|email',
+            'state' => 'required|string|size:2',
             'discount_code' => 'nullable|string',
         ]);
         
@@ -385,7 +460,7 @@ class CheckoutController extends Controller
         
         // Calculate price with discount if applicable
         $discountAmount = 0;
-        $finalPrice = $product->price;
+        $subtotal = $product->price;
         $discount = null;
         
         if (!empty($validated['discount_code'])) {
@@ -393,31 +468,29 @@ class CheckoutController extends Controller
                 ->where('is_active', true)
                 ->first();
                 
-            if ($discount) {
-                // Check if discount is valid (similar to regular payment processing)
-                $isValid = true;
-                
-                // Check date validity and usage limit
-                // Code omitted for brevity - same as the authenticated user flow
-                
-                if ($isValid) {
-                    if ($discount->type === 'percentage') {
-                        $discountAmount = $product->price * ($discount->value / 100);
-                    } else {
-                        $discountAmount = $discount->value;
-                    }
-                    
-                    $finalPrice = $product->price - $discountAmount;
-                    if ($finalPrice < 0) {
-                        $finalPrice = 0;
-                    }
-                    
-                    // Increment the usage count
-                    $discount->usage_count += 1;
-                    $discount->save();
+            if ($discount && $this->isDiscountValid($discount)) {
+                if ($discount->type === 'percentage') {
+                    $discountAmount = $product->price * ($discount->value / 100);
+                } else {
+                    $discountAmount = $discount->value;
                 }
+                
+                $subtotal = $product->price - $discountAmount;
+                if ($subtotal < 0) {
+                    $subtotal = 0;
+                }
+                
+                // Increment the usage count
+                $discount->usage_count += 1;
+                $discount->save();
             }
         }
+        
+        // Calculate tax
+        $taxCalculation = $this->taxService->calculateTax($subtotal, $validated['state']);
+        $taxRate = $taxCalculation['tax_rate'];
+        $taxAmount = $taxCalculation['tax_amount'];
+        $totalAmount = $taxCalculation['total'];
         
         // Setup Stripe
         Stripe::setApiKey(config('services.stripe.secret'));
@@ -428,7 +501,7 @@ class CheckoutController extends Controller
             
             // Create a payment intent
             $paymentIntent = PaymentIntent::create([
-                'amount' => $finalPrice * 100, // Stripe uses cents
+                'amount' => $totalAmount * 100, // Stripe uses cents
                 'currency' => 'usd',
                 'payment_method' => $validated['payment_method_id'],
                 'confirmation_method' => 'manual',
@@ -436,7 +509,11 @@ class CheckoutController extends Controller
                 'metadata' => [
                     'product_id' => $product->id,
                     'order_number' => $orderNumber,
-                    'guest_email' => $validated['email']
+                    'guest_email' => $validated['email'],
+                    'buyer_state' => $validated['state'],
+                    'subtotal' => $subtotal,
+                    'tax_rate' => $taxRate,
+                    'tax_amount' => $taxAmount,
                 ],
             ]);
             
@@ -445,10 +522,16 @@ class CheckoutController extends Controller
                 'guest_purchase' => [
                     'email' => $validated['email'],
                     'product_id' => $product->id,
-                    'amount' => $finalPrice,
+                    'amount' => $totalAmount,
+                    'subtotal' => $subtotal,
+                    'tax_rate' => $taxRate,
+                    'tax_amount' => $taxAmount,
+                    'buyer_state' => $validated['state'],
                     'order_number' => $orderNumber,
                     'payment_intent_id' => $paymentIntent->id,
-                    'payment_method_id' => $validated['payment_method_id']
+                    'payment_method_id' => $validated['payment_method_id'],
+                    'discount_amount' => $discountAmount,
+                    'discount_id' => $discount ? $discount->id : null,
                 ]
             ]);
             
@@ -525,20 +608,26 @@ class CheckoutController extends Controller
         $order = Order::create([
             'user_id' => $user->id,
             'product_id' => $guestPurchase['product_id'],
-            'amount' => $guestPurchase['amount'],
+            'total_amount' => $guestPurchase['amount'],
+            'subtotal' => $guestPurchase['subtotal'] ?? $guestPurchase['amount'],
+            'tax_rate' => $guestPurchase['tax_rate'] ?? 0,
+            'tax_amount' => $guestPurchase['tax_amount'] ?? 0,
+            'buyer_state' => $guestPurchase['buyer_state'] ?? null,
+            'discount_id' => $guestPurchase['discount_id'] ?? null,
+            'discount_amount' => $guestPurchase['discount_amount'] ?? 0,
             'status' => 'completed',
             'order_number' => $guestPurchase['order_number'],
-            'payment_method' => 'stripe',
-            'payment_id' => $guestPurchase['payment_intent_id']
         ]);
         
         // Create payment record
         Payment::create([
             'order_id' => $order->id,
+            'user_id' => $user->id,
             'amount' => $guestPurchase['amount'],
             'payment_method' => 'stripe',
-            'payment_id' => $guestPurchase['payment_intent_id'],
-            'status' => 'succeeded'
+            'stripe_payment_id' => $guestPurchase['payment_intent_id'],
+            'status' => 'completed',
+            'currency' => 'USD'
         ]);
         
         // Clear the guest purchase from session
