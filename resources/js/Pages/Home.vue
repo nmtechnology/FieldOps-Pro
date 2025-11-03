@@ -5,17 +5,22 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import CountdownTimer from '@/Components/CountdownTimer.vue';
 import PurchaseNotifications from '@/Components/PurchaseNotifications.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 // For the mobile menu toggle
 const mobileMenuOpen = ref(false);
 
-defineProps({
+const props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     featuredProduct: Object,
     products: Array,
     guestCheckout: Boolean,
+});
+
+// Find the Premium Business Consultation product
+const consultationProduct = computed(() => {
+    return props.products?.find(product => product.name === 'Premium Business Consultation');
 });
 </script>
 
@@ -634,8 +639,15 @@ defineProps({
                                 </div>
                                 
                                 <div class="mt-10">
-                                    <h4 class="text-lg font-medium text-white">Investment: ${{ featuredProduct.price.toFixed(2) }}</h4>
-                                    <p class="text-gray-300 text-sm mt-1">Professional development that pays for itself</p>
+                                    <div class="flex items-baseline gap-3 mb-2">
+                                        <h4 class="text-lg font-medium text-white">Investment:</h4>
+                                        <div class="flex items-baseline gap-2">
+                                            <span class="text-lg text-gray-400 line-through">${{ featuredProduct.price.toFixed(2) }}</span>
+                                            <span class="text-2xl font-bold text-orange-400">${{ (featuredProduct.price / 2).toFixed(2) }}</span>
+                                            <span class="text-sm font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded">50% OFF</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 text-sm mt-1">Professional development that pays for itself - Limited time offer!</p>
                                     <div class="mt-4 flex space-x-4">
                                         <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700">
                                             View Details
@@ -1025,7 +1037,7 @@ defineProps({
                             <div class="text-center mb-8 mt-4">
                                 <div class="text-gray-400 text-sm font-medium mb-2">STARTING AT</div>
                                 <div class="flex items-baseline justify-center">
-                                    <span class="text-5xl font-bold text-white">$399</span>
+                                    <span class="text-5xl font-bold text-white">$1999</span>
                                     <span class="text-2xl text-gray-400 ml-1">.99</span>
                                     <span class="text-xl text-gray-400 ml-2">+</span>
                                 </div>
@@ -1059,12 +1071,12 @@ defineProps({
                                 </div>
                             </div>
 
-                            <button class="w-full py-4 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold rounded-xl hover:from-orange-500 hover:to-orange-600 shadow-lg hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 flex items-center justify-center group">
+                            <Link v-if="consultationProduct" :href="route('guest.checkout', { product: consultationProduct.id })" class="w-full py-4 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold rounded-xl hover:from-orange-500 hover:to-orange-600 shadow-lg hover:shadow-orange-500/50 transition-all duration-200 transform hover:scale-105 flex items-center justify-center group">
                                 <svg class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
-                                Request Free Consultation
-                            </button>
+                                Get Started - Premium Business Package
+                            </Link>
                         </div>
 
                         <!-- Trust Badge -->

@@ -18,7 +18,7 @@ class UpdateProductTiersSeeder extends Seeder
             [
                 'description' => 'Your complete roadmap to launching a profitable field tech side hustle. This comprehensive digital guide provides lifetime access to proven strategies for establishing your skills, building your toolkit, defining your territory, setting up on work platforms, and maintaining a 5-star reputation. Everything you need to start earning $2000-5000+ monthly in your spare time.',
                 'type' => 'info',
-                'price' => 69.99,
+                'price' => 139.98,
                 'active' => true,
                 'content_sections' => [
                     'Section 1: Skills Assessment & Development - Identify and establish your expertise in computer PC support, smart home technology, and low voltage troubleshooting and service',
@@ -30,7 +30,7 @@ class UpdateProductTiersSeeder extends Seeder
             ]
         );
         
-        $this->command->info("Updated/Created Field Operations Guide: $69.99/month");
+        $this->command->info("Updated/Created Field Operations Guide: $139.98/month");
         
         // FieldOps Pro tier - monthly subscription
         $proProduct = Product::updateOrCreate(
@@ -38,7 +38,7 @@ class UpdateProductTiersSeeder extends Seeder
             [
                 'description' => 'Mid-tier subscription for contractors seeking to establish a consistent income stream. Learn advanced bidding techniques, develop competitive pricing strategies, and manage client relationships effectively.',
                 'type' => 'info',
-                'price' => 33.99,
+                'price' => 67.98,
                 'active' => true,
                 'content_sections' => [
                     'Advanced Bidding Strategies',
@@ -51,7 +51,7 @@ class UpdateProductTiersSeeder extends Seeder
             ]
         );
         
-        $this->command->info("Updated/Created FieldOps Pro tier: $33.99/month");
+        $this->command->info("Updated/Created FieldOps Pro tier: $67.98/month");
         
         // FieldOps Elite tier - premium monthly subscription
         $eliteProduct = Product::updateOrCreate(
@@ -59,7 +59,7 @@ class UpdateProductTiersSeeder extends Seeder
             [
                 'description' => 'Premium tier for serious field engineers looking to maximize earnings and create a sustainable business. Get personal insights on scaling your operations, handling multiple contracts, and building a reputation that commands top rates.',
                 'type' => 'info',
-                'price' => 44.99,
+                'price' => 89.98,
                 'active' => true,
                 'content_sections' => [
                     'Premium Bid Templates',
@@ -74,7 +74,29 @@ class UpdateProductTiersSeeder extends Seeder
             ]
         );
         
-        $this->command->info("Updated/Created FieldOps Elite tier: $44.99/month");
+        $this->command->info("Updated/Created FieldOps Elite tier: $89.98/month");
+        
+        // Premium Business Consultation - one-time service
+        $consultationProduct = Product::updateOrCreate(
+            ['name' => 'Premium Business Consultation'],
+            [
+                'description' => 'Personalized one-on-one consultation to build your custom field engineering business plan. Get expert guidance on market analysis, pricing strategy, operational setup, and growth planning tailored to your specific situation. After purchase, a FieldEngineer Pro representative will reach out within 24 hours to start setting up your business.',
+                'type' => 'info',
+                'price' => 1999.99,
+                'active' => true,
+                'content_sections' => [
+                    'Personal Business Assessment',
+                    'Custom Market Analysis for Your Area',
+                    'Tailored Pricing Strategy Development',
+                    'Operational Setup Guidance',
+                    'Growth & Scaling Roadmap',
+                    '24/7 Priority Support Access',
+                    'Ongoing Business Mentoring',
+                ]
+            ]
+        );
+        
+        $this->command->info("Updated/Created Premium Business Consultation: $1999.99");
         
         // Make FieldOps Pro the featured product
         if ($proProduct) {

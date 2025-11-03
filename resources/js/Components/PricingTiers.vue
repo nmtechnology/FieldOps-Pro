@@ -63,7 +63,7 @@
                     <div class="flex-1">
                         <h3 class="text-xl font-semibold text-orange-400">FieldOps Pro</h3>
                         <p class="mt-4 flex items-baseline text-orange-400">
-                            <span class="text-5xl font-extrabold tracking-tight">$33.99</span>
+                            <span class="text-5xl font-extrabold tracking-tight">$67.98</span>
                             <span class="ml-1 text-xl font-semibold">/month</span>
                         </p>
                         <p class="mt-6 text-white">
@@ -109,7 +109,7 @@
                     <div class="flex-1">
                         <h3 class="text-xl font-semibold text-orange-400">FieldOps Elite</h3>
                         <p class="mt-4 flex items-baseline text-orange-400">
-                            <span class="text-5xl font-extrabold tracking-tight">$44.99</span>
+                            <span class="text-5xl font-extrabold tracking-tight">$89.98</span>
                             <span class="ml-1 text-xl font-semibold">/month</span>
                         </p>
                         <p class="mt-6 text-white">
