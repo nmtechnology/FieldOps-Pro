@@ -20,12 +20,55 @@ class ProductController extends Controller
         // Get all active products for display to guests
         $products = Product::where('active', true)->get();
         
+        // Get the first active discount that is currently valid
+        $activeDiscount = Discount::where('active', true)
+            ->where(function ($query) {
+                $query->whereNull('valid_from')
+                      ->orWhere('valid_from', '<=', now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('valid_until')
+                      ->orWhere('valid_until', '>=', now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('max_uses')
+                      ->orWhereRaw('used < max_uses');
+            })
+            ->first();
+        
+        // Calculate discounted price if discount exists
+        $discountData = null;
+        if ($activeDiscount && $featuredProduct) {
+            $discountAmount = 0;
+            $discountedPrice = $featuredProduct->price;
+            
+            if ($activeDiscount->type === 'percentage') {
+                $discountAmount = ($featuredProduct->price * $activeDiscount->value) / 100;
+                $discountedPrice = $featuredProduct->price - $discountAmount;
+            } else { // fixed amount
+                $discountAmount = $activeDiscount->value;
+                $discountedPrice = max(0, $featuredProduct->price - $activeDiscount->value);
+            }
+            
+            $discountData = [
+                'code' => $activeDiscount->code,
+                'type' => $activeDiscount->type,
+                'value' => $activeDiscount->value,
+                'discounted_price' => round($discountedPrice, 2),
+                'discount_amount' => round($discountAmount, 2),
+                'discount_percentage' => $activeDiscount->type === 'percentage' 
+                    ? $activeDiscount->value 
+                    : round(($discountAmount / $featuredProduct->price) * 100, 0),
+            ];
+        }
+        
         return Inertia::render('Home', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'featuredProduct' => $featuredProduct,
             'products' => $products,
             'guestCheckout' => true,
+            'activeDiscount' => $discountData,
         ]);
     }
     

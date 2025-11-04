@@ -9,6 +9,12 @@
                 <p class="mt-4 max-w-2xl text-xl text-white mx-auto">
                     From getting started to building a full-time field engineering business
                 </p>
+                <div v-if="activeDiscount" class="mt-4 inline-flex items-center px-4 py-2 rounded-full bg-green-500/20 border border-green-500/30">
+                    <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-green-300 font-semibold text-sm">Limited Time: {{ activeDiscount.discount_percentage }}% OFF All Tiers!</span>
+                </div>
             </div>
             
             <div class="mt-16 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
@@ -17,7 +23,8 @@
                     <div class="flex-1">
                         <h3 class="text-xl font-semibold text-orange-400">FieldOps Scout</h3>
                         <p class="mt-4 flex items-baseline text-orange-400">
-                            <span class="text-5xl font-extrabold tracking-tight">$22.99</span>
+                            <span v-if="activeDiscount" class="text-3xl font-semibold text-gray-400 line-through mr-2">${{ basePrices.scout.toFixed(2) }}</span>
+                            <span class="text-5xl font-extrabold tracking-tight">${{ activeDiscount ? calculateDiscountedPrice(basePrices.scout).toFixed(2) : basePrices.scout.toFixed(2) }}</span>
                             <span class="ml-1 text-xl font-semibold">one-time</span>
                         </p>
                         <p class="mt-6 text-white">
@@ -63,7 +70,8 @@
                     <div class="flex-1">
                         <h3 class="text-xl font-semibold text-orange-400">FieldOps Pro</h3>
                         <p class="mt-4 flex items-baseline text-orange-400">
-                            <span class="text-5xl font-extrabold tracking-tight">$67.98</span>
+                            <span v-if="activeDiscount" class="text-3xl font-semibold text-gray-400 line-through mr-2">${{ basePrices.pro.toFixed(2) }}</span>
+                            <span class="text-5xl font-extrabold tracking-tight">${{ activeDiscount ? calculateDiscountedPrice(basePrices.pro).toFixed(2) : basePrices.pro.toFixed(2) }}</span>
                             <span class="ml-1 text-xl font-semibold">/month</span>
                         </p>
                         <p class="mt-6 text-white">
@@ -109,7 +117,8 @@
                     <div class="flex-1">
                         <h3 class="text-xl font-semibold text-orange-400">FieldOps Elite</h3>
                         <p class="mt-4 flex items-baseline text-orange-400">
-                            <span class="text-5xl font-extrabold tracking-tight">$89.98</span>
+                            <span v-if="activeDiscount" class="text-3xl font-semibold text-gray-400 line-through mr-2">${{ basePrices.elite.toFixed(2) }}</span>
+                            <span class="text-5xl font-extrabold tracking-tight">${{ activeDiscount ? calculateDiscountedPrice(basePrices.elite).toFixed(2) : basePrices.elite.toFixed(2) }}</span>
                             <span class="ml-1 text-xl font-semibold">/month</span>
                         </p>
                         <p class="mt-6 text-white">
@@ -156,4 +165,33 @@
 
 <script setup>
 // Component for displaying pricing tiers
+const props = defineProps({
+    activeDiscount: {
+        type: Object,
+        default: null
+    }
+});
+
+// Base prices for each tier
+const basePrices = {
+    scout: 22.99,
+    pro: 67.98,
+    elite: 89.98
+};
+
+// Calculate discounted price based on discount type
+const calculateDiscountedPrice = (basePrice) => {
+    if (!props.activeDiscount) return basePrice;
+    
+    let discountedPrice = basePrice;
+    
+    if (props.activeDiscount.type === 'percentage') {
+        const discountAmount = (basePrice * props.activeDiscount.value) / 100;
+        discountedPrice = basePrice - discountAmount;
+    } else { // fixed amount
+        discountedPrice = Math.max(0, basePrice - props.activeDiscount.value);
+    }
+    
+    return discountedPrice;
+};
 </script>

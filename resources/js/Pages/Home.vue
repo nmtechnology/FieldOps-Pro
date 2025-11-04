@@ -16,6 +16,7 @@ const props = defineProps({
     featuredProduct: Object,
     products: Array,
     guestCheckout: Boolean,
+    activeDiscount: Object,
 });
 
 // Find the Premium Business Consultation product
@@ -642,12 +643,15 @@ const consultationProduct = computed(() => {
                                     <div class="flex items-baseline gap-3 mb-2">
                                         <h4 class="text-lg font-medium text-white">Investment:</h4>
                                         <div class="flex items-baseline gap-2">
-                                            <span class="text-lg text-gray-400 line-through">${{ featuredProduct.price.toFixed(2) }}</span>
-                                            <span class="text-2xl font-bold text-orange-400">${{ (featuredProduct.price / 2).toFixed(2) }}</span>
-                                            <span class="text-sm font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded">50% OFF</span>
+                                            <span v-if="activeDiscount" class="text-lg text-gray-400 line-through">${{ featuredProduct.price.toFixed(2) }}</span>
+                                            <span class="text-2xl font-bold text-orange-400">${{ activeDiscount ? activeDiscount.discounted_price.toFixed(2) : featuredProduct.price.toFixed(2) }}</span>
+                                            <span v-if="activeDiscount" class="text-sm font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded">{{ activeDiscount.discount_percentage }}% OFF</span>
                                         </div>
                                     </div>
-                                    <p class="text-gray-300 text-sm mt-1">Professional development that pays for itself - Limited time offer!</p>
+                                    <p class="text-gray-300 text-sm mt-1">
+                                        <span v-if="activeDiscount">Professional development that pays for itself - Limited time offer!</span>
+                                        <span v-else>Professional development that pays for itself</span>
+                                    </p>
                                     <div class="mt-4 flex space-x-4">
                                         <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700">
                                             View Details
@@ -665,7 +669,7 @@ const consultationProduct = computed(() => {
         </div>
 
         <!-- Pricing Tiers section -->
-        <PricingTiers />
+        <PricingTiers :active-discount="activeDiscount" />
 
         <!-- Side Hustle Benefits Section -->
         <div class="bg-gray-800 py-16 lg:py-24">
