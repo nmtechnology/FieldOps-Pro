@@ -4,8 +4,8 @@ region: nyc
 # Database
 databases:
   - name: db
-    engine: MYSQL
-    version: "8"
+    engine: PG
+    version: "16"
     production: true
     
 # Services
@@ -36,21 +36,24 @@ services:
         scope: RUN_AND_BUILD_TIME
         type: SECRET
       - key: DB_CONNECTION
-        value: "mysql"
+        value: "pgsql"
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: "${db.DATABASE_URL}"
       - key: DB_HOST
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         value: "${db.HOSTNAME}"
       - key: DB_PORT
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         value: "${db.PORT}"
       - key: DB_DATABASE
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         value: "${db.DATABASE}"
       - key: DB_USERNAME
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         value: "${db.USERNAME}"
       - key: DB_PASSWORD
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         type: SECRET
         value: "${db.PASSWORD}"
       - key: SESSION_DRIVER

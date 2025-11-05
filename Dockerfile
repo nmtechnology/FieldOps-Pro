@@ -6,6 +6,10 @@ COPY . /var/www/html
 # Set working directory
 WORKDIR /var/www/html
 
+# Install required PHP extensions for PostgreSQL
+RUN apk add --no-cache postgresql-dev
+RUN docker-php-ext-install pdo pdo_pgsql pgsql
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -65,7 +69,13 @@ set -e
 
 echo "Running Laravel setup..."
 php artisan config:clear
-php artisan migrate --force --no-interaction
+
+# Wait for database to be ready
+echo "Waiting for database..."
+for i in 1 2 3 4 5; do
+    php artisan migrate --force --no-interaction && break || sleep 5
+done
+
 php artisan storage:link || true
 php artisan config:cache
 php artisan route:cache
