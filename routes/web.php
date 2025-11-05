@@ -8,6 +8,14 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// Health check endpoint for load balancers and monitoring (no middleware, no DB)
+Route::get('/health', function() {
+    return response()->json([
+        'status' => 'ok',
+        'timestamp' => time(),
+    ], 200);
+})->name('health');
+
 // Include auth routes first, but our home route will override the default behavior
 require __DIR__.'/auth.php';
 require __DIR__.'/admin_web.php';
