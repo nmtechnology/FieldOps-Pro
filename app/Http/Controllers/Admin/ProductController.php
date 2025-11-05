@@ -55,7 +55,7 @@ class ProductController extends Controller
             'short_description' => 'nullable|string',
             'type' => 'required|string|in:info,service,physical',
             'price' => 'required|numeric|min:0',
-            'image_path' => 'nullable|string|url',
+            'image_path' => 'nullable|string',
             'active' => 'boolean',
             'content_sections' => 'nullable|array'
         ]);
@@ -117,7 +117,7 @@ class ProductController extends Controller
             'short_description' => 'nullable|string',
             'type' => 'sometimes|string|in:info,service,physical',
             'price' => 'sometimes|numeric|min:0',
-            'image_path' => 'nullable|string|url',
+            'image_path' => 'nullable|string',
             'active' => 'sometimes|boolean',
             'content_sections' => 'nullable|array'
         ]);

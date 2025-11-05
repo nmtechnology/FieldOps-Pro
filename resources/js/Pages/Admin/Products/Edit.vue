@@ -189,10 +189,11 @@ const submit = () => {
                                 
                                 <!-- Default Image Options -->
                                 <div v-if="defaultImages.length > 0" class="mt-2 mb-4">
-                                    <p class="text-sm text-gray-400 mb-3">Choose from available images:</p>
+                                    <p class="text-sm text-gray-400 mb-3">Choose from special designs or available images:</p>
                                     
-                                    <!-- Artificial Book Option for Field Operations Guide -->
-                                    <div class="mb-4">
+                                    <!-- Special Image Options -->
+                                    <div class="mb-4 space-y-3">
+                                        <!-- Artificial Book Option for Field Operations Guide -->
                                         <button
                                             type="button"
                                             @click="useArtificialBook"
@@ -205,6 +206,22 @@ const submit = () => {
                                             <div>
                                                 <div class="font-medium text-white">Artificial Book Design</div>
                                                 <div class="text-sm text-gray-400">Perfect for the Field Operations Guide</div>
+                                            </div>
+                                        </button>
+                                        
+                                        <!-- Character Logo Option -->
+                                        <button
+                                            type="button"
+                                            @click="useDefaultImage('fieldengineer-logo.png')"
+                                            class="p-3 border rounded-lg hover:bg-gray-700 transition-colors flex items-center space-x-3 w-full text-left"
+                                            :class="form.image_path === '/img/fieldengineer-logo.png' ? 'border-indigo-500 bg-gray-700' : 'border-gray-600'"
+                                        >
+                                            <div class="w-16 h-16 bg-gray-800 rounded flex items-center justify-center p-2">
+                                                <img src="/img/fieldengineer-logo.png" alt="FieldEngineer Logo" class="w-full h-full object-contain" />
+                                            </div>
+                                            <div>
+                                                <div class="font-medium text-white">Character Logo</div>
+                                                <div class="text-sm text-gray-400">FieldEngineer Pro mascot logo</div>
                                             </div>
                                         </button>
                                     </div>
@@ -231,15 +248,17 @@ const submit = () => {
                                 
                                 <!-- Custom Image URL -->
                                 <div>
-                                    <InputLabel for="image_path" value="Or enter custom image URL:" />
+                                    <InputLabel for="image_path" value="Or enter custom image path or URL:" />
                                     <TextInput
                                         id="image_path"
-                                        type="url"
+                                        type="text"
                                         class="mt-1 block w-full"
                                         v-model="form.image_path"
-                                        placeholder="https://example.com/image.jpg"
+                                        placeholder="https://example.com/image.jpg or /img/your-image.jpg"
                                     />
-                                    <p class="text-sm text-gray-400 mt-1">Leave empty to automatically assign a default image</p>
+                                    <p class="text-sm text-gray-400 mt-1">
+                                        Enter a full URL (https://...), relative path (/img/...), or special value like 'artificial-book'
+                                    </p>
                                 </div>
                                 <InputError class="mt-2" :message="form.errors.image_path" />
                             </div>

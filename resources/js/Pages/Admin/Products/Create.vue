@@ -201,15 +201,17 @@ const submit = () => {
                                 
                                 <!-- Custom Image URL -->
                                 <div>
-                                    <InputLabel for="image_path" value="Or enter custom image URL:" />
+                                    <InputLabel for="image_path" value="Or enter custom image path or URL:" />
                                     <TextInput
                                         id="image_path"
-                                        type="url"
+                                        type="text"
                                         class="mt-1 block w-full"
                                         v-model="form.image_path"
-                                        placeholder="https://example.com/image.jpg or leave empty for auto-assignment"
+                                        placeholder="https://example.com/image.jpg or /img/your-image.jpg"
                                     />
-                                    <p class="text-sm text-gray-400 mt-1">Leave empty to automatically assign a default image</p>
+                                    <p class="text-sm text-gray-400 mt-1">
+                                        Enter a full URL (https://...), relative path (/img/...), or special value like 'artificial-book'
+                                    </p>
                                 </div>
                                 <InputError class="mt-2" :message="form.errors.image_path" />
                             </div>

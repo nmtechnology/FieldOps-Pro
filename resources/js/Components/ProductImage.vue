@@ -133,8 +133,8 @@ const imageUrl = computed(() => {
         return null; // Will use the artificial book design
     }
     
-    return props.product.image_url || props.product.image_path || 
-           'https://via.placeholder.com/400x300/374151/ffffff?text=' + encodeURIComponent(props.product.name || 'Product');
+    // Return the product's image path/url or a simple fallback
+    return props.product.image_url || props.product.image_path || '/img/default-product.jpg';
 });
 </script>
 
