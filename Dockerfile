@@ -53,66 +53,131 @@ COPY health-check.sh /usr/local/bin/health-check
 RUN chmod +x /usr/local/bin/health-check
 
 # Configure nginx
-RUN rm -f /etc/nginx/sites-available/default.conf
-COPY <<'EOF' /etc/nginx/sites-available/default.conf
-server {
-    listen 8080;
-    server_name _;
-    root /var/www/html/public;
-    index index.php index.html;
+RUN mkdir -p /etc/nginx/http.d && \
+    rm -f /etc/nginx/http.d/default.conf
+
+RUN cat > /etc/nginx/nginx.conf << 'EOF'
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log warn;
+pid /var/run/nginx.pid;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
     
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-Content-Type-Options "nosniff";
+    log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                    '$status $body_bytes_sent "$http_referer" '
+                    '"$http_user_agent" "$http_x_forwarded_for"';
     
-    charset utf-8;
+    access_log /var/log/nginx/access.log main;
     
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
+    sendfile on;
+    tcp_nopush on;
+    keepalive_timeout 65;
+    gzip on;
     
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-    
-    error_page 404 /index.php;
-    
-    location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        include fastcgi_params;
-        fastcgi_hide_header X-Powered-By;
-        fastcgi_connect_timeout 10s;
-        fastcgi_send_timeout 60s;
-        fastcgi_read_timeout 60s;
-        fastcgi_buffering off;
-    }
-    
-    location ~ /\.(?!well-known).* {
-        deny all;
+    server {
+        listen 8080;
+        server_name _;
+        root /var/www/html/public;
+        index index.php index.html;
+        
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-Content-Type-Options "nosniff";
+        
+        charset utf-8;
+        
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+        
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+        
+        error_page 404 /index.php;
+        
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+            include fastcgi_params;
+            fastcgi_hide_header X-Powered-By;
+            fastcgi_connect_timeout 10s;
+            fastcgi_send_timeout 60s;
+            fastcgi_read_timeout 60s;
+        }
+        
+        location ~ /\.(?!well-known).* {
+            deny all;
+        }
     }
 }
 EOF
 
+# Configure supervisor
+RUN cat > /etc/supervisord.conf << 'EOF'
+[supervisord]
+nodaemon=true
+user=root
+logfile=/var/log/supervisor/supervisord.log
+pidfile=/var/run/supervisord.pid
+
+[program:php-fpm]
+command=php-fpm --nodaemonize --fpm-config /usr/local/etc/php-fpm.d/www.conf
+autostart=true
+autorestart=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+
+[program:nginx]
+command=nginx -g 'daemon off;'
+autostart=true
+autorestart=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+EOF
+
+# Configure PHP-FPM to listen on TCP
+RUN sed -i 's/listen = .*/listen = 127.0.0.1:9000/' /usr/local/etc/php-fpm.d/www.conf && \
+    sed -i 's/;clear_env = no/clear_env = no/' /usr/local/etc/php-fpm.d/www.conf
+
+# Create directories
+RUN mkdir -p /var/log/supervisor /var/log/nginx
+
 # Create start script
 RUN cat > /start.sh << 'EOF'
 #!/bin/sh
+set -e
 
-echo "Starting services immediately..."
-# Start nginx and php-fpm in background
-/usr/bin/supervisord -c /etc/supervisord.conf &
+echo "Setting permissions..."
+chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache 2>/dev/null || true
+
+echo "Starting services..."
+# Start supervisor with php-fpm and nginx
+/usr/sbin/supervisord -c /etc/supervisord.conf &
 SUPERVISOR_PID=$!
 
-echo "Running Laravel setup in background..."
+echo "Waiting for services to start..."
+sleep 3
+
+echo "Running Laravel setup..."
 (
-    # Wait a moment for services to start
-    sleep 2
-    
-    # Clear config cache (fast operation)
-    php artisan config:clear
+    # Clear config cache
+    php artisan config:clear 2>/dev/null || true
     
     # Storage link
-    php artisan storage:link || true
+    php artisan storage:link 2>/dev/null || true
     
-    # Wait for database to be ready and migrate
+    # Wait for database and migrate
     echo "Waiting for database..."
     for i in 1 2 3 4 5 6 7 8 9 10; do
         if php artisan migrate --force --no-interaction 2>/dev/null; then
@@ -123,15 +188,15 @@ echo "Running Laravel setup in background..."
         sleep 3
     done
     
-    # Cache configuration (do this after migrations)
-    php artisan config:cache
-    php artisan route:cache
-    php artisan view:cache
+    # Cache after migrations
+    php artisan config:cache 2>/dev/null || true
+    php artisan route:cache 2>/dev/null || true
+    php artisan view:cache 2>/dev/null || true
     
     echo "Laravel setup complete!"
 ) &
 
-# Wait for supervisor process
+# Wait for supervisor
 wait $SUPERVISOR_PID
 EOF
 
