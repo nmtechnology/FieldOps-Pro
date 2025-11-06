@@ -58,6 +58,13 @@ services:
         scope: RUN_TIME
         type: SECRET
         value: "${db.PASSWORD}"
+      # Debug: Add these to see if they're being set
+      - key: DEBUG_DB_HOST
+        scope: RUN_TIME
+        value: "${db.HOSTNAME}"
+      - key: DEBUG_DB_URL
+        scope: RUN_TIME
+        value: "${db.DATABASE_URL}"
       - key: SESSION_DRIVER
         value: "database"
       - key: QUEUE_CONNECTION
