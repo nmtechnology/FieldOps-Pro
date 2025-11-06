@@ -40,6 +40,11 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
+# Restore composer.json if it was backed up to avoid buildpack detection
+RUN if [ -f /var/www/html/composer.json.backup ]; then \
+        cp /var/www/html/composer.json.backup /var/www/html/composer.json; \
+    fi
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 

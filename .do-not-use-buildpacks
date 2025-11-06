@@ -1,0 +1,2 @@
+# This file forces DigitalOcean to use Docker instead of buildpacks
+# By creating this file, we disable automatic buildpack detection

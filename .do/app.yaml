@@ -19,12 +19,9 @@ services:
     
     source_dir: /
     
-    # Force Docker build
+    # Absolutely force Docker
     type: DOCKERFILE
-    dockerfile_path: ./Dockerfile
-    
-    # Override any buildpack detection
-    build_command: echo "Using Dockerfile build"
+    dockerfile_path: Dockerfile
     
     # Environment
     envs:
