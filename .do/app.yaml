@@ -112,21 +112,22 @@ services:
         scope: RUN_AND_BUILD_TIME
         type: SECRET
       - key: DB_CONNECTION
-        value: "mysql"
+        scope: RUN_TIME
+        value: "pgsql"
       - key: DB_HOST
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         value: "${db.HOSTNAME}"
       - key: DB_PORT
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         value: "${db.PORT}"
       - key: DB_DATABASE
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         value: "${db.DATABASE}"
       - key: DB_USERNAME
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         value: "${db.USERNAME}"
       - key: DB_PASSWORD
-        scope: RUN_AND_BUILD_TIME
+        scope: RUN_TIME
         type: SECRET
         value: "${db.PASSWORD}"
       - key: QUEUE_CONNECTION
