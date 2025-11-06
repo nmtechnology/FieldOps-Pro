@@ -1,0 +1,21 @@
+# Ignore development files
+.git
+.gitignore
+README.md
+DEPLOYMENT.md
+.env*
+node_modules
+.vscode
+.idea
+*.log
+
+# Ignore build artifacts
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+composer.lock
+
+# OS files
+.DS_Store
+Thumbs.db
