@@ -168,14 +168,15 @@ RUN cat > /start.sh << 'EOF'
 #!/bin/sh
 set -e
 
-echo "======================================"
-echo "FIELDOPS-PRO POSTGRESQL-ONLY DEPLOYMENT"
-echo "======================================"
-echo "DB_CONNECTION: ${DB_CONNECTION:-pgsql}"
-echo "DATABASE_URL: $([ -n "$DATABASE_URL" ] && echo 'SET' || echo 'MISSING')"
+echo "========================================"
+echo "🐘 POSTGRESQL-ONLY DEPLOYMENT STARTING"
+echo "========================================"
+echo "ALL ENV VARS:"
+env | grep -E "(DB_|DATABASE_)" | sort || echo "No DB env vars found"
+echo "========================================"
 
 # Create .env file with PostgreSQL-only configuration
-echo "Creating .env file..."
+echo "📝 Creating .env file..."
 cat > /var/www/html/.env << 'ENVEOF'
 APP_NAME="FieldEngineer Pro"
 APP_ENV=production
@@ -187,7 +188,8 @@ SESSION_DRIVER=database
 QUEUE_CONNECTION=database
 ENVEOF
 
-# Add environment variables
+# Add environment variables with explicit logging
+echo "📝 Adding environment variables to .env..."
 echo "APP_KEY=${APP_KEY}" >> /var/www/html/.env
 echo "APP_URL=${APP_URL}" >> /var/www/html/.env
 echo "DATABASE_URL=${DATABASE_URL}" >> /var/www/html/.env
@@ -195,28 +197,38 @@ echo "DB_HOST=${DB_HOST}" >> /var/www/html/.env
 echo "DB_PORT=${DB_PORT}" >> /var/www/html/.env
 echo "DB_DATABASE=${DB_DATABASE}" >> /var/www/html/.env
 echo "DB_USERNAME=${DB_USERNAME}" >> /var/www/html/.env
-echo "DB_PASSWORD=${DB_PASSWORD}" >> /var/www/html/.env
+echo "DB_PASSWORD=***HIDDEN***" >> /var/www/html/.env
 
-echo "✓ .env file created with PostgreSQL configuration"
+echo "📄 .env file contents (DB vars only):"
+cat /var/www/html/.env | grep -E "(DB_|DATABASE_)" || echo "No DB vars in .env file!"
+
 chmod 600 /var/www/html/.env
 chown nginx:nginx /var/www/html/.env
 chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache
 
-echo "Starting services..."
+echo "🚀 Starting services..."
 /usr/sbin/supervisord -c /etc/supervisord.conf &
 SUPERVISOR_PID=$!
 
 sleep 5
 
-echo "Running migrations (PostgreSQL only)..."
+echo "🧪 Testing Laravel database config..."
+php artisan tinker --execute="
+echo 'Laravel DB default: ' . config('database.default') . PHP_EOL;
+echo 'Laravel DB host: ' . config('database.connections.pgsql.host') . PHP_EOL;
+echo 'Laravel DB port: ' . config('database.connections.pgsql.port') . PHP_EOL;
+echo 'Laravel DB database: ' . config('database.connections.pgsql.database') . PHP_EOL;
+" 2>&1 || echo "Tinker failed"
+
+echo "🗄️ Running migrations..."
 php artisan migrate --force --no-interaction || {
-    echo "❌ Migration failed - checking configuration..."
+    echo "❌ Migration failed - clearing cache and retrying..."
     php artisan config:clear
     php artisan config:cache
     php artisan migrate --force --no-interaction
 }
 
-echo "✓ Startup complete - SQLite is not available, PostgreSQL only"
+echo "✅ Startup complete - PostgreSQL only!"
 wait $SUPERVISOR_PID
 EOF
 
