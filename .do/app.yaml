@@ -19,7 +19,8 @@ services:
     
     source_dir: /
     
-    # Use Dockerfile for better control
+    # Explicitly use Docker (not buildpacks)
+    type: DOCKERFILE
     dockerfile_path: Dockerfile
     
     # Environment
