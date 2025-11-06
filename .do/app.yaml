@@ -10,7 +10,7 @@ databases:
     
 # Services
 services:
-  # Main Laravel Web Application
+  # Main Laravel Web Application  
   - name: web
     github:
       repo: nmtechnology/FieldOps-Pro
@@ -19,7 +19,7 @@ services:
     
     source_dir: /
     
-    # Absolutely force Docker
+    # Force Docker deployment
     type: DOCKERFILE
     dockerfile_path: Dockerfile
     
