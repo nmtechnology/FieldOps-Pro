@@ -166,6 +166,26 @@ else
     echo "DATABASE_URL not set"
 fi
 
+# Write environment variables to a file that PHP can read
+echo "Writing environment to PHP-FPM..."
+cat > /usr/local/etc/php-fpm.d/env.conf << ENVEOF
+[www]
+env[DB_CONNECTION] = ${DB_CONNECTION:-pgsql}
+env[DATABASE_URL] = ${DATABASE_URL}
+env[DB_HOST] = ${DB_HOST}
+env[DB_PORT] = ${DB_PORT}
+env[DB_DATABASE] = ${DB_DATABASE}
+env[DB_USERNAME] = ${DB_USERNAME}
+env[DB_PASSWORD] = ${DB_PASSWORD}
+env[APP_KEY] = ${APP_KEY}
+env[APP_ENV] = ${APP_ENV:-production}
+env[APP_DEBUG] = ${APP_DEBUG:-false}
+env[APP_URL] = ${APP_URL}
+env[SESSION_DRIVER] = ${SESSION_DRIVER:-database}
+env[QUEUE_CONNECTION] = ${QUEUE_CONNECTION:-database}
+env[CACHE_DRIVER] = ${CACHE_DRIVER:-database}
+ENVEOF
+
 echo "Setting permissions..."
 chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache 2>/dev/null || true
 
@@ -175,7 +195,7 @@ echo "Starting services..."
 SUPERVISOR_PID=$!
 
 echo "Waiting for services to start..."
-sleep 3
+sleep 5
 
 echo "Running Laravel setup..."
 (
