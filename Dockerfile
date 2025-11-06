@@ -188,6 +188,11 @@ echo "Running Laravel setup..."
     export DB_USERNAME="${DB_USERNAME}"
     export DB_PASSWORD="${DB_PASSWORD}"
     
+    # CRITICAL: Clear any cached config that might have wrong DB settings
+    echo "Clearing config cache..."
+    php artisan config:clear 2>/dev/null || true
+    rm -f bootstrap/cache/config.php 2>/dev/null || true
+    
     # Storage link first (doesn't need DB)
     php artisan storage:link 2>/dev/null || true
     
