@@ -168,11 +168,19 @@ RUN cat > /start.sh << 'EOF'
 #!/bin/sh
 set -e
 
+# First thing - confirm the startup script is running
+echo "=========================================="
+echo "START SCRIPT EXECUTING - $(date)"
+echo "PWD: $(pwd)"
+echo "USER: $(whoami)"
+echo "=========================================="
+
 echo "========================================"
 echo "🐘 POSTGRESQL-ONLY DEPLOYMENT STARTING"
 echo "========================================"
+echo "Checking environment variables..."
 echo "ALL ENV VARS:"
-env | grep -E "(DB_|DATABASE_)" | sort || echo "No DB env vars found"
+env | grep -E "(DB_|DATABASE_)" | sort || echo "❌ No DB env vars found"
 echo "========================================"
 
 # Create .env file with PostgreSQL-only configuration
@@ -239,5 +247,8 @@ EXPOSE 8080
 # Container health check
 HEALTHCHECK --interval=10s --timeout=3s --start-period=60s --retries=3 \
     CMD /usr/local/bin/health-check
+
+# Add debug output to confirm our Dockerfile is being used
+RUN echo "DOCKERFILE BUILD COMPLETE - FieldOps-Pro PostgreSQL-only image" > /docker-build-complete.txt
 
 CMD ["/start.sh"]
