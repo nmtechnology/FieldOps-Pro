@@ -213,12 +213,19 @@ echo "Running Laravel setup..."
     php artisan config:clear 2>/dev/null || true
     rm -f bootstrap/cache/config.php 2>/dev/null || true
     
+    # Debug: Show what Laravel thinks the DB connection is
+    echo "Testing database configuration..."
+    php -r "echo 'PHP DB_CONNECTION: ' . getenv('DB_CONNECTION') . PHP_EOL;"
+    php -r "echo 'PHP DATABASE_URL set: ' . (getenv('DATABASE_URL') ? 'yes' : 'no') . PHP_EOL;"
+    php artisan tinker --execute="echo 'Laravel DB driver: ' . config('database.default') . PHP_EOL;" 2>&1 || echo "Tinker failed"
+    
     # Storage link first (doesn't need DB)
     php artisan storage:link 2>/dev/null || true
     
     # Wait for database and migrate
     echo "Waiting for database..."
     for i in 1 2 3 4 5 6 7 8 9 10; do
+        echo "Migration attempt $i..."
         if php artisan migrate --force --no-interaction 2>&1; then
             echo "Migrations completed"
             break
