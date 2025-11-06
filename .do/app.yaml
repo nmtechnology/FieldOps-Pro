@@ -19,9 +19,12 @@ services:
     
     source_dir: /
     
-    # Explicitly use Docker (not buildpacks)
+    # Force Docker build
     type: DOCKERFILE
-    dockerfile_path: Dockerfile
+    dockerfile_path: ./Dockerfile
+    
+    # Override any buildpack detection
+    build_command: echo "Using Dockerfile build"
     
     # Environment
     envs:
