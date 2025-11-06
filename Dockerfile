@@ -158,101 +158,94 @@ RUN cat > /start.sh << 'EOF'
 #!/bin/sh
 set -e
 
-echo "=== Environment Check ==="
+echo "=== FieldOps-Pro Container Startup ==="
 echo "DB_CONNECTION: ${DB_CONNECTION:-not set}"
-if [ -n "$DATABASE_URL" ]; then
-    echo "DATABASE_URL: set (length: ${#DATABASE_URL})"
-else
-    echo "DATABASE_URL: NOT SET!"
-fi
-echo "DB_HOST: ${DB_HOST:-not set}"
-echo "DB_DATABASE: ${DB_DATABASE:-not set}"
+echo "DATABASE_URL: $([ -n "$DATABASE_URL" ] && echo 'set' || echo 'NOT SET')"
 
-# Create .env file from environment variables
+# Create .env file BEFORE starting any services
 echo "=== Creating .env file ==="
-cat > /var/www/html/.env << ENVEOF
-APP_NAME="${APP_NAME:-FieldEngineer Pro}"
-APP_ENV=${APP_ENV:-production}
-APP_KEY=${APP_KEY}
-APP_DEBUG=${APP_DEBUG:-false}
-APP_URL=${APP_URL}
+cat > /var/www/html/.env << 'ENVEOF'
+APP_NAME="FieldEngineer Pro"
+APP_ENV=production
+APP_KEY=ENVEOF
+echo "$APP_KEY" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+APP_DEBUG=false
+APP_URL=ENVEOF
+echo "$APP_URL" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+LOG_CHANNEL=stack
+DB_CONNECTION=ENVEOF
+echo "${DB_CONNECTION:-pgsql}" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+DATABASE_URL=ENVEOF
+echo "$DATABASE_URL" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+DB_HOST=ENVEOF
+echo "$DB_HOST" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+DB_PORT=ENVEOF
+echo "$DB_PORT" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+DB_DATABASE=ENVEOF
+echo "$DB_DATABASE" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+DB_USERNAME=ENVEOF
+echo "$DB_USERNAME" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+DB_PASSWORD=ENVEOF
+echo "$DB_PASSWORD" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+CACHE_DRIVER=database
+SESSION_DRIVER=database
+QUEUE_CONNECTION=database
+STRIPE_KEY=ENVEOF
+echo "$STRIPE_KEY" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+STRIPE_SECRET=ENVEOF
+echo "$STRIPE_SECRET" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+STRIPE_WEBHOOK_SECRET=ENVEOF
+echo "$STRIPE_WEBHOOK_SECRET" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+COINBASE_COMMERCE_API_KEY=ENVEOF
+echo "$COINBASE_COMMERCE_API_KEY" >> /var/www/html/.env
+cat >> /var/www/html/.env << 'ENVEOF'
+COINBASE_COMMERCE_WEBHOOK_SECRET=ENVEOF
+echo "$COINBASE_COMMERCE_WEBHOOK_SECRET" >> /var/www/html/.env
 
-LOG_CHANNEL=${LOG_CHANNEL:-stack}
-
-DB_CONNECTION=${DB_CONNECTION:-pgsql}
-DATABASE_URL=${DATABASE_URL}
-DB_HOST=${DB_HOST}
-DB_PORT=${DB_PORT}
-DB_DATABASE=${DB_DATABASE}
-DB_USERNAME=${DB_USERNAME}
-DB_PASSWORD=${DB_PASSWORD}
-
-CACHE_DRIVER=${CACHE_DRIVER:-database}
-SESSION_DRIVER=${SESSION_DRIVER:-database}
-QUEUE_CONNECTION=${QUEUE_CONNECTION:-database}
-
-STRIPE_KEY=${STRIPE_KEY}
-STRIPE_SECRET=${STRIPE_SECRET}
-STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
-
-COINBASE_COMMERCE_API_KEY=${COINBASE_COMMERCE_API_KEY}
-COINBASE_COMMERCE_WEBHOOK_SECRET=${COINBASE_COMMERCE_WEBHOOK_SECRET}
-ENVEOF
-
-echo ".env file created"
-cat /var/www/html/.env | grep "DB_" | sed 's/PASSWORD=.*/PASSWORD=***/'
+echo ".env file created successfully"
+chmod 600 /var/www/html/.env
+chown nginx:nginx /var/www/html/.env
 
 echo "=== Setting permissions ==="
-chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/.env 2>/dev/null || true
-chmod 600 /var/www/html/.env
+chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache
 
-echo "=== Starting services ==="
-# Start supervisor with php-fpm and nginx
+echo "=== Starting PHP-FPM and nginx ==="
 /usr/sbin/supervisord -c /etc/supervisord.conf &
 SUPERVISOR_PID=$!
 
-echo "Waiting for services to start..."
-sleep 5
+sleep 3
 
-echo "=== Running Laravel setup ==="
-(
-    # CRITICAL: Clear any cached config
-    echo "Clearing cached config..."
-    php artisan config:clear 2>/dev/null || true
-    rm -f bootstrap/cache/config.php 2>/dev/null || true
-    
-    # Debug: Show what Laravel sees
-    echo "=== Laravel Configuration Check ==="
-    php artisan tinker --execute="echo 'DB Connection: ' . config('database.default'); echo PHP_EOL; echo 'DB Driver: ' . config('database.connections.' . config('database.default') . '.driver'); echo PHP_EOL;" 2>&1 || echo "Tinker check failed"
-    
-    # Storage link first (doesn't need DB)
-    php artisan storage:link 2>/dev/null || true
-    
-    # Wait for database and migrate
-    echo "=== Starting migrations ==="
-    for i in 1 2 3 4 5 6 7 8 9 10; do
-        echo "Migration attempt $i/10..."
-        if php artisan migrate --force --no-interaction 2>&1; then
-            echo "✓ Migrations completed successfully"
-            break
-        fi
-        if [ $i -eq 10 ]; then
-            echo "✗ Migrations failed after 10 attempts"
-        else
-            echo "Waiting 5 seconds before retry..."
-            sleep 5
-        fi
-    done
-    
-    # Cache after migrations (when DB is available)
-    php artisan config:cache 2>/dev/null || true
-    php artisan route:cache 2>/dev/null || true
-    php artisan view:cache 2>/dev/null || true
-    
-    echo "Laravel setup complete!"
-) &
+echo "=== Running Laravel migrations ==="
+for i in 1 2 3 4 5 6 7 8 9 10; do
+    echo "Attempt $i/10: Running migrations..."
+    if php artisan migrate --force --no-interaction 2>&1; then
+        echo "✓ Migrations successful"
+        break
+    fi
+    echo "Migration failed, retrying in 5 seconds..."
+    sleep 5
+done
 
-# Wait for supervisor
+echo "=== Caching configuration ==="
+php artisan config:cache 2>/dev/null || echo "Config cache failed (continuing anyway)"
+php artisan route:cache 2>/dev/null || echo "Route cache failed (continuing anyway)"
+php artisan view:cache 2>/dev/null || echo "View cache failed (continuing anyway)"
+
+echo "=== Startup complete ==="
+
+# Wait for supervisor to keep container running
 wait $SUPERVISOR_PID
 EOF
 
