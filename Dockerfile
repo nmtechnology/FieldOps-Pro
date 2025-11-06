@@ -15,7 +15,7 @@ RUN apk add --no-cache \
     nodejs \
     npm
 
-# Install PHP extensions
+# Install PHP extensions (PostgreSQL only, NO SQLite)
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
     pdo \
@@ -25,6 +25,11 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     zip \
     gd \
     opcache
+
+# Explicitly remove any SQLite packages if they exist
+RUN apk del sqlite sqlite-dev 2>/dev/null || true
+RUN rm -f /usr/local/lib/php/extensions/*/pdo_sqlite.so 2>/dev/null || true
+RUN rm -f /usr/local/lib/php/extensions/*/sqlite3.so 2>/dev/null || true
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -159,13 +164,13 @@ RUN cat > /start.sh << 'EOF'
 set -e
 
 echo "======================================"
-echo "FIELDOPS-PRO CUSTOM DOCKERFILE STARTUP"
+echo "FIELDOPS-PRO POSTGRESQL-ONLY DEPLOYMENT"
 echo "======================================"
-echo "DB_CONNECTION env var: ${DB_CONNECTION:-MISSING}"
-echo "DATABASE_URL env var: $([ -n "$DATABASE_URL" ] && echo 'SET' || echo 'MISSING')"
+echo "DB_CONNECTION: ${DB_CONNECTION:-pgsql}"
+echo "DATABASE_URL: $([ -n "$DATABASE_URL" ] && echo 'SET' || echo 'MISSING')"
 
-# Force create .env with hardcoded pgsql to test
-echo "Creating .env file with hardcoded pgsql..."
+# Create .env file with PostgreSQL-only configuration
+echo "Creating .env file..."
 cat > /var/www/html/.env << 'ENVEOF'
 APP_NAME="FieldEngineer Pro"
 APP_ENV=production
@@ -177,7 +182,7 @@ SESSION_DRIVER=database
 QUEUE_CONNECTION=database
 ENVEOF
 
-# Add dynamic values
+# Add environment variables
 echo "APP_KEY=${APP_KEY}" >> /var/www/html/.env
 echo "APP_URL=${APP_URL}" >> /var/www/html/.env
 echo "DATABASE_URL=${DATABASE_URL}" >> /var/www/html/.env
@@ -187,35 +192,26 @@ echo "DB_DATABASE=${DB_DATABASE}" >> /var/www/html/.env
 echo "DB_USERNAME=${DB_USERNAME}" >> /var/www/html/.env
 echo "DB_PASSWORD=${DB_PASSWORD}" >> /var/www/html/.env
 
-echo ".env file created. Contents:"
-cat /var/www/html/.env | head -10
-
+echo "✓ .env file created with PostgreSQL configuration"
 chmod 600 /var/www/html/.env
 chown nginx:nginx /var/www/html/.env
 chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache
 
-echo "Starting supervisor..."
+echo "Starting services..."
 /usr/sbin/supervisord -c /etc/supervisord.conf &
 SUPERVISOR_PID=$!
 
 sleep 5
 
-echo "Testing database connection..."
-php artisan tinker --execute="
-    echo 'Laravel default DB: ' . config('database.default') . PHP_EOL;
-    echo 'Trying connection...';
-    try {
-        DB::connection()->getPdo();
-        echo 'SUCCESS: Connected to database' . PHP_EOL;
-    } catch (Exception \$e) {
-        echo 'ERROR: ' . \$e->getMessage() . PHP_EOL;
-    }
-" 2>&1
+echo "Running migrations (PostgreSQL only)..."
+php artisan migrate --force --no-interaction || {
+    echo "❌ Migration failed - checking configuration..."
+    php artisan config:clear
+    php artisan config:cache
+    php artisan migrate --force --no-interaction
+}
 
-echo "Running migrations..."
-php artisan migrate --force --no-interaction || echo "Migration failed"
-
-echo "Startup complete - waiting for supervisor"
+echo "✓ Startup complete - SQLite is not available, PostgreSQL only"
 wait $SUPERVISOR_PID
 EOF
 
