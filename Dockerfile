@@ -158,38 +158,55 @@ RUN cat > /start.sh << 'EOF'
 #!/bin/sh
 set -e
 
-echo "Environment check..."
+echo "=== Environment Check ==="
 echo "DB_CONNECTION: ${DB_CONNECTION:-not set}"
 if [ -n "$DATABASE_URL" ]; then
-    echo "DATABASE_URL is set"
+    echo "DATABASE_URL: set (length: ${#DATABASE_URL})"
 else
-    echo "DATABASE_URL not set"
+    echo "DATABASE_URL: NOT SET!"
 fi
+echo "DB_HOST: ${DB_HOST:-not set}"
+echo "DB_DATABASE: ${DB_DATABASE:-not set}"
 
-# Write environment variables to a file that PHP can read
-echo "Writing environment to PHP-FPM..."
-cat > /usr/local/etc/php-fpm.d/env.conf << ENVEOF
-[www]
-env[DB_CONNECTION] = ${DB_CONNECTION:-pgsql}
-env[DATABASE_URL] = ${DATABASE_URL}
-env[DB_HOST] = ${DB_HOST}
-env[DB_PORT] = ${DB_PORT}
-env[DB_DATABASE] = ${DB_DATABASE}
-env[DB_USERNAME] = ${DB_USERNAME}
-env[DB_PASSWORD] = ${DB_PASSWORD}
-env[APP_KEY] = ${APP_KEY}
-env[APP_ENV] = ${APP_ENV:-production}
-env[APP_DEBUG] = ${APP_DEBUG:-false}
-env[APP_URL] = ${APP_URL}
-env[SESSION_DRIVER] = ${SESSION_DRIVER:-database}
-env[QUEUE_CONNECTION] = ${QUEUE_CONNECTION:-database}
-env[CACHE_DRIVER] = ${CACHE_DRIVER:-database}
+# Create .env file from environment variables
+echo "=== Creating .env file ==="
+cat > /var/www/html/.env << ENVEOF
+APP_NAME="${APP_NAME:-FieldEngineer Pro}"
+APP_ENV=${APP_ENV:-production}
+APP_KEY=${APP_KEY}
+APP_DEBUG=${APP_DEBUG:-false}
+APP_URL=${APP_URL}
+
+LOG_CHANNEL=${LOG_CHANNEL:-stack}
+
+DB_CONNECTION=${DB_CONNECTION:-pgsql}
+DATABASE_URL=${DATABASE_URL}
+DB_HOST=${DB_HOST}
+DB_PORT=${DB_PORT}
+DB_DATABASE=${DB_DATABASE}
+DB_USERNAME=${DB_USERNAME}
+DB_PASSWORD=${DB_PASSWORD}
+
+CACHE_DRIVER=${CACHE_DRIVER:-database}
+SESSION_DRIVER=${SESSION_DRIVER:-database}
+QUEUE_CONNECTION=${QUEUE_CONNECTION:-database}
+
+STRIPE_KEY=${STRIPE_KEY}
+STRIPE_SECRET=${STRIPE_SECRET}
+STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+
+COINBASE_COMMERCE_API_KEY=${COINBASE_COMMERCE_API_KEY}
+COINBASE_COMMERCE_WEBHOOK_SECRET=${COINBASE_COMMERCE_WEBHOOK_SECRET}
 ENVEOF
 
-echo "Setting permissions..."
-chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache 2>/dev/null || true
+echo ".env file created"
+cat /var/www/html/.env | grep "DB_" | sed 's/PASSWORD=.*/PASSWORD=***/'
 
-echo "Starting services..."
+echo "=== Setting permissions ==="
+chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/.env 2>/dev/null || true
+chmod 600 /var/www/html/.env
+
+echo "=== Starting services ==="
 # Start supervisor with php-fpm and nginx
 /usr/sbin/supervisord -c /etc/supervisord.conf &
 SUPERVISOR_PID=$!
@@ -197,41 +214,34 @@ SUPERVISOR_PID=$!
 echo "Waiting for services to start..."
 sleep 5
 
-echo "Running Laravel setup..."
+echo "=== Running Laravel setup ==="
 (
-    # Ensure environment is available to PHP
-    export DB_CONNECTION="${DB_CONNECTION:-pgsql}"
-    export DATABASE_URL="${DATABASE_URL}"
-    export DB_HOST="${DB_HOST}"
-    export DB_PORT="${DB_PORT}"
-    export DB_DATABASE="${DB_DATABASE}"
-    export DB_USERNAME="${DB_USERNAME}"
-    export DB_PASSWORD="${DB_PASSWORD}"
-    
-    # CRITICAL: Clear any cached config that might have wrong DB settings
-    echo "Clearing config cache..."
+    # CRITICAL: Clear any cached config
+    echo "Clearing cached config..."
     php artisan config:clear 2>/dev/null || true
     rm -f bootstrap/cache/config.php 2>/dev/null || true
     
-    # Debug: Show what Laravel thinks the DB connection is
-    echo "Testing database configuration..."
-    php -r "echo 'PHP DB_CONNECTION: ' . getenv('DB_CONNECTION') . PHP_EOL;"
-    php -r "echo 'PHP DATABASE_URL set: ' . (getenv('DATABASE_URL') ? 'yes' : 'no') . PHP_EOL;"
-    php artisan tinker --execute="echo 'Laravel DB driver: ' . config('database.default') . PHP_EOL;" 2>&1 || echo "Tinker failed"
+    # Debug: Show what Laravel sees
+    echo "=== Laravel Configuration Check ==="
+    php artisan tinker --execute="echo 'DB Connection: ' . config('database.default'); echo PHP_EOL; echo 'DB Driver: ' . config('database.connections.' . config('database.default') . '.driver'); echo PHP_EOL;" 2>&1 || echo "Tinker check failed"
     
     # Storage link first (doesn't need DB)
     php artisan storage:link 2>/dev/null || true
     
     # Wait for database and migrate
-    echo "Waiting for database..."
+    echo "=== Starting migrations ==="
     for i in 1 2 3 4 5 6 7 8 9 10; do
-        echo "Migration attempt $i..."
+        echo "Migration attempt $i/10..."
         if php artisan migrate --force --no-interaction 2>&1; then
-            echo "Migrations completed"
+            echo "✓ Migrations completed successfully"
             break
         fi
-        echo "Database not ready, waiting... ($i/10)"
-        sleep 3
+        if [ $i -eq 10 ]; then
+            echo "✗ Migrations failed after 10 attempts"
+        else
+            echo "Waiting 5 seconds before retry..."
+            sleep 5
+        fi
     done
     
     # Cache after migrations (when DB is available)
