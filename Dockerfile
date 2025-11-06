@@ -158,6 +158,14 @@ RUN cat > /start.sh << 'EOF'
 #!/bin/sh
 set -e
 
+echo "Environment check..."
+echo "DB_CONNECTION: ${DB_CONNECTION:-not set}"
+if [ -n "$DATABASE_URL" ]; then
+    echo "DATABASE_URL is set"
+else
+    echo "DATABASE_URL not set"
+fi
+
 echo "Setting permissions..."
 chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache 2>/dev/null || true
 
@@ -171,16 +179,22 @@ sleep 3
 
 echo "Running Laravel setup..."
 (
-    # Clear config cache
-    php artisan config:clear 2>/dev/null || true
+    # Ensure environment is available to PHP
+    export DB_CONNECTION="${DB_CONNECTION:-pgsql}"
+    export DATABASE_URL="${DATABASE_URL}"
+    export DB_HOST="${DB_HOST}"
+    export DB_PORT="${DB_PORT}"
+    export DB_DATABASE="${DB_DATABASE}"
+    export DB_USERNAME="${DB_USERNAME}"
+    export DB_PASSWORD="${DB_PASSWORD}"
     
-    # Storage link
+    # Storage link first (doesn't need DB)
     php artisan storage:link 2>/dev/null || true
     
     # Wait for database and migrate
     echo "Waiting for database..."
     for i in 1 2 3 4 5 6 7 8 9 10; do
-        if php artisan migrate --force --no-interaction 2>/dev/null; then
+        if php artisan migrate --force --no-interaction 2>&1; then
             echo "Migrations completed"
             break
         fi
@@ -188,7 +202,7 @@ echo "Running Laravel setup..."
         sleep 3
     done
     
-    # Cache after migrations
+    # Cache after migrations (when DB is available)
     php artisan config:cache 2>/dev/null || true
     php artisan route:cache 2>/dev/null || true
     php artisan view:cache 2>/dev/null || true
