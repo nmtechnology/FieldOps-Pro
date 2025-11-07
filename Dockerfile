@@ -248,7 +248,8 @@ EXPOSE 8080
 HEALTHCHECK --interval=10s --timeout=3s --start-period=60s --retries=3 \
     CMD /usr/local/bin/health-check
 
-# Add debug output to confirm our Dockerfile is being used
+# Confirm Dockerfile build complete
 RUN echo "DOCKERFILE BUILD COMPLETE - FieldOps-Pro PostgreSQL-only image" > /docker-build-complete.txt
 
+# Start the application
 CMD ["/start.sh"]
