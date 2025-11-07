@@ -12,13 +12,11 @@ databases:
 services:
   # Main Laravel Web Application  
   - name: web
-    type: DOCKERFILE
-    dockerfile_path: Dockerfile
-    
-    github:
-      repo: nmtechnology/FieldOps-Pro
-      branch: main
-      deploy_on_push: true
+    # Use Docker image from Container Registry instead of building from source
+    image:
+      registry_type: DOCR
+      repository: fieldops-pro
+      tag: latest
     
     # Environment
     envs:
