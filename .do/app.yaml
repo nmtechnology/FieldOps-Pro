@@ -12,16 +12,13 @@ databases:
 services:
   # Main Laravel Web Application  
   - name: web
+    type: DOCKERFILE
+    dockerfile_path: Dockerfile
+    
     github:
       repo: nmtechnology/FieldOps-Pro
       branch: main
       deploy_on_push: true
-    
-    source_dir: /
-    
-    # Force Docker deployment
-    type: DOCKERFILE
-    dockerfile_path: Dockerfile
     
     # Environment
     envs:
