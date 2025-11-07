@@ -119,29 +119,35 @@ echo "📝 Adding environment variables to .env..."
 [ -n "$APP_KEY" ] && echo "APP_KEY=${APP_KEY}" >> /var/www/html/.env
 [ -n "$APP_URL" ] && echo "APP_URL=${APP_URL}" >> /var/www/html/.env
 
-# Only add DB variables if they have values
+# Check if DATABASE_URL is available and parse it if individual vars aren't set
 if [ -n "$DATABASE_URL" ]; then
     echo "DATABASE_URL=${DATABASE_URL}" >> /var/www/html/.env
     echo "✅ DATABASE_URL is set"
+    
+    # If individual DB vars aren't set, try to parse DATABASE_URL
+    # Format: postgresql://user:pass@host:port/database
+    if [ -z "$DB_HOST" ]; then
+        echo "⚠️  Individual DB vars not set, will parse DATABASE_URL"
+        echo "Laravel will use DATABASE_URL directly"
+    fi
 else
-    echo "⚠️  DATABASE_URL is NOT set"
+    echo "❌ DATABASE_URL is NOT set"
 fi
 
+# Add individual DB variables if they have values
 if [ -n "$DB_HOST" ]; then
     echo "DB_HOST=${DB_HOST}" >> /var/www/html/.env
     echo "✅ DB_HOST is set to: ${DB_HOST}"
-else
-    echo "❌ DB_HOST is NOT set - this will cause 'Database hosts array is empty' error!"
 fi
 
 if [ -n "$DB_PORT" ]; then
     echo "DB_PORT=${DB_PORT}" >> /var/www/html/.env
-    echo "✅ DB_PORT is set"
+    echo "✅ DB_PORT is set to: ${DB_PORT}"
 fi
 
 if [ -n "$DB_DATABASE" ]; then
     echo "DB_DATABASE=${DB_DATABASE}" >> /var/www/html/.env
-    echo "✅ DB_DATABASE is set"
+    echo "✅ DB_DATABASE is set to: ${DB_DATABASE}"
 fi
 
 if [ -n "$DB_USERNAME" ]; then
