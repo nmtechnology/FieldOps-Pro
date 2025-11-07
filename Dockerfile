@@ -86,6 +86,10 @@ RUN cat > /start.sh << 'EOF'
 #!/bin/sh
 set -e
 
+# Redirect all output to both stdout and a log file
+exec 1> >(tee -a /var/log/startup.log)
+exec 2>&1
+
 # First thing - confirm the startup script is running
 echo "=========================================="
 echo "START SCRIPT EXECUTING - $(date)"
