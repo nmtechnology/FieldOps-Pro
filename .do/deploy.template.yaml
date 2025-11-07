@@ -1,0 +1,20 @@
+spec:
+  name: fieldengineerpro
+  services:
+    - name: web
+      image:
+        registry_type: DOCR
+        repository: fieldops-pro
+        tag: latest  # Will be replaced with actual tag
+      instance_count: 1
+      instance_size_slug: basic-xs
+      http_port: 8080
+      routes:
+        - path: /
+      envs:
+        - key: DB_CONNECTION
+          scope: RUN_TIME
+          value: pgsql
+        - key: DATABASE_URL
+          scope: RUN_TIME
+          value: ${db.DATABASE_URL}
