@@ -116,17 +116,48 @@ ENVEOF
 
 # Add environment variables with explicit logging
 echo "📝 Adding environment variables to .env..."
-echo "APP_KEY=${APP_KEY}" >> /var/www/html/.env
-echo "APP_URL=${APP_URL}" >> /var/www/html/.env
-echo "DATABASE_URL=${DATABASE_URL}" >> /var/www/html/.env
-echo "DB_HOST=${DB_HOST}" >> /var/www/html/.env
-echo "DB_PORT=${DB_PORT}" >> /var/www/html/.env
-echo "DB_DATABASE=${DB_DATABASE}" >> /var/www/html/.env
-echo "DB_USERNAME=${DB_USERNAME}" >> /var/www/html/.env
-echo "DB_PASSWORD=***HIDDEN***" >> /var/www/html/.env
+[ -n "$APP_KEY" ] && echo "APP_KEY=${APP_KEY}" >> /var/www/html/.env
+[ -n "$APP_URL" ] && echo "APP_URL=${APP_URL}" >> /var/www/html/.env
 
-echo "📄 .env file contents (DB vars only):"
-cat /var/www/html/.env | grep -E "(DB_|DATABASE_)" || echo "No DB vars in .env file!"
+# Only add DB variables if they have values
+if [ -n "$DATABASE_URL" ]; then
+    echo "DATABASE_URL=${DATABASE_URL}" >> /var/www/html/.env
+    echo "✅ DATABASE_URL is set"
+else
+    echo "⚠️  DATABASE_URL is NOT set"
+fi
+
+if [ -n "$DB_HOST" ]; then
+    echo "DB_HOST=${DB_HOST}" >> /var/www/html/.env
+    echo "✅ DB_HOST is set to: ${DB_HOST}"
+else
+    echo "❌ DB_HOST is NOT set - this will cause 'Database hosts array is empty' error!"
+fi
+
+if [ -n "$DB_PORT" ]; then
+    echo "DB_PORT=${DB_PORT}" >> /var/www/html/.env
+    echo "✅ DB_PORT is set"
+fi
+
+if [ -n "$DB_DATABASE" ]; then
+    echo "DB_DATABASE=${DB_DATABASE}" >> /var/www/html/.env
+    echo "✅ DB_DATABASE is set"
+fi
+
+if [ -n "$DB_USERNAME" ]; then
+    echo "DB_USERNAME=${DB_USERNAME}" >> /var/www/html/.env
+    echo "✅ DB_USERNAME is set"
+fi
+
+if [ -n "$DB_PASSWORD" ]; then
+    echo "DB_PASSWORD=${DB_PASSWORD}" >> /var/www/html/.env
+    echo "✅ DB_PASSWORD is set"
+fi
+
+echo "========================================"
+echo "📄 Final .env file contents (DB vars only):"
+cat /var/www/html/.env | grep -E "(DB_|DATABASE_)" || echo "❌ No DB vars in .env file!"
+echo "========================================"
 
 chmod 600 /var/www/html/.env
 chown nginx:nginx /var/www/html/.env
