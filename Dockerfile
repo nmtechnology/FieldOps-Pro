@@ -79,50 +79,38 @@ events {
 http {
     include /etc/nginx/mime.types;
     default_type application/octet-stream;
-    
+
     log_format main '$remote_addr - $remote_user [$time_local] "$request" '
                     '$status $body_bytes_sent "$http_referer" '
                     '"$http_user_agent" "$http_x_forwarded_for"';
-    
+
     access_log /var/log/nginx/access.log main;
-    
+
     sendfile on;
     tcp_nopush on;
     keepalive_timeout 65;
     gzip on;
-    
+
     server {
         listen 8080;
         server_name _;
         root /var/www/html/public;
-        index index.php index.html;
-        
-        add_header X-Frame-Options "SAMEORIGIN";
-        add_header X-Content-Type-Options "nosniff";
-        
-        charset utf-8;
-        
+        index index.php;
+
+        client_max_body_size 100M;
+
         location / {
             try_files $uri $uri/ /index.php?$query_string;
         }
-        
-        location = /favicon.ico { access_log off; log_not_found off; }
-        location = /robots.txt  { access_log off; log_not_found off; }
-        
-        error_page 404 /index.php;
-        
+
         location ~ \.php$ {
             fastcgi_pass 127.0.0.1:9000;
             fastcgi_index index.php;
-            fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
-            fastcgi_hide_header X-Powered-By;
-            fastcgi_connect_timeout 10s;
-            fastcgi_send_timeout 60s;
-            fastcgi_read_timeout 60s;
         }
-        
-        location ~ /\.(?!well-known).* {
+
+        location ~ /\.ht {
             deny all;
         }
     }
