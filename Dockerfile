@@ -1,5 +1,8 @@
 FROM php:8.2-fpm-alpine
 
+# Build timestamp: forces fresh build
+ENV BUILD_DATE=2025-11-07
+
 # Install system dependencies and PHP extensions
 RUN apk add --no-cache \
     nginx \
