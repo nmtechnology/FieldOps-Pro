@@ -69,83 +69,10 @@ RUN chmod +x /usr/local/bin/health-check
 RUN mkdir -p /etc/nginx/http.d && \
     rm -f /etc/nginx/http.d/default.conf
 
-RUN cat > /etc/nginx/nginx.conf << 'EOF'
-user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log warn;
-pid /var/run/nginx.pid;
-
-events {
-    worker_connections 1024;
-}
-
-http {
-    include /etc/nginx/mime.types;
-    default_type application/octet-stream;
-
-    log_format main '$remote_addr - $remote_user [$time_local] "$request" '
-                    '$status $body_bytes_sent "$http_referer" '
-                    '"$http_user_agent" "$http_x_forwarded_for"';
-
-    access_log /var/log/nginx/access.log main;
-
-    sendfile on;
-    tcp_nopush on;
-    keepalive_timeout 65;
-    gzip on;
-
-    server {
-        listen 8080;
-        server_name _;
-        root /var/www/html/public;
-        index index.php;
-
-        client_max_body_size 100M;
-
-        location / {
-            try_files $uri $uri/ /index.php?$query_string;
-        }
-
-        location ~ \.php$ {
-            fastcgi_pass 127.0.0.1:9000;
-            fastcgi_index index.php;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            include fastcgi_params;
-        }
-
-        location ~ /\.ht {
-            deny all;
-        }
-    }
-}
-EOF
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Configure supervisor
-RUN cat > /etc/supervisord.conf << 'EOF'
-[supervisord]
-nodaemon=true
-user=root
-logfile=/var/log/supervisor/supervisord.log
-pidfile=/var/run/supervisord.pid
-
-[program:php-fpm]
-command=php-fpm --nodaemonize --fpm-config /usr/local/etc/php-fpm.d/www.conf
-autostart=true
-autorestart=true
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
-stderr_logfile=/dev/stderr
-stderr_logfile_maxbytes=0
-
-[program:nginx]
-command=nginx -g 'daemon off;'
-autostart=true
-autorestart=true
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
-stderr_logfile=/dev/stderr
-stderr_logfile_maxbytes=0
-EOF
+COPY supervisord.conf /etc/supervisord.conf
 
 # Configure PHP-FPM to listen on TCP
 RUN sed -i 's/listen = .*/listen = 127.0.0.1:9000/' /usr/local/etc/php-fpm.d/www.conf && \
