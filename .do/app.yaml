@@ -60,13 +60,6 @@ services:
       - key: DB_SSLMODE
         scope: RUN_TIME
         value: "require"
-      - key: DB_PORT
-        scope: RUN_TIME
-        value: "${db.PORT}"
-      - key: DB_DATABASE
-        scope: RUN_TIME
-        value: "${db.DATABASE}"
-      - key: DB_USERNAME
         scope: RUN_TIME
         value: "${db.USERNAME}"
       - key: DB_PASSWORD
