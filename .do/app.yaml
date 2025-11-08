@@ -12,19 +12,14 @@ databases:
 services:
   # Main Laravel Web Application  
   - name: web
-    # Force using Docker image from Container Registry
-    git:
-      repo_clone_url: https://github.com/nmtechnology/FieldOps-Pro.git
+    # Build from Dockerfile in repo
+    github:
+      repo: nmtechnology/FieldOps-Pro
       branch: main
-      repo_type: github
-    dockerfile_path: Dockerfile  # This tells DO that we have a Dockerfile
-    build_command: echo "Skip build - using pre-built image from registry"  # Skip the build
-    run_command: echo "Skip run - container has CMD"  # Skip the run command
-    image:
-      registry_type: DOCR  # DigitalOcean Container Registry
-      repository: fieldops-pro
-      tag: latest
-    source_dir: /  # Required but not used since we're using registry
+      deploy_on_push: true
+    
+    dockerfile_path: Dockerfile
+    source_dir: /
     
     # Environment
     envs:

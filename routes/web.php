@@ -8,12 +8,27 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Health check endpoint for load balancers and monitoring (no middleware, no DB)
+// Health check endpoint for load balancers and monitoring
 Route::get('/health', function() {
+    $status = 'ok';
+    $checks = [
+        'app' => 'ok',
+    ];
+    
+    // Try to check database connection
+    try {
+        \DB::connection()->getPdo();
+        $checks['database'] = 'ok';
+    } catch (\Exception $e) {
+        $status = 'degraded';
+        $checks['database'] = 'error';
+    }
+    
     return response()->json([
-        'status' => 'ok',
+        'status' => $status,
+        'checks' => $checks,
         'timestamp' => time(),
-    ], 200);
+    ], $status === 'ok' ? 200 : 503);
 })->name('health');
 
 // Include auth routes first, but our home route will override the default behavior

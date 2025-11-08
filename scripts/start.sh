@@ -24,8 +24,22 @@ env | sed 's/\(password=\)[^[:space:]]*/\1******/g' | \
        sort
 
 echo "📝 Creating .env file..."
-# Parse DATABASE_URL if present
-if [ -n "$DATABASE_URL" ]; then
+
+# Check if we have DATABASE_URL
+if [ -z "$DATABASE_URL" ]; then
+    echo "⚠️ WARNING: DATABASE_URL is not set!"
+    echo "  Will try to use individual DB_* variables instead"
+    
+    # Check if we have individual variables
+    if [ -z "$DB_HOST" ] || [ -z "$DB_DATABASE" ]; then
+        echo "❌ ERROR: Neither DATABASE_URL nor individual DB variables are set!"
+        echo "  Available DB-related environment variables:"
+        env | grep -i "db\|database" | sed 's/\(PASSWORD=\)[^[:space:]]*/\1******/g' || echo "  (none found)"
+        exit 1
+    fi
+else
+    echo "✅ DATABASE_URL is set"
+    # Parse DATABASE_URL if present
     echo "🔍 Parsing DATABASE_URL..."
     
     # Extract components using pattern matching
@@ -47,7 +61,12 @@ if [ -n "$DATABASE_URL" ]; then
     # Validate all components were parsed
     if [ -z "$DB_HOST" ] || [ -z "$DB_PORT" ] || [ -z "$DB_NAME" ] || [ -z "$DB_USER" ] || [ -z "$DB_PASS" ]; then
         echo "❌ ERROR: Failed to parse DATABASE_URL completely!"
-        echo "  Raw URL (masked): postgres://[user]:[pass]@[host]:[port]/[db]"
+        echo "  DATABASE_URL format: postgres://username:password@hostname:port/database"
+        echo "  Parsed values:"
+        echo "    DB_USER: ${DB_USER:-'(empty)'}"
+        echo "    DB_HOST: ${DB_HOST:-'(empty)'}"
+        echo "    DB_PORT: ${DB_PORT:-'(empty)'}"
+        echo "    DB_NAME: ${DB_NAME:-'(empty)'}"
         exit 1
     fi
 fi
@@ -66,7 +85,15 @@ ENVEOF
 
 # Add core environment variables
 echo "📝 Adding core environment variables..."
-[ -n "$APP_KEY" ] && echo "APP_KEY=${APP_KEY}" >> /var/www/html/.env
+
+# Validate critical environment variables
+if [ -z "$APP_KEY" ]; then
+    echo "❌ ERROR: APP_KEY environment variable is not set!"
+    echo "  This is required for Laravel to function."
+    exit 1
+fi
+
+echo "APP_KEY=${APP_KEY}" >> /var/www/html/.env
 [ -n "$APP_URL" ] && echo "APP_URL=${APP_URL}" >> /var/www/html/.env
 
 # Configure database connection

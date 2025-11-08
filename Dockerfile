@@ -85,7 +85,7 @@ RUN mkdir -p /var/log/supervisor /var/log/nginx
 # Copy and prepare startup script
 COPY scripts/start.sh /start.sh
 RUN chmod +x /start.sh
-echo "📝 Creating .env file..."
+
 # Configure environment variables
 ENV APP_ENV=production \
     APP_DEBUG=false \
