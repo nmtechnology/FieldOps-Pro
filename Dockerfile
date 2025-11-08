@@ -57,9 +57,10 @@ RUN npm ci --legacy-peer-deps --no-audit
 RUN npm run build
 RUN rm -rf node_modules
 
-# Set permissions
-RUN chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Make startup script executable and set permissions
+RUN chmod +x /start.sh && \
+    chown -R nginx:nginx /var/www/html && \
+    chmod -R 755 /var/www/html/storage
 
 # Copy and set up health check script
 COPY health-check.sh /usr/local/bin/health-check
@@ -81,8 +82,8 @@ RUN sed -i 's/listen = .*/listen = 127.0.0.1:9000/' /usr/local/etc/php-fpm.d/www
 # Create directories
 RUN mkdir -p /var/log/supervisor /var/log/nginx
 
-# Create start script
-RUN cat > /start.sh << 'EOF'
+# Create start script with database configuration and startup logic
+RUN <<'EOFSCRIPT' cat > /start.sh
 #!/bin/sh
 set -e
 
@@ -120,17 +121,15 @@ ENVEOF
 
 # Add environment variables with explicit logging
 echo "📝 Adding environment variables to .env..."
-[ -n "$APP_KEY" ] && echo "APP_KEY=${APP_KEY}" >> /var/www/html/.env
-[ -n "$APP_URL" ] && echo "APP_URL=${APP_URL}" >> /var/www/html/.env
+[ -n "\${APP_KEY}" ] && echo "APP_KEY=\${APP_KEY}" >> /var/www/html/.env
+[ -n "\${APP_URL}" ] && echo "APP_URL=\${APP_URL}" >> /var/www/html/.env
 
-# Check if DATABASE_URL is available and parse it if individual vars aren't set
-if [ -n "$DATABASE_URL" ]; then
-    echo "DATABASE_URL=${DATABASE_URL}" >> /var/www/html/.env
+# Database configuration
+if [ -n "\${DATABASE_URL}" ]; then
+    echo "DATABASE_URL=\${DATABASE_URL}" >> /var/www/html/.env
     echo "✅ DATABASE_URL is set"
     
-    # If individual DB vars aren't set, try to parse DATABASE_URL
-    # Format: postgresql://user:pass@host:port/database
-    if [ -z "$DB_HOST" ]; then
+    if [ -z "\${DB_HOST}" ]; then
         echo "⚠️  Individual DB vars not set, will parse DATABASE_URL"
         echo "Laravel will use DATABASE_URL directly"
     fi
@@ -139,30 +138,11 @@ else
 fi
 
 # Add individual DB variables if they have values
-if [ -n "$DB_HOST" ]; then
-    echo "DB_HOST=${DB_HOST}" >> /var/www/html/.env
-    echo "✅ DB_HOST is set to: ${DB_HOST}"
-fi
-
-if [ -n "$DB_PORT" ]; then
-    echo "DB_PORT=${DB_PORT}" >> /var/www/html/.env
-    echo "✅ DB_PORT is set to: ${DB_PORT}"
-fi
-
-if [ -n "$DB_DATABASE" ]; then
-    echo "DB_DATABASE=${DB_DATABASE}" >> /var/www/html/.env
-    echo "✅ DB_DATABASE is set to: ${DB_DATABASE}"
-fi
-
-if [ -n "$DB_USERNAME" ]; then
-    echo "DB_USERNAME=${DB_USERNAME}" >> /var/www/html/.env
-    echo "✅ DB_USERNAME is set"
-fi
-
-if [ -n "$DB_PASSWORD" ]; then
-    echo "DB_PASSWORD=${DB_PASSWORD}" >> /var/www/html/.env
-    echo "✅ DB_PASSWORD is set"
-fi
+[ -n "\${DB_HOST}" ] && echo "DB_HOST=\${DB_HOST}" >> /var/www/html/.env && echo "✅ DB_HOST is set to: \${DB_HOST}"
+[ -n "\${DB_PORT}" ] && echo "DB_PORT=\${DB_PORT}" >> /var/www/html/.env && echo "✅ DB_PORT is set to: \${DB_PORT}"
+[ -n "\${DB_DATABASE}" ] && echo "DB_DATABASE=\${DB_DATABASE}" >> /var/www/html/.env && echo "✅ DB_DATABASE is set"
+[ -n "\${DB_USERNAME}" ] && echo "DB_USERNAME=\${DB_USERNAME}" >> /var/www/html/.env && echo "✅ DB_USERNAME is set"
+[ -n "\${DB_PASSWORD}" ] && echo "DB_PASSWORD=\${DB_PASSWORD}" >> /var/www/html/.env && echo "✅ DB_PASSWORD is set"
 
 echo "========================================"
 echo "📄 Final .env file contents (DB vars only):"
@@ -175,7 +155,7 @@ chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache
 
 echo "🚀 Starting services..."
 /usr/sbin/supervisord -c /etc/supervisord.conf &
-SUPERVISOR_PID=$!
+SUPERVISOR_PID=\$!
 
 sleep 5
 
@@ -195,7 +175,11 @@ php artisan migrate --force --no-interaction || {
     php artisan migrate --force --no-interaction
 }
 
-echo "✅ Startup complete - PostgreSQL only!"
+exec /usr/sbin/supervisord -c /etc/supervisord.conf -n
+EOFSCRIPT
+
+# Make it executable
+RUN chmod +x /start.sh
 wait $SUPERVISOR_PID
 EOF
 
