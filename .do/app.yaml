@@ -60,17 +60,8 @@ services:
       - key: DB_SSLMODE
         scope: RUN_TIME
         value: "require"
-        scope: RUN_TIME
-        value: "${db.USERNAME}"
-      - key: DB_PASSWORD
-        scope: RUN_TIME
-        type: SECRET
-        value: "${db.PASSWORD}"
-      # Debug: Add these to see if they're being set
-      - key: DEBUG_DB_HOST
-        scope: RUN_TIME
-        value: "${db.HOSTNAME}"
-      - key: DEBUG_DB_URL
+      # Use DATABASE_URL from managed database
+      - key: DATABASE_URL
         scope: RUN_TIME
         value: "${db.DATABASE_URL}"
       - key: SESSION_DRIVER

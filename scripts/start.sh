@@ -23,38 +23,18 @@ env | sed 's/\(password=\)[^[:space:]]*/\1******/g' | \
        sed 's/\(PASSWORD=\)[^[:space:]]*/\1******/g' | \
        sort
 
-# Debug: Show URL parsing
-if [ -n "$DATABASE_URL" ]; then
-    echo "Found DATABASE_URL, parsing components..."
-    # Parse DATABASE_URL into components
-    # Format: postgres://username:password@hostname:port/database
-    DB_SCHEME=$(echo "$DATABASE_URL" | sed -E 's/^(.*):\/\/.*/\1/')
-    DB_USER=$(echo "$DATABASE_URL" | sed -E 's/.*:\/\/([^:]*).*/\1/')
-    DB_PASS=$(echo "$DATABASE_URL" | sed -E 's/.*:\/\/[^:]*:([^@]*)@.*/\1/')
-    DB_HOST=$(echo "$DATABASE_URL" | sed -E 's/.*@([^:]*).*/\1/')
-    DB_PORT=$(echo "$DATABASE_URL" | sed -E 's/.*:([0-9]*)\\/.*/\1/')
-    DB_NAME=$(echo "$DATABASE_URL" | sed -E 's/.*\/([^?]*).*/\1/')
-    
-    echo "✅ Parsed database configuration:"
-    echo "- Scheme: $DB_SCHEME"
-    echo "- Host: $DB_HOST"
-    echo "- Port: $DB_PORT"
-    echo "- Database: $DB_NAME"
-    echo "- User: $DB_USER"
-    echo "- Password: [REDACTED]"
-fi
-
 echo "📝 Creating .env file..."
 # Parse DATABASE_URL if present
 if [ -n "$DATABASE_URL" ]; then
-    echo "🔍 Parsing DATABASE_URL: ${DATABASE_URL}"
+    echo "🔍 Parsing DATABASE_URL..."
     
     # Extract components using pattern matching
+    # Format: postgres://username:password@hostname:port/database?params
     DB_USER=$(echo "$DATABASE_URL" | sed -n 's/^postgres:\/\/\([^:]*\):.*/\1/p')
     DB_PASS=$(echo "$DATABASE_URL" | sed -n 's/^postgres:\/\/[^:]*:\([^@]*\)@.*/\1/p')
     DB_HOST=$(echo "$DATABASE_URL" | sed -n 's/^postgres:\/\/[^@]*@\([^:]*\):.*/\1/p')
-    DB_PORT=$(echo "$DATABASE_URL" | sed -n 's/^postgres:\/\/[^@]*@[^:]*:\([^/]*\)\/.*/\1/p')
-    DB_NAME=$(echo "$DATABASE_URL" | sed -n 's/^postgres:\/\/[^@]*@[^/]*\/\(.*\)$/\1/p')
+    DB_PORT=$(echo "$DATABASE_URL" | sed -n 's/^postgres:\/\/[^@]*@[^:]*:\([^/?]*\).*/\1/p')
+    DB_NAME=$(echo "$DATABASE_URL" | sed -n 's/^postgres:\/\/[^/]*\/\([^?]*\).*/\1/p')
     
     # Log parsed components (masking password)
     echo "✅ Parsed DATABASE_URL components:"
@@ -62,7 +42,14 @@ if [ -n "$DATABASE_URL" ]; then
     echo "  - Port: ${DB_PORT}"
     echo "  - Database: ${DB_NAME}"
     echo "  - User: ${DB_USER}"
-    echo "  - Password: [MASKED]"
+    echo "  - Password: [MASKED ${#DB_PASS} chars]"
+    
+    # Validate all components were parsed
+    if [ -z "$DB_HOST" ] || [ -z "$DB_PORT" ] || [ -z "$DB_NAME" ] || [ -z "$DB_USER" ] || [ -z "$DB_PASS" ]; then
+        echo "❌ ERROR: Failed to parse DATABASE_URL completely!"
+        echo "  Raw URL (masked): postgres://[user]:[pass]@[host]:[port]/[db]"
+        exit 1
+    fi
 fi
 
 # Environment template
@@ -114,5 +101,38 @@ chmod 600 /var/www/html/.env
 chown nginx:nginx /var/www/html/.env
 chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache
 
-echo "🚀 Starting services..."
+# Test database connection before proceeding
+echo "🔌 Testing database connection..."
+if php artisan db:monitor --max-attempts=3 > /dev/null 2>&1; then
+    echo "✅ Database connection successful!"
+else
+    echo "⚠️ Database connection test inconclusive, attempting migration anyway..."
+fi
+
+# Run migrations with detailed error handling
+echo "🔄 Running database migrations..."
+if php artisan migrate --force --no-interaction; then
+    echo "✅ Database migrations completed successfully!"
+else
+    MIGRATION_EXIT_CODE=$?
+    echo "❌ ERROR: Database migrations failed with exit code: ${MIGRATION_EXIT_CODE}"
+    echo "📋 Checking migration status..."
+    php artisan migrate:status || true
+    echo "� Last 50 lines of Laravel logs:"
+    tail -50 /var/www/html/storage/logs/laravel.log 2>/dev/null || echo "No log file found"
+    echo "⚠️ CRITICAL: Application may not function correctly without migrations!"
+    # Don't exit - let supervisor start services so we can debug
+fi
+
+# Clear and cache configuration
+echo "🔧 Optimizing Laravel..."
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+echo "�🚀 Starting services..."
+echo "   - Nginx listening on port 8080"
+echo "   - PHP-FPM on 127.0.0.1:9000"
+echo "   - Queue worker enabled"
+echo "========================================"
 exec /usr/sbin/supervisord -c /etc/supervisord.conf -n

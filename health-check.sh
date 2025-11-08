@@ -1,25 +1,39 @@
 #!/bin/sh
 set -e
 
-echo "Starting health check..."
+echo "🏥 Health Check Starting - $(date)"
 
-# Check services
+# Check 1: Nginx process and port 8080
+echo "1️⃣ Checking Nginx on port 8080..."
 if ! pgrep nginx > /dev/null; then
-    echo "❌ nginx is not running"
+    echo "❌ Nginx process not running"
     exit 1
 fi
 
+if ! netstat -tuln 2>/dev/null | grep -q ':8080' && ! ss -tuln 2>/dev/null | grep -q ':8080'; then
+    echo "❌ Nginx not listening on port 8080"
+    exit 1
+fi
+echo "✅ Nginx running on port 8080"
+
+# Check 2: PHP-FPM process
+echo "2️⃣ Checking PHP-FPM..."
 if ! pgrep php-fpm > /dev/null; then
-    echo "❌ php-fpm is not running"
+    echo "❌ PHP-FPM process not running"
     exit 1
 fi
+echo "✅ PHP-FPM running"
 
+# Check 3: Supervisord
+echo "3️⃣ Checking Supervisord..."
 if ! pgrep supervisord > /dev/null; then
-    echo "❌ supervisord is not running"
+    echo "❌ Supervisord is not running"
     exit 1
 fi
+echo "✅ Supervisord running"
 
-# Check if Laravel can connect to the database
+# Check 4: Database connection
+echo "4️⃣ Checking database connection..."
 cd /var/www/html
 if ! php artisan db:monitor --quiet; then
     echo "❌ Database connection failed"
@@ -32,19 +46,29 @@ if ! php artisan db:monitor --quiet; then
         " 2>/dev/null || echo "Could not read database config"
     exit 1
 fi
+echo "✅ Database connection successful"
 
-# Check if web server is responding
+# Check 5: HTTP response on port 8080
+echo "5️⃣ Checking HTTP response..."
 if command -v curl > /dev/null; then
-    if ! curl -sf http://localhost:8080/health > /dev/null; then
-        echo "❌ Web server not responding"
-        exit 1
-    fi
+    HTTP_CODE=$(curl -sf -o /dev/null -w "%{http_code}" http://localhost:8080/health 2>/dev/null || echo "000")
 else
-    if ! wget -q -O- http://localhost:8080/health > /dev/null; then
-        echo "❌ Web server not responding"
-        exit 1
-    fi
+    HTTP_CODE=$(wget --spider --server-response http://localhost:8080/health 2>&1 | grep "HTTP/" | awk '{print $2}' | head -1 || echo "000")
 fi
 
-echo "✅ All health checks passed"
+if [ "$HTTP_CODE" = "000" ] || [ -z "$HTTP_CODE" ]; then
+    echo "❌ No HTTP response from localhost:8080"
+    exit 1
+fi
+echo "✅ HTTP responding with code: $HTTP_CODE"
+
+# Check 6: Required directories writable
+echo "6️⃣ Checking storage permissions..."
+if [ ! -w "/var/www/html/storage" ] || [ ! -w "/var/www/html/bootstrap/cache" ]; then
+    echo "❌ Storage directories not writable"
+    exit 1
+fi
+echo "✅ Storage writable"
+
+echo "✅✅✅ All health checks passed! ✅✅✅"
 exit 0
