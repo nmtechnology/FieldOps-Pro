@@ -1381,7 +1381,7 @@ const consultationProduct = computed(() => {
         </div>
 
         <!-- Urgency Components -->
-        <CountdownTimer />
+        <CountdownTimer :active-discount="activeDiscount" />
         <PurchaseNotifications :products="products" />
         
         <!-- Footer -->

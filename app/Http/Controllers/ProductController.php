@@ -54,6 +54,8 @@ class ProductController extends Controller
                 'code' => $activeDiscount->code,
                 'type' => $activeDiscount->type,
                 'value' => $activeDiscount->value,
+                'description' => $activeDiscount->description,
+                'valid_until' => $activeDiscount->valid_until?->toISOString(),
                 'discounted_price' => round($discountedPrice, 2),
                 'discount_amount' => round($discountAmount, 2),
                 'discount_percentage' => $activeDiscount->type === 'percentage' 

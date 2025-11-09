@@ -2,7 +2,7 @@
     <!-- Full-width banner below navbar for screens < 1790px | Floating card top-right for larger screens -->
     <!-- On md-2xl (768px-1789px): below navbar + announcement banner at top-[120px] -->
     <!-- On sm (< 768px): below navbar at top-20 -->
-    <div v-if="showTimer" 
+    <div v-if="showTimer && activeDiscount" 
          :class="[
              'fixed z-[60] bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-2xl animate-pulse-slow',
              isLargeScreen ? 'top-4 right-4 max-w-sm rounded-lg px-6 py-4 border-2 border-yellow-400' : 'top-20 md:top-[120px] 2xl:top-20 left-0 right-0 px-3 py-2 border-b-2 border-yellow-400'
@@ -24,7 +24,7 @@
                 <div :class="[
                     'font-semibold uppercase tracking-wide',
                     isLargeScreen ? 'text-xs' : 'text-[10px]'
-                ]">🎉 End of Year Sale!</div>
+                ]">🎉 {{ saleTitle }}</div>
                 <div :class="[
                     'font-black tabular-nums',
                     isLargeScreen ? 'text-2xl' : 'text-base'
@@ -34,7 +34,7 @@
                 <div :class="[
                     'opacity-90 font-bold',
                     isLargeScreen ? 'text-xs mt-1' : 'text-[10px]'
-                ]">💥 50% OFF - Ends Dec 31st!</div>
+                ]">💥 {{ discountText }} - {{ expirationText }}</div>
             </div>
         </div>
     </div>
@@ -42,6 +42,13 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+
+const props = defineProps({
+    activeDiscount: {
+        type: Object,
+        default: null
+    }
+});
 
 const showTimer = ref(true);
 const days = ref(0);
@@ -51,8 +58,45 @@ const seconds = ref(0);
 const isLargeScreen = ref(false);
 let interval = null;
 
-// Target: December 31, 2025 at 23:59:59
-const TARGET_DATE = new Date('2025-12-31T23:59:59').getTime();
+// Compute target date from activeDiscount or default to Dec 31, 2025
+const TARGET_DATE = computed(() => {
+    if (props.activeDiscount?.valid_until) {
+        return new Date(props.activeDiscount.valid_until).getTime();
+    }
+    return new Date('2025-12-31T23:59:59').getTime();
+});
+
+// Compute sale title from discount description or default
+const saleTitle = computed(() => {
+    if (props.activeDiscount?.description) {
+        return props.activeDiscount.description;
+    }
+    return 'End of Year Sale!';
+});
+
+// Compute discount display text
+const discountText = computed(() => {
+    if (!props.activeDiscount) return '50% OFF';
+    
+    if (props.activeDiscount.type === 'percentage') {
+        return `${props.activeDiscount.discount_percentage}% OFF`;
+    } else {
+        return `$${props.activeDiscount.value} OFF`;
+    }
+});
+
+// Compute expiration text
+const expirationText = computed(() => {
+    if (!props.activeDiscount?.valid_until) {
+        return 'Ends Dec 31st!';
+    }
+    
+    const expiryDate = new Date(props.activeDiscount.valid_until);
+    const month = expiryDate.toLocaleDateString('en-US', { month: 'short' });
+    const day = expiryDate.getDate();
+    
+    return `Ends ${month} ${day}!`;
+});
 
 const formattedTime = computed(() => {
     if (days.value > 0) {
@@ -70,7 +114,7 @@ const checkScreenSize = () => {
 
 const updateCountdown = () => {
     const now = Date.now();
-    const distance = TARGET_DATE - now;
+    const distance = TARGET_DATE.value - now;
 
     if (distance < 0) {
         // Countdown finished
