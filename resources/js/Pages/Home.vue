@@ -216,7 +216,7 @@ const consultationProduct = computed(() => {
             
             <!-- Mobile Menu Dropdown -->
             <div v-if="mobileMenuOpen" 
-                 class="lg:hidden absolute left-0 right-0 top-full bg-gray-900/95 backdrop-blur-lg border-t border-white/10 shadow-2xl"
+                 class="lg:hidden absolute left-0 right-0 top-full bg-gray-900/95 backdrop-blur-lg border-t border-white/10 shadow-2xl z-[70]"
                  style="animation: slideDown 0.3s ease-out;">
                 <div class="px-4 py-6 space-y-3">
                     <Link v-if="featuredProduct" 
