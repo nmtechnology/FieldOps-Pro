@@ -134,7 +134,7 @@ const consultationProduct = computed(() => {
     </Head>
 
     <!-- Modern Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 w-ful backdrop-blur-md border-b border-white/10 shadow-2xl md:top-0" :class="{'top-[40px]': true}">
+    <nav class="fixed top-[70px] left-0 right-0 z-50 w-ful backdrop-blur-md border-b border-white/10 shadow-2xl md:top-0">
         <!-- Top announcement bar (optional) -->
         <div class="bg-gradient-to-r from-orange-600 to-orange-500 text-white text-center py-2 text-sm font-medium hidden md:block">
             <span class="hidden sm:inline">🚀 Limited Time: Start Your Journey Today - </span>
@@ -273,7 +273,7 @@ const consultationProduct = computed(() => {
     
     <div class="min-h-screen bg-gray-900 dark:bg-gray-900">
         <!-- Spacer to account for fixed navbar + countdown banner on mobile -->
-        <div class="h-[120px] md:h-24"><!-- 40px countdown + 80px nav on mobile, 24 nav only on desktop --></div>
+        <div class="h-[150px] md:h-24"><!-- 70px countdown + 80px nav on mobile, 24px nav only on desktop --></div>
         
         <!-- Hero section -->
         <div class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
