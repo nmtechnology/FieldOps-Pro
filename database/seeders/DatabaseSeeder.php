@@ -15,19 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
+        // Create test user directly
+        User::create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
         ]);
         
-        // Seed product content if running in a development environment
-        if (app()->environment('local', 'development')) {
-            $this->call([
-                UpdateProductTiersSeeder::class,
-                ProductContentSeeder::class,
-            ]);
-        }
+        // Seed product content - always run in production too
+        $this->call([
+            UpdateProductTiersSeeder::class,
+            ProductContentSeeder::class,
+        ]);
     }
 }

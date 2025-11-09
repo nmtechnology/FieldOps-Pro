@@ -23,6 +23,9 @@ Route::middleware(['auth'])->group(function () {
     // Admin Dashboard route is defined in admin_web.php
     // These routes are loaded inside admin_web.php which already has prefix('admin') and name('admin.')
     
+    // API endpoint for dashboard stats
+    Route::get('api/stats', [\App\Http\Controllers\Admin\DashboardController::class, 'stats'])->name('api.stats');
+    
     // Orders Management
     Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function () {
         Route::resource('orders', OrderController::class);

@@ -99,7 +99,8 @@ const generateNotification = () => {
         productName = product.name;
         
         // Calculate price with 7.5% sales tax
-        const basePrice = parseFloat(product.price);
+        // Ensure price is a number by parsing it
+        const basePrice = typeof product.price === 'string' ? parseFloat(product.price) : product.price;
         const priceWithTax = basePrice * 1.075; // Add 7.5% tax
         productPrice = `$${priceWithTax.toFixed(2)}`;
         
@@ -143,14 +144,14 @@ const removeNotification = (id) => {
 };
 
 onMounted(() => {
-    // Show first notification after 3 seconds
+    // Show first notification after 10 seconds
     setTimeout(() => {
         showNotification();
-    }, 3000);
+    }, 10000);
 
-    // Then show notifications at random intervals (15-45 seconds)
+    // Then show notifications at random intervals (45-90 seconds)
     const scheduleNext = () => {
-        const delay = Math.random() * 30000 + 15000; // 15-45 seconds
+        const delay = Math.random() * 45000 + 45000; // 45-90 seconds
         interval = setTimeout(() => {
             showNotification();
             scheduleNext();

@@ -10,16 +10,54 @@ const stats = ref({
     activeUsers: 0
 });
 
-// This would normally be passed from the controller
-onMounted(() => {
-    // Simulated stats
-    stats.value = {
-        totalOrders: 157,
-        pendingOrders: 12,
-        totalRevenue: 15842.50,
-        activeUsers: 83
-    };
+const recentOrders = ref([]);
+const onlineUsers = ref([]);
+
+// Fetch real stats from the backend
+onMounted(async () => {
+    try {
+        const response = await fetch('/admin/api/stats');
+        if (response.ok) {
+            const data = await response.json();
+            stats.value = data.stats;
+            recentOrders.value = data.recentOrders || [];
+            onlineUsers.value = data.onlineUsers || [];
+        }
+    } catch (error) {
+        console.error('Failed to fetch stats:', error);
+        // Default to zeros on error
+        stats.value = {
+            totalOrders: 0,
+            pendingOrders: 0,
+            totalRevenue: 0,
+            activeUsers: 0
+        };
+        recentOrders.value = [];
+        onlineUsers.value = [];
+    }
 });
+
+const getStatusColor = (status) => {
+    const colors = {
+        'completed': 'bg-green-600 text-white',
+        'pending': 'bg-amber-600 text-white',
+        'processing': 'bg-blue-600 text-white',
+        'refunded': 'bg-gray-600 text-white'
+    };
+    return colors[status] || 'bg-gray-600 text-white';
+};
+
+const formatTime = (timestamp) => {
+    if (!timestamp) return 'Never';
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diff = Math.floor((now - date) / 1000); // seconds
+    
+    if (diff < 60) return 'Just now';
+    if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
+    return `${Math.floor(diff / 86400)} days ago`;
+};
 </script>
 
 <template>
@@ -126,46 +164,20 @@ onMounted(() => {
                                                 </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-700 bg-gray-800">
-                                                <!-- Sample order data -->
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">#10045</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">John Smith</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-orange-600 px-2.5 py-0.5 text-xs font-medium text-white">Completed</span>
+                                                <tr v-if="recentOrders.length === 0">
+                                                    <td colspan="4" class="px-6 py-8 text-center text-sm text-gray-400">
+                                                        No orders yet. Your first order will appear here!
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">$238.50</td>
                                                 </tr>
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">#10044</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">Sarah Johnson</td>
+                                                <tr v-for="order in recentOrders" :key="order.id" class="hover:bg-gray-700">
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">#{{ order.order_number }}</td>
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">{{ order.user_name }}</td>
                                                     <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-amber-600 px-2.5 py-0.5 text-xs font-medium text-white">Pending</span>
+                                                        <span :class="getStatusColor(order.status)" class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize">
+                                                            {{ order.status }}
+                                                        </span>
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">$129.99</td>
-                                                </tr>
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">#10043</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">Robert Williams</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-blue-600 px-2.5 py-0.5 text-xs font-medium text-white">Processing</span>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">$427.00</td>
-                                                </tr>
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">#10042</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">Michael Brown</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">Completed</span>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">$195.25</td>
-                                                </tr>
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">#10041</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">Jennifer Davis</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">Cancelled</span>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">$79.99</td>
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">${{ parseFloat(order.amount).toFixed(2) }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -199,106 +211,32 @@ onMounted(() => {
                                                 </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-700 bg-gray-800">
-                                                <!-- Sample user data -->
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-8 w-8 flex-shrink-0">
-                                                                <div class="relative h-8 w-8">
-                                                                    <img class="rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                                                    <span class="absolute right-0 bottom-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-gray-800"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ml-4">
-                                                                <div class="text-sm font-medium text-white">John Smith</div>
-                                                                <div class="text-sm text-gray-400">john@example.com</div>
-                                                            </div>
-                                                        </div>
+                                                <tr v-if="onlineUsers.length === 0">
+                                                    <td colspan="3" class="px-6 py-8 text-center text-sm text-gray-400">
+                                                        No users online currently.
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-orange-100 px-2.5 py-0.5 text-xs font-medium text-orange-800">Admin</span>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">Just now</td>
                                                 </tr>
-                                                <tr class="hover:bg-gray-700">
+                                                <tr v-for="user in onlineUsers" :key="user.id" class="hover:bg-gray-700">
                                                     <td class="whitespace-nowrap px-6 py-4">
                                                         <div class="flex items-center">
                                                             <div class="h-8 w-8 flex-shrink-0">
-                                                                <div class="relative h-8 w-8">
-                                                                    <img class="rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                                                    <span class="absolute right-0 bottom-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-gray-800"></span>
+                                                                <div class="relative h-8 w-8 bg-gray-600 rounded-full flex items-center justify-center">
+                                                                    <span class="text-white text-xs font-medium">{{ user.name.charAt(0).toUpperCase() }}</span>
+                                                                    <span v-if="user.is_online" class="absolute right-0 bottom-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-gray-800"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="ml-4">
-                                                                <div class="text-sm font-medium text-white">Sarah Johnson</div>
-                                                                <div class="text-sm text-gray-400">sarah@example.com</div>
+                                                                <div class="text-sm font-medium text-white">{{ user.name }}</div>
+                                                                <div class="text-sm text-gray-400">{{ user.email }}</div>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">Customer</span>
+                                                        <span :class="user.is_admin ? 'bg-orange-600 text-white' : 'bg-blue-600 text-white'" class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">
+                                                            {{ user.is_admin ? 'Admin' : 'Customer' }}
+                                                        </span>
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">2 minutes ago</td>
-                                                </tr>
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-8 w-8 flex-shrink-0">
-                                                                <div class="relative h-8 w-8">
-                                                                    <img class="rounded-full" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                                                    <span class="absolute right-0 bottom-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-gray-800"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ml-4">
-                                                                <div class="text-sm font-medium text-white">Robert Williams</div>
-                                                                <div class="text-sm text-gray-400">robert@example.com</div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">Customer</span>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">5 minutes ago</td>
-                                                </tr>
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-8 w-8 flex-shrink-0">
-                                                                <div class="relative h-8 w-8">
-                                                                    <img class="rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                                                    <span class="absolute right-0 bottom-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-gray-800"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ml-4">
-                                                                <div class="text-sm font-medium text-white">Michael Brown</div>
-                                                                <div class="text-sm text-gray-400">michael@example.com</div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">Customer</span>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">8 minutes ago</td>
-                                                </tr>
-                                                <tr class="hover:bg-gray-700">
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        <div class="flex items-center">
-                                                            <div class="h-8 w-8 flex-shrink-0">
-                                                                <div class="relative h-8 w-8">
-                                                                    <img class="rounded-full" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                                                    <span class="absolute right-0 bottom-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-gray-800"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ml-4">
-                                                                <div class="text-sm font-medium text-white">Jennifer Davis</div>
-                                                                <div class="text-sm text-gray-400">jennifer@example.com</div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm">
-                                                        <span class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">Customer</span>
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">12 minutes ago</td>
+                                                    <td class="whitespace-nowrap px-6 py-4 text-sm text-white">{{ formatTime(user.last_login_at) }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

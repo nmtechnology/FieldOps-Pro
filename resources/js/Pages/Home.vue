@@ -643,8 +643,8 @@ const consultationProduct = computed(() => {
                                     <div class="flex items-baseline gap-3 mb-2">
                                         <h4 class="text-lg font-medium text-white">Investment:</h4>
                                         <div class="flex items-baseline gap-2">
-                                            <span v-if="activeDiscount" class="text-lg text-gray-400 line-through">${{ featuredProduct.price.toFixed(2) }}</span>
-                                            <span class="text-2xl font-bold text-orange-400">${{ activeDiscount ? activeDiscount.discounted_price.toFixed(2) : featuredProduct.price.toFixed(2) }}</span>
+                                            <span v-if="activeDiscount" class="text-lg text-gray-400 line-through">${{ parseFloat(featuredProduct.price).toFixed(2) }}</span>
+                                            <span class="text-2xl font-bold text-orange-400">${{ activeDiscount ? parseFloat(activeDiscount.discounted_price).toFixed(2) : parseFloat(featuredProduct.price).toFixed(2) }}</span>
                                             <span v-if="activeDiscount" class="text-sm font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded">{{ activeDiscount.discount_percentage }}% OFF</span>
                                         </div>
                                     </div>

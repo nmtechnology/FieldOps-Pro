@@ -21,6 +21,7 @@ class Product extends Model
     protected $casts = [
         'content_sections' => 'array',
         'active' => 'boolean',
+        'price' => 'decimal:2',
     ];
 
     public function orders()
