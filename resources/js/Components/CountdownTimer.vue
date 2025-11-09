@@ -1,6 +1,6 @@
 <template>
-    <!-- Mobile: Full-width banner at top ABOVE navbar -->
-    <div v-if="showTimer" class="fixed top-0 left-0 right-0 md:top-4 md:left-auto md:right-4 md:max-w-sm z-[60] bg-gradient-to-r from-red-600 to-orange-600 text-white px-3 py-2 md:px-6 md:py-4 md:rounded-lg shadow-2xl border-b-2 md:border-2 border-yellow-400 animate-pulse-slow">
+    <!-- Mobile: Below navbar | Desktop: Top right corner -->
+    <div v-if="showTimer" class="fixed top-[150px] left-0 right-0 md:top-4 md:left-auto md:right-4 md:max-w-sm z-[60] bg-gradient-to-r from-red-600 to-orange-600 text-white px-3 py-2 md:px-6 md:py-4 md:rounded-lg shadow-2xl border-b-2 md:border-2 border-yellow-400 animate-pulse-slow">
         <div class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3">
             <svg class="w-4 h-4 md:w-6 md:h-6 text-yellow-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
