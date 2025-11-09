@@ -1,9 +1,11 @@
 <template>
     <!-- Full-width banner below navbar for screens < 1790px | Floating card top-right for larger screens -->
+    <!-- On md-2xl (768px-1789px): below navbar + announcement banner at top-[120px] -->
+    <!-- On sm (< 768px): below navbar at top-20 -->
     <div v-if="showTimer" 
          :class="[
              'fixed z-[60] bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-2xl animate-pulse-slow',
-             isLargeScreen ? 'top-4 right-4 max-w-sm rounded-lg px-6 py-4 border-2 border-yellow-400' : 'top-20 left-0 right-0 px-3 py-2 border-b-2 border-yellow-400'
+             isLargeScreen ? 'top-4 right-4 max-w-sm rounded-lg px-6 py-4 border-2 border-yellow-400' : 'top-20 md:top-[120px] 2xl:top-20 left-0 right-0 px-3 py-2 border-b-2 border-yellow-400'
          ]">
         <div :class="[
             'flex items-center space-x-2',

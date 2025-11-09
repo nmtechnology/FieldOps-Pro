@@ -135,13 +135,6 @@ const consultationProduct = computed(() => {
 
     <!-- Modern Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 w-ful backdrop-blur-md border-b border-white/10 shadow-2xl">
-        <!-- Top announcement bar (optional) -->
-        <div class="bg-gradient-to-r from-orange-600 to-orange-500 text-white text-center py-2 text-sm font-medium hidden md:block">
-            <span class="hidden sm:inline">🚀 Limited Time: Start Your Journey Today - </span>
-            <span class="font-bold">Earn $100k+ yearly</span>
-            <span class="hidden sm:inline"> in Your Spare Time</span>
-        </div>
-        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 backdrop-blur-md">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo and Brand -->
@@ -270,10 +263,17 @@ const consultationProduct = computed(() => {
             </div>
         </div>
     </nav>
+
+    <!-- Announcement Banner (visible 768px-1789px, below navbar) -->
+    <div class="fixed top-20 left-0 right-0 z-40 bg-gradient-to-r from-orange-600 to-orange-500 text-white text-center py-2 text-sm font-medium hidden md:block 2xl:hidden">
+        <span class="hidden lg:inline">🚀 Limited Time: Start Your Journey Today - </span>
+        <span class="font-bold">Earn $100k+ yearly</span>
+        <span class="hidden lg:inline"> in Your Spare Time</span>
+    </div>
     
     <div class="min-h-screen bg-gray-900 dark:bg-gray-900">
-        <!-- Spacer to account for fixed navbar + countdown banner (on screens < 1790px) -->
-        <div class="h-[120px] 2xl:h-24"><!-- 80px nav + 40px banner for < 1790px, 96px nav only for >= 1790px --></div>
+        <!-- Spacer to account for fixed navbar + announcement banner (768px-1789px) + countdown banner -->
+        <div class="h-20 md:h-[160px] 2xl:h-24"><!-- 80px nav | 80px nav + 40px announcement + 40px countdown | 96px nav --></div>
         
         <!-- Hero section -->
         <div class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
