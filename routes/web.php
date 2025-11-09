@@ -37,11 +37,26 @@ require __DIR__.'/auth.php';
 require __DIR__.'/admin_web.php';
 
 // Bot verification page - THE FIRST PAGE at root
-Route::get('/', function() {
+Route::get('/', function(Illuminate\Http\Request $request) {
     // If already verified, go to home
     if (session()->has('human_verified')) {
         return app(ProductController::class)->home();
     }
+    
+    // Track the visitor when they first land
+    try {
+        $trackingService = app(\App\Services\VisitorTrackingService::class);
+        $sessionId = $request->session()->getId();
+        
+        // Only create a record if one doesn't exist for this session
+        $existingVisitor = \App\Models\VisitorLog::where('session_id', $sessionId)->first();
+        if (!$existingVisitor) {
+            $trackingService->trackVisitor($request);
+        }
+    } catch (\Exception $e) {
+        \Log::error('Failed to track landing visitor: ' . $e->getMessage());
+    }
+    
     return Inertia::render('BotCheck');
 })->name('bot-check');
 
@@ -49,6 +64,36 @@ Route::post('/verify', function(Illuminate\Http\Request $request) {
     // Set verification in session
     $request->session()->put('human_verified', true);
     $request->session()->save();
+    
+    // Track and notify about verified visitor
+    try {
+        $trackingService = app(\App\Services\VisitorTrackingService::class);
+        $visitor = $trackingService->markAsVerified($request);
+        
+        // If no existing visitor record, create one
+        if (!$visitor) {
+            $visitor = $trackingService->trackVisitor($request);
+            $visitor->update([
+                'verified' => true,
+                'verified_at' => now(),
+            ]);
+        }
+        
+        // Send notification emails to all admin addresses
+        $adminEmails = config('mail.admin_emails', ['purchases@fieldengineerpro.com', 'patrick@nmtechnology.us']);
+        foreach ($adminEmails as $email) {
+            \Mail::to(trim($email))->send(new \App\Mail\VisitorVerified($visitor));
+        }
+        
+        \Log::info('Visitor verified and tracked', [
+            'visitor_id' => $visitor->id,
+            'ip' => $visitor->ip_address,
+            'location' => $visitor->city . ', ' . $visitor->country,
+        ]);
+    } catch (\Exception $e) {
+        \Log::error('Failed to track visitor: ' . $e->getMessage());
+        // Don't fail the verification if tracking fails
+    }
     
     // Log for debugging
     \Log::info('Verification set', [
