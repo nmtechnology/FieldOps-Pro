@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Discount;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -31,6 +32,11 @@ class DashboardController extends Controller
         $pendingOrders = Order::where('status', 'pending')->count();
         $totalRevenue = Order::where('status', 'completed')->sum('amount');
         $activeUsers = User::where('is_admin', false)->count();
+        
+        // Get discount statistics
+        $activeDiscounts = Discount::where('active', true)->count();
+        $inactiveDiscounts = Discount::where('active', false)->count();
+        $totalDiscounts = Discount::count();
 
         // Get recent orders with user names
         $recentOrders = Order::with('user')
@@ -67,7 +73,10 @@ class DashboardController extends Controller
                 'totalOrders' => $totalOrders,
                 'pendingOrders' => $pendingOrders,
                 'totalRevenue' => (float) $totalRevenue,
-                'activeUsers' => $activeUsers
+                'activeUsers' => $activeUsers,
+                'activeDiscounts' => $activeDiscounts,
+                'inactiveDiscounts' => $inactiveDiscounts,
+                'totalDiscounts' => $totalDiscounts
             ],
             'recentOrders' => $recentOrders,
             'onlineUsers' => $onlineUsers

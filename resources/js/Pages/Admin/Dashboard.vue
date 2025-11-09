@@ -7,7 +7,10 @@ const stats = ref({
     totalOrders: 0,
     pendingOrders: 0,
     totalRevenue: 0,
-    activeUsers: 0
+    activeUsers: 0,
+    activeDiscounts: 0,
+    inactiveDiscounts: 0,
+    totalDiscounts: 0
 });
 
 const recentOrders = ref([]);
@@ -30,7 +33,10 @@ onMounted(async () => {
             totalOrders: 0,
             pendingOrders: 0,
             totalRevenue: 0,
-            activeUsers: 0
+            activeUsers: 0,
+            activeDiscounts: 0,
+            inactiveDiscounts: 0,
+            totalDiscounts: 0
         };
         recentOrders.value = [];
         onlineUsers.value = [];
@@ -73,7 +79,7 @@ const formatTime = (timestamp) => {
         <div class="py-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <!-- Stats Cards -->
-                <div class="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
                     <!-- Total Orders -->
                     <div class="overflow-hidden rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 shadow">
                         <div class="px-4 py-5 sm:p-6">
@@ -137,6 +143,28 @@ const formatTime = (timestamp) => {
                                 <div class="ml-5 w-0 flex-1">
                                     <dt class="truncate text-sm font-medium text-gray-300">Active Users</dt>
                                     <dd class="mt-1 text-3xl font-semibold text-white">{{ stats?.activeUsers || 0 }}</dd>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Discounts -->
+                    <div class="overflow-hidden rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 shadow">
+                        <div class="px-4 py-5 sm:p-6">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 rounded-md bg-orange-600 p-3">
+                                    <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                    </svg>
+                                </div>
+                                <div class="ml-5 w-0 flex-1">
+                                    <dt class="truncate text-sm font-medium text-gray-300">Active Discounts</dt>
+                                    <dd class="mt-1 text-2xl font-semibold text-white">
+                                        <span class="text-green-400">{{ stats?.activeDiscounts || 0 }}</span>
+                                        <span class="text-gray-500 text-base"> / </span>
+                                        <span class="text-gray-400 text-base">{{ stats?.totalDiscounts || 0 }}</span>
+                                    </dd>
+                                    <p class="text-xs text-gray-400 mt-1">{{ stats?.inactiveDiscounts || 0 }} inactive</p>
                                 </div>
                             </div>
                         </div>
