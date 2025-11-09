@@ -84,6 +84,44 @@ class ProductController extends Controller
         // Get all active products
         $products = Product::where('active', true)->get();
         
+        // Get the first active discount that is currently valid
+        $activeDiscount = Discount::where('active', true)
+            ->where(function ($query) {
+                $query->whereNull('valid_from')
+                      ->orWhere('valid_from', '<=', now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('valid_until')
+                      ->orWhere('valid_until', '>=', now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('max_uses')
+                      ->orWhereRaw('used < max_uses');
+            })
+            ->first();
+        
+        // Apply discount to products if active discount exists
+        if ($activeDiscount) {
+            $products = $products->map(function($product) use ($activeDiscount) {
+                $originalPrice = $product->price;
+                
+                if ($activeDiscount->type === 'percentage') {
+                    $discountAmount = ($originalPrice * $activeDiscount->value) / 100;
+                } else {
+                    $discountAmount = $activeDiscount->value;
+                }
+                
+                $product->original_price = $originalPrice;
+                $product->discounted_price = max(0, $originalPrice - $discountAmount);
+                $product->discount_percentage = $activeDiscount->type === 'percentage' 
+                    ? $activeDiscount->value 
+                    : round(($discountAmount / $originalPrice) * 100, 0);
+                $product->has_active_discount = true;
+                
+                return $product;
+            });
+        }
+        
         // Get user's purchased products
         $userProducts = $user->orders()
             ->where('status', 'completed')

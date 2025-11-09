@@ -93,12 +93,23 @@ const formatCurrency = (amount) => {
                             
                             <!-- Price -->
                             <div class="flex items-baseline gap-2 mb-4">
-                                <span class="text-3xl font-bold text-orange-400">{{ formatCurrency(product.price) }}</span>
-                                <span v-if="product.old_price" class="text-lg line-through text-gray-500">
-                                    {{ formatCurrency(product.old_price) }}
+                                <!-- Show discounted price if active discount exists -->
+                                <span v-if="product.has_active_discount" class="text-3xl font-bold text-orange-400">
+                                    {{ formatCurrency(product.discounted_price) }}
                                 </span>
-                                <span v-if="product.old_price" class="ml-auto bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs font-bold">
-                                    SAVE {{ Math.round(((product.old_price - product.price) / product.old_price) * 100) }}%
+                                <!-- Show regular price prominently if no discount -->
+                                <span v-else class="text-3xl font-bold text-orange-400">
+                                    {{ formatCurrency(product.price) }}
+                                </span>
+                                
+                                <!-- Show original price with strikethrough if discount active -->
+                                <span v-if="product.has_active_discount" class="text-lg line-through text-gray-500">
+                                    {{ formatCurrency(product.original_price) }}
+                                </span>
+                                
+                                <!-- Show discount percentage badge -->
+                                <span v-if="product.has_active_discount" class="ml-auto bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs font-bold">
+                                    SAVE {{ Math.round(product.discount_percentage) }}%
                                 </span>
                             </div>
                             
