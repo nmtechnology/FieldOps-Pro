@@ -1,16 +1,38 @@
 <template>
-    <!-- Mobile: Below navbar | Desktop: Top right corner -->
-    <div v-if="showTimer" class="fixed top-[150px] left-0 right-0 md:top-4 md:left-auto md:right-4 md:max-w-sm z-[60] bg-gradient-to-r from-red-600 to-orange-600 text-white px-3 py-2 md:px-6 md:py-4 md:rounded-lg shadow-2xl border-b-2 md:border-2 border-yellow-400 animate-pulse-slow">
-        <div class="flex items-center justify-center md:justify-start space-x-2 md:space-x-3">
-            <svg class="w-4 h-4 md:w-6 md:h-6 text-yellow-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+    <!-- Full-width banner below navbar for screens < 1790px | Floating card top-right for larger screens -->
+    <div v-if="showTimer" 
+         :class="[
+             'fixed z-[60] bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-2xl animate-pulse-slow',
+             isLargeScreen ? 'top-4 right-4 max-w-sm rounded-lg px-6 py-4 border-2 border-yellow-400' : 'top-20 left-0 right-0 px-3 py-2 border-b-2 border-yellow-400'
+         ]">
+        <div :class="[
+            'flex items-center space-x-2',
+            isLargeScreen ? 'justify-start space-x-3' : 'justify-center'
+        ]">
+            <svg :class="[
+                'text-yellow-300 flex-shrink-0',
+                isLargeScreen ? 'w-6 h-6' : 'w-4 h-4'
+            ]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
             </svg>
-            <div class="min-w-0 flex flex-col md:block">
-                <div class="text-[10px] md:text-xs font-semibold uppercase tracking-wide">🎉 End of Year Sale!</div>
-                <div class="text-base md:text-2xl font-black tabular-nums">
+            <div :class="[
+                'min-w-0',
+                isLargeScreen ? 'block' : 'flex flex-col'
+            ]">
+                <div :class="[
+                    'font-semibold uppercase tracking-wide',
+                    isLargeScreen ? 'text-xs' : 'text-[10px]'
+                ]">🎉 End of Year Sale!</div>
+                <div :class="[
+                    'font-black tabular-nums',
+                    isLargeScreen ? 'text-2xl' : 'text-base'
+                ]">
                     {{ formattedTime }}
                 </div>
-                <div class="text-[10px] md:text-xs opacity-90 font-bold md:mt-1">💥 50% OFF - Ends Dec 31st!</div>
+                <div :class="[
+                    'opacity-90 font-bold',
+                    isLargeScreen ? 'text-xs mt-1' : 'text-[10px]'
+                ]">💥 50% OFF - Ends Dec 31st!</div>
             </div>
         </div>
     </div>
@@ -24,6 +46,7 @@ const days = ref(0);
 const hours = ref(0);
 const minutes = ref(0);
 const seconds = ref(0);
+const isLargeScreen = ref(false);
 let interval = null;
 
 // Target: December 31, 2025 at 23:59:59
@@ -38,6 +61,10 @@ const formattedTime = computed(() => {
         return `${minutes.value}m ${seconds.value}s`;
     }
 });
+
+const checkScreenSize = () => {
+    isLargeScreen.value = window.innerWidth >= 1790;
+};
 
 const updateCountdown = () => {
     const now = Date.now();
@@ -66,10 +93,13 @@ const startCountdown = () => {
 };
 
 onMounted(() => {
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
     startCountdown();
 });
 
 onUnmounted(() => {
+    window.removeEventListener('resize', checkScreenSize);
     if (interval) {
         clearInterval(interval);
     }

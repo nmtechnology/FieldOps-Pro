@@ -272,8 +272,8 @@ const consultationProduct = computed(() => {
     </nav>
     
     <div class="min-h-screen bg-gray-900 dark:bg-gray-900">
-        <!-- Spacer to account for fixed navbar -->
-        <div class="h-20 md:h-24"><!-- 80px nav on mobile, 96px (24*4) nav on desktop --></div>
+        <!-- Spacer to account for fixed navbar + countdown banner (on screens < 1790px) -->
+        <div class="h-[120px] 2xl:h-24"><!-- 80px nav + 40px banner for < 1790px, 96px nav only for >= 1790px --></div>
         
         <!-- Hero section -->
         <div class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
