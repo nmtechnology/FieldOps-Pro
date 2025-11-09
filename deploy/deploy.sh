@@ -18,10 +18,10 @@ echo "=========================================="
 echo "🚀 Deploying FieldOps-Pro"
 echo "=========================================="
 
-# Check if running as deployer user
-if [ "$USER" != "deployer" ]; then
-    echo "❌ This script must be run as the 'deployer' user"
-    echo "   Run: sudo -u deployer bash deploy.sh"
+# Check if running as nmtechnology user
+if [ "$USER" != "nmtechnology" ]; then
+    echo "❌ This script must be run as the 'nmtechnology' user"
+    echo "   Run: sudo -u nmtechnology bash deploy.sh"
     exit 1
 fi
 
@@ -50,7 +50,7 @@ npm run build
 
 # Set permissions
 echo "🔒 Setting permissions..."
-sudo chown -R deployer:www-data $APP_DIR
+sudo chown -R nmtechnology:www-data $APP_DIR
 sudo chmod -R 755 $APP_DIR
 sudo chmod -R 775 $APP_DIR/storage
 sudo chmod -R 775 $APP_DIR/bootstrap/cache

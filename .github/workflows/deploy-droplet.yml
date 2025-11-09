@@ -15,7 +15,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.DROPLET_HOST }}
-          username: ${{ secrets.DROPLET_USER }}
+          username: nmtechnology
           key: ${{ secrets.DROPLET_SSH_KEY }}
           script: |
             cd /var/www/fieldops-pro

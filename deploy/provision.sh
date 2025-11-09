@@ -82,16 +82,17 @@ sed -i 's/max_execution_time = .*/max_execution_time = 300/' /etc/php/8.2/fpm/ph
 
 # Create deployment user
 echo "👤 Creating deployment user..."
-if ! id -u deployer > /dev/null 2>&1; then
-    useradd -m -s /bin/bash deployer
-    usermod -aG www-data deployer
-    echo "deployer ALL=(ALL) NOPASSWD: /usr/sbin/service php8.2-fpm reload, /usr/sbin/service nginx reload, /usr/bin/supervisorctl" | tee /etc/sudoers.d/deployer
+if ! id -u nmtechnology > /dev/null 2>&1; then
+    useradd -m -s /bin/bash nmtechnology
+    usermod -aG www-data nmtechnology
+    usermod -aG sudo nmtechnology
+    echo "nmtechnology ALL=(ALL) NOPASSWD: /usr/sbin/service php8.2-fpm reload, /usr/sbin/service nginx reload, /usr/bin/supervisorctl" | tee /etc/sudoers.d/nmtechnology
 fi
 
 # Create application directory
 echo "📁 Creating application directory..."
 mkdir -p /var/www/fieldops-pro
-chown -R deployer:www-data /var/www/fieldops-pro
+chown -R nmtechnology:www-data /var/www/fieldops-pro
 
 # Setup PostgreSQL database
 echo "🗄️ Setting up PostgreSQL..."
@@ -126,13 +127,13 @@ ufw allow 22/tcp    # SSH
 ufw allow 80/tcp    # HTTP
 ufw allow 443/tcp   # HTTPS
 
-# Create SSH directory for deployer
-echo "🔑 Setting up SSH for deployer..."
-mkdir -p /home/deployer/.ssh
-chmod 700 /home/deployer/.ssh
-touch /home/deployer/.ssh/authorized_keys
-chmod 600 /home/deployer/.ssh/authorized_keys
-chown -R deployer:deployer /home/deployer/.ssh
+# Create SSH directory for nmtechnology
+echo "🔑 Setting up SSH for nmtechnology..."
+mkdir -p /home/nmtechnology/.ssh
+chmod 700 /home/nmtechnology/.ssh
+touch /home/nmtechnology/.ssh/authorized_keys
+chmod 600 /home/nmtechnology/.ssh/authorized_keys
+chown -R nmtechnology:nmtechnology /home/nmtechnology/.ssh
 
 echo ""
 echo "=========================================="
@@ -140,7 +141,7 @@ echo "✅ Server provisioning completed!"
 echo "=========================================="
 echo ""
 echo "Next steps:"
-echo "1. Add your SSH public key to: /home/deployer/.ssh/authorized_keys"
+echo "1. Add your SSH public key to: /home/nmtechnology/.ssh/authorized_keys"
 echo "2. Change PostgreSQL password in this script and re-run database setup"
 echo "3. Update database credentials in your .env file"
 echo "4. Run deploy.sh to deploy the application"
