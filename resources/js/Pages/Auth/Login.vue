@@ -31,12 +31,12 @@ const submit = () => {
 
 <template>
     <div class="relative min-h-screen bg-black flex flex-col items-center pt-6 sm:justify-center sm:pt-0 overflow-hidden">
-        <!-- 3D Matrix Grid Background - Fixed Position -->
+        <!-- 3D Matrix Grid Background - Close-up with Depth -->
         <div class="fixed inset-0 grid-container pointer-events-none">
             <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
                 <defs>
                     <filter id="grid-glow">
-                        <feGaussianBlur stdDeviation="0.8" result="coloredBlur"/>
+                        <feGaussianBlur stdDeviation="1.2" result="coloredBlur"/>
                         <feMerge>
                             <feMergeNode in="coloredBlur"/>
                             <feMergeNode in="coloredBlur"/>
@@ -46,42 +46,47 @@ const submit = () => {
                 </defs>
                 
                 <g class="grid-lines" filter="url(#grid-glow)">
-                    <!-- HORIZONTAL LINES - Thicker and more visible -->
-                    <line x1="0" y1="95" x2="100" y2="95" stroke="#0ea5e9" stroke-width="0.8" opacity="1"/>
-                    <line x1="0" y1="90" x2="100" y2="90" stroke="#0ea5e9" stroke-width="0.7" opacity="0.95"/>
-                    <line x1="0" y1="85" x2="100" y2="85" stroke="#0ea5e9" stroke-width="0.6" opacity="0.9"/>
-                    <line x1="0" y1="80" x2="100" y2="80" stroke="#0ea5e9" stroke-width="0.6" opacity="0.85"/>
-                    <line x1="0" y1="75" x2="100" y2="75" stroke="#0ea5e9" stroke-width="0.5" opacity="0.8"/>
-                    <line x1="0" y1="70" x2="100" y2="70" stroke="#0ea5e9" stroke-width="0.5" opacity="0.7"/>
-                    <line x1="0" y1="65" x2="100" y2="65" stroke="#0ea5e9" stroke-width="0.4" opacity="0.6"/>
-                    <line x1="0" y1="60" x2="100" y2="60" stroke="#0ea5e9" stroke-width="0.4" opacity="0.5"/>
-                    <line x1="0" y1="55" x2="100" y2="55" stroke="#0ea5e9" stroke-width="0.3" opacity="0.4"/>
-                    <line x1="0" y1="50" x2="100" y2="50" stroke="#0ea5e9" stroke-width="0.3" opacity="0.35"/>
-                    <line x1="0" y1="45" x2="100" y2="45" stroke="#0ea5e9" stroke-width="0.2" opacity="0.3"/>
-                    <line x1="0" y1="40" x2="100" y2="40" stroke="#0ea5e9" stroke-width="0.2" opacity="0.25"/>
-                    <line x1="0" y1="35" x2="100" y2="35" stroke="#0ea5e9" stroke-width="0.15" opacity="0.2"/>
-                    <line x1="0" y1="30" x2="100" y2="30" stroke="#0ea5e9" stroke-width="0.15" opacity="0.15"/>
+                    <!-- HORIZONTAL LINES - Large in foreground, fading to distance -->
+                    <line x1="0" y1="100" x2="100" y2="100" stroke="#0ea5e9" stroke-width="2" opacity="1"/>
+                    <line x1="0" y1="95" x2="100" y2="95" stroke="#0ea5e9" stroke-width="1.8" opacity="0.95"/>
+                    <line x1="0" y1="90" x2="100" y2="90" stroke="#0ea5e9" stroke-width="1.6" opacity="0.9"/>
+                    <line x1="0" y1="85" x2="100" y2="85" stroke="#0ea5e9" stroke-width="1.4" opacity="0.85"/>
+                    <line x1="0" y1="80" x2="100" y2="80" stroke="#0ea5e9" stroke-width="1.2" opacity="0.8"/>
+                    <line x1="0" y1="75" x2="100" y2="75" stroke="#0ea5e9" stroke-width="1" opacity="0.75"/>
+                    <line x1="0" y1="70" x2="100" y2="70" stroke="#0ea5e9" stroke-width="0.9" opacity="0.7"/>
+                    <line x1="0" y1="65" x2="100" y2="65" stroke="#0ea5e9" stroke-width="0.8" opacity="0.65"/>
+                    <line x1="0" y1="60" x2="100" y2="60" stroke="#0ea5e9" stroke-width="0.7" opacity="0.6"/>
+                    <line x1="0" y1="55" x2="100" y2="55" stroke="#0ea5e9" stroke-width="0.6" opacity="0.55"/>
+                    <line x1="0" y1="50" x2="100" y2="50" stroke="#0ea5e9" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="0" y1="45" x2="100" y2="45" stroke="#0ea5e9" stroke-width="0.4" opacity="0.45"/>
+                    <line x1="0" y1="40" x2="100" y2="40" stroke="#0ea5e9" stroke-width="0.3" opacity="0.4"/>
+                    <line x1="0" y1="35" x2="100" y2="35" stroke="#0ea5e9" stroke-width="0.25" opacity="0.35"/>
+                    <line x1="0" y1="30" x2="100" y2="30" stroke="#0ea5e9" stroke-width="0.2" opacity="0.3"/>
+                    <line x1="0" y1="25" x2="100" y2="25" stroke="#0ea5e9" stroke-width="0.15" opacity="0.25"/>
+                    <line x1="0" y1="20" x2="100" y2="20" stroke="#0ea5e9" stroke-width="0.1" opacity="0.2"/>
                     
-                    <!-- VERTICAL LINES - Thicker and wider spacing -->
-                    <line x1="5" y1="0" x2="5" y2="100" stroke="#0ea5e9" stroke-width="0.6" opacity="0.8"/>
-                    <line x1="10" y1="0" x2="10" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.75"/>
-                    <line x1="15" y1="0" x2="15" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.7"/>
-                    <line x1="20" y1="0" x2="20" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.65"/>
-                    <line x1="25" y1="0" x2="25" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.6"/>
-                    <line x1="30" y1="0" x2="30" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.55"/>
-                    <line x1="35" y1="0" x2="35" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.5"/>
-                    <line x1="40" y1="0" x2="40" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.45"/>
-                    <line x1="45" y1="0" x2="45" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.4"/>
-                    <line x1="50" y1="0" x2="50" y2="100" stroke="#0ea5e9" stroke-width="0.7" opacity="0.85"/>
-                    <line x1="55" y1="0" x2="55" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.4"/>
-                    <line x1="60" y1="0" x2="60" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.45"/>
-                    <line x1="65" y1="0" x2="65" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.5"/>
-                    <line x1="70" y1="0" x2="70" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.55"/>
-                    <line x1="75" y1="0" x2="75" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.6"/>
-                    <line x1="80" y1="0" x2="80" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.65"/>
-                    <line x1="85" y1="0" x2="85" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.7"/>
-                    <line x1="90" y1="0" x2="90" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.75"/>
-                    <line x1="95" y1="0" x2="95" y2="100" stroke="#0ea5e9" stroke-width="0.6" opacity="0.8"/>
+                    <!-- VERTICAL LINES - Large edges, smaller in center (perspective) -->
+                    <line x1="0" y1="0" x2="0" y2="100" stroke="#0ea5e9" stroke-width="1.5" opacity="0.9"/>
+                    <line x1="5" y1="0" x2="5" y2="100" stroke="#0ea5e9" stroke-width="1.3" opacity="0.85"/>
+                    <line x1="10" y1="0" x2="10" y2="100" stroke="#0ea5e9" stroke-width="1.1" opacity="0.8"/>
+                    <line x1="15" y1="0" x2="15" y2="100" stroke="#0ea5e9" stroke-width="0.9" opacity="0.75"/>
+                    <line x1="20" y1="0" x2="20" y2="100" stroke="#0ea5e9" stroke-width="0.8" opacity="0.7"/>
+                    <line x1="25" y1="0" x2="25" y2="100" stroke="#0ea5e9" stroke-width="0.7" opacity="0.65"/>
+                    <line x1="30" y1="0" x2="30" y2="100" stroke="#0ea5e9" stroke-width="0.6" opacity="0.6"/>
+                    <line x1="35" y1="0" x2="35" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.55"/>
+                    <line x1="40" y1="0" x2="40" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="45" y1="0" x2="45" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.45"/>
+                    <line x1="50" y1="0" x2="50" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.4"/>
+                    <line x1="55" y1="0" x2="55" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.45"/>
+                    <line x1="60" y1="0" x2="60" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="65" y1="0" x2="65" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.55"/>
+                    <line x1="70" y1="0" x2="70" y2="100" stroke="#0ea5e9" stroke-width="0.6" opacity="0.6"/>
+                    <line x1="75" y1="0" x2="75" y2="100" stroke="#0ea5e9" stroke-width="0.7" opacity="0.65"/>
+                    <line x1="80" y1="0" x2="80" y2="100" stroke="#0ea5e9" stroke-width="0.8" opacity="0.7"/>
+                    <line x1="85" y1="0" x2="85" y2="100" stroke="#0ea5e9" stroke-width="0.9" opacity="0.75"/>
+                    <line x1="90" y1="0" x2="90" y2="100" stroke="#0ea5e9" stroke-width="1.1" opacity="0.8"/>
+                    <line x1="95" y1="0" x2="95" y2="100" stroke="#0ea5e9" stroke-width="1.3" opacity="0.85"/>
+                    <line x1="100" y1="0" x2="100" y2="100" stroke="#0ea5e9" stroke-width="1.5" opacity="0.9"/>
                 </g>
             </svg>
         </div>
@@ -172,42 +177,42 @@ const submit = () => {
 </template>
 
 <style scoped>
-/* 3D Perspective Grid with Contour */
+/* 3D Perspective Grid - Close-up with Deep Vanishing Point */
 .grid-container {
-    perspective: 300px;
-    perspective-origin: 50% 70%;
+    perspective: 200px;
+    perspective-origin: 50% 85%;
     overflow: hidden;
 }
 
 .grid-container svg {
     transform-style: preserve-3d;
-    transform: rotateX(60deg) translateY(-20%);
-    transform-origin: center center;
+    transform: rotateX(65deg) translateY(10%) scale(1.8);
+    transform-origin: center bottom;
 }
 
-/* Smooth upward animation */
+/* Smooth upward animation creating movement */
 @keyframes grid-flow {
     0% {
-        transform: rotateX(60deg) translateY(-20%);
+        transform: rotateX(65deg) translateY(10%) scale(1.8);
     }
     100% {
-        transform: rotateX(60deg) translateY(-22%);
+        transform: rotateX(65deg) translateY(8%) scale(1.8);
     }
 }
 
 .grid-lines {
-    animation: grid-flow 6s linear infinite;
+    animation: grid-flow 8s linear infinite;
 }
 
-/* Horizon glow effect */
+/* Enhanced horizon glow for depth */
 .grid-container::after {
     content: '';
     position: absolute;
-    top: 30%;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 40%;
-    background: radial-gradient(ellipse at center, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+    height: 60%;
+    background: radial-gradient(ellipse at center bottom, rgba(14, 165, 233, 0.2) 0%, rgba(14, 165, 233, 0.05) 40%, transparent 70%);
     pointer-events: none;
 }
 </style>
