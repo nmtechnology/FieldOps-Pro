@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerProductController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -69,6 +70,14 @@ Route::get('/home', [ProductController::class, 'home'])
 Route::get('/terms', function() {
     return Inertia::render('TermsAndConditions');
 })->middleware('verify.human')->name('terms');
+
+// Contact/Support
+Route::get('/contact', [ContactController::class, 'index'])
+    ->middleware('verify.human')
+    ->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware('verify.human')
+    ->name('contact.store');
 
 // Guest checkout routes - all protected by verification
 Route::prefix('guest')->name('guest.')->middleware('verify.human')->group(function() {

@@ -1296,19 +1296,16 @@ const consultationProduct = computed(() => {
             <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
                 <nav class="flex flex-wrap justify-center -mx-5 -my-2">
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-white hover:text-orange-400">About</a>
+                        <a href="#about" class="text-base text-white hover:text-orange-400">About</a>
                     </div>
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-white hover:text-orange-400">Products</a>
+                        <Link :href="route('home')" class="text-base text-white hover:text-orange-400">Products</Link>
                     </div>
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-white hover:text-orange-400">Contact</a>
+                        <Link :href="route('contact')" class="text-base text-white hover:text-orange-400">Contact Support</Link>
                     </div>
                     <div class="px-5 py-2">
-                        <a href="#" class="text-base text-white hover:text-orange-400">Terms</a>
-                    </div>
-                    <div class="px-5 py-2">
-                        <a href="#" class="text-base text-white hover:text-orange-400">Privacy</a>
+                        <Link :href="route('terms')" class="text-base text-white hover:text-orange-400">Terms</Link>
                     </div>
                 </nav>
                 <div class="mt-8 flex justify-center space-x-6">

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Order;
+use App\Mail\OrderPlacedAdmin;
+use App\Mail\PurchaseConfirmation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Exception\SignatureVerificationException;
 use Stripe\Webhook;
 use Stripe\Stripe;
@@ -70,6 +73,24 @@ class StripeWebhookController extends Controller
             if ($order) {
                 $order->status = 'completed';
                 $order->save();
+                
+                // Send email notifications
+                try {
+                    // Notify admin
+                    Mail::to(config('mail.admin_email', 'admin@fieldengineerpro.com'))
+                        ->send(new OrderPlacedAdmin($order));
+                    
+                    // Notify customer
+                    if ($order->user && $order->user->email) {
+                        Mail::to($order->user->email)
+                            ->send(new PurchaseConfirmation($order));
+                    }
+                    
+                    Log::info('Order notification emails sent for order #' . $order->order_number);
+                } catch (\Exception $e) {
+                    Log::error('Failed to send order emails: ' . $e->getMessage());
+                    // Don't fail the webhook if email fails
+                }
             }
         }
     }

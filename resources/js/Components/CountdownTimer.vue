@@ -1,15 +1,15 @@
 <template>
-    <div v-if="showTimer" class="fixed top-4 right-4 z-50 bg-gradient-to-r from-red-600 to-orange-600 text-white px-6 py-4 rounded-lg shadow-2xl border-2 border-yellow-400 animate-pulse-slow">
-        <div class="flex items-center space-x-3">
-            <svg class="w-6 h-6 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
+    <div v-if="showTimer" class="fixed top-2 right-2 md:top-4 md:right-4 z-50 bg-gradient-to-r from-red-600 to-orange-600 text-white px-3 py-2 md:px-6 md:py-4 rounded-lg shadow-2xl border-2 border-yellow-400 animate-pulse-slow max-w-[95vw] md:max-w-none">
+        <div class="flex items-center space-x-2 md:space-x-3">
+            <svg class="w-4 h-4 md:w-6 md:h-6 text-yellow-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
             </svg>
-            <div>
-                <div class="text-xs font-semibold uppercase tracking-wide">🎉 End of Year Sale!</div>
-                <div class="text-2xl font-black tabular-nums">
+            <div class="min-w-0">
+                <div class="text-[10px] md:text-xs font-semibold uppercase tracking-wide truncate">🎉 End of Year Sale!</div>
+                <div class="text-lg md:text-2xl font-black tabular-nums">
                     {{ formattedTime }}
                 </div>
-                <div class="text-xs opacity-90 font-bold">💥 50% OFF - Sale Ends Dec 31st!</div>
+                <div class="text-[10px] md:text-xs opacity-90 font-bold truncate">💥 50% OFF - Sale Ends Dec 31st!</div>
             </div>
         </div>
     </div>
