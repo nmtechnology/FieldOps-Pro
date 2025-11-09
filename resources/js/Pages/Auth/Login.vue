@@ -31,13 +31,14 @@ const submit = () => {
 
 <template>
     <div class="relative min-h-screen bg-black flex flex-col items-center pt-6 sm:justify-center sm:pt-0 overflow-hidden">
-        <!-- Dense Tron-Style 3D Matrix Grid -->
-        <div class="absolute inset-0 grid-container">
-            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <!-- 3D Matrix Grid Background - Fixed Position -->
+        <div class="fixed inset-0 grid-container pointer-events-none">
+            <svg class="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
                 <defs>
                     <filter id="grid-glow">
-                        <feGaussianBlur stdDeviation="0.3" result="coloredBlur"/>
+                        <feGaussianBlur stdDeviation="0.8" result="coloredBlur"/>
                         <feMerge>
+                            <feMergeNode in="coloredBlur"/>
                             <feMergeNode in="coloredBlur"/>
                             <feMergeNode in="SourceGraphic"/>
                         </feMerge>
@@ -45,91 +46,42 @@ const submit = () => {
                 </defs>
                 
                 <g class="grid-lines" filter="url(#grid-glow)">
-                    <!-- HORIZONTAL LINES - Many lines creating dense grid -->
-                    <line x1="0" y1="100" x2="100" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="1"/>
-                    <line x1="0" y1="98" x2="100" y2="98" stroke="#0ea5e9" stroke-width="0.25" opacity="0.95"/>
-                    <line x1="0" y1="96" x2="100" y2="96" stroke="#0ea5e9" stroke-width="0.25" opacity="0.9"/>
-                    <line x1="0" y1="94" x2="100" y2="94" stroke="#0ea5e9" stroke-width="0.25" opacity="0.85"/>
-                    <line x1="0" y1="92" x2="100" y2="92" stroke="#0ea5e9" stroke-width="0.25" opacity="0.8"/>
-                    <line x1="0" y1="90" x2="100" y2="90" stroke="#0ea5e9" stroke-width="0.25" opacity="0.75"/>
-                    <line x1="0" y1="88" x2="100" y2="88" stroke="#0ea5e9" stroke-width="0.2" opacity="0.7"/>
-                    <line x1="0" y1="86" x2="100" y2="86" stroke="#0ea5e9" stroke-width="0.2" opacity="0.65"/>
-                    <line x1="0" y1="84" x2="100" y2="84" stroke="#0ea5e9" stroke-width="0.2" opacity="0.6"/>
-                    <line x1="0" y1="82" x2="100" y2="82" stroke="#0ea5e9" stroke-width="0.2" opacity="0.55"/>
-                    <line x1="0" y1="80" x2="100" y2="80" stroke="#0ea5e9" stroke-width="0.2" opacity="0.5"/>
-                    <line x1="0" y1="78" x2="100" y2="78" stroke="#0ea5e9" stroke-width="0.15" opacity="0.48"/>
-                    <line x1="0" y1="76" x2="100" y2="76" stroke="#0ea5e9" stroke-width="0.15" opacity="0.46"/>
-                    <line x1="0" y1="74" x2="100" y2="74" stroke="#0ea5e9" stroke-width="0.15" opacity="0.44"/>
-                    <line x1="0" y1="72" x2="100" y2="72" stroke="#0ea5e9" stroke-width="0.15" opacity="0.42"/>
-                    <line x1="0" y1="70" x2="100" y2="70" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="0" y1="68" x2="100" y2="68" stroke="#0ea5e9" stroke-width="0.15" opacity="0.38"/>
-                    <line x1="0" y1="66" x2="100" y2="66" stroke="#0ea5e9" stroke-width="0.15" opacity="0.36"/>
-                    <line x1="0" y1="64" x2="100" y2="64" stroke="#0ea5e9" stroke-width="0.15" opacity="0.34"/>
-                    <line x1="0" y1="62" x2="100" y2="62" stroke="#0ea5e9" stroke-width="0.15" opacity="0.32"/>
-                    <line x1="0" y1="60" x2="100" y2="60" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="0" y1="58" x2="100" y2="58" stroke="#0ea5e9" stroke-width="0.1" opacity="0.28"/>
-                    <line x1="0" y1="56" x2="100" y2="56" stroke="#0ea5e9" stroke-width="0.1" opacity="0.26"/>
-                    <line x1="0" y1="54" x2="100" y2="54" stroke="#0ea5e9" stroke-width="0.1" opacity="0.24"/>
-                    <line x1="0" y1="52" x2="100" y2="52" stroke="#0ea5e9" stroke-width="0.1" opacity="0.22"/>
-                    <line x1="0" y1="50" x2="100" y2="50" stroke="#0ea5e9" stroke-width="0.1" opacity="0.2"/>
-                    <line x1="0" y1="48" x2="100" y2="48" stroke="#0ea5e9" stroke-width="0.1" opacity="0.18"/>
-                    <line x1="0" y1="46" x2="100" y2="46" stroke="#0ea5e9" stroke-width="0.1" opacity="0.16"/>
-                    <line x1="0" y1="44" x2="100" y2="44" stroke="#0ea5e9" stroke-width="0.1" opacity="0.14"/>
-                    <line x1="0" y1="42" x2="100" y2="42" stroke="#0ea5e9" stroke-width="0.1" opacity="0.12"/>
-                    <line x1="0" y1="40" x2="100" y2="40" stroke="#0ea5e9" stroke-width="0.1" opacity="0.1"/>
+                    <!-- HORIZONTAL LINES - Thicker and more visible -->
+                    <line x1="0" y1="95" x2="100" y2="95" stroke="#0ea5e9" stroke-width="0.8" opacity="1"/>
+                    <line x1="0" y1="90" x2="100" y2="90" stroke="#0ea5e9" stroke-width="0.7" opacity="0.95"/>
+                    <line x1="0" y1="85" x2="100" y2="85" stroke="#0ea5e9" stroke-width="0.6" opacity="0.9"/>
+                    <line x1="0" y1="80" x2="100" y2="80" stroke="#0ea5e9" stroke-width="0.6" opacity="0.85"/>
+                    <line x1="0" y1="75" x2="100" y2="75" stroke="#0ea5e9" stroke-width="0.5" opacity="0.8"/>
+                    <line x1="0" y1="70" x2="100" y2="70" stroke="#0ea5e9" stroke-width="0.5" opacity="0.7"/>
+                    <line x1="0" y1="65" x2="100" y2="65" stroke="#0ea5e9" stroke-width="0.4" opacity="0.6"/>
+                    <line x1="0" y1="60" x2="100" y2="60" stroke="#0ea5e9" stroke-width="0.4" opacity="0.5"/>
+                    <line x1="0" y1="55" x2="100" y2="55" stroke="#0ea5e9" stroke-width="0.3" opacity="0.4"/>
+                    <line x1="0" y1="50" x2="100" y2="50" stroke="#0ea5e9" stroke-width="0.3" opacity="0.35"/>
+                    <line x1="0" y1="45" x2="100" y2="45" stroke="#0ea5e9" stroke-width="0.2" opacity="0.3"/>
+                    <line x1="0" y1="40" x2="100" y2="40" stroke="#0ea5e9" stroke-width="0.2" opacity="0.25"/>
+                    <line x1="0" y1="35" x2="100" y2="35" stroke="#0ea5e9" stroke-width="0.15" opacity="0.2"/>
+                    <line x1="0" y1="30" x2="100" y2="30" stroke="#0ea5e9" stroke-width="0.15" opacity="0.15"/>
                     
-                    <!-- VERTICAL LINES - Dense spacing -->
-                    <line x1="0" y1="0" x2="0" y2="100" stroke="#0ea5e9" stroke-width="0.25" opacity="0.8"/>
-                    <line x1="2" y1="0" x2="2" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.7"/>
-                    <line x1="4" y1="0" x2="4" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.65"/>
-                    <line x1="6" y1="0" x2="6" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.6"/>
-                    <line x1="8" y1="0" x2="8" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.55"/>
-                    <line x1="10" y1="0" x2="10" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.5"/>
-                    <line x1="12" y1="0" x2="12" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.45"/>
-                    <line x1="14" y1="0" x2="14" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="16" y1="0" x2="16" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="18" y1="0" x2="18" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="20" y1="0" x2="20" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="22" y1="0" x2="22" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="24" y1="0" x2="24" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="26" y1="0" x2="26" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="28" y1="0" x2="28" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="30" y1="0" x2="30" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="32" y1="0" x2="32" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="34" y1="0" x2="34" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="36" y1="0" x2="36" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="38" y1="0" x2="38" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="40" y1="0" x2="40" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="42" y1="0" x2="42" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="44" y1="0" x2="44" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="46" y1="0" x2="46" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="48" y1="0" x2="48" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="50" y1="0" x2="50" y2="100" stroke="#0ea5e9" stroke-width="0.25" opacity="0.6"/>
-                    <line x1="52" y1="0" x2="52" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="54" y1="0" x2="54" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="56" y1="0" x2="56" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="58" y1="0" x2="58" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="60" y1="0" x2="60" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="62" y1="0" x2="62" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="64" y1="0" x2="64" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="66" y1="0" x2="66" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="68" y1="0" x2="68" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.3"/>
-                    <line x1="70" y1="0" x2="70" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="72" y1="0" x2="72" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="74" y1="0" x2="74" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="76" y1="0" x2="76" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="78" y1="0" x2="78" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.35"/>
-                    <line x1="80" y1="0" x2="80" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="82" y1="0" x2="82" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="84" y1="0" x2="84" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="86" y1="0" x2="86" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="88" y1="0" x2="88" y2="100" stroke="#0ea5e9" stroke-width="0.15" opacity="0.4"/>
-                    <line x1="90" y1="0" x2="90" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.5"/>
-                    <line x1="92" y1="0" x2="92" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.55"/>
-                    <line x1="94" y1="0" x2="94" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.6"/>
-                    <line x1="96" y1="0" x2="96" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.65"/>
-                    <line x1="98" y1="0" x2="98" y2="100" stroke="#0ea5e9" stroke-width="0.2" opacity="0.7"/>
-                    <line x1="100" y1="0" x2="100" y2="100" stroke="#0ea5e9" stroke-width="0.25" opacity="0.8"/>
+                    <!-- VERTICAL LINES - Thicker and wider spacing -->
+                    <line x1="5" y1="0" x2="5" y2="100" stroke="#0ea5e9" stroke-width="0.6" opacity="0.8"/>
+                    <line x1="10" y1="0" x2="10" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.75"/>
+                    <line x1="15" y1="0" x2="15" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.7"/>
+                    <line x1="20" y1="0" x2="20" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.65"/>
+                    <line x1="25" y1="0" x2="25" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.6"/>
+                    <line x1="30" y1="0" x2="30" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.55"/>
+                    <line x1="35" y1="0" x2="35" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.5"/>
+                    <line x1="40" y1="0" x2="40" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.45"/>
+                    <line x1="45" y1="0" x2="45" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.4"/>
+                    <line x1="50" y1="0" x2="50" y2="100" stroke="#0ea5e9" stroke-width="0.7" opacity="0.85"/>
+                    <line x1="55" y1="0" x2="55" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.4"/>
+                    <line x1="60" y1="0" x2="60" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.45"/>
+                    <line x1="65" y1="0" x2="65" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.5"/>
+                    <line x1="70" y1="0" x2="70" y2="100" stroke="#0ea5e9" stroke-width="0.3" opacity="0.55"/>
+                    <line x1="75" y1="0" x2="75" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.6"/>
+                    <line x1="80" y1="0" x2="80" y2="100" stroke="#0ea5e9" stroke-width="0.4" opacity="0.65"/>
+                    <line x1="85" y1="0" x2="85" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.7"/>
+                    <line x1="90" y1="0" x2="90" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.75"/>
+                    <line x1="95" y1="0" x2="95" y2="100" stroke="#0ea5e9" stroke-width="0.6" opacity="0.8"/>
                 </g>
             </svg>
         </div>
@@ -220,43 +172,44 @@ const submit = () => {
 </template>
 
 <style scoped>
-/* Dense 3D Tron Matrix Grid */
+/* 3D Perspective Grid with Contour */
 .grid-container {
-    perspective: 400px;
-    perspective-origin: 50% 100%;
+    perspective: 300px;
+    perspective-origin: 50% 70%;
     overflow: hidden;
 }
 
 .grid-container svg {
     transform-style: preserve-3d;
-    transform: rotateX(75deg) translateY(50%);
-    transform-origin: center bottom;
+    transform: rotateX(60deg) translateY(-20%);
+    transform-origin: center center;
 }
 
-/* Smooth upward scrolling animation */
+/* Smooth upward animation */
 @keyframes grid-flow {
     0% {
-        transform: rotateX(75deg) translateY(50%);
+        transform: rotateX(60deg) translateY(-20%);
     }
     100% {
-        transform: rotateX(75deg) translateY(48%);
+        transform: rotateX(60deg) translateY(-22%);
     }
 }
 
 .grid-lines {
-    animation: grid-flow 8s linear infinite;
+    animation: grid-flow 6s linear infinite;
 }
 
-/* Ambient horizon glow */
-.grid-container::before {
+/* Horizon glow effect */
+.grid-container::after {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 0;
     right: 0;
-    height: 50%;
-    background: linear-gradient(to bottom, transparent 0%, rgba(14, 165, 233, 0.1) 50%, transparent 100%);
+    height: 40%;
+    background: radial-gradient(ellipse at center, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
     pointer-events: none;
 }
 </style>
+
 
