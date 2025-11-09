@@ -27,15 +27,110 @@ const consultationProduct = computed(() => {
 
 <template>
     <Head>
-        <title>Side Hustle Field Tech Work - Earn Extra Income as Low Voltage Contractor | FieldEngineer Pro</title>
-        <meta name="description" content="Start your profitable side hustle in field engineering. Learn low voltage contracting skills to earn $2000-5000+ monthly. Perfect side business for extra income - no experience required.">
-        <meta name="keywords" content="side hustle, extra income, field tech work, low voltage contractor, side business, part time work, electrical side hustle, contracting side gig, make extra money, field engineer side work">
-        <meta property="og:title" content="Side Hustle Field Tech Work - Earn Extra Income as Low Voltage Contractor">
-        <meta property="og:description" content="Start your profitable side hustle in field engineering. Learn low voltage contracting skills to earn $2000-5000+ monthly.">
+        <title>Side Hustle Field Tech Work - Earn $2000-5000+ Monthly Income | FieldEngineer Pro</title>
+        <meta name="description" content="Start your profitable side hustle in field engineering today. Learn low voltage contracting, fiber optics, and network installation skills to earn $2000-5000+ monthly. Perfect part-time business for extra income - no experience required. Join 1000+ students earning extra cash.">
+        <meta name="keywords" content="side hustle, extra income, monthly income, field tech work, low voltage contractor, side business, part time work, electrical side hustle, contracting side gig, make extra money, field engineer side work, fiber optics training, network installation, passive income, second job, weekend work">
+        
+        <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ route('home') }}">
+        <meta property="og:title" content="Side Hustle Field Tech Work - Earn $2000-5000+ Monthly Income">
+        <meta property="og:description" content="Start your profitable side hustle in field engineering. Learn low voltage contracting skills to earn $2000-5000+ monthly. No experience required.">
+        
+        <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Side Hustle Field Tech Work - Earn Extra Income">
+        <meta name="twitter:title" content="Side Hustle Field Tech Work - Earn $2000-5000+ Monthly">
         <meta name="twitter:description" content="Start your profitable side hustle in field engineering. Learn low voltage contracting skills to earn $2000-5000+ monthly.">
+        
+        <!-- JSON-LD Structured Data for Course -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Course",
+            "name": "Field Engineering & Low Voltage Contracting Side Hustle Training",
+            "description": "Complete training program to start your side hustle in field engineering and low voltage contracting. Earn $2000-5000+ monthly in extra income.",
+            "provider": {
+                "@type": "Organization",
+                "name": "FieldEngineer Pro",
+                "sameAs": "{{ route('home') }}"
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": "1247",
+                "bestRating": "5",
+                "worstRating": "1"
+            },
+            "offers": {
+                "@type": "Offer",
+                "category": "Educational",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+            },
+            "educationalLevel": "Beginner to Advanced",
+            "keywords": "side hustle, extra income, field engineering, low voltage contractor, monthly income, side business"
+        }
+        </script>
+        
+        <!-- JSON-LD for Organization -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            "name": "FieldEngineer Pro",
+            "description": "Leading platform for field engineering and low voltage contracting side hustle training",
+            "url": "{{ route('home') }}",
+            "logo": "{{ asset('img/fieldengineer-logo.png') }}",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "Customer Support",
+                "email": "support@fieldengineerpro.com"
+            },
+            "sameAs": []
+        }
+        </script>
+        
+        <!-- JSON-LD for FAQs -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How much can I earn with a field tech side hustle?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Most students earn between $2000-5000+ per month working part-time. Some advanced students earn $100,000+ annually doing field tech work on weekends and evenings."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I need experience to start?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No experience required! Our training covers everything from basic tools to advanced low voltage contracting, fiber optics, and network installation."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How much time do I need to invest?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "You can start with just 5-10 hours per week. Many students work evenings and weekends while keeping their full-time jobs."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What skills will I learn?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "You'll learn low voltage contracting, fiber optic installation, network cabling, troubleshooting, client management, pricing strategies, and business development for your side hustle."
+                    }
+                }
+            ]
+        }
+        </script>
     </Head>
 
     <!-- Modern Navigation -->

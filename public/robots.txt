@@ -1,2 +1,22 @@
+# Allow all crawlers
 User-agent: *
-Disallow:
+Allow: /
+
+# Disallow admin and internal pages
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+Disallow: /checkout/
+Disallow: /stripe/
+Disallow: /dashboard
+
+# Allow important pages for SEO
+Allow: /products
+Allow: /contact
+
+# Sitemap location
+Sitemap: https://fieldengineerpro.com/sitemap.xml
+
+# Crawl-delay to prevent server overload
+Crawl-delay: 1

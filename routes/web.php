@@ -124,6 +124,10 @@ Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('verify.human')
     ->name('contact.store');
 
+// Sitemap for SEO
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])
+    ->name('sitemap');
+
 // Guest checkout routes - all protected by verification
 Route::prefix('guest')->name('guest.')->middleware('verify.human')->group(function() {
     Route::get('/checkout/{product}', [CheckoutController::class, 'guestCheckout'])->name('checkout');
