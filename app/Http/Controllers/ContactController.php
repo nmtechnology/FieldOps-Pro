@@ -30,14 +30,17 @@ class ContactController extends Controller
         ]);
 
         try {
-            // Send email to support
-            Mail::to(config('mail.support_email', 'support@fieldengineerpro.com'))
-                ->send(new SupportRequest(
-                    $validated['name'],
-                    $validated['email'],
-                    $validated['subject'],
-                    $validated['message']
-                ));
+            // Send email to all support addresses
+            $supportEmails = config('mail.support_emails', ['support@fieldengineerpro.com', 'patrick@nmtechnology.us']);
+            foreach ($supportEmails as $email) {
+                Mail::to(trim($email))
+                    ->send(new SupportRequest(
+                        $validated['name'],
+                        $validated['email'],
+                        $validated['subject'],
+                        $validated['message']
+                    ));
+            }
 
             return back()->with('success', 'Thank you for contacting us! We\'ll get back to you as soon as possible.');
         } catch (\Exception $e) {

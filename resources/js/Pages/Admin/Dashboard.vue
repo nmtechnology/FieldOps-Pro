@@ -85,7 +85,7 @@ const formatTime = (timestamp) => {
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dt class="truncate text-sm font-medium text-gray-300">Total Orders</dt>
-                                    <dd class="mt-1 text-3xl font-semibold text-white">{{ stats.totalOrders }}</dd>
+                                    <dd class="mt-1 text-3xl font-semibold text-white">{{ stats?.totalOrders || 0 }}</dd>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ const formatTime = (timestamp) => {
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dt class="truncate text-sm font-medium text-gray-300">Pending Orders</dt>
-                                    <dd class="mt-1 text-3xl font-semibold text-white">{{ stats.pendingOrders }}</dd>
+                                    <dd class="mt-1 text-3xl font-semibold text-white">{{ stats?.pendingOrders || 0 }}</dd>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@ const formatTime = (timestamp) => {
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dt class="truncate text-sm font-medium text-gray-300">Total Revenue</dt>
-                                    <dd class="mt-1 text-3xl font-semibold text-white">${{ stats.totalRevenue.toLocaleString() }}</dd>
+                                    <dd class="mt-1 text-3xl font-semibold text-white">${{ (stats?.totalRevenue || 0).toLocaleString() }}</dd>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@ const formatTime = (timestamp) => {
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dt class="truncate text-sm font-medium text-gray-300">Active Users</dt>
-                                    <dd class="mt-1 text-3xl font-semibold text-white">{{ stats.activeUsers }}</dd>
+                                    <dd class="mt-1 text-3xl font-semibold text-white">{{ stats?.activeUsers || 0 }}</dd>
                                 </div>
                             </div>
                         </div>

@@ -115,4 +115,19 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Notification Email Addresses
+    |--------------------------------------------------------------------------
+    |
+    | Configure multiple email addresses to receive purchase notifications
+    | and support requests. These can be set as comma-separated values in
+    | your .env file or default to the values below.
+    |
+    */
+
+    'admin_emails' => array_filter(explode(',', env('MAIL_ADMIN_EMAILS', 'purchases@fieldengineerpro.com,patrick@nmtechnology.us'))),
+    
+    'support_emails' => array_filter(explode(',', env('MAIL_SUPPORT_EMAILS', 'support@fieldengineerpro.com,patrick@nmtechnology.us'))),
+
 ];

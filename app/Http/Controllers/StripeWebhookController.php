@@ -76,9 +76,12 @@ class StripeWebhookController extends Controller
                 
                 // Send email notifications
                 try {
-                    // Notify admin
-                    Mail::to(config('mail.admin_email', 'admin@fieldengineerpro.com'))
-                        ->send(new OrderPlacedAdmin($order));
+                    // Notify all admin emails
+                    $adminEmails = config('mail.admin_emails', ['purchases@fieldengineerpro.com', 'patrick@nmtechnology.us']);
+                    foreach ($adminEmails as $email) {
+                        Mail::to(trim($email))
+                            ->send(new OrderPlacedAdmin($order));
+                    }
                     
                     // Notify customer
                     if ($order->user && $order->user->email) {
