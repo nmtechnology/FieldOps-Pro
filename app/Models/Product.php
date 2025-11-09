@@ -16,17 +16,31 @@ class Product extends Model
         'image_path',
         'active',
         'content_sections',
+        'is_subscription',
+        'stripe_price_id',
+        'billing_cycle_days',
+        'allow_reactivation',
+        'grace_period_days',
     ];
 
     protected $casts = [
         'content_sections' => 'array',
         'active' => 'boolean',
         'price' => 'decimal:2',
+        'is_subscription' => 'boolean',
+        'billing_cycle_days' => 'integer',
+        'allow_reactivation' => 'boolean',
+        'grace_period_days' => 'integer',
     ];
 
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+    
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
     }
     
     public function contents()
