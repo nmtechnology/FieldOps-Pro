@@ -20,10 +20,12 @@ const selectedDiscount = ref(null);
 const form = ref({
     code: '',
     description: '',
-    amount: '',
+    value: '',
     type: 'percentage', // 'percentage' or 'fixed'
-    active: true,
-    expires_at: '',
+    is_active: true,
+    valid_from: '',
+    valid_until: '',
+    max_uses: null,
 });
 
 const errors = ref({});
@@ -33,10 +35,12 @@ const openCreateModal = () => {
     form.value = {
         code: '',
         description: '',
-        amount: '',
+        value: '',
         type: 'percentage',
-        active: true,
-        expires_at: '',
+        is_active: true,
+        valid_from: '',
+        valid_until: '',
+        max_uses: null,
     };
     errors.value = {};
     showingModal.value = true;
@@ -48,10 +52,12 @@ const openEditModal = (discount) => {
     form.value = {
         code: discount.code,
         description: discount.description || '',
-        amount: discount.amount,
+        value: discount.value,
         type: discount.type || 'percentage',
-        active: discount.active,
-        expires_at: discount.expires_at || '',
+        is_active: discount.active,
+        valid_from: discount.valid_from || '',
+        valid_until: discount.valid_until || '',
+        max_uses: discount.max_uses || null,
     };
     errors.value = {};
     showingModal.value = true;
@@ -155,7 +161,7 @@ const formatAmount = (amount, type) => {
                                             </span>
                                         </td>
                                         <td class="px-3 py-4 text-sm text-gray-300">
-                                            {{ discount.expires_at ? new Date(discount.expires_at).toLocaleDateString() : 'Never' }}
+                                            {{ discount.valid_until ? new Date(discount.valid_until).toLocaleDateString() : 'Never' }}
                                         </td>
                                     </tr>
                                     <tr v-if="discounts.data && discounts.data.length === 0">
@@ -243,17 +249,20 @@ const formatAmount = (amount, type) => {
                     </div>
 
                     <div>
-                        <InputLabel for="amount" value="Amount" />
+                        <InputLabel for="value" value="Amount" />
                         <TextInput
-                            id="amount"
+                            id="value"
                             type="number"
                             step="0.01"
                             min="0"
                             class="mt-1 block w-full"
-                            v-model="form.amount"
+                            v-model="form.value"
                             required
                         />
-                        <InputError class="mt-2" :message="errors.amount" />
+                        <InputError class="mt-2" :message="errors.value" />
+                        <p class="mt-1 text-xs text-gray-600">
+                            Enter {{ form.type === 'percentage' ? 'percentage (e.g., 20 for 20%)' : 'dollar amount (e.g., 10 for $10)' }}
+                        </p>
                     </div>
 
                     <div>
@@ -271,14 +280,39 @@ const formatAmount = (amount, type) => {
                     </div>
 
                     <div>
-                        <InputLabel for="expires_at" value="Expiration Date (Optional)" />
+                        <InputLabel for="valid_from" value="Valid From (Optional)" />
                         <TextInput
-                            id="expires_at"
+                            id="valid_from"
                             type="date"
                             class="mt-1 block w-full"
-                            v-model="form.expires_at"
+                            v-model="form.valid_from"
                         />
-                        <InputError class="mt-2" :message="errors.expires_at" />
+                        <InputError class="mt-2" :message="errors.valid_from" />
+                    </div>
+
+                    <div>
+                        <InputLabel for="valid_until" value="Valid Until (Optional)" />
+                        <TextInput
+                            id="valid_until"
+                            type="date"
+                            class="mt-1 block w-full"
+                            v-model="form.valid_until"
+                        />
+                        <InputError class="mt-2" :message="errors.valid_until" />
+                    </div>
+
+                    <div>
+                        <InputLabel for="max_uses" value="Maximum Uses (Optional)" />
+                        <TextInput
+                            id="max_uses"
+                            type="number"
+                            min="1"
+                            step="1"
+                            class="mt-1 block w-full"
+                            v-model="form.max_uses"
+                            placeholder="Leave blank for unlimited"
+                        />
+                        <InputError class="mt-2" :message="errors.max_uses" />
                     </div>
 
                     <div class="flex items-center mt-4">
@@ -286,10 +320,10 @@ const formatAmount = (amount, type) => {
                             id="active"
                             type="checkbox"
                             class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
-                            v-model="form.active"
+                            v-model="form.is_active"
                         />
                         <InputLabel for="active" value="Active" class="ml-2" />
-                        <InputError class="mt-2" :message="errors.active" />
+                        <InputError class="mt-2" :message="errors.is_active" />
                     </div>
 
                     <div class="flex items-center justify-end mt-6 space-x-4">

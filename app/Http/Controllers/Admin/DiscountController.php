@@ -45,16 +45,21 @@ class DiscountController extends Controller
     {
         $validated = $request->validate([
             'code' => 'required|string|max:50|unique:discounts',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'type' => 'required|string|in:percentage,fixed',
             'value' => 'required|numeric|min:0',
-            'starts_at' => 'nullable|date',
-            'expires_at' => 'nullable|date|after_or_equal:starts_at',
-            'usage_limit' => 'nullable|integer|min:1',
+            'valid_from' => 'nullable|date',
+            'valid_until' => 'nullable|date|after_or_equal:valid_from',
+            'max_uses' => 'nullable|integer|min:1',
             'is_active' => 'boolean'
         ]);
 
-        Discount::create($validated);
+        // Map is_active to active for database
+        $data = $validated;
+        $data['active'] = $validated['is_active'] ?? true;
+        unset($data['is_active']);
+
+        Discount::create($data);
 
         return redirect()->route('admin.discounts.index')
             ->with('success', 'Discount created successfully.');
@@ -99,16 +104,23 @@ class DiscountController extends Controller
     {
         $validated = $request->validate([
             'code' => 'sometimes|string|max:50|unique:discounts,code,'.$discount->id,
-            'description' => 'sometimes|string',
+            'description' => 'nullable|string',
             'type' => 'sometimes|string|in:percentage,fixed',
             'value' => 'sometimes|numeric|min:0',
-            'starts_at' => 'nullable|date',
-            'expires_at' => 'nullable|date|after_or_equal:starts_at',
-            'usage_limit' => 'nullable|integer|min:1',
+            'valid_from' => 'nullable|date',
+            'valid_until' => 'nullable|date|after_or_equal:valid_from',
+            'max_uses' => 'nullable|integer|min:1',
             'is_active' => 'sometimes|boolean'
         ]);
 
-        $discount->update($validated);
+        // Map is_active to active for database
+        $data = $validated;
+        if (isset($validated['is_active'])) {
+            $data['active'] = $validated['is_active'];
+            unset($data['is_active']);
+        }
+
+        $discount->update($data);
 
         return redirect()->route('admin.discounts.index')
             ->with('success', 'Discount updated successfully.');

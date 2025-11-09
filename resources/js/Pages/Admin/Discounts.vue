@@ -59,7 +59,7 @@
                                             {{ discount.type === 'percentage' ? discount.value + '%' : '$' + discount.value.toFixed(2) }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span v-if="discount.is_active" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            <span v-if="discount.active" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                 Active
                                             </span>
                                             <span v-else class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
@@ -67,7 +67,7 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ discount.usage_count || 0 }} / {{ discount.max_uses || '∞' }}
+                                            {{ discount.used || 0 }} / {{ discount.max_uses || '∞' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div v-if="discount.valid_from || discount.valid_until">
@@ -281,7 +281,7 @@ export default defineComponent({
                 code: discount.code,
                 type: discount.type,
                 value: discount.value,
-                is_active: discount.is_active,
+                is_active: discount.active, // Map active to is_active for form
                 valid_from: discount.valid_from,
                 valid_until: discount.valid_until,
                 max_uses: discount.max_uses,
