@@ -144,7 +144,7 @@ const formatAmount = (amount, type) => {
                                 </thead>
                                 <tbody class="divide-y divide-gray-700 bg-gray-800">
                                     <tr v-for="discount in discounts.data" :key="discount.id" 
-                                        @click="$inertia.visit(route('admin.discounts.edit', discount.id))"
+                                        @click="openEditModal(discount)"
                                         class="hover:bg-gray-700 cursor-pointer transition-colors duration-150">
                                         <td class="py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-6">{{ discount.code }}</td>
                                         <td class="px-3 py-4 text-sm text-gray-300">{{ discount.description }}</td>
