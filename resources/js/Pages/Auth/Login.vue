@@ -136,6 +136,13 @@ const submit = () => {
                 <ApplicationLogo class="h-20 w-20 fill-current text-orange-500" />
             </Link>
         </div>
+
+        <!-- Brand Text -->
+        <div class="z-10 text-center mt-4 mb-2">
+            <h1 class="text-3xl font-bold text-white tracking-tight">FieldEngineer Pro</h1>
+            <p class="text-orange-400 font-semibold mt-1">Field Service Training Platform</p>
+            <p class="text-gray-400 text-sm mt-1">Sign in to access your courses</p>
+        </div>
         
         <!-- Login Form Card -->
         <div class="mt-6 w-full max-w-md px-6 py-4 bg-gray-800 bg-opacity-50 shadow-md overflow-hidden sm:rounded-lg z-10 backdrop-blur-sm border border-gray-700">
