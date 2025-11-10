@@ -69,8 +69,8 @@ Route::get('/', function() {
                   ->orWhere('valid_until', '>=', now());
         })
         ->where(function($query) {
-            $query->whereNull('usage_limit')
-                  ->orWhereRaw('usage_count < usage_limit');
+            $query->whereNull('max_uses')
+                  ->orWhereRaw('used < max_uses');
         })
         ->first();
     
