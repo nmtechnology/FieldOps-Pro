@@ -16,214 +16,322 @@ const tutorialSlides = ref([
     {
         title: "Welcome to CCTV Camera Troubleshooting!",
         text: "Hey there! Ready to become a CCTV troubleshooting expert? I'm your FieldOps Pro guide, and I'm going to teach you everything about diagnosing and fixing both PoE digital cameras and analog CCTV systems!\n\nThis comprehensive training covers:\n\n📹 Understanding PoE (Power over Ethernet) systems\n📺 Analog camera fundamentals\n🔧 Common failure points and diagnostics\n⚡ Power and connectivity issues\n📡 Video signal problems\n🌐 Network configuration troubleshooting\n🧪 Testing equipment and techniques\n\nCCTV systems are EVERYWHERE - offices, retail stores, warehouses, parking lots. Master these troubleshooting skills and you'll always be in demand. Let's dive in!",
+        image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Modern CCTV surveillance systems combining PoE and analog technologies"
     },
     {
         title: "Understanding PoE Camera Systems",
         text: "Let's start with PoE (Power over Ethernet) digital cameras - the modern standard for CCTV installations.\n\n🔌 HOW PoE WORKS:\nPoE delivers both power AND data over a single Ethernet cable (Cat5e/Cat6). No separate power cable needed!\n\n🏗️ SYSTEM COMPONENTS:\n\n📷 IP Camera - Network-connected camera with built-in processor\n🔄 PoE Switch/Injector - Provides 15.4W to 30W per port\n💾 NVR (Network Video Recorder) - Stores and manages video\n🌐 Network Infrastructure - Cables, routers, switches\n\n⚡ POE STANDARDS:\n• PoE (802.3af) = 15.4W - Basic cameras\n• PoE+ (802.3at) = 30W - PTZ cameras\n• PoE++ (802.3bt) = 60-100W - High-power systems\n\nKnowing these basics helps you diagnose 90% of PoE camera issues!",
-        quiz: {
-            question: "What is the main advantage of PoE cameras over traditional cameras?",
-            options: [
-                "They're cheaper to install",
-                "Power and data travel over one cable, simplifying installation",
-                "They have better video quality",
-                "They don't need any cables at all"
-            ],
-            correctAnswer: 1,
-            correctFeedback: "🎯 Exactly! PoE combines power and data in one cable, making installation cleaner and easier.",
-            incorrectFeedback: "Think about what makes PoE special - it's all about combining power and data transmission in a single Ethernet cable!"
-        }
+        image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "PoE IP camera system with network switch and NVR"
     },
     {
         title: "Understanding Analog Camera Systems",
         text: "Now let's cover analog CCTV systems - still widely used and often what you'll encounter in older installations.\n\n📺 HOW ANALOG WORKS:\nAnalog cameras send video signals over coaxial cable (like old TV antennas). Simple and reliable!\n\n🏗️ SYSTEM COMPONENTS:\n\n📹 Analog Camera - Captures in analog format (CVBS, AHD, TVI, CVI)\n📀 DVR (Digital Video Recorder) - Converts analog to digital\n🔌 Power Supply - Separate 12V DC for each camera\n🔗 Cabling - RG59/RG6 coaxial for video, separate power wires\n\n📊 VIDEO FORMATS:\n• CVBS - Traditional analog (low res)\n• AHD - HD over coax (720p-1080p)\n• TVI/CVI - Competing HD-over-coax standards\n\n💡 KEY DIFFERENCE:\nAnalog = Separate power and video cables\nPoE = Combined in one Ethernet cable\n\nUnderstanding both systems makes you valuable - many sites have mixed installations!",
+        image: "https://images.unsplash.com/photo-1557597774-9d47605007b1?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Traditional analog CCTV cameras with coaxial cabling and DVR system"
     },
     {
-        title: "The Technician's Toolkit",
-        text: "Having the right tools makes troubleshooting 10X easier. Here's what you need:\n\n⚡ FOR PoE/DIGITAL SYSTEMS:\n✅ PoE tester/validator ($50-150)\n✅ Network cable tester ($30-200)\n✅ Multimeter for voltage testing ($20-50)\n✅ Laptop with network tools (ping, SADP, IP scanner)\n✅ Ethernet crimping tool ($15-30)\n✅ RJ-45 connectors and cable\n\n📺 FOR ANALOG SYSTEMS:\n✅ Multimeter (12V DC testing)\n✅ Portable test monitor ($50-150)\n✅ Coax cable tester ($30-100)\n✅ BNC compression tool ($20-40)\n✅ BNC connectors\n\n📱 UNIVERSAL TOOLS:\n✅ Phone with good camera (document everything!)\n✅ Flashlight (headlamp is better)\n✅ Label maker\n✅ Notepad for tracking IPs and settings\n\nYou don't need everything day one - start with basics and build your kit!",
+        title: "Essential Technician's Toolkit",
+        text: "Having the right tools makes troubleshooting 10X easier and faster. Here's your complete shopping list!\n\n⚡ FOR PoE/DIGITAL SYSTEMS:\n✅ PoE Tester/Validator - Test voltage and data\n✅ Network Cable Tester - Verify all 8 wires\n✅ Multimeter - Measure voltage accurately\n✅ Laptop - Configure cameras and test network\n✅ Ethernet Crimping Tool - Make/repair cables\n✅ RJ-45 Connectors - Have extras on hand\n\n📺 FOR ANALOG SYSTEMS:\n✅ Multimeter - Test 12V DC power\n✅ Portable Test Monitor - See video at camera\n✅ Coax Cable Tester - Check cable integrity\n✅ BNC Compression Tool - Professional connections\n✅ BNC Connectors - Various sizes\n\n📱 UNIVERSAL TOOLS:\n✅ Smartphone with Camera - Document everything\n✅ Flashlight/Headlamp - See in dark spaces\n✅ Label Maker - Organize your work\n✅ Notepad - Track IPs and settings\n\nClick the links below to see recommended tools on Amazon!",
+        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional CCTV technician toolkit with testers and hand tools",
+        links: [
+            {
+                icon: "🔌",
+                title: "PoE Network Cable Tester (TRENDnet)",
+                price: "$79.99",
+                url: "https://www.amazon.com/TRENDnet-Network-Cable-Tester-TC-NT3/dp/B01M63EMBQ"
+            },
+            {
+                icon: "⚡",
+                title: "PoE Voltage Tester & Power Checker",
+                price: "$45.99",
+                url: "https://www.amazon.com/Klein-Tools-VDV500-820-Cable-Tester/dp/B07MKZHRRY"
+            },
+            {
+                icon: "📏",
+                title: "Fluke Digital Multimeter",
+                price: "$159.99",
+                url: "https://www.amazon.com/Fluke-101-Basic-Digital-Multimeter/dp/B00OHDKLTE"
+            },
+            {
+                icon: "📺",
+                title: "Portable Test Monitor (7\" LCD)",
+                price: "$89.99",
+                url: "https://www.amazon.com/LILLIPUT-7-Inch-Monitor-HDMI-Input/dp/B00HZN0D9U"
+            },
+            {
+                icon: "🔧",
+                title: "Professional RJ45 Crimping Tool Kit",
+                price: "$29.99",
+                url: "https://www.amazon.com/iCrimp-Crimping-Connectors-Stripper-Accessories/dp/B01K4JE53Q"
+            },
+            {
+                icon: "🔌",
+                title: "BNC Compression Tool for Coax",
+                price: "$34.99",
+                url: "https://www.amazon.com/Klein-Tools-VDV212-015-Compression-Connectors/dp/B002D3B97U"
+            }
+        ],
         quiz: {
-            question: "What's the most important tool for troubleshooting PoE camera power issues?",
+            question: "What's the main advantage of using a PoE tester over just a multimeter?",
             options: [
-                "A really expensive laptop",
-                "PoE tester and multimeter to measure voltage",
-                "Just a screwdriver",
-                "A portable monitor"
+                "It's cheaper and easier to use",
+                "It tests both power delivery AND data connectivity in one tool",
+                "You don't need one - multimeters are enough",
+                "PoE testers can fix cameras automatically"
             ],
             correctAnswer: 1,
-            correctFeedback: "⚡ Perfect! A PoE tester and multimeter let you verify power delivery - the #1 cause of PoE camera failures.",
-            incorrectFeedback: "Power issues are super common with PoE! You need tools to measure voltage - that's where a PoE tester and multimeter come in."
+            correctFeedback: "🎯 Exactly! A PoE tester verifies both power AND network connectivity, saving you time by testing everything at once.",
+            incorrectFeedback: "Think about what makes PoE special - it combines power and data. A PoE tester checks both functions simultaneously!"
         }
     },
     {
-        title: "PoE Troubleshooting: Camera Has No Power",
-        text: "Let's tackle the most common PoE camera issue - no power!\n\n🔍 SYMPTOMS:\n• No lights on camera\n• No link light on switch port\n• Camera not detected on network\n\n🛠️ DIAGNOSTIC STEPS:\n\n1️⃣ CHECK SWITCH/INJECTOR:\n   • Is it powered on?\n   • Is the port PoE-enabled? (Check docs)\n   • Try a different port\n\n2️⃣ TEST VOLTAGE:\n   • Use multimeter at camera end\n   • Should read 48-54V DC\n   • If 0V, cable or switch issue\n\n3️⃣ CHECK CABLE:\n   • Max PoE distance: 100 meters (328 feet)\n   • Look for damage, kinks, cuts\n   • Test with known-good cable\n\n4️⃣ VERIFY POE BUDGET:\n   • Each switch has max total wattage\n   • Count cameras × wattage per camera\n   • Budget exceeded = some cameras won't power\n\nMost \"dead\" cameras are actually power delivery issues!",
+        title: "Interactive Scenario 1: The Dead Camera",
+        text: "🎬 REAL-WORLD SCENARIO:\n\nYou arrive at a retail store. The manager says: \"Camera 3 in the back room stopped working yesterday. It's completely dead - no lights, nothing on the monitor.\"\n\nYou walk to the camera location and observe:\n• Camera is mounted 12 feet high\n• No LED lights visible on camera\n• Cable runs through ceiling\n• Other 7 cameras in store work fine\n• System uses PoE IP cameras\n• 16-port PoE switch in server closet\n\nWhat's your FIRST troubleshooting step?",
+        image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "CCTV camera mounted in retail environment - troubleshooting scenario",
+        quiz: {
+            question: "What should you check FIRST?",
+            options: [
+                "Immediately climb ladder and take camera down to bench test it",
+                "Check the PoE switch to see if the port has link lights and is providing power",
+                "Replace the camera with a new one to see if that fixes it",
+                "Check if the NVR software needs updating"
+            ],
+            correctAnswer: 1,
+            correctFeedback: "✅ Perfect! Always start at the switch - it's safer, faster, and tells you if power is being delivered. No need to climb a ladder yet! You see no link lights on port 3. Next step: Test the port with your PoE tester...",
+            incorrectFeedback: "Think about working safely and efficiently. Before climbing ladders or replacing parts, check the POWER SOURCE first. Head to that PoE switch!"
+        }
+    },
+    {
+        title: "Scenario 1 Continued: Testing the Switch",
+        text: "Good decision! You head to the server closet and check the PoE switch.\n\n🔍 WHAT YOU OBSERVE:\n• Switch is powered on (green power LED)\n• Ports 1, 2, 4-8 show green link lights\n• Port 3 (dead camera) shows NO link light\n• Switch shows 16 ports, 120W total PoE budget\n• Label says \"Port 3 = Back Room Camera\"\n\nYou plug your PoE tester into port 3...\n\n⚡ TESTER RESULTS:\n• No voltage detected\n• No data link\n• Port appears completely dead\n\nWhat's your next move?",
+        image: "https://images.unsplash.com/photo-1560732488-6b0df240254a?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Network switch with PoE ports - some showing link lights, one dead",
+        quiz: {
+            question: "Port 3 shows no power or link. What should you do next?",
+            options: [
+                "The switch is bad - replace the entire switch immediately",
+                "Test the same PoE tester on port 9 (empty port) to see if the switch can deliver PoE at all",
+                "The cable from port 3 to the camera must be bad - start pulling new cable",
+                "Call the camera manufacturer for technical support"
+            ],
+            correctAnswer: 1,
+            correctFeedback: "🎯 Excellent troubleshooting! You test port 9 and get 52V PoE! The switch CAN deliver power. This tells you: ✅ Switch works ✅ Your tester works ❌ Port 3 is dead OR the cable is bad. Next: Let's test if it's the port or the cable...",
+            incorrectFeedback: "Don't jump to conclusions! Test if the SWITCH can deliver PoE on other ports. This verifies your switch and your tester are working."
+        }
+    },
+    {
+        title: "Scenario 1 Continued: Port vs Cable?",
+        text: "Smart! You tested port 9 (empty) and got 52V PoE. The switch is good!\n\n🤔 THE QUESTION:\nIs port 3 dead, or is the cable bad?\n\n🧪 YOUR TEST:\nYou unplug the back room camera cable from port 3, then plug it into the working port 9.\n\nYou connect your PoE tester to the CAMERA END of the cable (at the ceiling).\n\n⚡ RESULT:\nYour PoE tester shows: 48V detected! Data link established!\n\n💡 WHAT THIS TELLS YOU:\n✅ The cable is GOOD (delivers power and data)\n✅ The switch port 9 works\n❌ The switch port 3 is DEAD\n\nNow you know the problem!",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Testing cable with PoE tester - isolating the problem",
+        quiz: {
+            question: "You've confirmed port 3 is dead but the cable is good. What's the best solution?",
+            options: [
+                "Replace the entire PoE switch ($300-500) since port 3 doesn't work",
+                "Simply move the camera cable to port 9 and update your documentation - camera works now!",
+                "Run a completely new cable because you can't trust the switch",
+                "Tell the customer the camera needs replacing"
+            ],
+            correctAnswer: 1,
+            correctFeedback: "💰 Perfect! Port 9 works, cable works, camera works. Just move the connection! Update your port labels: \"Port 9 = Back Room Camera (was port 3)\". Document that port 3 is dead. Job done in 15 minutes! The customer is happy and you look like a pro. This is real-world troubleshooting - systematic, fast, and cost-effective!",
+            incorrectFeedback: "Think cost-effectively! You have 16 ports and one is dead. The switch still has 15 working ports. Why replace anything when you can just use a different port?"
+        }
     },
     {
         title: "Understanding PoE Power Budgets",
-        text: "Here's something that trips up even experienced techs - PoE power budgets!\n\n💡 THE CONCEPT:\nEvery PoE switch has a TOTAL power budget. Add up all connected devices - if you exceed it, cameras won't power on!\n\n📊 EXAMPLE CALCULATION:\nYou have a 16-port PoE switch with 120W budget\n\n✅ SCENARIO 1 - Works Fine:\n• 8 cameras @ 12W each = 96W\n• 2 cameras @ 6W each = 12W\n• Total: 108W (under 120W budget) ✓\n\n❌ SCENARIO 2 - Problems:\n• 10 cameras @ 15W each = 150W\n• Total: 150W (exceeds 120W budget) ✗\n• Last cameras to connect won't power on!\n\n🔧 SOLUTIONS:\n1. Add second PoE switch\n2. Use PoE injectors for some cameras\n3. Upgrade to higher-wattage switch\n4. Use lower-power cameras\n\n💰 PRO TIP: Always leave 20% headroom in your power budget calculation!",
+        text: "Let's dive deeper into PoE power budgets - this trips up many techs!\n\n💡 THE CONCEPT:\nEvery PoE switch has a TOTAL power budget. Add up all connected devices - if you exceed it, cameras won't power on!\n\n📊 VISUAL EXAMPLE:\nSwitch: 16 ports, 120W total budget\n\n✅ SCENARIO A - Works:\n• 6 cameras @ 15W each = 90W\n• 2 cameras @ 12W each = 24W\n• Total: 114W / 120W (96% used) ✓\n\n⚠️ SCENARIO B - Danger Zone:\n• 8 cameras @ 15W each = 120W\n• Total: 120W / 120W (100% used)\n• NO HEADROOM - any spike fails!\n\n❌ SCENARIO C - Failure:\n• 10 cameras @ 15W each = 150W\n• Exceeds 120W budget\n• Last 2 cameras won't power on!\n\n🎯 PROFESSIONAL TIP:\nAlways plan for 80% max usage (96W of 120W). This gives you headroom for power spikes!",
+        image: "https://i.imgur.com/9X3k7QH.png",
+        imageCaption: "PoE power budget visualization showing working vs failed scenarios"
+    },
+    {
+        title: "Interactive Scenario 2: Mysterious Power Issues",
+        text: "🎬 NEW SCENARIO:\n\nYou get a call: \"Our cameras keep going offline randomly, usually in the afternoon.\"\n\nYou investigate and find:\n• 12 PoE cameras on site\n• 16-port PoE switch, 200W budget\n• 10 cameras work fine\n• Cameras 11 and 12 randomly reboot\n• Problem started 2 weeks ago\n• Client recently added 2 new cameras (#11 and #12)\n\nYou check power consumption:\n• Cameras 1-10: 12W each = 120W\n• Cameras 11-12: 30W each = 60W\n• Total: 180W / 200W budget\n\nThe math says it should work! But cameras 11-12 still reboot randomly...\n\nWhat could be wrong?",
+        image: "https://images.unsplash.com/photo-1573167243872-43c6433b9d40?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Multiple security cameras - intermittent power issues",
         quiz: {
-            question: "You have a PoE switch with 200W budget. Can you power 12 cameras that each use 18W?",
+            question: "Math says 180W/200W should work, but cameras reboot. What's the likely cause?",
             options: [
-                "Yes, 12 × 18 = 216W which is close enough",
-                "No, 12 × 18 = 216W exceeds the 200W budget",
-                "Yes, because PoE can share power between cameras",
-                "It depends on the cable length"
+                "The cameras are defective and need replacement",
+                "Environmental heat causes power consumption spikes beyond rated specs",
+                "The network bandwidth is too high",
+                "Someone is unplugging cameras as a prank"
             ],
             correctAnswer: 1,
-            correctFeedback: "🧮 Correct! 216W exceeds 200W budget. You'd need to reduce cameras, upgrade switch, or add another PoE source.",
-            incorrectFeedback: "Do the math: 12 cameras × 18W = 216W. That exceeds the 200W budget, so not all cameras will power on!"
+            correctFeedback: "🔥 Brilliant! HEAT is the culprit! In afternoon sun, camera power consumption spikes 20-30% above rated specs. 180W + 20% = 216W! This exceeds the 200W budget. Solutions: 1) Add a second PoE switch, 2) Use PoE injectors for cameras 11-12, 3) Add sunshades to reduce heat. Real-world troubleshooting considers environment, not just specs!",
+            incorrectFeedback: "Think about WHEN it happens - afternoons. What changes? Temperature! Hot cameras draw more power. Your 180W rating can spike to 216W in heat!"
         }
     },
     {
-        title: "PoE Troubleshooting: Camera Powers On But No Video",
-        text: "Camera lights are on but no video? This is a network/configuration issue!\n\n🔍 SYMPTOMS:\n• Camera has power (LED lit)\n• No video in NVR/VMS\n• Can't access camera web interface\n\n🛠️ DIAGNOSTIC STEPS:\n\n1️⃣ FIND THE CAMERA:\n   • Use SADP tool (Hikvision)\n   • Or IP scanner software\n   • Or check DHCP server logs\n   • Camera should appear with IP address\n\n2️⃣ CHECK IP CONFIGURATION:\n   • Camera IP in same subnet as NVR?\n   • Example: Camera 192.168.1.64, NVR 192.168.1.100 ✓\n   • Example: Camera 192.168.0.64, NVR 192.168.1.100 ✗\n\n3️⃣ TEST CONNECTIVITY:\n   • Ping camera from NVR or laptop\n   • If no response, IP/network issue\n   • If responds, try web interface\n\n4️⃣ VERIFY CREDENTIALS:\n   • Default username/password?\n   • Check camera documentation\n   • Try: admin/admin, admin/12345\n\nNetwork issues beat techs more than hardware failures!",
+        title: "Network Configuration Basics",
+        text: "PoE cameras live on your network - understanding IP addressing is CRUCIAL!\n\n🌐 IP ADDRESS BASICS:\n\nEvery device needs a unique IP address in the same subnet.\n\n✅ CORRECT SETUP:\nNVR: 192.168.1.100\nCamera 1: 192.168.1.101\nCamera 2: 192.168.1.102\n(All in 192.168.1.x subnet) ✓\n\n❌ COMMON MISTAKE:\nNVR: 192.168.1.100\nCamera: 192.168.0.50\n(Different subnets - won't talk!) ✗\n\n🔧 DHCP vs STATIC:\n\n📡 DHCP (Dynamic):\n• Router assigns IPs automatically\n• Good: Easy setup\n• Bad: IPs can change, cameras disappear\n\n📌 STATIC (Fixed):\n• You manually set each IP\n• Good: IPs never change, reliable\n• Bad: Takes more setup time\n\n💡 PRO RECOMMENDATION:\nUse STATIC IPs for cameras. Document them all!",
+        image: "https://i.imgur.com/7yK4QZm.png",
+        imageCaption: "IP address subnet configuration diagram for CCTV systems"
     },
     {
-        title: "IP Configuration Issues",
-        text: "Let's master IP addressing - crucial for PoE camera troubleshooting!\n\n🌐 COMMON IP PROBLEMS:\n\n❌ IP CONFLICT:\nTwo devices with same IP address\n• Both devices will have connection problems\n• Change one camera's IP to unique address\n\n❌ WRONG SUBNET:\nCamera: 192.168.1.64\nNVR: 192.168.0.100\n• Different subnets (1 vs 0) - can't communicate!\n• Change camera to 192.168.0.x range\n\n❌ DHCP ISSUES:\nCamera set to DHCP but no DHCP server\n• Camera waits forever for IP assignment\n• Set static IP manually instead\n\n✅ SOLUTION STEPS:\n1. Find camera with manufacturer's IP config tool\n2. Set camera to static IP in NVR's subnet\n3. Use sequential IPs (easier tracking):\n   • NVR: 192.168.1.100\n   • Camera 1: 192.168.1.101\n   • Camera 2: 192.168.1.102\n4. Document all IPs with labels!\n\n📝 PRO TIP: Keep a spreadsheet of all camera IPs, locations, and MAC addresses!",
+        title: "Interactive Scenario 3: The Invisible Camera",
+        text: "🎬 CHALLENGING SCENARIO:\n\nCustomer: \"I installed a new IP camera but can't see it in my NVR. The camera has power - I see lights on it.\"\n\nYOU OBSERVE:\n• Camera power LED is ON (green)\n• Network link light is BLINKING (data flowing)\n• NVR shows 5 cameras, this would be #6\n• NVR IP: 192.168.1.100\n• Other cameras: 192.168.1.101-105\n\nYou run an IP scanner...\n\n📡 SCAN RESULTS:\n192.168.1.100 - NVR\n192.168.1.101 - Camera 1\n192.168.1.102 - Camera 2\n192.168.1.103 - Camera 3\n192.168.1.104 - Camera 4\n192.168.1.105 - Camera 5\n192.168.0.64 - Unknown device!\n\nWhat's wrong?",
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "IP camera with LED lights showing power and network activity",
+        links: [
+            {
+                icon: "🔍",
+                title: "Advanced IP Scanner (Free Software)",
+                price: "Free",
+                url: "https://www.advanced-ip-scanner.com/"
+            },
+            {
+                icon: "🔍",
+                title: "SADP Tool - Hikvision IP Config",
+                price: "Free",
+                url: "https://www.hikvision.com/en/support/tools/hitools/cl1f27f97b2e3d7b0e/"
+            }
+        ],
         quiz: {
-            question: "Your NVR is at 192.168.1.100. Which camera IP will work?",
+            question: "The camera is at 192.168.0.64 but the NVR is at 192.168.1.100. Why can't they communicate?",
             options: [
-                "192.168.0.150 (different subnet)",
-                "192.168.1.101 (same subnet)",
-                "10.0.0.50 (completely different network)",
-                "Any IP will work fine"
+                "The camera is too far away from the NVR",
+                "Different subnets (192.168.0.x vs 192.168.1.x) - they can't see each other",
+                "The camera needs a firmware update",
+                "The NVR is full and can't add more cameras"
             ],
             correctAnswer: 1,
-            correctFeedback: "🎯 Perfect! Both are in 192.168.1.x subnet so they can communicate. Subnet matching is critical!",
-            incorrectFeedback: "Remember: Devices must be in the same subnet to communicate! 192.168.1.x devices can talk to each other."
+            correctFeedback: "🎯 Perfect! The camera came preset to 192.168.0.64 (different subnet). The NVR is in 192.168.1.x subnet. They're like different neighborhoods - can't talk! SOLUTION: 1) Connect laptop to camera, 2) Access camera web interface at 192.168.0.64, 3) Change camera IP to 192.168.1.106 (static), 4) Change subnet mask to match (255.255.255.0), 5) Now NVR can see it! Always check subnets first!",
+            incorrectFeedback: "Look at the IP addresses! 192.168.0.64 vs 192.168.1.100 - they're in different subnets. Devices must be in the same subnet to communicate."
         }
     },
     {
-        title: "Analog Troubleshooting: No Video Signal",
-        text: "Now let's tackle analog camera issues - different problems, different solutions!\n\n🔍 SYMPTOMS:\n• DVR shows \"No Video\" or black screen\n• No image on test monitor\n• Channel appears disabled\n\n🛠️ DIAGNOSTIC STEPS:\n\n1️⃣ CHECK POWER:\n   • Measure at camera: should be 11.5-12.5V DC\n   • Below 11V = voltage drop problem\n   • 0V = power supply or wiring issue\n\n2️⃣ INSPECT CONNECTIONS:\n   • BNC connectors tight?\n   • Look for corrosion, damage\n   • Reseat all connections\n\n3️⃣ TEST VIDEO SIGNAL:\n   • Use portable monitor at camera\n   • Plug directly into camera output\n   • If image shows, cable to DVR is bad\n   • If no image, camera is faulty\n\n4️⃣ CHECK DVR:\n   • Try camera on different DVR channel\n   • If works, original channel is bad\n   • Verify channel is enabled in settings\n\n🎯 80% of analog issues = power or cable problems!",
+        title: "Analog Camera Troubleshooting",
+        text: "Now let's master analog systems - different technology, different problems!\n\n📺 ANALOG SIGNAL PATH:\nCamera → Coax Cable → DVR → Display\n\n🔍 COMMON SYMPTOMS & CAUSES:\n\n❄️ SNOWY/STATIC IMAGE:\n• Weak signal (cable too long)\n• Bad connectors (corrosion)\n• Damaged coax shield\n→ Test with portable monitor at camera\n\n🌊 ROLLING HORIZONTAL LINES:\n• Ground loop interference\n• AC power interference\n→ Use ground loop isolator\n\n⚫ COMPLETE BLACK SCREEN:\n• No power to camera\n• Completely bad cable\n• Wrong DVR input selected\n→ Check voltage at camera first\n\n🔅 DIM/DARK IMAGE:\n• Voltage drop (cable too long)\n• Undersized wire gauge\n• Weak power supply\n→ Measure voltage: should be 11.5-12.5V\n\n👥 GHOSTING/DOUBLE IMAGE:\n• Impedance mismatch\n• Cable termination wrong\n→ Check 75Ω termination",
+        image: "https://images.unsplash.com/photo-1600783245777-6d0ac96c0096?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Analog CCTV camera installation with coaxial cabling"
     },
     {
-        title: "Voltage Drop: The Silent Killer",
-        text: "Voltage drop causes MORE analog camera problems than anything else. Let's fix it!\n\n⚡ THE PROBLEM:\nLong cable runs cause voltage drop. 12V at power supply becomes 9V at camera = camera fails!\n\n🧮 VOLTAGE DROP FORMULA:\nDrop = (2 × Length × Current × Resistance) ÷ 1000\n\n📊 REAL EXAMPLE:\n• Cable: 100 meters (328 feet)\n• Current: 0.5A (camera draw)\n• Wire: 18AWG (21 Ω/km resistance)\n• Drop = (2 × 100 × 0.5 × 21) ÷ 1000 = 2.1V\n• Camera gets: 12V - 2.1V = 9.9V ✗ Too low!\n\n✅ SOLUTIONS:\n\n1️⃣ USE LARGER WIRE:\n   • 16AWG or 14AWG = lower resistance\n   • Reduces voltage drop significantly\n\n2️⃣ MID-POINT POWER:\n   • Install power supply closer to cameras\n   • Shorter runs = less drop\n\n3️⃣ HIGHER INPUT VOLTAGE:\n   • Use 24V AC systems\n   • More headroom for drop\n\n📏 RULE OF THUMB: For 18AWG wire, max run is 200 feet with 12V DC",
+        title: "The Voltage Drop Calculator",
+        text: "Voltage drop is the #1 killer of analog cameras! Let's master it.\n\n⚡ THE PROBLEM:\n12V at power supply → 9V at camera = Camera fails!\n\n🧮 VOLTAGE DROP FORMULA:\nDrop (V) = (2 × Length × Current × Resistance) ÷ 1000\n\nWhere:\n• Length = meters of cable\n• Current = amps camera draws\n• Resistance = Ω/km of wire gauge\n\n📊 WIRE RESISTANCE:\n• 18 AWG = 21 Ω/km\n• 16 AWG = 13 Ω/km\n• 14 AWG = 8 Ω/km\n\n💡 REAL EXAMPLE:\n• Cable: 150m run\n• Camera: 0.5A draw\n• Wire: 18 AWG (21 Ω/km)\n\nDrop = (2 × 150 × 0.5 × 21) ÷ 1000\nDrop = 3,150 ÷ 1000 = 3.15V\n\nCamera gets: 12V - 3.15V = 8.85V ❌\n(Minimum needed: 11V)\n\n✅ SOLUTION: Use 16 AWG wire!\nDrop = (2 × 150 × 0.5 × 13) ÷ 1000 = 1.95V\nCamera gets: 12V - 1.95V = 10.05V ❌ Still too low!\n\n✅ BEST SOLUTION: Use 14 AWG OR add mid-point power!",
+        image: "https://i.imgur.com/3QmK8Bx.png",
+        imageCaption: "Voltage drop chart showing wire gauge vs cable length"
+    },
+    {
+        title: "Interactive Scenario 4: The Dying Camera",
+        text: "🎬 TRICKY SCENARIO:\n\nCustomer: \"Camera was working fine, then started showing a dark image. Now it's completely dead.\"\n\nYOUR INVESTIGATION:\n• Analog camera, 300 feet from DVR\n• Camera powered from central power supply\n• 18 AWG wire used for power\n• Camera rated 12V DC, 500mA\n• Power supply output: 12.2V (measured)\n• Other cameras on shorter runs work fine\n\nYou climb the ladder and measure voltage AT THE CAMERA with your multimeter...\n\n⚡ READING: 8.3V DC\n\nThe camera needs minimum 11V to operate.\n\nWhat's your diagnosis and fix?",
+        image: "https://images.unsplash.com/photo-1581092918484-8313e8f28c7d?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Technician measuring voltage at camera with multimeter",
         quiz: {
-            question: "You run a camera cable 300 feet using thin wire. Camera works for 1 hour then goes dark. What's wrong?",
+            question: "Camera gets 8.3V instead of 12V due to 300ft run with 18 AWG wire. Best solution?",
             options: [
-                "The camera is defective",
-                "Voltage drop - the camera isn't getting enough power over that distance",
-                "The DVR channel failed",
-                "Someone unplugged it"
+                "Replace the camera with a 24V model",
+                "Run new 14 AWG wire OR install a power supply at the halfway point (150ft)",
+                "Increase the power supply to 15V to compensate for drop",
+                "Use a wireless camera instead"
             ],
             correctAnswer: 1,
-            correctFeedback: "⚡ Exactly! Long cable + thin wire = voltage drop. Camera boots up but can't maintain operation. Use thicker wire!",
-            incorrectFeedback: "Think about the distance! 300 feet is a long run. Voltage drop over thin wire means the camera doesn't get enough power."
+            correctFeedback: "⚡ Excellent! 300ft with 18 AWG is way too much voltage drop. Solutions: 1) Pull 14 AWG wire (lower resistance), or 2) Install power supply at 150ft midpoint (half the distance = 1/4 the drop). Mid-point power is often fastest! You install a small 12V supply at 150ft: Drop = (2 × 46m × 0.5 × 21) ÷ 1000 = 0.96V. Camera now gets 11.24V ✓ Problem solved!",
+            incorrectFeedback: "The problem is voltage DROP over distance. You need either lower-resistance wire (thicker gauge) or shorter distance (mid-point power)."
         }
     },
     {
-        title: "Poor Video Quality: Diagnosis Guide",
-        text: "Video quality issues tell you exactly what's wrong - if you know how to read the signs!\n\n📺 SYMPTOM GUIDE:\n\n❄️ SNOWY/GRAINY IMAGE:\n• Weak signal strength\n• Bad cable or connectors\n• Cable too long without amplifier\n→ Fix: Replace cable, check connections, add video amplifier\n\n🌊 ROLLING LINES:\n• Ground loop (interference)\n• Power and video share same pathway\n• Bad grounding\n→ Fix: Use ground loop isolator, separate power/video runs\n\n🔅 DIM IMAGE:\n• Low voltage at camera\n• Camera not getting full 12V\n• Voltage drop on power cable\n→ Fix: Check power voltage, use larger wire, add mid-point power\n\n⚫ NO COLOR (Black & White):\n• Camera in night mode (IR LEDs active)\n• Not enough light for color mode\n• Camera set to B&W mode\n→ Fix: Add lighting, adjust camera settings, check IR cut filter\n\n👥 GHOSTING/DOUBLE IMAGE:\n• Impedance mismatch (75Ω termination)\n• Cable too long\n• Poor quality cable\n→ Fix: Check termination, use video amplifier, replace cable",
+        title: "Cable Testing Like a Pro",
+        text: "Proper cable testing saves HOURS of frustration. Here's the professional method!\n\n🔌 TESTING ETHERNET (PoE CAMERAS):\n\n1️⃣ VISUAL INSPECTION:\n   • Check for kinks, cuts, staple damage\n   • Verify Cat5e minimum (Cat6 better)\n   • Check connector tabs aren't broken\n\n2️⃣ CONTINUITY TEST:\n   • Use cable tester\n   • ALL 8 wires must test good\n   • Check wire map for correct order\n   • Look for shorts between pairs\n\n3️⃣ POE VOLTAGE TEST:\n   • Disconnect camera first!\n   • Measure pins 1-2: should be 48-54V\n   • Measure pins 3-6: should be 48-54V\n   • Both pairs must have voltage\n\n4️⃣ LENGTH TEST:\n   • Max PoE: 100m (328ft)\n   • Most testers measure length\n   • Over 100m = no PoE delivery\n\n📺 TESTING COAX (ANALOG CAMERAS):\n\n1️⃣ CONTINUITY:\n   • Center conductor: ~0Ω\n   • Shield: ~0Ω  \n   • Center to shield: Infinite Ω\n\n2️⃣ VISUAL VIDEO TEST:\n   • Portable monitor at camera\n   • Compare to monitor at DVR\n   • Images should match\n\n3️⃣ CONNECTOR CHECK:\n   • BNC should click firmly\n   • No exposed center conductor\n   • Shield properly crimped",
+        image: "https://images.unsplash.com/photo-1581092160607-1e49b2f2a7b4?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional network cable tester showing wire map and continuity",
+        links: [
+            {
+                icon: "🔍",
+                title: "Klein Tools Cable Tester with Tone",
+                price: "$89.99",
+                url: "https://www.amazon.com/Klein-Tools-VDV501-851-Cable-Tester/dp/B00OQWBZ92"
+            },
+            {
+                icon: "📏",
+                title: "Fluke MicroScanner PoE Cable Verifier",
+                price: "$449.99",
+                url: "https://www.amazon.com/Fluke-Networks-MS-POE-MicroScanner-Verifier/dp/B008BZBRQ6"
+            },
+            {
+                icon: "🔌",
+                title: "Budget-Friendly Cable Tester",
+                price: "$24.99",
+                url: "https://www.amazon.com/iMBAPrice-Network-Cable-Tester-Phone/dp/B01M63EMBQ"
+            }
+        ]
     },
     {
-        title: "Cable Testing Techniques",
-        text: "Proper cable testing saves hours of frustration. Here's how the pros do it!\n\n🔌 TESTING ETHERNET CABLES (PoE):\n\n1️⃣ VISUAL INSPECTION:\n   • Look for kinks, cuts, crush damage\n   • Check connectors for broken tabs\n   • Verify cable type (Cat5e minimum)\n\n2️⃣ CONTINUITY TEST:\n   • Use cable tester\n   • All 8 wires must test good\n   • Check for shorts between pairs\n\n3️⃣ POE VOLTAGE TEST:\n   • Disconnect camera first!\n   • Measure pins 1-2 and 3-6\n   • Should read 48-54V DC\n\n4️⃣ LENGTH VERIFICATION:\n   • Max PoE distance: 100m (328ft)\n   • Cable tester can measure length\n   • Too long = no power delivery\n\n📺 TESTING COAXIAL CABLES (Analog):\n\n1️⃣ VISUAL INSPECTION:\n   • Check for damaged jacket\n   • Look for exposed braid shield\n   • Verify proper connectors\n\n2️⃣ CONTINUITY TEST:\n   • Test center conductor: should be ~0Ω\n   • Test shield: should be ~0Ω\n   • Test center-to-shield: should be infinite Ω\n\n3️⃣ VIDEO SIGNAL TEST:\n   • Use portable monitor at camera\n   • Connect at DVR end too\n   • Image should be identical both ends",
+        title: "Interactive Scenario 5: The Cable Mystery",
+        text: "🎬 DETECTIVE WORK:\n\nYou're called to investigate: \"Camera 4 worked yesterday, nothing today.\"\n\nYOUR TESTS:\n• Power at switch: 52V PoE ✓\n• Switch link light: ON ✓\n• Camera: No power, no LED\n\nYou test with cable tester at the camera end:\n\n📊 TESTER RESULTS:\n✅ Wire 1: Good\n✅ Wire 2: Good\n❌ Wire 3: OPEN (broken)\n✅ Wire 4: Good\n✅ Wire 5: Good\n❌ Wire 6: OPEN (broken)\n✅ Wire 7: Good\n✅ Wire 8: Good\n\n💡 PoE uses:\n• Wires 1-2 for data + power\n• Wires 3-6 for data + power\n\nWires 3 and 6 are broken!\n\nWhat happened?",
+        image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Cable tester display showing failed wires in red",
         quiz: {
-            question: "What's the maximum cable distance for PoE cameras?",
+            question: "Wires 1-2 good, wires 3-6 broken, wires 7-8 good. What likely happened?",
             options: [
-                "500 feet (152 meters)",
-                "328 feet (100 meters)",
-                "1000 feet (305 meters)",
-                "There's no limit"
+                "The cable was defective from the factory",
+                "Someone stapled or pinched the cable, crushing wires 3-6 in the middle",
+                "The camera shorted out and burned the wires",
+                "Lightning strike damaged specific wires"
             ],
             correctAnswer: 1,
-            correctFeedback: "📏 Perfect! 100 meters (328 feet) is the PoE limit. Beyond that, both data and power degrade significantly.",
-            incorrectFeedback: "The IEEE 802.3af/at standard limits PoE to 100 meters (328 feet). Beyond that, you need repeaters or extenders."
+            correctFeedback: "🎯 Detective work! Wires 3-6 are together in the cable. Damage to ONLY those wires = physical crush injury. You inspect the cable run and find a STAPLE driven through it! Customer says 'Oh yeah, we hung a picture yesterday...' SOLUTION: Cut out damaged section, install two RJ45 connectors and a coupler. Or pull new cable. Document: 'Cable damaged by staple at 8ft height near picture frame.' Customer now understands the damage!",
+            incorrectFeedback: "Think about the pattern! Wires 3, 4, 5, 6 are physically grouped together in the cable. Damage to ONLY this group = something crushed the cable at one point."
         }
     },
     {
-        title: "Environmental Factors",
-        text: "Cameras don't just fail from electrical issues - environment plays a huge role!\n\n🌡️ TEMPERATURE EXTREMES:\n\n❄️ COLD:\n• Cameras may fail below -10°C (14°F)\n• Condensation causes failures\n• PoE switches can fail in cold\n✅ Solution: Use outdoor-rated cameras, add heaters, insulate\n\n🔥 HEAT:\n• Cameras fail above 50°C (122°F)\n• Direct sunlight overheats housings\n• Dark camera housings absorb more heat\n✅ Solution: Use sunshades, white housings, proper ventilation\n\n💧 MOISTURE/HUMIDITY:\n• Water intrusion kills cameras fast\n• Condensation inside housing\n• Corroded connections\n✅ Solution: IP66 minimum rating, seal cable entries, use silicone, check drainage holes\n\n⚡ LIGHTNING/SURGES:\n• Lightning doesn't need direct hit\n• Nearby strikes induce voltage in cables\n• Kills cameras, switches, NVRs\n✅ Solution: Surge protectors on power AND data, proper grounding, shielded cables\n\n☀️ LIGHTING CONDITIONS:\n• Backlight (camera facing sun)\n• WDR needed for mixed light\n• IR reflection off objects\n✅ Solution: Adjust camera angle, enable WDR, reposition cameras",
+        title: "Environmental Troubleshooting",
+        text: "Cameras don't just fail electrically - environment kills them too!\n\n🌡️ TEMPERATURE ISSUES:\n\n❄️ COLD (Below -10°C/14°F):\n• Condensation inside housing\n• Camera won't boot\n• Lens fogs up\n✅ Fix: Add heater, use cold-rated cameras\n\n🔥 HEAT (Above 50°C/122°F):\n• Camera overheats and shuts down\n• Afternoon failures\n• Dark housings worse\n✅ Fix: Add sunshade, white housing, ventilation\n\n💧 MOISTURE PROBLEMS:\n\n🌧️ SYMPTOMS:\n• Foggy lens\n• Corrosion on connections  \n• Intermittent operation\n• Water inside housing\n\n✅ PREVENTION:\n• IP66 minimum rating\n• Seal ALL cable entries with silicone\n• Point camera down (water drains)\n• Check drainage holes aren't clogged\n• Use outdoor-rated connectors\n\n⚡ LIGHTNING & SURGE:\n\n🌩️ DAMAGE PATTERNS:\n• Multiple cameras fail at once\n• Switch/NVR also damaged\n• Happens after storms\n\n✅ PROTECTION:\n• Surge protectors on EVERY camera\n• Surge protection at switch/NVR\n• Proper system grounding\n• Consider fiber for long runs",
+        image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Outdoor CCTV cameras in harsh environmental conditions",
+        links: [
+            {
+                icon: "⚡",
+                title: "Ethernet Surge Protector (PoE)",
+                price: "$39.99",
+                url: "https://www.amazon.com/Ubiquiti-ETH-SP-G2-Ethernet-Surge-Protector/dp/B07PGBCQP8"
+            },
+            {
+                icon: "🌡️",
+                title: "Camera Housing with Heater/Blower",
+                price: "$89.99",
+                url: "https://www.amazon.com/Outdoor-Security-Housing-Heater-Blower/dp/B07QKXN8VH"
+            }
+        ]
     },
     {
-        title: "Systematic Troubleshooting Checklist",
-        text: "Follow this proven checklist on EVERY call - you'll solve 95% of issues!\n\n⚡ THE 5-MINUTE QUICK CHECK:\n\n☐ Power present at camera?\n  • LED indicator on?\n  • Measure voltage if no LED\n\n☐ Cables physically intact?\n  • No visible damage\n  • Connectors secure\n\n☐ Other cameras working?\n  • Single camera = camera/cable issue\n  • All cameras = switch/NVR issue\n\n☐ Recent changes?\n  • Power outage?\n  • Construction/renovation?\n  • New equipment added?\n\n☐ Test with known-good equipment?\n  • Swap camera with working one\n  • Try different cable\n  • Test on different port/channel\n\n🔍 THE 30-MINUTE DEEP DIVE:\n\n☐ Measure actual voltages (PoE or 12V DC)\n☐ Check network settings (IP, subnet, gateway)\n☐ Test camera on bench with direct power\n☐ Review system logs if available\n☐ Verify firmware compatibility\n☐ Check for IP conflicts\n☐ Test port-to-port on switch\n☐ Inspect for environmental damage",
-        quiz: {
-            question: "All cameras stop working at once. What's the MOST likely cause?",
-            options: [
-                "All cameras failed simultaneously (very unlikely)",
-                "Power supply, PoE switch, or NVR failure (centralized issue)",
-                "All cables failed at once",
-                "Cameras need firmware updates"
-            ],
-            correctAnswer: 1,
-            correctFeedback: "🎯 Excellent thinking! Multiple failures = look for centralized problems. Check power source, switch, or NVR first!",
-            incorrectFeedback: "When ALL cameras fail together, think centralized! Check the switch, power supply, or NVR - not individual cameras."
-        }
-    },
-    {
-        title: "Ground Loop Issues",
-        text: "Ground loops cause weird problems that confuse even experienced techs. Let's demystify them!\n\n⚡ WHAT IS A GROUND LOOP?\n\nImagine two devices (camera and DVR) each connected to electrical ground at different points. If there's a voltage difference between those grounds, current flows through the cable shield - creating interference!\n\n📺 SYMPTOMS:\n• Rolling horizontal lines on video\n• Wavy or distorted image\n• Hum bars (60Hz interference)\n• Image gets worse with fluorescent lights\n• Worse in long cable runs\n\n🔍 HOW TO IDENTIFY:\n• Problem appears on some cameras, not all\n• Worse at certain times of day\n• Changes when you touch camera or cable\n• Lifting ground temporarily \"fixes\" it (DON'T DO THIS - SAFETY HAZARD!)\n\n✅ PROPER SOLUTIONS:\n\n1️⃣ GROUND LOOP ISOLATOR:\n   • Install inline on video cable\n   • Breaks the ground path\n   • $10-30 per camera\n\n2️⃣ SINGLE POINT GROUNDING:\n   • All equipment grounds to ONE point\n   • Eliminates voltage differences\n\n3️⃣ SEPARATE POWER/VIDEO RUNS:\n   • Don't bundle power and video cables\n   • Reduces interference coupling\n\n4️⃣ USE FIBER OPTIC:\n   • For long runs\n   • Completely immune to ground loops\n   • More expensive but bulletproof",
-    },
-    {
-        title: "Network Bandwidth Issues",
-        text: "PoE cameras work on networks - and networks have limits! Here's what you need to know:\n\n🌐 BANDWIDTH BASICS:\n\nEach IP camera uses network bandwidth based on:\n• Resolution (1080p vs 4K)\n• Frame rate (15fps vs 30fps)\n• Compression (H.264 vs H.265)\n\n📊 TYPICAL CAMERA BANDWIDTH:\n• 1080p @ 30fps = 2-4 Mbps\n• 4K @ 30fps = 8-12 Mbps\n• With H.265 compression = 30-50% less\n\n⚠️ COMMON PROBLEMS:\n\n1️⃣ NETWORK SATURATION:\n   • Too many cameras on one switch\n   • 1Gbps switch with 20 cameras @ 4Mbps each = 80Mbps ✓\n   • But add 10 more 4K cameras @ 10Mbps = 180Mbps total\n   • Plus network overhead = choppy video\n\n2️⃣ WIFI CAMERAS:\n   • Never use WiFi for more than 2-3 cameras\n   • WiFi bandwidth is SHARED\n   • Latency and interference cause dropouts\n   • Wired is ALWAYS better\n\n3️⃣ NVR PROCESSING:\n   • NVR has max incoming bandwidth limit\n   • Exceed it = dropped frames, lost recordings\n   • Check NVR specs: \"Max 256Mbps\" etc.\n\n✅ SOLUTIONS:\n• Use H.265 compression (saves 50% bandwidth)\n• Reduce frame rate to 15fps if acceptable\n• Segment network with multiple switches\n• Upgrade to managed switches with QoS\n• Lower resolution on less critical cameras",
-    },
-    {
-        title: "Preventive Maintenance Schedule",
-        text: "Don't wait for failures! Preventive maintenance keeps systems running and clients happy!\n\n📅 MONTHLY TASKS:\n\n☐ Clean camera lenses\n  • Dust, spider webs, water spots\n  • Use microfiber cloth, lens cleaner\n  • Check IR LEDs for obstructions\n\n☐ Verify video quality\n  • Spot-check random cameras\n  • Look for focus drift\n  • Check for new obstructions\n\n☐ Test recording functionality\n  • Playback footage from all cameras\n  • Verify motion detection works\n  • Check storage availability\n\n📅 QUARTERLY TASKS:\n\n☐ Inspect all cable connections\n  • Look for corrosion\n  • Tighten loose connections\n  • Check for water intrusion\n\n☐ Test backup power systems\n  • UPS battery test\n  • Generator test (if present)\n  • Verify failover works\n\n☐ Update camera firmware\n  • Check manufacturer sites\n  • Test updates on one camera first\n  • Document versions\n\n☐ Review storage capacity\n  • How many days of recording?\n  • Plan for expansion if needed\n\n📅 ANNUAL TASKS:\n\n☐ Full system testing\n☐ Replace surge protectors (they wear out!)\n☐ Clean internal electronics (dust buildup)\n☐ Update NVR/DVR firmware\n☐ Review and update network security\n☐ Test all backup/restore procedures",
-        quiz: {
-            question: "How often should you clean camera lenses in a dusty environment?",
-            options: [
-                "Once a year is enough",
-                "Monthly, or more often in harsh environments",
-                "Only when clients complain",
-                "Cameras are self-cleaning"
-            ],
-            correctAnswer: 1,
-            correctFeedback: "🧹 Perfect! Monthly minimum, more often in dusty/dirty locations. Clean lenses = happy clients!",
-            incorrectFeedback: "Dirty lenses degrade video quality significantly. In harsh environments, monthly cleaning (or more) is essential for clear footage."
-        }
-    },
-    {
-        title: "Installation Best Practices",
-        text: "Great installations prevent future service calls! Follow these pro practices:\n\n✅ DO THESE THINGS:\n\n🔌 Use quality cables\n  • Cat6 for PoE (better than Cat5e)\n  • RG6 for analog (better than RG59)\n  • Don't cheap out - cables last 10+ years\n\n🏷️ Label everything clearly\n  • Both ends of every cable\n  • Camera number + location\n  • IP addresses on labels\n  • Use weatherproof labels outdoors\n\n🔄 Leave service loops\n  • Extra 3-6 feet at each end\n  • Allows repositioning without rewiring\n  • Coil neatly, secure with velcro\n\n📋 Document everything\n  • IP addresses in spreadsheet\n  • Camera locations on site map\n  • Login credentials (secure!)\n  • Installation date and equipment models\n\n⚡ Install surge protection\n  • Protects entire investment\n  • Both power and data lines\n  • Ground properly\n\n❌ DON'T DO THESE THINGS:\n\n⚠️ Run near high voltage lines\n  • Causes interference\n  • Keep 12+ inches away\n\n⚠️ Exceed maximum distances\n  • 100m for PoE\n  • Check specs for analog\n\n⚠️ Use indoor equipment outdoors\n  • Water ingress kills everything\n  • Always use proper IP ratings\n\n⚠️ Forget proper grounding\n  • Lightning strikes destroy systems\n  • Proper ground = protection\n\n⚠️ Skip testing before closing walls\n  • ALWAYS test before sealing\n  • Saves massive headaches",
-    },
-    {
-        title: "Professional Documentation",
-        text: "Documentation separates pros from amateurs. It protects you AND helps future troubleshooting!\n\n📸 TAKE PHOTOS OF EVERYTHING:\n\n• Before starting (document existing conditions)\n• Cable routing and pathways\n• All connections (close-ups)\n• Equipment serial numbers\n• After completion (prove quality work)\n• Problem areas you find\n\n📋 DOCUMENT THESE DETAILS:\n\n🎯 SYSTEM INFORMATION:\n  • Camera make/model/serial numbers\n  • NVR/DVR make/model/firmware version\n  • Switch make/model (if separate)\n  • Power supply specifications\n\n🌐 NETWORK CONFIGURATION:\n  • Every camera's IP address\n  • NVR IP address and gateway\n  • Subnet mask\n  • DNS servers (if used)\n  • Port forwarding rules (if remote access)\n\n🔐 CREDENTIALS:\n  • Admin usernames (never write passwords!)\n  • Camera access codes\n  • Keep in secure password manager\n  • Never email credentials\n\n📍 PHYSICAL LAYOUT:\n  • Site map with camera locations\n  • Cable run lengths and pathways\n  • Where equipment is mounted\n  • Access panel locations\n\n💡 WHY THIS MATTERS:\n• Saves hours on future service calls\n• Protects you legally (proof of proper work)\n• Helps other techs who come after you\n• Shows professionalism to clients\n• Allows accurate quoting for expansions",
-    },
-    {
-        title: "Remote Troubleshooting Tips",
-        text: "Sometimes you can solve problems remotely - saves time and travel costs!\n\n💻 REMOTE ACCESS SETUP:\n\n1️⃣ NVR/CAMERA WEB ACCESS:\n   • Port forwarding on router\n   • Use HTTPS with strong passwords\n   • Change default ports (not 80, not 8000)\n   • Consider VPN instead of port forwarding\n\n2️⃣ REMOTE DESKTOP:\n   • TeamViewer/AnyDesk to client computer\n   • Can access local network from there\n   • View same interface as on-site\n\n3️⃣ MANUFACTURER APPS:\n   • Hikvision: Hik-Connect\n   • Dahua: gDMSS Plus\n   • Check camera web interface remotely\n\n🔍 REMOTE DIAGNOSTICS:\n\n☐ Check system logs remotely\n☐ Verify recording is working\n☐ Test camera connections\n☐ Review error messages\n☐ Adjust camera settings\n☐ Reboot cameras/NVR remotely\n☐ Check network connectivity\n☐ Review bandwidth usage\n\n⚠️ SECURITY WARNINGS:\n\n❌ Never use default passwords\n❌ Don't open all ports to internet\n❌ Avoid using telnet (not secure)\n❌ Don't share admin credentials openly\n\n✅ Use strong unique passwords\n✅ Enable two-factor authentication\n✅ Use VPN when possible\n✅ Keep firmware updated\n✅ Monitor for unauthorized access\n\n💰 REMOTE TROUBLESHOOTING SAVES:\n• 2-4 hours drive time\n• Vehicle expenses\n• Same-day resolution for clients\n• Can help after hours\n• Build recurring maintenance contracts",
-    },
-    {
-        title: "Common Myths Debunked",
-        text: "Let's clear up misconceptions that waste time and money!\n\n❌ MYTH #1: \"More megapixels = better cameras\"\n✅ TRUTH: More megapixels = more storage/bandwidth needed. 4MP is plenty for most applications. Consider lighting, lens quality, and sensor size!\n\n❌ MYTH #2: \"WiFi cameras are just as good as wired\"\n✅ TRUTH: WiFi has interference, bandwidth limits, and reliability issues. Wired is ALWAYS more reliable for CCTV.\n\n❌ MYTH #3: \"All Ethernet cables are the same\"\n✅ TRUTH: Cat5e is minimum for PoE, Cat6 is better. Quality matters - cheap cable = voltage drop and data errors.\n\n❌ MYTH #4: \"Cameras work forever without maintenance\"\n✅ TRUTH: Dust, moisture, temperature, and age degrade all cameras. Regular cleaning and inspection extends life significantly.\n\n❌ MYTH #5: \"More cameras = better security\"\n✅ TRUTH: Proper camera placement matters more than quantity. 5 well-placed cameras beat 20 poorly positioned ones.\n\n❌ MYTH #6: \"Night vision works in total darkness\"\n✅ TRUTH: IR cameras need IR LEDs (invisible light). \"Starlight\" cameras need SOME ambient light. True darkness = no image.\n\n❌ MYTH #7: \"Digital zoom = optical zoom\"\n✅ TRUTH: Digital zoom just enlarges pixels (makes image blocky). Optical zoom maintains quality. Know the difference!\n\n❌ MYTH #8: \"Cloud storage is always better\"\n✅ TRUTH: Local storage is faster, more reliable, and no monthly fees. Cloud is great for off-site backup, not primary storage.",
-    },
-    {
-        title: "Dealing with Challenging Installations",
-        text: "Some sites present unique challenges. Here's how to handle them!\n\n🏢 LONG DISTANCE RUNS:\n\nProblem: Need camera 500 feet from NVR\n\n✅ Solutions:\n• Use PoE extenders (every 100m)\n• Install intermediate switch\n• Use fiber optic converters\n• Consider wireless bridge (line of sight)\n\n🌳 OUTDOOR/HARSH ENVIRONMENTS:\n\nProblem: Extreme weather, moisture, dust\n\n✅ Solutions:\n• IP66/IP67 rated cameras minimum\n• Add heater/blower for extreme temps\n• Use sunshades on south-facing cameras\n• Seal all cable entries with silicone\n• Check drainage holes aren't blocked\n• Use stainless steel mounting hardware\n\n⚡ HIGH LIGHTNING AREAS:\n\nProblem: System damaged by storms repeatedly\n\n✅ Solutions:\n• Install surge protectors on EVERY camera\n• Use shielded cables\n• Proper grounding (critical!)\n• Consider fiber for long runs (immune to surges)\n• Install whole-system surge protection\n• Document lightning protection in quote\n\n🏗️ METAL BUILDING/INTERFERENCE:\n\nProblem: Metal building causing PoE/network issues\n\n✅ Solutions:\n• Use shielded Cat6 cable\n• Proper grounding eliminates ground loops\n• Keep cables away from metal structures\n• Use fiber optic if interference persists\n• Check for nearby radio transmitters\n\n🔒 HIGH SECURITY REQUIREMENTS:\n\nProblem: Client needs redundancy, encryption\n\n✅ Solutions:\n• Dual recording (local + cloud/off-site)\n• Redundant power (UPS + generator)\n• VLAN segregation for camera network\n• Enable camera encryption\n• Regular backup testing\n• Documented security procedures",
-    },
-    {
-        title: "Pricing Your Services",
-        text: "Don't leave money on the table! Here's how to price CCTV troubleshooting properly:\n\n💰 SERVICE CALL STRUCTURE:\n\n🔍 DIAGNOSTIC FEE: $100-150\n  • Covers initial visit and diagnosis\n  • Applied to repair if client proceeds\n  • Non-refundable if they decline\n\n🔧 HOURLY RATE: $75-125/hour\n  • Varies by region and experience\n  • Minimum 1-2 hour charge\n  • Higher rate for after-hours/emergency\n\n📊 COMMON REPAIRS (Labor + Parts):\n\n• Replace single camera: $150-250\n• Run new cable: $200-400\n• Configure network settings: $100-200\n• Replace PoE switch: $300-600\n• Full system checkup: $200-400\n• Install surge protection: $150-300/camera\n• Add storage upgrade: $200-500\n\n💡 VALUE-BASED PRICING:\n\nInstead of just hourly:\n\"Camera down = lost evidence = risk\"\n\"I can fix it today = peace of mind\"\n\nPrice based on VALUE delivered:\n• Restore critical security\n• Prevent loss/theft\n• Compliance requirements\n• Emergency response\n\n📋 MAINTENANCE CONTRACTS:\n\nRecurring revenue = business stability!\n\n🥉 BRONZE ($100/month):\n   • Quarterly check-ins\n   • Priority scheduling\n   • 10% off repairs\n\n🥈 SILVER ($200/month):\n   • Monthly checks\n   • Remote monitoring\n   • 20% off repairs\n   • After-hours support\n\n🥇 GOLD ($400/month):\n   • Bi-weekly checks\n   • 24/7 monitoring\n   • Free minor repairs\n   • Guaranteed 4-hour response\n\n💰 BUNDLE PRICING:\n\"System Health Check\" package:\n• Clean all lenses\n• Test all cameras\n• Update firmware\n• Check all connections\n• Full report with recommendations\n• $500 flat rate (beats hourly for client)\n• You complete in 3-4 hours = $125-165/hour effective rate!",
+        title: "Professional Maintenance Schedule",
+        text: "Preventive maintenance keeps systems running and builds recurring revenue!\n\n📅 MONTHLY CHECKS ($100-150/visit):\n\n🧹 Clean camera lenses\n  • Microfiber cloth\n  • Lens cleaning solution\n  • Check for spider webs\n  • Clear IR LED obstructions\n\n📹 Spot-check video quality\n  • Random camera playback\n  • Check focus hasn't drifted\n  • Verify motion detection works\n\n💾 Check storage capacity\n  • Days of recording available?\n  • Storage nearly full?\n  • Plan expansion if needed\n\n📅 QUARTERLY CHECKS ($200-300/visit):\n\n🔌 Inspect connections\n  • Look for corrosion\n  • Tighten loose connections\n  • Check for water intrusion\n  • Test all cameras\n\n⚡ Power system check\n  • Test UPS batteries\n  • Verify PoE budget headroom\n  • Check power supply voltages\n\n🔄 Firmware updates\n  • Check manufacturer sites\n  • Test on one camera first\n  • Document versions\n\n📅 ANNUAL SERVICE ($500-800/visit):\n\n🧪 Full system test\n✅ Replace surge protectors\n🧹 Clean equipment internals  \n🔄 Update NVR/DVR firmware\n🔒 Security audit\n💾 Test backup/restore",
+        image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Technician performing preventive maintenance on CCTV system"
     },
     {
         title: "Building Your CCTV Business",
-        text: "You've got the technical skills - now let's talk about building a profitable CCTV service business!\n\n🎯 NICHE SPECIALIZATION:\n\nDon't be everything to everyone! Pick a focus:\n\n• Retail stores (know POS integration)\n• Restaurants (kitchen camera requirements)\n• Warehouses (wide area coverage)\n• Residential (user-friendly systems)\n• Construction sites (temporary power, wireless)\n• Schools (specific compliance needs)\n\n📣 MARKETING STRATEGIES:\n\n1️⃣ REFERRAL PARTNERSHIPS:\n   • IT companies (don't do CCTV themselves)\n   • Electricians (camera installs needed)\n   • Security companies (need installation help)\n   • Property managers (multiple properties)\n\n2️⃣ ONLINE PRESENCE:\n   • Google Business Profile (critical!)\n   • Before/after photos\n   • Video testimonials\n   • \"CCTV troubleshooting [your city]\"\n\n3️⃣ LOCAL NETWORKING:\n   • Join chamber of commerce\n   • Business networking groups\n   • Property manager associations\n\n💼 GROWTH PATH:\n\n📊 YEAR 1:\n   • Focus on service calls\n   • Build reputation\n   • 2-3 installs/month\n   • $50-75K revenue\n\n📈 YEAR 2:\n   • Add installation services\n   • Hire first helper\n   • 5-8 installs/month\n   • $100-150K revenue\n\n🚀 YEAR 3+:\n   • Focus on sales/project management\n   • Team handles technical work\n   • Recurring maintenance contracts\n   • $200K+ revenue\n\n💡 RECURRING REVENUE FOCUS:\n\nService calls are unpredictable income.\nMaintenance contracts = predictable monthly income!\n\n20 clients × $200/month = $4,000/month baseline\nBefore you do ANY project work!",
+        text: "You've got the skills - now let's talk about making money!\n\n💰 PRICING GUIDE:\n\n🔍 DIAGNOSTIC VISIT:\n$100-150 flat rate\n• Covers first hour\n• Applied to repair if they proceed\n• Non-refundable if they decline\n\n🔧 HOURLY RATE:\n$75-125/hour\n• Varies by region\n• 2-hour minimum\n• After-hours: +50%\n• Emergency: +100%\n\n💼 COMMON JOBS:\n• Camera replacement: $150-250\n• Cable run (100ft): $200-400\n• Network config: $100-200\n• Switch replacement: $300-600  \n• Full system health check: $400-600\n\n📋 MAINTENANCE CONTRACTS (Monthly):\n\n🥉 BASIC ($150/month):\n   • Quarterly visits\n   • Priority scheduling\n   • 10% off repairs\n\n🥈 STANDARD ($300/month):\n   • Monthly visits\n   • Remote monitoring\n   • 20% off repairs\n   • After-hours support\n\n🥇 PREMIUM ($600/month):\n   • Bi-weekly visits\n   • 24/7 monitoring\n   • Free minor repairs\n   • 4-hour response guarantee\n\n💡 RECURRING REVENUE:\n10 clients × $300/month = $3,000/month\nBefore you do ANY project work!\n\nThis is how you build a stable business!",
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "CCTV service business - pricing and contracts planning"
     },
     {
-        title: "Final Assessment",
-        text: "Alright, let's test your CCTV troubleshooting mastery! This brings together everything we've covered.\n\nYou arrive at a site with 8 PoE cameras. Cameras 1-6 work fine. Cameras 7 and 8 have no power. You check:\n\n• Both cameras: No LED lights\n• PoE switch: All other ports working\n• Cables: Appear undamaged\n• Switch specs: 16 ports, 200W PoE budget\n• Cameras 1-6: Each using 15W = 90W total\n• Cameras 7-8: Each rated for 30W (PTZ models)\n• Total if all worked: 90W + 60W = 150W (under 200W budget)\n\nYou test Camera 7 on an empty port - still no power. You connect your laptop with a known-good cable to Camera 7's port - you get network access and PoE power.\n\nWhat's the most likely problem?",
+        title: "Final Master Scenario",
+        text: "🎬 THE ULTIMATE TEST:\n\nYou're called to a warehouse with 16 PoE cameras. The manager is frustrated:\n\n\"Cameras 13-16 randomly go offline. Sometimes they work, sometimes they don't. It's driving us crazy!\"\n\nYOUR INVESTIGATION:\n• System: 16-port PoE switch, 200W budget\n• Cameras 1-12: 12W each = 144W\n• Cameras 13-16: 30W each = 120W\n• Total: 264W required\n• Budget: 200W available\n\nBUT HERE'S THE TWIST:\nCameras 13-16 are PTZ (Pan-Tilt-Zoom) cameras. They only use 30W when MOVING. When stationary, they use 15W.\n\n• Stationary load: 144W + (4 × 15W) = 204W (exceeds 200W slightly)\n• Moving load: 144W + (4 × 30W) = 264W (way over!)\n\nThe warehouse has motion detection enabled on PTZ cameras. When motion detected, all 4 PTZ cameras start moving simultaneously...\n\nWhat's happening?",
+        image: "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "PTZ surveillance cameras in warehouse environment",
         quiz: {
-            question: "Based on the scenario above, what's wrong with Cameras 7 and 8?",
+            question: "Why do cameras 13-16 randomly fail? (Hint: Think about WHEN they fail)",
             options: [
-                "Both cameras are defective",
-                "The PoE switch has failed",
-                "The cables to Cameras 7 and 8 are damaged/faulty",
-                "The cameras need different voltage"
+                "The cameras are defective and need warranty replacement",
+                "When motion triggers all PTZ cameras to move simultaneously, power demand spikes to 264W, exceeding the 200W budget - last cameras lose power",
+                "The network bandwidth is saturated",
+                "Someone keeps unplugging the cameras"
             ],
-            correctAnswer: 2,
-            correctFeedback: "🎯 Perfect diagnosis! The switch and cameras work fine (you tested them). Laptop got power on those ports. Same camera failed on different port. Must be the cables to those camera locations. Time to replace those cables!",
-            incorrectFeedback: "Think through the testing: Camera 7 failed on its original port AND a new port. But your laptop worked on Camera 7's port with a good cable. The switch provides power, the cameras would work with good cables... what's left?"
+            correctAnswer: 1,
+            correctFeedback: "🏆 MASTER LEVEL! You identified a DYNAMIC power budget problem! At rest: barely works (204W). During motion: demand hits 264W, exceeding 200W budget - cameras 13-16 drop! SOLUTIONS: 1) Add 2nd PoE switch for cameras 13-16, 2) Use PoE injectors for PTZ cameras, 3) Stagger motion detection (don't move all PTZs at once), 4) Upgrade to 400W PoE switch. You recommend: Add 4-port PoE+ injectors ($60 each) for cameras 13-16. Total cost: $240. Problem solved! This is REAL troubleshooting - understanding system behavior over time!",
+            incorrectFeedback: "Think about WHEN failures occur - during motion! PTZ cameras draw more power while moving. Multiple moving at once = power spike!"
         }
     },
     {
         title: "Congratulations! You're a CCTV Pro! 🎉",
-        text: "Outstanding work! You've completed the CCTV Camera Troubleshooting certification!\n\n🎓 YOU NOW KNOW HOW TO:\n\n✅ Troubleshoot PoE digital camera systems\n✅ Diagnose and fix analog camera issues\n✅ Calculate power budgets and voltage drops\n✅ Configure network settings properly\n✅ Test cables and connections professionally\n✅ Handle environmental challenges\n✅ Perform preventive maintenance\n✅ Build a profitable CCTV service business\n✅ Price services confidently\n✅ Document work professionally\n\n💼 YOUR NEXT STEPS:\n\n1️⃣ Practice these techniques on real systems\n2️⃣ Build your technician toolkit\n3️⃣ Start offering CCTV services\n4️⃣ Join industry groups and forums\n5️⃣ Consider manufacturer certifications\n6️⃣ Build a portfolio of completed projects\n7️⃣ Network with local installers\n8️⃣ Stay updated on new technologies\n\n🚀 CAREER OPPORTUNITIES:\n\n💰 CCTV technicians earn:\n   • Service calls: $75-125/hour\n   • Installations: $300-800/day\n   • Maintenance contracts: Recurring revenue\n   • Emergency calls: Premium rates\n\n🌟 With these skills, you can:\n   • Work independently\n   • Join established companies\n   • Start your own CCTV business\n   • Combine with other field tech services\n\n📚 KEEP LEARNING:\n   • New camera technologies emerge constantly\n   • AI/analytics integration is growing\n   • Cloud-based systems expanding\n   • Cybersecurity becoming critical\n\nCCTV systems protect property, assets, and people. Your troubleshooting skills ensure security systems work when needed most. That's valuable - own it!\n\n🎊 You've earned this certification. Now go make money with these skills! 🔧📹💰",
+        text: "Outstanding work! You've completed the CCTV Camera Troubleshooting certification!\n\n🎓 YOU NOW KNOW HOW TO:\n\n✅ Systematically troubleshoot PoE cameras\n✅ Diagnose analog camera issues\n✅ Calculate and plan power budgets\n✅ Configure network settings properly\n✅ Test cables like a professional\n✅ Understand environmental impacts\n✅ Solve real-world complex scenarios\n✅ Price services profitably\n✅ Build maintenance contracts\n✅ Create recurring revenue\n\n💼 YOUR NEXT STEPS:\n\n1️⃣ Purchase your essential toolkit (see links earlier)\n2️⃣ Practice on real systems (offer free service to friends)\n3️⃣ Start taking CCTV jobs on FieldNation/WorkMarket\n4️⃣ Build a portfolio with before/after photos\n5️⃣ Join CCTV forums and Facebook groups\n6️⃣ Get manufacturer certifications (Hikvision, Dahua)\n7️⃣ Network with local security installers\n8️⃣ Start offering maintenance contracts\n\n🚀 INCOME POTENTIAL:\n\n💰 Service calls: $75-125/hour\n💰 Installations: $300-800/day  \n💰 Maintenance: $150-600/month per client\n💰 Emergency calls: $150-250/hour\n\n📚 KEEP LEARNING:\n• AI/analytics integration (hot trend!)\n• Cloud-based systems  \n• Thermal cameras\n• License plate recognition\n• Cybersecurity for IP cameras\n\nYou protect people, property, and assets. That's valuable work. Own it and charge accordingly!\n\n🎊 Now go build your CCTV troubleshooting business! 🔧📹💰",
+        image: "https://images.unsplash.com/photo-1556745753-b2904692b3cd?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional CCTV technician - certified and ready for business"
     },
 ]);
 

@@ -395,12 +395,6 @@ const discountInfo = computed(() => {
                                 </span>
                                 <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                             </Link>
-                            <Link :href="route('products.show', { product: featuredProduct.id })" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-orange-400 bg-white/5 backdrop-blur-sm border-2 border-orange-500/30 rounded-lg hover:bg-white/10 hover:border-orange-500/50 transition-all duration-300">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                See How It Works
-                            </Link>
                         </div>
 
                         <!-- Trust Indicators -->

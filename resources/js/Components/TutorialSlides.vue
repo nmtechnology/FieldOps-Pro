@@ -185,6 +185,50 @@ const retryQuiz = () => {
                     </div>
                 </div>
 
+                <!-- Image Display -->
+                <div v-if="!isTyping && currentSlideData.image" class="mt-6">
+                    <img 
+                        :src="currentSlideData.image" 
+                        :alt="currentSlideData.imageAlt || currentSlideData.title"
+                        class="w-full rounded-xl border-2 border-gray-700 shadow-lg"
+                    />
+                    <p v-if="currentSlideData.imageCaption" class="text-center text-gray-400 text-sm mt-2">
+                        {{ currentSlideData.imageCaption }}
+                    </p>
+                </div>
+
+                <!-- Links Display -->
+                <div v-if="!isTyping && currentSlideData.links && currentSlideData.links.length > 0" class="mt-6">
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-4">
+                        <h4 class="text-orange-400 font-semibold mb-3">🛒 Recommended Tools & Resources:</h4>
+                        <div class="space-y-2">
+                            <a 
+                                v-for="(link, index) in currentSlideData.links" 
+                                :key="index"
+                                :href="link.url" 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex items-center justify-between p-3 bg-gray-900 rounded-lg border border-gray-600 hover:border-orange-500 transition-all group"
+                            >
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">{{ link.icon || '🔗' }}</span>
+                                    <div>
+                                        <div class="text-white font-medium group-hover:text-orange-400 transition-colors">
+                                            {{ link.title }}
+                                        </div>
+                                        <div v-if="link.price" class="text-green-400 text-sm">
+                                            {{ link.price }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Quiz Section -->
                 <div v-if="showQuiz && currentSlideData.quiz" class="mt-6">
                     <div class="bg-gray-900 rounded-xl border-2 border-blue-500/30 p-6">
