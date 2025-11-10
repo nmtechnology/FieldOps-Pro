@@ -124,7 +124,8 @@ const getBlockTypeIcon = (type) => {
         text: '📝',
         heading: '📌',
         image: '🖼️',
-        video: '🎥'
+        video: '🎥',
+        tutorial: '🎓'
     };
     return icons[type] || '📄';
 };
@@ -253,6 +254,7 @@ const isMediaBlock = computed(() => {
                                                 <option value="text">📝 Text Paragraph</option>
                                                 <option value="image">🖼️ Image</option>
                                                 <option value="video">🎥 Video</option>
+                                                <option value="tutorial">🎓 Interactive Tutorial</option>
                                             </select>
                                         </div>
 
@@ -338,6 +340,10 @@ const isMediaBlock = computed(() => {
                                             <div v-else-if="block.block_type === 'text'" class="text-gray-300 whitespace-pre-line">
                                                 {{ block.content }}
                                             </div>
+                                            <div v-else-if="block.block_type === 'tutorial'" class="bg-purple-900 border border-purple-700 rounded-md p-4">
+                                                <p class="text-purple-200 font-semibold">Interactive Field Technician Training Tutorial</p>
+                                                <p class="text-sm text-purple-300 mt-1">15 slides with quizzes and certificate - students will see this embedded in the content</p>
+                                            </div>
                                             <div v-else-if="block.block_type === 'image' && block.media_path">
                                                 <img :src="`/storage/${block.media_path}`" 
                                                     class="max-w-md rounded border border-gray-600 mb-2"
@@ -388,12 +394,20 @@ const isMediaBlock = computed(() => {
                                         <option value="text">📝 Text Paragraph - Main Content</option>
                                         <option value="image">🖼️ Image - Upload Picture (WebP, JPG, PNG)</option>
                                         <option value="video">🎥 Video - Upload Video (MP4, WebM)</option>
+                                        <option value="tutorial">🎓 Interactive Tutorial - Field Tech Training</option>
                                     </select>
                                     <p class="mt-2 text-sm text-gray-400">
                                         <span v-if="blockForm.block_type === 'heading'">Use for section titles and headers</span>
                                         <span v-else-if="blockForm.block_type === 'text'">Use for paragraphs and main content text</span>
                                         <span v-else-if="blockForm.block_type === 'image'">Use for screenshots, diagrams, and illustrations</span>
                                         <span v-else-if="blockForm.block_type === 'video'">Use for tutorial videos, demonstrations, and explanations</span>
+                                        <span v-else-if="blockForm.block_type === 'tutorial'">Interactive tutorial with 15 slides, quizzes, and certificate</span>
+                                    </p>
+                                </div>
+
+                                <div v-if="blockForm.block_type === 'tutorial'" class="bg-purple-900 border border-purple-700 rounded-md p-4">
+                                    <p class="text-sm text-purple-200">
+                                        <strong>🎓 Tutorial Block:</strong> This will embed the interactive Field Technician Training tutorial directly in this content section. Students will go through 15 slides with quizzes and earn a certificate upon completion.
                                     </p>
                                 </div>
 
