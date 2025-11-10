@@ -33,7 +33,7 @@ const consultationProduct = computed(() => {
         
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
-        <meta property="og:url" content="{{ route('home') }}">
+        <meta property="og:url" content="{{ route('home.index') }}">
         <meta property="og:title" content="Side Hustle Field Tech Work - Earn $2000-5000+ Monthly Income">
         <meta property="og:description" content="Start your profitable side hustle in field engineering. Learn low voltage contracting skills to earn $2000-5000+ monthly. No experience required.">
         
@@ -52,7 +52,7 @@ const consultationProduct = computed(() => {
             "provider": {
                 "@type": "Organization",
                 "name": "FieldEngineer Pro",
-                "sameAs": "{{ route('home') }}"
+                "sameAs": "{{ route('home.index') }}"
             },
             "aggregateRating": {
                 "@type": "AggregateRating",
@@ -79,7 +79,7 @@ const consultationProduct = computed(() => {
             "@type": "EducationalOrganization",
             "name": "FieldEngineer Pro",
             "description": "Leading platform for field engineering and low voltage contracting side hustle training",
-            "url": "{{ route('home') }}",
+            "url": "{{ route('home.index') }}",
             "logo": "{{ asset('img/fieldengineer-logo.png') }}",
             "contactPoint": {
                 "@type": "ContactPoint",
@@ -1392,7 +1392,7 @@ const consultationProduct = computed(() => {
                         <a href="#about" class="text-base text-white hover:text-orange-400">About</a>
                     </div>
                     <div class="px-5 py-2">
-                        <Link :href="route('home')" class="text-base text-white hover:text-orange-400">Products</Link>
+                        <Link :href="route('home.index')" class="text-base text-white hover:text-orange-400">Products</Link>
                     </div>
                     <div class="px-5 py-2">
                         <Link :href="route('contact')" class="text-base text-white hover:text-orange-400">Contact Support</Link>
