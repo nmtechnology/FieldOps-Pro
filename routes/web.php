@@ -195,6 +195,14 @@ Route::middleware('auth')->group(function () {
         ->name('products.downloads');
     Route::get('/products/{productId}/download/{contentId}/{fileIndex}', [App\Http\Controllers\ProductContentController::class, 'download'])
         ->name('products.download');
+    
+    // Tutorial routes
+    Route::get('/tutorial/{product}', [App\Http\Controllers\TutorialController::class, 'show'])
+        ->name('tutorial.show');
+    Route::post('/tutorial/complete', [App\Http\Controllers\TutorialController::class, 'complete'])
+        ->name('tutorial.complete');
+    Route::get('/tutorial/{product}/certificate', [App\Http\Controllers\TutorialController::class, 'certificate'])
+        ->name('tutorial.certificate');
 });
 
 // Product Routes
