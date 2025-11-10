@@ -387,26 +387,29 @@ export default defineComponent({
         };
     },
     computed: {
+        productPrice() {
+            return parseFloat(this.product.price);
+        },
         discountDescription() {
             if (!this.discount) return '';
             
             if (this.discount.type === 'percentage') {
                 return `${this.discount.value}% off`;
             } else {
-                return `$${this.discount.value.toFixed(2)} off`;
+                return `$${parseFloat(this.discount.value).toFixed(2)} off`;
             }
         },
         discountAmount() {
             if (!this.discount) return 0;
             
             if (this.discount.type === 'percentage') {
-                return (this.product.price * this.discount.value) / 100;
+                return (this.productPrice * this.discount.value) / 100;
             } else {
-                return Math.min(this.discount.value, this.product.price);
+                return Math.min(parseFloat(this.discount.value), this.productPrice);
             }
         },
         subtotalAmount() {
-            return Math.max(0, this.product.price - this.discountAmount);
+            return Math.max(0, this.productPrice - this.discountAmount);
         },
         finalAmount() {
             return this.subtotalAmount + this.taxAmount;
