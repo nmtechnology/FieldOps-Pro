@@ -13,6 +13,10 @@ const props = defineProps({
     defaultImages: {
         type: Array,
         default: () => []
+    },
+    availableTutorials: {
+        type: Array,
+        default: () => []
     }
 });
 
@@ -39,6 +43,44 @@ const useDefaultImage = (imageFile) => {
 
 const useArtificialBook = () => {
     form.image_path = 'artificial-book';
+};
+
+const addTextSection = () => {
+    form.content_sections.push({
+        type: 'text',
+        heading: 'New Section',
+        content: 'Section content here...'
+    });
+};
+
+const addTutorialSection = (tutorialName) => {
+    form.content_sections.push({
+        type: 'tutorial',
+        tutorial: tutorialName,
+        heading: tutorialName
+    });
+};
+
+const removeSection = (index) => {
+    if (confirm('Remove this section?')) {
+        form.content_sections.splice(index, 1);
+    }
+};
+
+const moveSectionUp = (index) => {
+    if (index > 0) {
+        const temp = form.content_sections[index];
+        form.content_sections[index] = form.content_sections[index - 1];
+        form.content_sections[index - 1] = temp;
+    }
+};
+
+const moveSectionDown = (index) => {
+    if (index < form.content_sections.length - 1) {
+        const temp = form.content_sections[index];
+        form.content_sections[index] = form.content_sections[index + 1];
+        form.content_sections[index + 1] = temp;
+    }
 };
 
 // Handle content sections as JSON text

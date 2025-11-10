@@ -72,8 +72,11 @@
                                             </span>
                                         </template>
                                         <template v-else>
-                                            <Link :href="route('products.content.show', { productId: product.id, slug: content.slug })" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200">
-                                                Read
+                                            <Link 
+                                                :href="content.section_type === 'tutorial' ? `/tutorial/${product.id}` : route('products.content.show', { productId: product.id, slug: content.slug })" 
+                                                :class="content.section_type === 'tutorial' ? 'inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200' : 'inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200'"
+                                            >
+                                                {{ content.section_type === 'tutorial' ? 'Start Tutorial' : 'Read' }}
                                                 <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                                 </svg>
@@ -141,6 +144,8 @@ export default defineComponent({
                     return '👋';
                 case 'chapter':
                     return '📝';
+                case 'tutorial':
+                    return '🎓';
                 case 'bonus':
                     return '🎁';
                 case 'conclusion':
@@ -150,6 +155,12 @@ export default defineComponent({
                 default:
                     return '📄';
             }
+        },
+        getContentLink(content) {
+            if (content.section_type === 'tutorial') {
+                return `/tutorial/${this.product.id}`;
+            }
+            return this.route('products.content.show', { productId: this.product.id, slug: content.slug });
         }
     }
 });

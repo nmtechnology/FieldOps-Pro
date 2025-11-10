@@ -40,6 +40,7 @@ const getSectionTypeColor = (type) => {
         introduction: 'bg-blue-100 text-blue-800',
         chapter: 'bg-green-100 text-green-800',
         section: 'bg-yellow-100 text-yellow-800',
+        tutorial: 'bg-purple-100 text-purple-800',
         bonus: 'bg-purple-100 text-purple-800',
         conclusion: 'bg-gray-100 text-gray-800'
     };
@@ -57,6 +58,12 @@ const getSectionTypeColor = (type) => {
                     Manage Content: {{ product.name }}
                 </h2>
                 <div class="flex gap-2">
+                    <Link
+                        :href="route('admin.products.content.create', product.id) + '?type=tutorial'"
+                        class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-500 transition"
+                    >
+                        Add Tutorial
+                    </Link>
                     <Link
                         :href="route('admin.products.content.create', product.id)"
                         class="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-500 transition"
@@ -114,6 +121,14 @@ const getSectionTypeColor = (type) => {
                                             </div>
                                         </div>
                                         <div class="flex gap-2">
+                                            <Link
+                                                v-if="content.section_type === 'tutorial'"
+                                                :href="`/tutorial/${product.id}`"
+                                                target="_blank"
+                                                class="px-3 py-1 bg-purple-600 text-white text-sm rounded hover:bg-purple-700 transition"
+                                            >
+                                                View Tutorial
+                                            </Link>
                                             <Link
                                                 :href="route('admin.products.content.edit', { product: product.id, content: content.id })"
                                                 class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition"
