@@ -51,8 +51,22 @@ Route::get('/bot-check', function(Illuminate\Http\Request $request) {
     return Inertia::render('BotCheck');
 })->name('bot-check');
 
-// Hero Landing Page - Shows after bot verification
+// Home Page - Main advertising/product catalog page for verified visitors
 Route::get('/', function() {
+    // If logged in, redirect to dashboard - logged in users don't see the home page
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    
+    // Show the main Home page (advertising/product catalog) to verified visitors
+    return Inertia::render('Home', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->middleware('verify.human')->name('home.index');
+
+// Hero/Welcome page - Simple landing page (shown after logout, etc)
+Route::get('/welcome', function() {
     // If logged in, redirect to dashboard
     if (auth()->check()) {
         return redirect()->route('dashboard');
@@ -62,7 +76,7 @@ Route::get('/', function() {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-})->middleware('verify.human')->name('home.index');
+})->name('welcome');
 
 Route::post('/verify', function(Illuminate\Http\Request $request) {
     // Set verification in session

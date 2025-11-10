@@ -49,9 +49,17 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('web')->logout();
 
+        // Preserve the human verification across logout
+        $wasVerified = $request->session()->get('human_verified');
+        
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+        
+        // Restore the verification status so they don't have to verify again
+        if ($wasVerified) {
+            $request->session()->put('human_verified', true);
+        }
 
         return redirect('/');
     }
