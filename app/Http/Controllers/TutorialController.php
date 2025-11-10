@@ -41,6 +41,7 @@ class TutorialController extends Controller
             'Field Technician Training' => 'Tutorial/FieldTechTraining',
             'Cat 6 Cable Installation' => 'Tutorial/Cat6CableTraining',
             'Network Equipment Setup' => 'Tutorial/NetworkEquipmentSetup',
+            'CCTV Camera Troubleshooting' => 'Tutorial/CCTVTroubleshooting',
         ];
         
         $component = $tutorialComponents[$tutorialName] ?? 'Tutorial/FieldTechTraining';

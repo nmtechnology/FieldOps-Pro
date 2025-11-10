@@ -450,6 +450,7 @@ const isMediaBlock = computed(() => {
                                             <option value="Field Technician Training">Field Technician Training (15 slides)</option>
                                             <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (25 slides)</option>
                                             <option value="Network Equipment Setup">Network Equipment Setup (26 slides)</option>
+                                            <option value="CCTV Camera Troubleshooting">CCTV Camera Troubleshooting (30+ slides)</option>
                                         </select>
                                         <p class="mt-1 text-xs text-purple-300">More tutorials will be added here as you create them</p>
                                     </div>
