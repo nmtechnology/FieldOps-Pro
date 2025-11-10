@@ -1,246 +1,489 @@
-<script setup><script setup>
+<script setup><script setup><script setup>
+
+import { Head, Link } from '@inertiajs/vue3';
 
 import { Head, Link } from '@inertiajs/vue3';import { Head, Link } from '@inertiajs/vue3';
 
+defineProps({
 
+    canLogin: Boolean,
 
-defineProps({defineProps({
+    canRegister: Boolean,
+
+});defineProps({defineProps({
+
+</script>
 
     canLogin: Boolean,    canLogin: {
 
-    canRegister: Boolean,        type: Boolean,
+<template>
 
-});    },
+    <Head title="FieldEngineer Pro - Professional Field Service Training" />    canRegister: Boolean,        type: Boolean,
 
-</script>    canRegister: {
 
-        type: Boolean,
 
-<template>    },
+    <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">});    },
 
-    <Head title="FieldEngineer Pro - Professional Field Service Training" />    laravelVersion: {
+        <!-- Navigation -->
 
-        type: String,
+        <nav class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-700"></script>    canRegister: {
 
-    <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">        required: true,
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <!-- Navigation -->    },
+                <div class="flex justify-between items-center h-16">        type: Boolean,
 
-        <nav class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-700">    phpVersion: {
+                    <div class="flex items-center">
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">        type: String,
-
-                <div class="flex justify-between items-center h-16">        required: true,
-
-                    <div class="flex items-center">    },
-
-                        <span class="text-2xl font-bold text-white">});
+                        <span class="text-2xl font-bold text-white"><template>    },
 
                             <span class="text-orange-500">Field</span>Engineer<span class="text-orange-500">Pro</span>
 
-                        </span>function handleImageError() {
+                        </span>    <Head title="FieldEngineer Pro - Professional Field Service Training" />    laravelVersion: {
 
-                    </div>    document.getElementById('screenshot-container')?.classList.add('!hidden');
+                    </div>
 
-                    <div class="flex items-center gap-4">    document.getElementById('docs-card')?.classList.add('!row-span-1');
+                    <div class="flex items-center gap-4">        type: String,
 
-                        <Link    document.getElementById('docs-card-content')?.classList.add('!flex-row');
+                        <Link
 
-                            v-if="canLogin"    document.getElementById('background')?.classList.add('!hidden');
+                            v-if="canLogin"    <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">        required: true,
 
-                            :href="route('login')"}
+                            :href="route('login')"
 
-                            class="text-gray-300 hover:text-white transition-colors"</script>
+                            class="text-gray-300 hover:text-white transition-colors"        <!-- Navigation -->    },
 
                         >
 
-                            Log in<template>
+                            Log in        <nav class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-700">    phpVersion: {
 
-                        </Link>    <Head title="Welcome" />
+                        </Link>
 
-                        <Link    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+                        <Link            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">        type: String,
 
-                            :href="route('login')"        <img
+                            :href="route('login')"
 
-                            class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"            id="background"
+                            class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"                <div class="flex justify-between items-center h-16">        required: true,
 
-                        >            class="absolute -left-20 top-0 max-w-[877px]"
+                        >
 
-                            Get Started            src="https://laravel.com/assets/img/welcome/background.svg"
+                            Get Started                    <div class="flex items-center">    },
 
-                        </Link>        />
+                        </Link>
 
-                    </div>        <div
+                    </div>                        <span class="text-2xl font-bold text-white">});
 
-                </div>            class="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
+                </div>
 
-            </div>        >
+            </div>                            <span class="text-orange-500">Field</span>Engineer<span class="text-orange-500">Pro</span>
+
+        </nav>
+
+                        </span>function handleImageError() {
+
+        <!-- Hero Section -->
+
+        <div class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">                    </div>    document.getElementById('screenshot-container')?.classList.add('!hidden');
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="text-center">                    <div class="flex items-center gap-4">    document.getElementById('docs-card')?.classList.add('!row-span-1');
+
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">
+
+                        Master Field Service                        <Link    document.getElementById('docs-card-content')?.classList.add('!flex-row');
+
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
+
+                            Engineering Skills                            v-if="canLogin"    document.getElementById('background')?.classList.add('!hidden');
+
+                        </span>
+
+                    </h1>                            :href="route('login')"}
+
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+
+                        Professional training courses for field technicians, network engineers, and service professionals.                            class="text-gray-300 hover:text-white transition-colors"</script>
+
+                        Learn from industry experts and get certified.
+
+                    </p>                        >
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+
+                        <Link                            Log in<template>
+
+                            :href="route('login')"
+
+                            class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all transform hover:scale-105 shadow-lg"                        </Link>    <Head title="Welcome" />
+
+                        >
+
+                            Start Learning Today                        <Link    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+
+                        </Link>
+
+                        <a                            :href="route('login')"        <img
+
+                            href="#features"
+
+                            class="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all transform hover:scale-105"                            class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"            id="background"
+
+                        >
+
+                            Learn More                        >            class="absolute -left-20 top-0 max-w-[877px]"
+
+                        </a>
+
+                    </div>                            Get Started            src="https://laravel.com/assets/img/welcome/background.svg"
+
+                </div>
+
+            </div>                        </Link>        />
+
+
+
+            <!-- Decorative Elements -->                    </div>        <div
+
+            <div class="absolute inset-0 pointer-events-none overflow-hidden">
+
+                <div class="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>                </div>            class="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
+
+                <div class="absolute bottom-20 right-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse animation-delay-2"></div>
+
+            </div>            </div>        >
+
+        </div>
 
         </nav>            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
 
-                <header
+        <!-- Features Section -->
 
-        <!-- Hero Section -->                    class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3"
+        <div id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-800/50">                <header
 
-        <div class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">                >
+            <div class="max-w-7xl mx-auto">
 
-            <div class="max-w-7xl mx-auto">                    <div class="flex lg:col-start-2 lg:justify-center">
-
-                <div class="text-center">                        <svg
-
-                    <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">                            class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]"
-
-                        Master Field Service                            viewBox="0 0 62 65"
-
-                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">                            fill="none"
-
-                            Engineering Skills                            xmlns="http://www.w3.org/2000/svg"
-
-                        </span>                        >
-
-                    </h1>                            <path
-
-                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">                                d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 28.737 61.8434 28.9095 61.7554 29.0614C61.6675 29.2132 61.5409 29.3392 61.3887 29.4265L49.9104 36.0351V49.1337C49.9104 49.4902 49.7209 49.8192 49.4118 49.9987L25.4519 63.7916C25.3971 63.8227 25.3372 63.8427 25.2774 63.8639C25.255 63.8714 25.2338 63.8851 25.2101 63.8913C25.0426 63.9354 24.8666 63.9354 24.6991 63.8913C24.6716 63.8838 24.6467 63.8689 24.6205 63.8589C24.5657 63.8389 24.5084 63.8215 24.456 63.7916L0.501061 49.9987C0.348882 49.9113 0.222437 49.7853 0.134469 49.6334C0.0465019 49.4816 0.000120578 49.3092 0 49.1337L0 8.10652C0 8.01678 0.0124642 7.92953 0.0348998 7.84477C0.0423783 7.8161 0.0598282 7.78993 0.0697995 7.76126C0.0884958 7.70891 0.105946 7.65531 0.133367 7.6067C0.152063 7.5743 0.179485 7.54812 0.20192 7.51821C0.230588 7.47832 0.256763 7.43719 0.290416 7.40229C0.319084 7.37362 0.356476 7.35243 0.388883 7.32751C0.425029 7.29759 0.457436 7.26518 0.498568 7.2415L12.4779 0.345059C12.6296 0.257786 12.8015 0.211853 12.9765 0.211853C13.1515 0.211853 13.3234 0.257786 13.475 0.345059L25.4531 7.2415H25.4556C25.4955 7.26643 25.5292 7.29759 25.5653 7.32626C25.5977 7.35119 25.6339 7.37362 25.6625 7.40104C25.6974 7.43719 25.7224 7.47832 25.7523 7.51821C25.7735 7.54812 25.8021 7.5743 25.8196 7.6067C25.8483 7.65656 25.8645 7.70891 25.8844 7.76126C25.8944 7.78993 25.9118 7.8161 25.9193 7.84602C25.9423 7.93096 25.954 8.01853 25.9542 8.10652V33.7317L35.9355 27.9844V14.8846C35.9355 14.7973 35.948 14.7088 35.9704 14.6253C35.9792 14.5954 35.9954 14.5692 36.0053 14.5405C36.0253 14.4882 36.0427 14.4346 36.0702 14.386C36.0888 14.3536 36.1163 14.3274 36.1375 14.2975C36.1674 14.2576 36.1923 14.2165 36.2272 14.1816C36.2559 14.1529 36.292 14.1317 36.3244 14.1068C36.3618 14.0769 36.3942 14.0445 36.4341 14.0208L48.4147 7.12434C48.5663 7.03694 48.7383 6.99094 48.9133 6.99094C49.0883 6.99094 49.2602 7.03694 49.4118 7.12434L61.3899 14.0208C61.4323 14.0457 61.4647 14.0769 61.5021 14.1055C61.5333 14.1305 61.5694 14.1529 61.5981 14.1803C61.633 14.2165 61.6579 14.2576 61.6878 14.2975C61.7103 14.3274 61.7377 14.3536 61.7551 14.386C61.7838 14.4346 61.8 14.4882 61.8199 14.5405C61.8312 14.5692 61.8474 14.5954 61.8548 14.6253ZM59.893 27.9844V16.6121L55.7013 19.0252L49.9104 22.3593V33.7317L59.8942 27.9844H59.893ZM47.9149 48.5566V37.1768L42.2187 40.4299L25.953 49.7133V61.2003L47.9149 48.5566ZM1.99677 9.83281V48.5566L23.9562 61.199V49.7145L12.4841 43.2219L12.4804 43.2194L12.4754 43.2169C12.4368 43.1945 12.4044 43.1621 12.3682 43.1347C12.3371 43.1097 12.3009 43.0898 12.2735 43.0624L12.271 43.0586C12.2386 43.0275 12.2162 42.9888 12.1887 42.9539C12.1638 42.9203 12.1339 42.8916 12.114 42.8567L12.1127 42.853C12.0903 42.8156 12.0766 42.7707 12.0604 42.7283C12.0442 42.6909 12.023 42.656 12.013 42.6161C12.0005 42.5688 11.998 42.5177 11.9931 42.4691C11.9881 42.4317 11.9781 42.3943 11.9781 42.3569V15.5801L6.18848 12.2446L1.99677 9.83281ZM12.9777 2.36177L2.99764 8.10652L12.9752 13.8513L22.9541 8.10527L12.9752 2.36177H12.9777ZM18.1678 38.2138L23.9574 34.8809V9.83281L19.7657 12.2459L13.9749 15.5801V40.6281L18.1678 38.2138ZM48.9133 9.14105L38.9344 14.8858L48.9133 20.6305L58.8909 14.8846L48.9133 9.14105ZM47.9149 22.3593L42.124 19.0252L37.9323 16.6121V27.9844L43.7219 31.3174L47.9149 33.7317V22.3593ZM24.9533 47.987L39.59 39.631L46.9065 35.4555L36.9352 29.7145L25.4544 36.3242L14.9907 42.3482L24.9533 47.987Z"
-
-                        Professional training courses for field technicians, network engineers, and service professionals.                                fill="currentColor"
-
-                        Learn from industry experts and get certified.                            />
-
-                    </p>                        </svg>
-
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">                    </div>
-
-                        <Link                    <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
-
-                            :href="route('login')"                        <Link
-
-                            class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all transform hover:scale-105 shadow-lg"                            v-if="$page.props.auth.user"
-
-                        >                            :href="route('dashboard')"
-
-                            Start Learning Today                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-
-                        </Link>                        >
-
-                        <a                            Dashboard
-
-                            href="#features"                        </Link>
-
-                            class="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all transform hover:scale-105"
-
-                        >                        <template v-else>
-
-                            Learn More                            <Link
-
-                        </a>                                :href="route('login')"
-
-                    </div>                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-
-                </div>                            >
-
-            </div>                                Log in
-
-                            </Link>
-
-            <!-- Decorative Elements -->
-
-            <div class="absolute inset-0 pointer-events-none overflow-hidden">                            <Link
-
-                <div class="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>                                v-if="canRegister"
-
-                <div class="absolute bottom-20 right-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style="animation-delay: 2s"></div>                                :href="route('register')"
-
-            </div>                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-
-        </div>                            >
-
-                                Register
-
-        <!-- Features Section -->                            </Link>
-
-        <div id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-800/50">                        </template>
-
-            <div class="max-w-7xl mx-auto">                    </nav>
-
-                <h2 class="text-4xl font-bold text-white text-center mb-16">                </header>
+                <h2 class="text-4xl font-bold text-white text-center mb-16">        <!-- Hero Section -->                    class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3"
 
                     Why Choose FieldEngineer<span class="text-orange-500">Pro</span>?
 
-                </h2>                <main class="mt-6">
+                </h2>        <div class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">                >
 
-                                    <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
+                
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">                        <a
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">            <div class="max-w-7xl mx-auto">                    <div class="flex lg:col-start-2 lg:justify-center">
 
-                    <!-- Feature 1 -->                            href="https://laravel.com/docs"
+                    <!-- Feature 1 -->
 
-                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">                            id="docs-card"
+                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">                <div class="text-center">                        <svg
 
-                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">                            class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">
 
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                        >
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                    <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">                            class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]"
 
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />                            <div
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
 
-                            </svg>                                id="screenshot-container"
+                            </svg>                        Master Field Service                            viewBox="0 0 62 65"
 
-                        </div>                                class="relative flex w-full flex-1 items-stretch"
+                        </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-4">Interactive Tutorials</h3>                            >
+                        <h3 class="text-2xl font-bold text-white mb-4">Interactive Tutorials</h3>                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">                            fill="none"
 
-                        <p class="text-gray-300">                                <img
+                        <p class="text-gray-300">
 
-                            Step-by-step interactive courses with hands-on exercises, quizzes, and real-world scenarios to master field service skills.                                    src="https://laravel.com/assets/img/welcome/docs-light.svg"
-
-                        </p>                                    alt="Laravel documentation screenshot"
-
-                    </div>                                    class="aspect-video h-full w-full flex-1 rounded-[10px] object-cover object-top drop-shadow-[0px_4px_34px_rgba(0,0,0,0.06)] dark:hidden"
-
-                                    @error="handleImageError"
-
-                    <!-- Feature 2 -->                                />
-
-                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">                                <img
-
-                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">                                    src="https://laravel.com/assets/img/welcome/docs-dark.svg"
-
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                                    alt="Laravel documentation screenshot"
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />                                    class="hidden aspect-video h-full w-full flex-1 rounded-[10px] object-cover object-top drop-shadow-[0px_4px_34px_rgba(0,0,0,0.25)] dark:block"
-
-                            </svg>                                />
-
-                        </div>                                <div
-
-                        <h3 class="text-2xl font-bold text-white mb-4">Professional Certificates</h3>                                    class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900"
-
-                        <p class="text-gray-300">                                ></div>
-
-                            Earn industry-recognized certificates upon course completion. Showcase your expertise to employers and clients.                            </div>
+                            Step-by-step interactive courses with hands-on exercises, quizzes, and real-world scenarios to master field service skills.                            Engineering Skills                            xmlns="http://www.w3.org/2000/svg"
 
                         </p>
 
-                    </div>                            <div
+                    </div>                        </span>                        >
 
-                                class="relative flex items-center gap-6 lg:items-end"
+
+
+                    <!-- Feature 2 -->                    </h1>                            <path
+
+                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">
+
+                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">                                d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 28.737 61.8434 28.9095 61.7554 29.0614C61.6675 29.2132 61.5409 29.3392 61.3887 29.4265L49.9104 36.0351V49.1337C49.9104 49.4902 49.7209 49.8192 49.4118 49.9987L25.4519 63.7916C25.3971 63.8227 25.3372 63.8427 25.2774 63.8639C25.255 63.8714 25.2338 63.8851 25.2101 63.8913C25.0426 63.9354 24.8666 63.9354 24.6991 63.8913C24.6716 63.8838 24.6467 63.8689 24.6205 63.8589C24.5657 63.8389 24.5084 63.8215 24.456 63.7916L0.501061 49.9987C0.348882 49.9113 0.222437 49.7853 0.134469 49.6334C0.0465019 49.4816 0.000120578 49.3092 0 49.1337L0 8.10652C0 8.01678 0.0124642 7.92953 0.0348998 7.84477C0.0423783 7.8161 0.0598282 7.78993 0.0697995 7.76126C0.0884958 7.70891 0.105946 7.65531 0.133367 7.6067C0.152063 7.5743 0.179485 7.54812 0.20192 7.51821C0.230588 7.47832 0.256763 7.43719 0.290416 7.40229C0.319084 7.37362 0.356476 7.35243 0.388883 7.32751C0.425029 7.29759 0.457436 7.26518 0.498568 7.2415L12.4779 0.345059C12.6296 0.257786 12.8015 0.211853 12.9765 0.211853C13.1515 0.211853 13.3234 0.257786 13.475 0.345059L25.4531 7.2415H25.4556C25.4955 7.26643 25.5292 7.29759 25.5653 7.32626C25.5977 7.35119 25.6339 7.37362 25.6625 7.40104C25.6974 7.43719 25.7224 7.47832 25.7523 7.51821C25.7735 7.54812 25.8021 7.5743 25.8196 7.6067C25.8483 7.65656 25.8645 7.70891 25.8844 7.76126C25.8944 7.78993 25.9118 7.8161 25.9193 7.84602C25.9423 7.93096 25.954 8.01853 25.9542 8.10652V33.7317L35.9355 27.9844V14.8846C35.9355 14.7973 35.948 14.7088 35.9704 14.6253C35.9792 14.5954 35.9954 14.5692 36.0053 14.5405C36.0253 14.4882 36.0427 14.4346 36.0702 14.386C36.0888 14.3536 36.1163 14.3274 36.1375 14.2975C36.1674 14.2576 36.1923 14.2165 36.2272 14.1816C36.2559 14.1529 36.292 14.1317 36.3244 14.1068C36.3618 14.0769 36.3942 14.0445 36.4341 14.0208L48.4147 7.12434C48.5663 7.03694 48.7383 6.99094 48.9133 6.99094C49.0883 6.99094 49.2602 7.03694 49.4118 7.12434L61.3899 14.0208C61.4323 14.0457 61.4647 14.0769 61.5021 14.1055C61.5333 14.1305 61.5694 14.1529 61.5981 14.1803C61.633 14.2165 61.6579 14.2576 61.6878 14.2975C61.7103 14.3274 61.7377 14.3536 61.7551 14.386C61.7838 14.4346 61.8 14.4882 61.8199 14.5405C61.8312 14.5692 61.8474 14.5954 61.8548 14.6253ZM59.893 27.9844V16.6121L55.7013 19.0252L49.9104 22.3593V33.7317L59.8942 27.9844H59.893ZM47.9149 48.5566V37.1768L42.2187 40.4299L25.953 49.7133V61.2003L47.9149 48.5566ZM1.99677 9.83281V48.5566L23.9562 61.199V49.7145L12.4841 43.2219L12.4804 43.2194L12.4754 43.2169C12.4368 43.1945 12.4044 43.1621 12.3682 43.1347C12.3371 43.1097 12.3009 43.0898 12.2735 43.0624L12.271 43.0586C12.2386 43.0275 12.2162 42.9888 12.1887 42.9539C12.1638 42.9203 12.1339 42.8916 12.114 42.8567L12.1127 42.853C12.0903 42.8156 12.0766 42.7707 12.0604 42.7283C12.0442 42.6909 12.023 42.656 12.013 42.6161C12.0005 42.5688 11.998 42.5177 11.9931 42.4691C11.9881 42.4317 11.9781 42.3943 11.9781 42.3569V15.5801L6.18848 12.2446L1.99677 9.83281ZM12.9777 2.36177L2.99764 8.10652L12.9752 13.8513L22.9541 8.10527L12.9752 2.36177H12.9777ZM18.1678 38.2138L23.9574 34.8809V9.83281L19.7657 12.2459L13.9749 15.5801V40.6281L18.1678 38.2138ZM48.9133 9.14105L38.9344 14.8858L48.9133 20.6305L58.8909 14.8846L48.9133 9.14105ZM47.9149 22.3593L42.124 19.0252L37.9323 16.6121V27.9844L43.7219 31.3174L47.9149 33.7317V22.3593ZM24.9533 47.987L39.59 39.631L46.9065 35.4555L36.9352 29.7145L25.4544 36.3242L14.9907 42.3482L24.9533 47.987Z"
+
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />                        Professional training courses for field technicians, network engineers, and service professionals.                                fill="currentColor"
+
+                            </svg>
+
+                        </div>                        Learn from industry experts and get certified.                            />
+
+                        <h3 class="text-2xl font-bold text-white mb-4">Professional Certificates</h3>
+
+                        <p class="text-gray-300">                    </p>                        </svg>
+
+                            Earn industry-recognized certificates upon course completion. Showcase your expertise to employers and clients.
+
+                        </p>                    <div class="flex flex-col sm:flex-row gap-4 justify-center">                    </div>
+
+                    </div>
+
+                        <Link                    <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
+
+                    <!-- Feature 3 -->
+
+                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">                            :href="route('login')"                        <Link
+
+                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">
+
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all transform hover:scale-105 shadow-lg"                            v-if="$page.props.auth.user"
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+
+                            </svg>                        >                            :href="route('dashboard')"
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4">Expert-Led Content</h3>                            Start Learning Today                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+
+                        <p class="text-gray-300">
+
+                            Learn from experienced field engineers and certified professionals with decades of real-world experience.                        </Link>                        >
+
+                        </p>
+
+                    </div>                        <a                            Dashboard
+
+                </div>
+
+            </div>                            href="#features"                        </Link>
+
+        </div>
+
+                            class="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all transform hover:scale-105"
+
+        <!-- Courses Preview Section -->
+
+        <div class="py-20 px-4 sm:px-6 lg:px-8">                        >                        <template v-else>
+
+            <div class="max-w-7xl mx-auto">
+
+                <h2 class="text-4xl font-bold text-white text-center mb-4">                            Learn More                            <Link
+
+                    Available Training Courses
+
+                </h2>                        </a>                                :href="route('login')"
+
+                <p class="text-xl text-gray-300 text-center mb-16">
+
+                    Comprehensive training programs designed for field service professionals                    </div>                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+
+                </p>
+
+                                </div>                            >
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Course 1 -->            </div>                                Log in
+
+                    <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-orange-500 transition-all transform hover:scale-105">
+
+                        <div class="bg-gradient-to-r from-orange-600 to-red-600 h-48 flex items-center justify-center">                            </Link>
+
+                            <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.040A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />            <!-- Decorative Elements -->
+
+                            </svg>
+
+                        </div>            <div class="absolute inset-0 pointer-events-none overflow-hidden">                            <Link
+
+                        <div class="p-6">
+
+                            <h3 class="text-2xl font-bold text-white mb-3">Field Technician Training</h3>                <div class="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>                                v-if="canRegister"
+
+                            <p class="text-gray-300 mb-4">
+
+                                Essential skills, safety protocols, and professional practices for field service technicians.                <div class="absolute bottom-20 right-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style="animation-delay: 2s"></div>                                :href="route('register')"
+
+                            </p>
+
+                            <div class="flex items-center text-sm text-gray-400">            </div>                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>        </div>                            >
+
+                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+
+                                </svg>                                Register
+
+                                15 Lessons
+
+                            </div>        <!-- Features Section -->                            </Link>
+
+                        </div>
+
+                    </div>        <div id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-800/50">                        </template>
+
+
+
+                    <!-- Course 2 -->            <div class="max-w-7xl mx-auto">                    </nav>
+
+                    <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-orange-500 transition-all transform hover:scale-105">
+
+                        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 h-48 flex items-center justify-center">                <h2 class="text-4xl font-bold text-white text-center mb-16">                </header>
+
+                            <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />                    Why Choose FieldEngineer<span class="text-orange-500">Pro</span>?
+
+                            </svg>
+
+                        </div>                </h2>                <main class="mt-6">
+
+                        <div class="p-6">
+
+                            <h3 class="text-2xl font-bold text-white mb-3">Cat 6 Cable Installation</h3>                                    <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
+
+                            <p class="text-gray-300 mb-4">
+
+                                Professional cable pulling, termination, and testing using TIA-568B standards.                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">                        <a
+
+                            </p>
+
+                            <div class="flex items-center text-sm text-gray-400">                    <!-- Feature 1 -->                            href="https://laravel.com/docs"
+
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">                            id="docs-card"
+
+                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+
+                                </svg>                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">                            class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+
+                                25 Lessons
+
+                            </div>                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                        >
+
+                        </div>
+
+                    </div>                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />                            <div
+
+
+
+                    <!-- Course 3 -->                            </svg>                                id="screenshot-container"
+
+                    <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-orange-500 transition-all transform hover:scale-105">
+
+                        <div class="bg-gradient-to-r from-green-600 to-teal-600 h-48 flex items-center justify-center">                        </div>                                class="relative flex w-full flex-1 items-stretch"
+
+                            <svg class="w-24 h-24 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />                        <h3 class="text-2xl font-bold text-white mb-4">Interactive Tutorials</h3>                            >
+
+                            </svg>
+
+                        </div>                        <p class="text-gray-300">                                <img
+
+                        <div class="p-6">
+
+                            <h3 class="text-2xl font-bold text-white mb-3">Network Equipment Setup</h3>                            Step-by-step interactive courses with hands-on exercises, quizzes, and real-world scenarios to master field service skills.                                    src="https://laravel.com/assets/img/welcome/docs-light.svg"
+
+                            <p class="text-gray-300 mb-4">
+
+                                Configure switches, routers, VLANs, PoE, and QoS for enterprise networks.                        </p>                                    alt="Laravel documentation screenshot"
+
+                            </p>
+
+                            <div class="flex items-center text-sm text-gray-400">                    </div>                                    class="aspect-video h-full w-full flex-1 rounded-[10px] object-cover object-top drop-shadow-[0px_4px_34px_rgba(0,0,0,0.06)] dark:hidden"
+
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>                                    @error="handleImageError"
+
+                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+
+                                </svg>                    <!-- Feature 2 -->                                />
+
+                                26 Lessons
+
+                            </div>                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">                                <img
+
+                        </div>
+
+                    </div>                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">                                    src="https://laravel.com/assets/img/welcome/docs-dark.svg"
+
+                </div>
+
+            </div>                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                                    alt="Laravel documentation screenshot"
+
+        </div>
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />                                    class="hidden aspect-video h-full w-full flex-1 rounded-[10px] object-cover object-top drop-shadow-[0px_4px_34px_rgba(0,0,0,0.25)] dark:block"
+
+        <!-- CTA Section -->
+
+        <div class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-orange-600 to-red-600">                            </svg>                                />
+
+            <div class="max-w-4xl mx-auto text-center">
+
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">                        </div>                                <div
+
+                    Ready to Level Up Your Skills?
+
+                </h2>                        <h3 class="text-2xl font-bold text-white mb-4">Professional Certificates</h3>                                    class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900"
+
+                <p class="text-xl text-orange-100 mb-8">
+
+                    Join thousands of field service professionals who have advanced their careers with FieldEngineerPro.                        <p class="text-gray-300">                                ></div>
+
+                </p>
+
+                <Link                            Earn industry-recognized certificates upon course completion. Showcase your expertise to employers and clients.                            </div>
+
+                    :href="route('login')"
+
+                    class="inline-block bg-white text-orange-600 px-12 py-4 rounded-lg text-xl font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl"                        </p>
+
+                >
+
+                    Get Started Now                    </div>                            <div
+
+                </Link>
+
+            </div>                                class="relative flex items-center gap-6 lg:items-end"
+
+        </div>
 
                     <!-- Feature 3 -->                            >
 
-                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">                                <div
+        <!-- Footer -->
 
-                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">                                    id="docs-card-content"
+        <footer class="bg-gray-900 border-t border-gray-800 py-12 px-4 sm:px-6 lg:px-8">                    <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-orange-500 transition-all">                                <div
 
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                                    class="flex items-start gap-6 lg:flex-col"
+            <div class="max-w-7xl mx-auto text-center">
 
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />                                >
+                <p class="text-gray-400">                        <div class="bg-orange-600 w-16 h-16 rounded-lg flex items-center justify-center mb-6">                                    id="docs-card-content"
 
-                            </svg>                                    <div
+                    &copy; 2025 <span class="text-orange-500 font-semibold">Field</span>Engineer<span class="text-orange-500 font-semibold">Pro</span>. All rights reserved.
 
-                        </div>                                        class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16"
+                </p>                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                                    class="flex items-start gap-6 lg:flex-col"
 
-                        <h3 class="text-2xl font-bold text-white mb-4">Expert-Led Content</h3>                                    >
+            </div>
 
-                        <p class="text-gray-300">                                        <svg
+        </footer>                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />                                >
+
+    </div>
+
+</template>                            </svg>                                    <div
+
+
+
+<style scoped>                        </div>                                        class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16"
+
+.animation-delay-2 {
+
+    animation-delay: 2s;                        <h3 class="text-2xl font-bold text-white mb-4">Expert-Led Content</h3>                                    >
+
+}
+
+</style>                        <p class="text-gray-300">                                        <svg
+
 
                             Learn from experienced field engineers and certified professionals with decades of real-world experience.                                            class="size-5 sm:size-6"
 
