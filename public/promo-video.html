@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FieldOps-Pro Promotional Video</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        #videoCanvas {
+            border: 2px solid #f97316;
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.5);
+            max-width: 100%;
+            height: auto;
+        }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        button {
+            background: #f97316;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #ea580c;
+            transform: scale(1.05);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #f97316;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <strong>🎬 FieldOps-Pro Promo Video</strong><br>
+        <small>Click Play to start. Duration: 30 seconds<br>
+        Use screen recording software to capture as WebM</small>
+    </div>
+
+    <canvas id="videoCanvas" width="1920" height="1080"></canvas>
+    
+    <div class="controls">
+        <button id="playBtn">▶ Play</button>
+        <button id="pauseBtn" disabled>⏸ Pause</button>
+        <button id="restartBtn">🔄 Restart</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('videoCanvas');
+        const ctx = canvas.getContext('2d');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const restartBtn = document.getElementById('restartBtn');
+
+        let animationId;
+        let startTime;
+        let isPaused = false;
+        let pausedTime = 0;
+
+        const scenes = [
+            { start: 0, end: 4, name: 'intro' },
+            { start: 4, end: 8, name: 'problem' },
+            { start: 8, end: 13, name: 'solution' },
+            { start: 13, end: 19, name: 'features' },
+            { start: 19, end: 25, name: 'tutorials' },
+            { start: 25, end: 30, name: 'cta' }
+        ];
+
+        // Gradient backgrounds
+        function drawGradientBg(colors, time) {
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, colors[0]);
+            gradient.addColorStop(0.5, colors[1]);
+            gradient.addColorStop(1, colors[2]);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Animated particles
+            const particleCount = 50;
+            for (let i = 0; i < particleCount; i++) {
+                const x = (Math.sin(time * 0.5 + i) * 200) + canvas.width / 2 + Math.cos(i * 0.5) * 400;
+                const y = (Math.cos(time * 0.3 + i) * 150) + canvas.height / 2 + Math.sin(i * 0.3) * 300;
+                const size = Math.sin(time + i) * 2 + 3;
+                ctx.fillStyle = `rgba(249, 115, 22, ${0.1 + Math.sin(time + i) * 0.1})`;
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Text with animation
+        function drawText(text, y, size, color, alpha = 1, slideIn = 0) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.font = `bold ${size}px Arial`;
+            ctx.fillStyle = color;
+            ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+            ctx.shadowBlur = 20;
+            ctx.shadowOffsetX = 3;
+            ctx.shadowOffsetY = 3;
+            ctx.fillText(text, canvas.width / 2 + slideIn, y);
+            ctx.restore();
+        }
+
+        // Scene 1: Intro (0-4s)
+        function drawIntro(t) {
+            const progress = t / 4;
+            drawGradientBg(['#1a1a2e', '#16213e', '#0f3460'], t);
+            
+            // Logo entrance
+            const logoAlpha = Math.min(progress * 2, 1);
+            const logoScale = Math.min(progress * 1.5, 1);
+            const logoY = 300 - (1 - logoScale) * 100;
+            
+            // 8-bit character
+            ctx.save();
+            ctx.globalAlpha = logoAlpha;
+            ctx.translate(canvas.width / 2, logoY);
+            ctx.scale(logoScale * 3, logoScale * 3);
+            
+            // Draw pixelated character
+            const pixelSize = 10;
+            const character = [
+                [0,0,1,1,1,1,0,0],
+                [0,1,2,2,2,2,1,0],
+                [0,1,2,3,3,2,1,0],
+                [0,1,2,2,2,2,1,0],
+                [1,1,1,1,1,1,1,1],
+                [0,1,4,4,4,4,1,0],
+                [0,1,4,0,0,4,1,0],
+                [0,0,1,0,0,1,0,0]
+            ];
+            
+            const colors = ['transparent', '#000', '#ff8c00', '#fff', '#0066cc'];
+            for (let y = 0; y < character.length; y++) {
+                for (let x = 0; x < character[y].length; x++) {
+                    if (character[y][x] > 0) {
+                        ctx.fillStyle = colors[character[y][x]];
+                        ctx.fillRect(x * pixelSize - 40, y * pixelSize - 40, pixelSize, pixelSize);
+                    }
+                }
+            }
+            ctx.restore();
+
+            // Text fade in
+            const textAlpha = Math.max(0, (progress - 0.3) * 1.5);
+            drawText('FieldOps-Pro', 500, 120, '#f97316', textAlpha);
+            drawText('Professional Field Services Training', 620, 50, '#ffffff', textAlpha * 0.8);
+        }
+
+        // Scene 2: Problem (4-8s)
+        function drawProblem(t) {
+            const progress = (t - 4) / 4;
+            drawGradientBg(['#2c1810', '#1a0f0a', '#0a0a0a'], t);
+            
+            const textAlpha = Math.min(progress * 2, 1);
+            const slideIn = (1 - Math.min(progress * 2, 1)) * 200;
+            
+            drawText('Breaking Into Field Services?', 300, 80, '#ff6b6b', textAlpha, -slideIn);
+            
+            if (progress > 0.2) {
+                const alpha2 = Math.min((progress - 0.2) * 2, 1);
+                drawText('❌ No Experience Required', 450, 60, '#ffffff', alpha2, slideIn);
+            }
+            if (progress > 0.4) {
+                const alpha3 = Math.min((progress - 0.4) * 2, 1);
+                drawText('❌ Expensive Training Programs', 550, 60, '#ffffff', alpha3, -slideIn);
+            }
+            if (progress > 0.6) {
+                const alpha4 = Math.min((progress - 0.6) * 2, 1);
+                drawText('❌ Hard to Learn On Your Own', 650, 60, '#ffffff', alpha4, slideIn);
+            }
+            if (progress > 0.8) {
+                const alpha5 = Math.min((progress - 0.8) * 2, 1);
+                drawText('We Have The Solution! 👇', 800, 70, '#f97316', alpha5);
+            }
+        }
+
+        // Scene 3: Solution (8-13s)
+        function drawSolution(t) {
+            const progress = (t - 8) / 5;
+            drawGradientBg(['#0f3460', '#16213e', '#1a1a2e'], t);
+            
+            const scale = 0.9 + Math.sin(t * 2) * 0.05;
+            
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.scale(scale, scale);
+            ctx.translate(-canvas.width / 2, -canvas.height / 2);
+            
+            drawText('FieldOps-Pro', 350, 100, '#f97316', Math.min(progress * 2, 1));
+            drawText('Your Path to Field Service Success', 470, 60, '#ffffff', Math.min(progress * 2, 1));
+            
+            ctx.restore();
+            
+            if (progress > 0.3) {
+                const alpha = Math.min((progress - 0.3) * 1.5, 1);
+                drawText('✓ Professional Training', 600, 55, '#4ade80', alpha);
+                drawText('✓ Industry-Standard Skills', 690, 55, '#4ade80', alpha);
+                drawText('✓ Certificate Upon Completion', 780, 55, '#4ade80', alpha);
+            }
+        }
+
+        // Scene 4: Features (13-19s)
+        function drawFeatures(t) {
+            const progress = (t - 13) / 6;
+            drawGradientBg(['#1e3a8a', '#1e40af', '#3b82f6'], t);
+            
+            drawText('🎯 Everything You Need', 200, 90, '#ffffff', Math.min(progress * 2, 1));
+            
+            const features = [
+                { icon: '🔧', title: 'Hands-On Training', desc: 'Interactive tutorials with real scenarios' },
+                { icon: '📚', title: 'Complete Courses', desc: 'Cat 6 cabling, networking, field basics' },
+                { icon: '🎓', title: 'Certificates', desc: 'Earn credentials to prove your skills' },
+                { icon: '💼', title: 'Career Ready', desc: 'Land jobs in high-demand field services' }
+            ];
+            
+            features.forEach((feature, i) => {
+                const delay = 0.15 * i;
+                if (progress > delay) {
+                    const alpha = Math.min((progress - delay) * 3, 1);
+                    const y = 400 + (i % 2) * 300;
+                    const x = 480 + Math.floor(i / 2) * 960;
+                    
+                    // Card background
+                    ctx.save();
+                    ctx.globalAlpha = alpha * 0.3;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(x - 350, y - 80, 700, 200);
+                    ctx.restore();
+                    
+                    drawText(feature.icon, y - 20, 80, '#f97316', alpha);
+                    drawText(feature.title, y + 50, 45, '#ffffff', alpha);
+                    drawText(feature.desc, y + 100, 30, '#cbd5e1', alpha);
+                }
+            });
+        }
+
+        // Scene 5: Tutorials (19-25s)
+        function drawTutorials(t) {
+            const progress = (t - 19) / 6;
+            drawGradientBg(['#7c2d12', '#991b1b', '#dc2626'], t);
+            
+            drawText('🎓 Professional Training Courses', 200, 90, '#ffffff', Math.min(progress * 2, 1));
+            
+            const courses = [
+                { name: 'Field Technician Training', slides: '15 slides', icon: '👷' },
+                { name: 'Cat 6 Cable Installation', slides: '25 slides', icon: '🔌' },
+                { name: 'Network Equipment Setup', slides: '26 slides', icon: '🌐' }
+            ];
+            
+            courses.forEach((course, i) => {
+                const delay = 0.2 * i;
+                if (progress > delay) {
+                    const alpha = Math.min((progress - delay) * 2, 1);
+                    const y = 400 + i * 180;
+                    
+                    // Course card
+                    ctx.save();
+                    ctx.globalAlpha = alpha * 0.2;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(360, y - 60, 1200, 140);
+                    ctx.restore();
+                    
+                    ctx.save();
+                    ctx.globalAlpha = alpha;
+                    ctx.font = 'bold 70px Arial';
+                    ctx.fillStyle = '#f97316';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(course.icon, 420, y + 20);
+                    
+                    ctx.font = 'bold 50px Arial';
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText(course.name, 550, y + 10);
+                    
+                    ctx.font = '35px Arial';
+                    ctx.fillStyle = '#cbd5e1';
+                    ctx.fillText(course.slides, 1350, y + 10);
+                    ctx.restore();
+                }
+            });
+        }
+
+        // Scene 6: CTA (25-30s)
+        function drawCTA(t) {
+            const progress = (t - 25) / 5;
+            drawGradientBg(['#0f172a', '#1e293b', '#334155'], t);
+            
+            const pulse = 0.95 + Math.sin(t * 3) * 0.05;
+            
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2 - 100);
+            ctx.scale(pulse, pulse);
+            ctx.translate(-canvas.width / 2, -(canvas.height / 2 - 100));
+            
+            drawText('Ready To Start Your Journey?', 400, 100, '#f97316', Math.min(progress * 2, 1));
+            ctx.restore();
+            
+            if (progress > 0.3) {
+                const alpha = Math.min((progress - 0.3) * 1.5, 1);
+                
+                // Button effect
+                ctx.save();
+                ctx.globalAlpha = alpha * 0.3;
+                ctx.fillStyle = '#f97316';
+                const buttonPulse = 0.98 + Math.sin(t * 4) * 0.02;
+                ctx.scale(buttonPulse, buttonPulse);
+                ctx.fillRect(660 / buttonPulse, 580 / buttonPulse, 600 / buttonPulse, 120 / buttonPulse);
+                ctx.restore();
+                
+                drawText('Visit FieldOps-Pro.com', 650, 85, '#ffffff', alpha);
+            }
+            
+            if (progress > 0.5) {
+                const alpha2 = Math.min((progress - 0.5) * 1.5, 1);
+                drawText('Start Learning Today • Build Your Career Tomorrow', 850, 50, '#cbd5e1', alpha2);
+            }
+            
+            if (progress > 0.7) {
+                const alpha3 = Math.min((progress - 0.7) * 1.5, 1);
+                drawText('🚀 Professional Training • 💼 Career Support • 🎓 Certificates', 950, 40, '#f97316', alpha3);
+            }
+        }
+
+        function animate() {
+            if (isPaused) return;
+            
+            const elapsed = (Date.now() - startTime - pausedTime) / 1000;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Determine current scene
+            if (elapsed < 4) {
+                drawIntro(elapsed);
+            } else if (elapsed < 8) {
+                drawProblem(elapsed);
+            } else if (elapsed < 13) {
+                drawSolution(elapsed);
+            } else if (elapsed < 19) {
+                drawFeatures(elapsed);
+            } else if (elapsed < 25) {
+                drawTutorials(elapsed);
+            } else if (elapsed < 30) {
+                drawCTA(elapsed);
+            } else {
+                // Loop back
+                startTime = Date.now();
+                pausedTime = 0;
+            }
+            
+            animationId = requestAnimationFrame(animate);
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (!startTime) {
+                startTime = Date.now();
+            } else if (isPaused) {
+                pausedTime += Date.now() - pauseStart;
+            }
+            isPaused = false;
+            playBtn.disabled = true;
+            pauseBtn.disabled = false;
+            animate();
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            isPaused = true;
+            pauseStart = Date.now();
+            playBtn.disabled = false;
+            pauseBtn.disabled = true;
+            cancelAnimationFrame(animationId);
+        });
+
+        restartBtn.addEventListener('click', () => {
+            startTime = Date.now();
+            pausedTime = 0;
+            isPaused = false;
+            playBtn.disabled = true;
+            pauseBtn.disabled = false;
+            animate();
+        });
+
+        let pauseStart;
+
+        // Initial draw
+        drawIntro(0);
+    </script>
+</body>
+</html>

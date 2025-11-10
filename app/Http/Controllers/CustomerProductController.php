@@ -76,6 +76,9 @@ class CustomerProductController extends Controller
             abort(404);
         }
         
+        // Load content blocks
+        $content->load('blocks');
+        
         // Load related content for navigation
         $allContent = $product->contents()
             ->when(!$isAdmin, function ($query) {

@@ -119,6 +119,68 @@
                             </div>
                         </div>
 
+                        <!-- Content Blocks -->
+                        <div v-if="content.blocks && content.blocks.length > 0" class="mt-8 space-y-6">
+                            <div v-for="block in content.blocks" :key="block.id" class="content-block">
+                                <!-- Heading Block -->
+                                <h3 v-if="block.block_type === 'heading'" class="text-3xl font-bold text-white mb-4">
+                                    {{ block.content }}
+                                </h3>
+                                
+                                <!-- Text Block -->
+                                <div v-else-if="block.block_type === 'text'" 
+                                     class="prose prose-lg prose-invert max-w-none text-gray-200 leading-relaxed"
+                                     v-html="block.content">
+                                </div>
+                                
+                                <!-- Image Block -->
+                                <div v-else-if="block.block_type === 'image'" class="my-6">
+                                    <img 
+                                        :src="block.media_url" 
+                                        :alt="block.content || 'Image'"
+                                        class="rounded-lg shadow-lg max-w-full h-auto"
+                                    />
+                                    <p v-if="block.content" class="text-sm text-gray-400 mt-2 text-center">{{ block.content }}</p>
+                                </div>
+                                
+                                <!-- Video Block -->
+                                <div v-else-if="block.block_type === 'video'" class="my-6">
+                                    <video 
+                                        controls 
+                                        class="w-full rounded-lg shadow-lg"
+                                        :poster="block.content ? null : undefined"
+                                    >
+                                        <source :src="block.media_url" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p v-if="block.content" class="text-sm text-gray-400 mt-2">{{ block.content }}</p>
+                                </div>
+                                
+                                <!-- Tutorial Block -->
+                                <div v-else-if="block.block_type === 'tutorial'" class="my-8">
+                                    <div class="bg-gradient-to-r from-purple-900 to-indigo-900 rounded-lg p-8 shadow-xl">
+                                        <div class="flex items-center mb-4">
+                                            <svg class="w-8 h-8 text-purple-300 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                            </svg>
+                                            <h3 class="text-2xl font-bold text-white">Interactive Tutorial</h3>
+                                        </div>
+                                        <p class="text-purple-200 mb-6">{{ block.content || 'Start this interactive tutorial to learn more' }}</p>
+                                        <Link 
+                                            :href="`/tutorial/${product.id}?tutorial=${encodeURIComponent(block.content)}`"
+                                            class="inline-flex items-center bg-white text-purple-900 font-bold px-6 py-3 rounded-lg hover:bg-purple-100 transition-colors shadow-lg"
+                                        >
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            Start Tutorial
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Content Sections (if JSON structured content) -->
                         <div v-if="contentSections && contentSections.length > 0" class="mt-12">
                             <h2 class="text-2xl font-bold text-white mb-6">Sections</h2>

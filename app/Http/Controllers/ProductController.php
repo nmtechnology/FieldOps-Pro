@@ -153,9 +153,27 @@ class ProductController extends Controller
                 ->first();
         }
         
+        // Check if user has purchased this product
+        $hasPurchased = false;
+        $hasContent = false;
+        
+        if (auth()->check()) {
+            $hasPurchased = \App\Models\Order::where('user_id', auth()->id())
+                ->where('product_id', $product->id)
+                ->where('status', 'completed')
+                ->exists();
+            
+            // Check if product has published content
+            $hasContent = \App\Models\ProductContent::where('product_id', $product->id)
+                ->where('is_published', true)
+                ->exists();
+        }
+        
         return Inertia::render('Products/Landing', [
             'product' => $product,
             'discountCode' => $discount ? $discount->code : null,
+            'hasPurchased' => $hasPurchased,
+            'hasContent' => $hasContent,
         ]);
     }
 }
