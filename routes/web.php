@@ -32,12 +32,7 @@ Route::get('/health', function() {
     ], $status === 'ok' ? 200 : 503);
 })->name('health');
 
-// Include auth routes first, but our home route will override the default behavior
-require __DIR__.'/auth.php';
-require __DIR__.'/admin_web.php';
-
-// Bot verification page - THE FIRST PAGE at root
-// Bot check page - First page visitors see
+// Bot check page - MUST be defined before auth routes to ensure it's accessible
 Route::get('/bot-check', function(Illuminate\Http\Request $request) {
     // Track the visitor when they first land
     try {
@@ -114,6 +109,10 @@ Route::post('/verify', function(Illuminate\Http\Request $request) {
     // Redirect to loading screen using Inertia redirect
     return redirect()->route('loading-to-home');
 })->name('verify');
+
+// Include auth and admin routes AFTER our public routes
+require __DIR__.'/auth.php';
+require __DIR__.'/admin_web.php';
 
 // Terms and Conditions
 Route::get('/terms', function() {
