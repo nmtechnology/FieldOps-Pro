@@ -58,10 +58,30 @@ Route::get('/', function() {
         return redirect()->route('dashboard');
     }
     
+    // Get active products and featured product for the home page
+    $products = \App\Models\Product::where('active', true)->get();
+    $featuredProduct = $products->first(); // First active product as featured
+    
+    // Get active discount if any
+    $activeDiscount = \App\Models\Discount::where('active', true)
+        ->where(function($query) {
+            $query->whereNull('valid_until')
+                  ->orWhere('valid_until', '>=', now());
+        })
+        ->where(function($query) {
+            $query->whereNull('usage_limit')
+                  ->orWhereRaw('usage_count < usage_limit');
+        })
+        ->first();
+    
     // Show the main Home page (advertising/product catalog) to verified visitors
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+        'products' => $products,
+        'featuredProduct' => $featuredProduct,
+        'guestCheckout' => true,
+        'activeDiscount' => $activeDiscount,
     ]);
 })->middleware('verify.human')->name('home.index');
 
