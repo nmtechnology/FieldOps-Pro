@@ -63,7 +63,7 @@ const props = defineProps({
                                         Go to Dashboard
                                     </Link>
                                     
-                                    <Link :href="route('home')" class="inline-flex items-center justify-center px-5 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <Link :href="route('home.index')" class="inline-flex items-center justify-center px-5 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
                                         Return Home
                                     </Link>
                                 </div>

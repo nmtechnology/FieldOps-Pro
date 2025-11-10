@@ -45,7 +45,7 @@ onMounted(() => {
     // If user is not admin, redirect to customer dashboard
     if (!isAdmin.value) {
         // Non-admin users should not see this layout, redirect to home
-        window.location.href = route('home');
+        window.location.href = route('home.index');
     }
 });
 </script>
@@ -60,7 +60,7 @@ onMounted(() => {
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('home')" class="flex items-center hover:opacity-80 transition-opacity">
+                                <Link :href="route('home.index')" class="flex items-center hover:opacity-80 transition-opacity">
                                     <ApplicationLogo class="h-9 w-auto mr-2" />
                                     <span class="text-2xl font-bold text-orange-400">Admin Portal</span>
                                 </Link>

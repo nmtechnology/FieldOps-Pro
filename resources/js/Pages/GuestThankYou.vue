@@ -75,7 +75,7 @@
                             <p class="text-gray-600 dark:text-gray-400 mb-4">
                                 A confirmation email has been sent to your email address.
                             </p>
-                            <Link :href="route('home')" class="text-orange-600 hover:text-orange-500">
+                            <Link :href="route('home.index')" class="text-orange-600 hover:text-orange-500">
                                 Return to Homepage
                             </Link>
                         </div>

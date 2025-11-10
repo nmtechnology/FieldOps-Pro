@@ -102,7 +102,7 @@
                                         <p class="text-sm text-gray-700 mb-2">
                                             There was an issue with your payment. Please contact support for assistance.
                                         </p>
-                                        <Link :href="route('home')" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <Link :href="route('home.index')" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             Return to Homepage
                                         </Link>
                                     </div>

@@ -57,7 +57,7 @@ onMounted(() => {
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('home')" class="flex items-center hover:opacity-80 transition-opacity">
+                                <Link :href="route('home.index')" class="flex items-center hover:opacity-80 transition-opacity">
                                     <ApplicationLogo class="h-9 w-auto mr-2" />
                                     <span class="text-2xl font-bold text-orange-400">FieldEngineer Pro</span>
                                 </Link>
@@ -65,7 +65,7 @@ onMounted(() => {
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('home')" :active="route().current('home')">
+                                <NavLink :href="route('home.index')" :active="route().current('home.index')">
                                     Home
                                 </NavLink>
                                 
@@ -173,7 +173,7 @@ onMounted(() => {
                     class="sm:hidden"
                 >
                     <div class="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
+                        <ResponsiveNavLink :href="route('home.index')" :active="route().current('home.index')">
                             Home
                         </ResponsiveNavLink>
                         
