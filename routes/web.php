@@ -37,12 +37,8 @@ require __DIR__.'/auth.php';
 require __DIR__.'/admin_web.php';
 
 // Bot verification page - THE FIRST PAGE at root
-Route::get('/', function(Illuminate\Http\Request $request) {
-    // If already verified, go to home
-    if (session()->has('human_verified')) {
-        return app(ProductController::class)->home();
-    }
-    
+// Bot check page - First page visitors see
+Route::get('/bot-check', function(Illuminate\Http\Request $request) {
     // Track the visitor when they first land
     try {
         $trackingService = app(\App\Services\VisitorTrackingService::class);
@@ -59,6 +55,19 @@ Route::get('/', function(Illuminate\Http\Request $request) {
     
     return Inertia::render('BotCheck');
 })->name('bot-check');
+
+// Hero Landing Page - Shows after bot verification
+Route::get('/', function() {
+    // If logged in, redirect to dashboard
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->middleware('verify.human')->name('home.index');
 
 Route::post('/verify', function(Illuminate\Http\Request $request) {
     // Set verification in session
@@ -106,30 +115,23 @@ Route::post('/verify', function(Illuminate\Http\Request $request) {
     return redirect()->route('loading-to-home');
 })->name('verify');
 
-// Homepage - Real home page after verification
-Route::get('/home', [ProductController::class, 'home'])
-    ->middleware('verify.human')
-    ->name('home');
-
 // Terms and Conditions
 Route::get('/terms', function() {
     return Inertia::render('TermsAndConditions');
-})->middleware('verify.human')->name('terms');
+})->name('terms');
 
 // Contact/Support
 Route::get('/contact', [ContactController::class, 'index'])
-    ->middleware('verify.human')
     ->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])
-    ->middleware('verify.human')
     ->name('contact.store');
 
 // Sitemap for SEO
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])
     ->name('sitemap');
 
-// Guest checkout routes - all protected by verification
-Route::prefix('guest')->name('guest.')->middleware('verify.human')->group(function() {
+// Guest checkout routes
+Route::prefix('guest')->name('guest.')->group(function() {
     Route::get('/checkout/{product}', [CheckoutController::class, 'guestCheckout'])->name('checkout');
     Route::post('/checkout/calculate-tax', [CheckoutController::class, 'calculateTax'])->name('checkout.calculate-tax');
     Route::post('/process-payment', [CheckoutController::class, 'processGuestPayment'])->name('process-payment');

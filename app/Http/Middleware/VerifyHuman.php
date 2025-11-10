@@ -16,10 +16,10 @@ class VerifyHuman
     public function handle(Request $request, Closure $next): Response
     {
         // Skip verification check for:
-        // - The root page (verification page)
+        // - The bot-check page
         // - POST request to verify
         // - Authenticated admin users
-        if ($request->path() === '/' || 
+        if ($request->path() === 'bot-check' || 
             ($request->isMethod('post') && $request->path() === 'verify') ||
             ($request->user() && $request->user()->is_admin)) {
             return $next($request);

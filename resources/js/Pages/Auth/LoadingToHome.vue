@@ -5,7 +5,7 @@ import { router } from '@inertiajs/vue3';
 onMounted(() => {
     // Show loading animation for 2.5 seconds, then redirect to home
     setTimeout(() => {
-        router.visit('/home');
+        router.visit('/');
     }, 2500);
 });
 </script>
