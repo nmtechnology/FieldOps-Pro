@@ -40,6 +40,7 @@ class TutorialController extends Controller
         $tutorialComponents = [
             'Field Technician Training' => 'Tutorial/FieldTechTraining',
             'Cat 6 Cable Installation' => 'Tutorial/Cat6CableTraining',
+            'Network Equipment Setup' => 'Tutorial/NetworkEquipmentSetup',
         ];
         
         $component = $tutorialComponents[$tutorialName] ?? 'Tutorial/FieldTechTraining';
