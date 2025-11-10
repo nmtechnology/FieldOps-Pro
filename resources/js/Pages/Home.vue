@@ -23,6 +23,33 @@ const props = defineProps({
 const consultationProduct = computed(() => {
     return props.products?.find(product => product.name === 'Premium Business Consultation');
 });
+
+// Calculate discounted price and percentage if discount exists
+const discountInfo = computed(() => {
+    if (!props.activeDiscount || !props.featuredProduct) {
+        return null;
+    }
+    
+    const originalPrice = parseFloat(props.featuredProduct.price);
+    let discountedPrice = originalPrice;
+    let discountPercentage = 0;
+    
+    if (props.activeDiscount.type === 'percentage') {
+        discountPercentage = parseFloat(props.activeDiscount.value);
+        discountedPrice = originalPrice * (1 - discountPercentage / 100);
+    } else if (props.activeDiscount.type === 'fixed') {
+        const fixedDiscount = parseFloat(props.activeDiscount.value);
+        discountedPrice = originalPrice - fixedDiscount;
+        discountPercentage = ((fixedDiscount / originalPrice) * 100).toFixed(0);
+    }
+    
+    return {
+        discountedPrice: discountedPrice.toFixed(2),
+        discountPercentage: Math.round(discountPercentage),
+        originalPrice: originalPrice.toFixed(2)
+    };
+});
+
 </script>
 
 <template>
@@ -739,13 +766,13 @@ const consultationProduct = computed(() => {
                                     <div class="flex items-baseline gap-3 mb-2">
                                         <h4 class="text-lg font-medium text-white">Investment:</h4>
                                         <div class="flex items-baseline gap-2">
-                                            <span v-if="activeDiscount" class="text-lg text-gray-400 line-through">${{ parseFloat(featuredProduct.price).toFixed(2) }}</span>
-                                            <span class="text-2xl font-bold text-orange-400">${{ activeDiscount ? parseFloat(activeDiscount.discounted_price).toFixed(2) : parseFloat(featuredProduct.price).toFixed(2) }}</span>
-                                            <span v-if="activeDiscount" class="text-sm font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded">{{ activeDiscount.discount_percentage }}% OFF</span>
+                                            <span v-if="discountInfo" class="text-lg text-gray-400 line-through">${{ discountInfo.originalPrice }}</span>
+                                            <span class="text-2xl font-bold text-orange-400">${{ discountInfo ? discountInfo.discountedPrice : parseFloat(featuredProduct.price).toFixed(2) }}</span>
+                                            <span v-if="discountInfo" class="text-sm font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded">{{ discountInfo.discountPercentage }}% OFF</span>
                                         </div>
                                     </div>
                                     <p class="text-gray-300 text-sm mt-1">
-                                        <span v-if="activeDiscount">Professional development that pays for itself - Limited time offer!</span>
+                                        <span v-if="discountInfo">Professional development that pays for itself - Limited time offer!</span>
                                         <span v-else>Professional development that pays for itself</span>
                                     </p>
                                     <div class="mt-4">
