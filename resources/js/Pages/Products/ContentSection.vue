@@ -52,6 +52,62 @@
                         <!-- Content is rendered as HTML -->
                         <div class="prose dark:prose-invert max-w-none" v-html="content.content"></div>
                         
+                        <!-- Content Blocks -->
+                        <div v-if="content.blocks && content.blocks.length > 0" class="mt-8 space-y-6">
+                            <div v-for="block in content.blocks" :key="block.id">
+                                <!-- Heading Block -->
+                                <h3 v-if="block.block_type === 'heading'" 
+                                    class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                                    {{ block.content }}
+                                </h3>
+                                
+                                <!-- Text Block -->
+                                <div v-else-if="block.block_type === 'text'" 
+                                     class="prose dark:prose-invert max-w-none"
+                                     v-html="block.content">
+                                </div>
+                                
+                                <!-- Image Block -->
+                                <div v-else-if="block.block_type === 'image'" class="my-6">
+                                    <img :src="block.media_url" :alt="block.content || 'Content image'" class="rounded-lg shadow-lg w-full">
+                                    <p v-if="block.content" class="text-sm text-gray-600 dark:text-gray-400 mt-2 text-center">{{ block.content }}</p>
+                                </div>
+                                
+                                <!-- Video Block -->
+                                <div v-else-if="block.block_type === 'video'" class="my-6">
+                                    <video controls class="rounded-lg shadow-lg w-full">
+                                        <source :src="block.media_url" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p v-if="block.content" class="text-sm text-gray-600 dark:text-gray-400 mt-2 text-center">{{ block.content }}</p>
+                                </div>
+                                
+                                <!-- Tutorial Block -->
+                                <div v-else-if="block.block_type === 'tutorial'" class="my-8 bg-gradient-to-r from-purple-900 to-indigo-900 rounded-xl shadow-2xl p-8 border-2 border-purple-500">
+                                    <div class="flex items-center mb-4">
+                                        <div class="text-5xl mr-4">🎓</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-2xl font-bold text-white mb-2">Interactive Tutorial</h3>
+                                            <p class="text-purple-200 text-lg">{{ block.content || 'Field Technician Training' }}</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-purple-100 mb-6">
+                                        Complete this hands-on training module to master the skills. Features interactive slides, knowledge checks, and earn a certificate upon completion!
+                                    </p>
+                                    <Link 
+                                        :href="`/tutorial/${product.id}?tutorial=${encodeURIComponent(block.content || 'Field Technician Training')}`"
+                                        class="inline-flex items-center px-6 py-3 bg-white text-purple-900 font-bold rounded-lg shadow-lg hover:bg-purple-100 transform hover:scale-105 transition-all duration-200"
+                                    >
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Start Tutorial
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- Media Section if available -->
                         <div v-if="content.media && content.media.length > 0" class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8">
                             <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Media Resources</h3>

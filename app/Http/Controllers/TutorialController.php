@@ -13,7 +13,7 @@ class TutorialController extends Controller
     /**
      * Show the tutorial for a specific product
      */
-    public function show(Product $product)
+    public function show(Product $product, Request $request)
     {
         $user = auth()->user();
         
@@ -33,7 +33,18 @@ class TutorialController extends Controller
             ->where('product_id', $product->id)
             ->first();
         
-        return Inertia::render('Tutorial/FieldTechTraining', [
+        // Determine which tutorial to show based on request or product content
+        $tutorialName = $request->query('tutorial', 'Field Technician Training');
+        
+        // Map tutorial names to component names
+        $tutorialComponents = [
+            'Field Technician Training' => 'Tutorial/FieldTechTraining',
+            'Cat 6 Cable Installation' => 'Tutorial/Cat6CableTraining',
+        ];
+        
+        $component = $tutorialComponents[$tutorialName] ?? 'Tutorial/FieldTechTraining';
+        
+        return Inertia::render($component, [
             'product' => $product,
             'hasCompleted' => $completion !== null,
             'certificate' => $completion,

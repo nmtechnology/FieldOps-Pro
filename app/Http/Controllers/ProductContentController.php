@@ -43,6 +43,7 @@ class ProductContentController extends Controller
         $content = \App\Models\ProductContent::where('product_id', $productId)
             ->where('slug', $slug)
             ->where('is_published', true)
+            ->with('blocks') // Load content blocks
             ->firstOrFail();
         
         // If the content is premium, check if the user has purchased it

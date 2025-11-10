@@ -280,7 +280,7 @@ const isMediaBlock = computed(() => {
                                                 required
                                             >
                                                 <option value="Field Technician Training">Field Technician Training (15 slides)</option>
-                                                <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (Coming Soon)</option>
+                                                <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (25 slides)</option>
                                                 <option value="Network Equipment Setup">Network Equipment Setup (Coming Soon)</option>
                                             </select>
                                         </div>
@@ -435,7 +435,7 @@ const isMediaBlock = computed(() => {
                                             required
                                         >
                                             <option value="Field Technician Training">Field Technician Training (15 slides)</option>
-                                            <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (Coming Soon)</option>
+                                            <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (25 slides)</option>
                                             <option value="Network Equipment Setup">Network Equipment Setup (Coming Soon)</option>
                                         </select>
                                         <p class="mt-1 text-xs text-purple-300">More tutorials will be added here as you create them</p>
