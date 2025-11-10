@@ -29,6 +29,7 @@ const blockForm = useForm({
     caption: '',
     media_type: null,
     media_file: null,
+    tutorial_name: 'Field Technician Training',
 });
 
 const editingBlock = ref(null);
@@ -61,6 +62,7 @@ const startEditBlock = (block) => {
     blockForm.content = block.content || '';
     blockForm.caption = block.caption || '';
     blockForm.media_type = block.media_type;
+    blockForm.tutorial_name = block.block_type === 'tutorial' ? (block.content || 'Field Technician Training') : 'Field Technician Training';
 };
 
 const cancelEditBlock = () => {
@@ -269,6 +271,20 @@ const isMediaBlock = computed(() => {
                                             ></textarea>
                                         </div>
 
+                                        <div v-if="blockForm.block_type === 'tutorial'" class="bg-purple-900 border border-purple-700 rounded-md p-4">
+                                            <InputLabel for="edit_tutorial_name" value="Select Tutorial" />
+                                            <select
+                                                id="edit_tutorial_name"
+                                                class="mt-1 block w-full border-purple-600 bg-purple-800 text-white focus:border-purple-400 focus:ring-purple-400 rounded-md shadow-sm"
+                                                v-model="blockForm.tutorial_name"
+                                                required
+                                            >
+                                                <option value="Field Technician Training">Field Technician Training (15 slides)</option>
+                                                <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (Coming Soon)</option>
+                                                <option value="Network Equipment Setup">Network Equipment Setup (Coming Soon)</option>
+                                            </select>
+                                        </div>
+
                                         <div v-if="isMediaBlock">
                                             <InputLabel :for="`edit_media_file_${block.id}`" :value="blockForm.block_type === 'image' ? 'Upload New Image (optional)' : 'Upload New Video (optional)'" />
                                             
@@ -341,8 +357,8 @@ const isMediaBlock = computed(() => {
                                                 {{ block.content }}
                                             </div>
                                             <div v-else-if="block.block_type === 'tutorial'" class="bg-purple-900 border border-purple-700 rounded-md p-4">
-                                                <p class="text-purple-200 font-semibold">Interactive Field Technician Training Tutorial</p>
-                                                <p class="text-sm text-purple-300 mt-1">15 slides with quizzes and certificate - students will see this embedded in the content</p>
+                                                <p class="text-purple-200 font-semibold">{{ block.content || 'Field Technician Training' }}</p>
+                                                <p class="text-sm text-purple-300 mt-1">Interactive tutorial with slides, quizzes, and certificate</p>
                                             </div>
                                             <div v-else-if="block.block_type === 'image' && block.media_path">
                                                 <img :src="`/storage/${block.media_path}`" 
@@ -406,9 +422,24 @@ const isMediaBlock = computed(() => {
                                 </div>
 
                                 <div v-if="blockForm.block_type === 'tutorial'" class="bg-purple-900 border border-purple-700 rounded-md p-4">
-                                    <p class="text-sm text-purple-200">
-                                        <strong>🎓 Tutorial Block:</strong> This will embed the interactive Field Technician Training tutorial directly in this content section. Students will go through 15 slides with quizzes and earn a certificate upon completion.
+                                    <p class="text-sm text-purple-200 mb-3">
+                                        <strong>🎓 Tutorial Block:</strong> Select which interactive tutorial to embed in this content section. Students will complete the tutorial with slides, quizzes, and earn a certificate.
                                     </p>
+                                    
+                                    <div>
+                                        <InputLabel for="tutorial_name" value="Select Tutorial" />
+                                        <select
+                                            id="tutorial_name"
+                                            class="mt-1 block w-full border-purple-600 bg-purple-800 text-white focus:border-purple-400 focus:ring-purple-400 rounded-md shadow-sm"
+                                            v-model="blockForm.tutorial_name"
+                                            required
+                                        >
+                                            <option value="Field Technician Training">Field Technician Training (15 slides)</option>
+                                            <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (Coming Soon)</option>
+                                            <option value="Network Equipment Setup">Network Equipment Setup (Coming Soon)</option>
+                                        </select>
+                                        <p class="mt-1 text-xs text-purple-300">More tutorials will be added here as you create them</p>
+                                    </div>
                                 </div>
 
                                 <div v-if="blockForm.block_type === 'heading' || blockForm.block_type === 'text'">

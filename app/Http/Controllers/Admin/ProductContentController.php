@@ -126,16 +126,22 @@ class ProductContentController extends Controller
     public function storeBlock(Request $request, Product $product, ProductContent $content)
     {
         $validated = $request->validate([
-            'block_type' => 'required|string|in:text,heading,image,video',
+            'block_type' => 'required|string|in:text,heading,image,video,tutorial',
             'content' => 'nullable|string',
             'caption' => 'nullable|string',
             'media_type' => 'nullable|string|in:webp,jpg,png,mp4,webm',
             'media_file' => 'nullable|file|mimes:webp,jpg,jpeg,png,mp4,webm|max:51200', // 50MB max
+            'tutorial_name' => 'nullable|string',
         ]);
 
         // Get next block order
         $maxOrder = $content->blocks()->max('block_order') ?? 0;
         $validated['block_order'] = $maxOrder + 1;
+
+        // For tutorial blocks, store the tutorial name in the content field
+        if ($validated['block_type'] === 'tutorial' && !empty($validated['tutorial_name'])) {
+            $validated['content'] = $validated['tutorial_name'];
+        }
 
         // Handle file upload
         if ($request->hasFile('media_file')) {
@@ -156,13 +162,19 @@ class ProductContentController extends Controller
     public function updateBlock(Request $request, Product $product, ProductContent $content, ContentBlock $block)
     {
         $validated = $request->validate([
-            'block_type' => 'required|string|in:text,heading,image,video',
+            'block_type' => 'required|string|in:text,heading,image,video,tutorial',
             'content' => 'nullable|string',
             'caption' => 'nullable|string',
             'block_order' => 'nullable|integer|min:0',
             'media_type' => 'nullable|string|in:webp,jpg,png,mp4,webm',
             'media_file' => 'nullable|file|mimes:webp,jpg,jpeg,png,mp4,webm|max:51200',
+            'tutorial_name' => 'nullable|string',
         ]);
+
+        // For tutorial blocks, store the tutorial name in the content field
+        if ($validated['block_type'] === 'tutorial' && !empty($validated['tutorial_name'])) {
+            $validated['content'] = $validated['tutorial_name'];
+        }
 
         // Handle file upload
         if ($request->hasFile('media_file')) {
