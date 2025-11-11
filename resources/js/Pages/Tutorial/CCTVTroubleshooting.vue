@@ -51,9 +51,9 @@ const tutorialSlides = ref([
             },
             {
                 icon: "📏",
-                title: "Fluke Digital Multimeter",
-                price: "$159.99",
-                url: "https://www.amazon.com/Fluke-101-Basic-Digital-Multimeter/dp/B00OHDKLTE"
+                title: "KAIWEETS Digital Multimeter (Affordable)",
+                price: "$39.99",
+                url: "https://www.amazon.com/KAIWEETS-Multimeter-Resistance-Capacitance-Temperature/dp/B07SHLS639"
             },
             {
                 icon: "📺",
