@@ -21,10 +21,13 @@ const typeText = (text, callback) => {
     isTyping.value = true;
     displayedText.value = '';
     let index = 0;
-
+    
+    // Convert to array to handle Unicode characters properly (including emojis)
+    const characters = [...text]; // Spread operator properly handles Unicode
+    
     const interval = setInterval(() => {
-        if (index < text.length) {
-            displayedText.value += text[index];
+        if (index < characters.length) {
+            displayedText.value += characters[index];
             index++;
         } else {
             clearInterval(interval);
