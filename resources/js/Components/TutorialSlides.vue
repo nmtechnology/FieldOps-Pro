@@ -197,6 +197,9 @@ const retryQuiz = () => {
                     </p>
                 </div>
 
+                <!-- Custom HTML Display (for tables, charts, etc.) -->
+                <div v-if="!isTyping && currentSlideData.customHtml" class="mt-6" v-html="currentSlideData.customHtml"></div>
+
                 <!-- Links Display -->
                 <div v-if="!isTyping && currentSlideData.links && currentSlideData.links.length > 0" class="mt-6">
                     <div class="bg-gray-800 rounded-xl border border-gray-700 p-4">

@@ -16,10 +16,14 @@ const tutorialSlides = ref([
     {
         title: "Welcome to Field Technician Training!",
         text: "Hey there! I'm your FieldOps Pro guide, and I'm super excited to help you start your journey as an independent field technician!\n\nIn this training, you'll learn everything you need to know to build a successful side hustle or even replace your 9-5 income. We're going to cover:\n\n✅ Setting up your profiles on FieldNation and WorkMarket\n✅ How to price your services profitably\n✅ Building an effective territory strategy\n✅ Essential tools you'll need\n✅ Professional practices that win repeat clients\n\nThis isn't just another course - this is your roadmap to financial freedom through field services. Ready? Let's get started!",
+        image: "https://images.unsplash.com/photo-1581092918484-8313e8f28c7d?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional field technician working on network equipment"
     },
     {
         title: "Getting Started: Platform Signup",
         text: "First things first - we need to get you signed up on the two major platforms where you'll find work: FieldNation.com and WorkMarket.com.\n\nThese platforms connect businesses that need on-site technical work with skilled technicians like you. Think of them as the Uber of field services!\n\n🌐 FieldNation.com - Register as a service provider\n🌐 WorkMarket.com - Create your technician profile\n\nBoth platforms are free to join. You'll need:\n📧 A professional email address\n📱 Your phone number\n💳 Banking info for payments (added after approval)\n📄 Basic business info (you can operate as a sole proprietor)\n\nDon't worry about being perfect - you can update your profile as you go. The key is to get started!",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Online platform registration - your gateway to finding work orders",
         quiz: {
             question: "What are the two main platforms we'll be using to find work orders?",
             options: [
@@ -52,10 +56,156 @@ const tutorialSlides = ref([
     {
         title: "Calculating Your Hourly Rate",
         text: "This is CRUCIAL - pricing yourself right means the difference between profit and working for free. Let's break it down.\n\n💰 Your rate needs to cover:\n\n1️⃣ Your desired hourly wage (what you want to earn)\n2️⃣ Taxes (set aside 25-30% for self-employment taxes)\n3️⃣ Vehicle costs (gas, maintenance, insurance)\n4️⃣ Tools and equipment\n5️⃣ Insurance (liability insurance is smart)\n6️⃣ Unbillable time (driving, admin work, no-work days)\n\n📊 Example calculation:\n• You want $25/hour take-home\n• Add 30% for taxes = $32.50\n• Add $15 for vehicle/overhead = $47.50\n• Round up for unbillable time = $55-60/hour\n\nDon't race to the bottom on price! Clients value quality work. Being affordable doesn't mean being the cheapest - it means providing great value.\n\nStart at $50-65/hour for most markets. You can adjust based on your local area.",
+        image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Financial planning - calculate your profitable hourly rate",
+        customHtml: `
+        <div class="bg-gray-800 rounded-lg p-6 my-6">
+            <h3 class="text-xl font-bold text-orange-400 mb-4">📊 Hourly Rate Breakdown Calculator</h3>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Component</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Amount</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Cumulative</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300">
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">💵 Desired Take-Home Wage</td>
+                        <td class="py-3 px-4 text-right font-mono">$25.00</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">$25.00</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">📋 Taxes (30% self-employment)</td>
+                        <td class="py-3 px-4 text-right font-mono">+$7.50</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">$32.50</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">🚗 Vehicle & Travel Costs</td>
+                        <td class="py-3 px-4 text-right font-mono">+$8.00</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">$40.50</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">🔧 Tools & Equipment Depreciation</td>
+                        <td class="py-3 px-4 text-right font-mono">+$3.00</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">$43.50</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">📱 Phone, Insurance & Overhead</td>
+                        <td class="py-3 px-4 text-right font-mono">+$4.00</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">$47.50</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">⏰ Unbillable Time (admin, quotes, gaps)</td>
+                        <td class="py-3 px-4 text-right font-mono">+$7.50</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">$55.00</td>
+                    </tr>
+                    <tr class="bg-orange-500/20 font-bold">
+                        <td class="py-4 px-4 text-orange-400">🎯 MINIMUM HOURLY RATE</td>
+                        <td class="py-4 px-4 text-right font-mono text-xl"></td>
+                        <td class="py-4 px-4 text-right font-mono text-2xl text-orange-400">$55-60</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-sm text-gray-400 mt-4">💡 <strong>Pro Tip:</strong> This ensures you actually take home $25/hour after ALL expenses. Price lower than this = working for less than minimum wage!</p>
+        </div>
+        `
     },
     {
         title: "Understanding Your Costs",
         text: "Let's get specific about what you need to factor into your pricing:\n\n🚗 VEHICLE COSTS ($0.65/mile IRS standard):\n• 20-mile round trip = $13\n• 50-mile round trip = $32.50\n• 100-mile round trip = $65\n\n🔧 TOOL COSTS (one-time investment, but factor in):\n• Basic tool kit: $100-300\n• Laptop for remote work: $400-800\n• Specialized tools: Budget as needed\n\n⏰ TIME COSTS:\n• 2-hour job might take 4 hours total (drive time + admin)\n• Bid on the TOTAL time, not just on-site time\n\n📋 Example bid breakdown:\n• On-site work: 2 hours @ $60 = $120\n• Drive time: 1 hour @ $60 = $60\n• Total bid: $180\n\nAlways account for the full scope of what you're investing!",
+        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Business expense tracking - understand your true costs",
+        customHtml: `
+        <div class="bg-gray-800 rounded-lg p-6 my-6">
+            <h3 class="text-xl font-bold text-orange-400 mb-4">🚗 Vehicle Cost Comparison</h3>
+            <table class="w-full text-left border-collapse mb-6">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Round Trip Distance</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Miles</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Cost @ $0.65/mi</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Trips/Week</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Weekly Cost</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300">
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">Local (under 20 mi)</td>
+                        <td class="py-3 px-4 text-right font-mono">20</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">$13.00</td>
+                        <td class="py-3 px-4 text-right font-mono">10</td>
+                        <td class="py-3 px-4 text-right font-mono font-bold">$130</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">Medium (30-40 mi)</td>
+                        <td class="py-3 px-4 text-right font-mono">40</td>
+                        <td class="py-3 px-4 text-right font-mono text-yellow-400">$26.00</td>
+                        <td class="py-3 px-4 text-right font-mono">10</td>
+                        <td class="py-3 px-4 text-right font-mono font-bold">$260</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50 bg-orange-500/10">
+                        <td class="py-3 px-4">Territory Edge (50 mi)</td>
+                        <td class="py-3 px-4 text-right font-mono">50</td>
+                        <td class="py-3 px-4 text-right font-mono text-orange-400">$32.50</td>
+                        <td class="py-3 px-4 text-right font-mono">10</td>
+                        <td class="py-3 px-4 text-right font-mono font-bold">$325</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">❌ Too Far (100+ mi)</td>
+                        <td class="py-3 px-4 text-right font-mono">100</td>
+                        <td class="py-3 px-4 text-right font-mono text-red-400">$65.00</td>
+                        <td class="py-3 px-4 text-right font-mono">10</td>
+                        <td class="py-3 px-4 text-right font-mono font-bold text-red-400">$650</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 class="text-xl font-bold text-orange-400 mb-4 mt-6">🔧 Tool Investment Breakdown</h3>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Tool Category</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Cost Range</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-center">Priority</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300">
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">💻 Laptop (essential for config work)</td>
+                        <td class="py-3 px-4 text-right font-mono">$400-800</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">MUST HAVE</span></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">🔧 Basic Hand Tools Kit</td>
+                        <td class="py-3 px-4 text-right font-mono">$100-200</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">MUST HAVE</span></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">⚡ Multimeter/Voltage Tester</td>
+                        <td class="py-3 px-4 text-right font-mono">$30-80</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">HIGH</span></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">📡 Network Cable Tester</td>
+                        <td class="py-3 px-4 text-right font-mono">$20-150</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-yellow-600 text-white px-3 py-1 rounded-full text-xs font-bold">MEDIUM</span></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">🔦 Flashlight/Headlamp</td>
+                        <td class="py-3 px-4 text-right font-mono">$20-60</td>
+                        <td class="py-3 px-4 text-center"><span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">HIGH</span></td>
+                    </tr>
+                    <tr class="bg-gray-700/30 font-bold">
+                        <td class="py-4 px-4 text-orange-400">💰 TOTAL STARTUP INVESTMENT</td>
+                        <td class="py-4 px-4 text-right font-mono text-xl text-orange-400">$570-1,290</td>
+                        <td class="py-4 px-4 text-center"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-sm text-gray-400 mt-4">💡 <strong>ROI:</strong> At $60/hour, your tools pay for themselves after just 10-22 hours of work. That's 1-2 weeks for most techs!</p>
+        </div>
+        `,
         quiz: {
             question: "If a job is 30 miles away (60 miles round trip) and takes 2 hours on-site, what should you factor into your bid?",
             options: [
@@ -72,6 +222,95 @@ const tutorialSlides = ref([
     {
         title: "Your Territory Strategy: Work Smarter",
         text: "Here's a game-changer that most new techs don't understand: Having a defined territory makes you WAY more profitable!\n\n🎯 Why territory matters:\n\n1️⃣ EFFICIENCY: Working within 30-50 miles of home means:\n   • Less drive time = more jobs per day\n   • Lower vehicle costs\n   • Better work-life balance\n   • You can respond to emergencies faster\n\n2️⃣ REPUTATION: Focusing on one area means:\n   • You become THE known tech in that region\n   • Clients remember you and request you\n   • You learn the local sites and systems\n   • Word-of-mouth referrals explode\n\n3️⃣ SCHEDULING: Stay local and you can:\n   • Book multiple jobs in one day\n   • Fill schedule gaps efficiently  \n   • Reduce canceled job impact\n\n🚫 Don't chase every job across the state - it's a trap! Pick your zone and OWN it.",
+        image: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Territory mapping - define your profitable service area",
+        customHtml: `
+        <div class="bg-gray-800 rounded-lg p-6 my-6">
+            <h3 class="text-xl font-bold text-orange-400 mb-4">📍 Territory Radius Efficiency Analysis</h3>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Territory Size</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Max Drive Time</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Jobs/Day</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-center">Efficiency</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-center">Recommendation</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300">
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">15-mile radius</td>
+                        <td class="py-3 px-4 text-right font-mono">~25 min</td>
+                        <td class="py-3 px-4 text-right font-mono">4-6</td>
+                        <td class="py-3 px-4 text-center">
+                            <div class="flex justify-center gap-1">
+                                <span class="text-green-400">⭐⭐⭐⭐⭐</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4 text-center"><span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">IDEAL START</span></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50 bg-green-500/10">
+                        <td class="py-3 px-4">30-mile radius</td>
+                        <td class="py-3 px-4 text-right font-mono">~45 min</td>
+                        <td class="py-3 px-4 text-right font-mono">3-5</td>
+                        <td class="py-3 px-4 text-center">
+                            <div class="flex justify-center gap-1">
+                                <span class="text-green-400">⭐⭐⭐⭐</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4 text-center"><span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">OPTIMAL</span></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50 bg-orange-500/10">
+                        <td class="py-3 px-4">50-mile radius</td>
+                        <td class="py-3 px-4 text-right font-mono">~75 min</td>
+                        <td class="py-3 px-4 text-right font-mono">2-4</td>
+                        <td class="py-3 px-4 text-center">
+                            <div class="flex justify-center gap-1">
+                                <span class="text-yellow-400">⭐⭐⭐</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4 text-center"><span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">MAX LIMIT</span></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">❌ 75+ mile radius</td>
+                        <td class="py-3 px-4 text-right font-mono">~2 hours</td>
+                        <td class="py-3 px-4 text-right font-mono">1-2</td>
+                        <td class="py-3 px-4 text-center">
+                            <div class="flex justify-center gap-1">
+                                <span class="text-red-400">⭐</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4 text-center"><span class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">AVOID</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="mt-6 grid md:grid-cols-2 gap-4">
+                <div class="bg-green-500/20 border border-green-500 rounded-lg p-4">
+                    <h4 class="font-bold text-green-400 mb-2">✅ Benefits of Tight Territory (30-50 mi)</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• More jobs per day = higher daily income</li>
+                        <li>• Lower fuel costs (extra $100-200/week savings)</li>
+                        <li>• Build local reputation faster</li>
+                        <li>• Better work-life balance</li>
+                        <li>• Easier to stack multiple jobs same day</li>
+                    </ul>
+                </div>
+                <div class="bg-red-500/20 border border-red-500 rounded-lg p-4">
+                    <h4 class="font-bold text-red-400 mb-2">❌ Risks of Wide Territory (75+ mi)</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• Exhausting drive times</li>
+                        <li>• High fuel costs eat profits ($50-100+ per job)</li>
+                        <li>• Only 1-2 jobs possible per day</li>
+                        <li>• Can't build focused reputation</li>
+                        <li>• Emergency jobs = 2-3 hour response time</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-400 mt-4">💡 <strong>Pro Strategy:</strong> Start with 15-mile radius. Expand to 30-50 miles only when you have consistent work in your core area!</p>
+        </div>
+        `,
         quiz: {
             question: "What's the recommended travel distance to maximize your effectiveness?",
             options: [
@@ -88,10 +327,14 @@ const tutorialSlides = ref([
     {
         title: "Essential Tools: Start Simple",
         text: "Good news - you don't need $10,000 in tools to get started! Here's what you ACTUALLY need:\n\n🔧 BASIC HAND TOOLS ($100-200):\n✅ Screwdriver set (Phillips & flathead)\n✅ Drill and bit set\n✅ Wire strippers and cutters\n✅ Voltage tester/multimeter\n✅ Flashlight (headlamp is even better)\n✅ Measuring tape\n✅ Utility knife\n✅ Adjustable wrench and pliers\n\n💻 LAPTOP ($400-800):\n✅ Windows 10/11 laptop\n✅ Don't need high-end gaming specs\n✅ Reliable and virus-free is key\n✅ For configuring equipment, remote support\n✅ This ONE tool can save entire jobs!\n\n📦 Other essentials:\n✅ Tool bag or backpack\n✅ Phone with good camera (document work)\n✅ Notepad and pens\n\nWith just these basics, you can complete 80% of field work orders. Add specialized tools as specific jobs require them!",
+        image: "https://images.unsplash.com/photo-1581092918484-8313e8f28c7d?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional tools - your investment in success"
     },
     {
         title: "The Power of Being Prepared",
         text: "Here's why having the right tools matters SO much:\n\n🎯 FIRST-TRIP COMPLETION:\n\nScenario: You arrive at a retail store to install a router.\n❌ Without laptop: Can't configure it → have to return → unprofitable\n✅ With laptop: Configure on-site → job done → client happy → you're profitable!\n\n💵 Financial impact:\n• Trip 1: 2 hours + 1 hour drive = 3 hours\n• Trip 2: 1 hour + 1 hour drive = 2 hours  \n• Total: 5 hours for a job that should take 3\n• Lost: 2 hours of income + extra fuel costs\n\n😊 CLIENT SATISFACTION:\n• One trip = professional and efficient\n• Client is impressed\n• They request YOU next time\n• They leave 5-star reviews\n• You get MORE work\n\nInvesting in basic tools isn't an expense - it's the foundation of your profitable business!",
+        image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Well-equipped technician - ready for any job",
         quiz: {
             question: "Why is having a laptop essential for field tech work?",
             options: [
@@ -108,10 +351,14 @@ const tutorialSlides = ref([
     {
         title: "Professionalism: Your Secret Weapon",
         text: "This might be the MOST important lesson in this entire training:\n\n🌟 YOU ARE REPRESENTING YOUR CLIENT\n\nWhen you're on a job site, you're not just a contractor - you're an extension of the business that hired you. Whether it's FieldNation, WorkMarket, or direct clients:\n\n✅ Professional appearance:\n   • Clean clothes (doesn't have to be fancy)\n   • Company shirt if provided\n   • Look put-together and trustworthy\n\n✅ Professional communication:\n   • Arrive on time (or call ahead if delayed)\n   • Be polite to everyone\n   • Clear, written updates on job progress\n   • Take before/after photos\n\n✅ Professional work:\n   • Clean workspace when done\n   • Cable management (no sloppy wiring!)\n   • Test everything before leaving\n   • Document what you did\n\nThis matters because ONE bad experience can cost you dozens of future jobs. ONE great experience can earn you a lifetime client!",
+        image: "https://images.unsplash.com/photo-1556745753-b2904692b3cd?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional technician at work - quality and presentation matter"
     },
     {
         title: "Building Your 5-Star Rating",
         text: "Your rating is your CURRENCY in this business. Here's how to build and protect it:\n\n⭐ RATING FACTORS:\n\n1️⃣ Communication (30%):\n   • Confirm jobs promptly\n   • Update on arrival/completion\n   • Respond to messages quickly\n   • Be clear and professional\n\n2️⃣ Quality of Work (40%):\n   • Follow instructions exactly\n   • Double-check your work\n   • Take photos of completion\n   • Clean up after yourself\n\n3️⃣ Timeliness (20%):\n   • Show up when scheduled\n   • Complete on time\n   • Don't rush and make mistakes\n\n4️⃣ Professionalism (10%):\n   • Respectful demeanor\n   • Appropriate appearance  \n   • Handle issues calmly\n\n🎯 Goal: Maintain 4.5+ stars\n\nClients AND platforms look at your rating. High ratings = more job offers = higher pay rates = better clients.",
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Five-star service - your reputation is everything",
         quiz: {
             question: "What's the most important factor in getting repeat business?",
             options: [

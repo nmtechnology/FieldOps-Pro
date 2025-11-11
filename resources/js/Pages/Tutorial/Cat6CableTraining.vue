@@ -16,10 +16,61 @@ const tutorialSlides = ref([
     {
         title: "Welcome to Cat 6 Cable Installation Training!",
         text: "Hey there! Ready to master one of the most valuable skills in field tech work? I'm your FieldOps Pro guide, and I'm going to teach you everything about installing and terminating Cat 6 cabling!\n\nThis training covers:\n\n🔧 Cable types and when to use them\n📏 Proper cable routing techniques\n🏢 Commercial vs. residential installations\n🔌 Professional RJ-45 termination (TIA-568B standard)\n🧪 Testing and certification methods\n💼 Industry best practices\n\nCat 6 cabling is EVERYWHERE - offices, retail stores, warehouses, homes. Master this skill and you'll always have work. Let's dive in!",
+        image: "https://images.unsplash.com/photo-1606603696914-4d85a5287b8f?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional Cat6 cable installation - structured cabling is a high-demand skill"
     },
     {
         title: "Understanding Cat 6 Cable",
         text: "Before we start pulling cable, let's understand what makes Cat 6 special:\n\n📊 SPECIFICATIONS:\n• Maximum speed: 10 Gbps (up to 55 meters)\n• Frequency: 250 MHz\n• Standard speed: 1 Gbps (up to 100 meters)\n• 4 twisted pairs (8 wires total)\n• Backward compatible with Cat 5e\n\n🆚 CAT 6 vs CAT 5e:\n• Tighter wire twists (less crosstalk)\n• Thicker cable jacket\n• Better shielding options\n• Higher data rates\n• Slightly more expensive\n\n⚡ WHEN TO USE CAT 6:\n• New installations (future-proofing)\n• High-bandwidth applications\n• PoE+ devices (cameras, APs)\n• Professional environments\n• When client requests it\n\nAlways verify project specs before ordering cable!",
+        image: "https://images.unsplash.com/photo-1606603696914-4d85a5287b8f?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Cat6 cable - understanding the specifications",
+        customHtml: `
+        <div class="bg-gray-800 rounded-lg p-6 my-6">
+            <h3 class="text-xl font-bold text-orange-400 mb-4">📊 Cable Category Comparison</h3>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Category</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Max Speed</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Frequency</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Max Distance</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-center">Best For</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300">
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4 font-mono">Cat 5e</td>
+                        <td class="py-3 px-4 text-right font-mono">1 Gbps</td>
+                        <td class="py-3 px-4 text-right font-mono">100 MHz</td>
+                        <td class="py-3 px-4 text-right font-mono">100m</td>
+                        <td class="py-3 px-4 text-center text-sm">Legacy/Budget</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50 bg-green-500/10">
+                        <td class="py-3 px-4 font-mono font-bold text-green-400">Cat 6</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">10 Gbps (55m)</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">250 MHz</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400">100m (1Gb)</td>
+                        <td class="py-3 px-4 text-center text-sm"><span class="bg-green-500 text-white px-2 py-1 rounded text-xs font-bold">RECOMMENDED</span></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4 font-mono">Cat 6a</td>
+                        <td class="py-3 px-4 text-right font-mono">10 Gbps</td>
+                        <td class="py-3 px-4 text-right font-mono">500 MHz</td>
+                        <td class="py-3 px-4 text-right font-mono">100m</td>
+                        <td class="py-3 px-4 text-center text-sm">Data Centers</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4 font-mono">Cat 7/8</td>
+                        <td class="py-3 px-4 text-right font-mono">40+ Gbps</td>
+                        <td class="py-3 px-4 text-right font-mono">600+ MHz</td>
+                        <td class="py-3 px-4 text-right font-mono">100m</td>
+                        <td class="py-3 px-4 text-center text-sm">Enterprise Only</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-sm text-gray-400 mt-4">💡 <strong>Pro Tip:</strong> Cat 6 is the sweet spot for 95% of installations - future-proof without breaking the bank!</p>
+        </div>
+        `,
         quiz: {
             question: "What is the maximum speed of Cat 6 cable for distances up to 55 meters?",
             options: [
@@ -36,10 +87,14 @@ const tutorialSlides = ref([
     {
         title: "Essential Tools: Cable Installation",
         text: "Here's your toolkit for professional cable installation:\n\n🎒 BASIC INSTALLATION TOOLS:\n\n📏 **Fish Tape/Glow Rods** ($30-150)\n• For routing cable through walls\n• Steel or fiberglass options\n• Get 25-50 foot length minimum\n\n✂️ **Cable Cutters** ($15-40)\n• Sharp, clean cuts only\n• Don't use regular scissors!\n• Cuts through jacket and wires\n\n🔦 **Headlamp** ($20-60)\n• Hands-free lighting is essential\n• Get 300+ lumens brightness\n• Long battery life important\n\n📐 **Measuring Tape** ($10-25)\n• 25-foot minimum\n• Mark cable route distances\n• Verify box heights\n\n🗂️ **Cable Labels** ($10-30)\n• Label both ends BEFORE termination\n• Use permanent markers\n• Include location codes\n\nInvest in quality tools - they'll last years!",
+        image: "https://images.unsplash.com/photo-1581092918484-8313e8f28c7d?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional cable installation tools"
     },
     {
         title: "Essential Tools: Termination & Testing",
         text: "Now for the precision tools - these make or break your connections:\n\n🔌 TERMINATION TOOLS:\n\n🔨 **Crimp Tool** ($15-100)\n• Get a ratcheting model (consistent crimps)\n• Must fit RJ-45 connectors\n• Quality matters here!\n\n✂️ **Wire Stripper** ($10-30)\n• Adjustable for Cat 6 thickness\n• Removes jacket without cutting wires\n• Some have built-in cutters\n\n🧪 TESTING EQUIPMENT:\n\n✅ **Cable Tester** ($20-80)\n• Verifies pin-to-pin continuity\n• Tests for shorts and miswires\n• Essential for every tech\n\n📊 **Network Certifier** ($1,500-3,000)\n• Professional certification tool\n• Tests to TIA/EIA standards\n• Required for warranty work\n• Usually company-provided\n\n💡 PRO TIP: Start with a basic tester, upgrade as you grow!",
+        image: "https://images.unsplash.com/photo-1581092160607-1e49b2f2a7b4?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Cable termination and testing equipment",
         quiz: {
             question: "Why should you get a ratcheting crimp tool instead of a basic one?",
             options: [
@@ -84,6 +139,126 @@ const tutorialSlides = ref([
     {
         title: "Understanding TIA-568B Wiring Standard",
         text: "This is THE standard you'll use 99% of the time. Memorize this!\n\n🎨 TIA-568B PINOUT (Left to Right):\n\nPin 1: 🟧 White/Orange\nPin 2: 🟠 Orange\nPin 3: ⬜ White/Green\nPin 4: 🔵 Blue\nPin 5: ⬜ White/Blue\nPin 6: 🟢 Green\nPin 7: ⬜ White/Brown\nPin 8: 🟤 Brown\n\n💡 MEMORY TRICK:\n\"Orange pair first, green pair split, blue together, brown at the end\"\n\n📊 WHY THIS ORDER?\n• Pins 1,2,3,6 carry data (100Mbps/1Gbps)\n• Pins 4,5,7,8 used for Gigabit and PoE\n• Order minimizes crosstalk\n• Twisted pairs stay together\n\n⚡ TIA-568A vs 568B:\n• 568B is the industry standard\n• 568A mainly for government/legacy\n• NEVER mix standards on same cable!\n• Both ends must match\n\nWrite this down and keep it in your toolkit!",
+        image: "https://images.unsplash.com/photo-1625314868143-20e93ce3ff33?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "RJ-45 connector with Cat6 cable - proper termination is critical",
+        customHtml: `
+        <div class="bg-gray-800 rounded-lg p-6 my-6">
+            <h3 class="text-xl font-bold text-orange-400 mb-4">🔌 TIA-568B Wiring Diagram</h3>
+            <div class="bg-gray-900 rounded-lg p-6 border-2 border-orange-500">
+                <div class="text-center mb-4">
+                    <p class="text-gray-400 text-sm mb-2">Looking at RJ-45 connector (clip facing DOWN, pins facing UP)</p>
+                    <div class="inline-block bg-gray-800 px-4 py-2 rounded border border-gray-600 font-mono text-sm mb-4">
+                        ← Pin 1 (Left) | Pin 8 (Right) →
+                    </div>
+                </div>
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b-2 border-orange-500">
+                            <th class="py-3 px-4 text-orange-400 font-semibold text-center">Pin #</th>
+                            <th class="py-3 px-4 text-orange-400 font-semibold">Wire Color</th>
+                            <th class="py-3 px-4 text-orange-400 font-semibold">Pair</th>
+                            <th class="py-3 px-4 text-orange-400 font-semibold">Function</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300">
+                        <tr class="border-b border-gray-700 bg-orange-500/10">
+                            <td class="py-3 px-4 text-center font-bold text-orange-400">1</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-2">
+                                    <span class="w-4 h-4 rounded-full bg-orange-300 border-2 border-white"></span>
+                                    <span class="font-mono">White/Orange</span>
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-orange-400">Pair 2</td>
+                            <td class="py-3 px-4 text-sm">TX+ (Transmit)</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 bg-orange-500/10">
+                            <td class="py-3 px-4 text-center font-bold text-orange-400">2</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-2">
+                                    <span class="w-4 h-4 rounded-full bg-orange-500"></span>
+                                    <span class="font-mono">Orange</span>
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-orange-400">Pair 2</td>
+                            <td class="py-3 px-4 text-sm">TX- (Transmit)</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 bg-green-500/10">
+                            <td class="py-3 px-4 text-center font-bold text-green-400">3</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-2">
+                                    <span class="w-4 h-4 rounded-full bg-green-300 border-2 border-white"></span>
+                                    <span class="font-mono">White/Green</span>
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-green-400">Pair 3</td>
+                            <td class="py-3 px-4 text-sm">RX+ (Receive)</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="py-3 px-4 text-center font-bold text-blue-400">4</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-2">
+                                    <span class="w-4 h-4 rounded-full bg-blue-500"></span>
+                                    <span class="font-mono">Blue</span>
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-blue-400">Pair 1</td>
+                            <td class="py-3 px-4 text-sm">PoE / Gigabit</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="py-3 px-4 text-center font-bold text-blue-400">5</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-2">
+                                    <span class="w-4 h-4 rounded-full bg-blue-300 border-2 border-white"></span>
+                                    <span class="font-mono">White/Blue</span>
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-blue-400">Pair 1</td>
+                            <td class="py-3 px-4 text-sm">PoE / Gigabit</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 bg-green-500/10">
+                            <td class="py-3 px-4 text-center font-bold text-green-400">6</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-2">
+                                    <span class="w-4 h-4 rounded-full bg-green-500"></span>
+                                    <span class="font-mono">Green</span>
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-green-400">Pair 3</td>
+                            <td class="py-3 px-4 text-sm">RX- (Receive)</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="py-3 px-4 text-center font-bold text-yellow-600">7</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-2">
+                                    <span class="w-4 h-4 rounded-full bg-yellow-200 border-2 border-white"></span>
+                                    <span class="font-mono">White/Brown</span>
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-yellow-600">Pair 4</td>
+                            <td class="py-3 px-4 text-sm">PoE / Gigabit</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="py-3 px-4 text-center font-bold text-yellow-600">8</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-2">
+                                    <span class="w-4 h-4 rounded-full bg-yellow-700"></span>
+                                    <span class="font-mono">Brown</span>
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-yellow-600">Pair 4</td>
+                            <td class="py-3 px-4 text-sm">PoE / Gigabit</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4 bg-red-500/20 border border-red-500 rounded-lg p-4">
+                <h4 class="font-bold text-red-400 mb-2">⚠️ CRITICAL: Never Split Twisted Pairs!</h4>
+                <p class="text-sm text-gray-300">Each colored wire MUST stay with its white/colored striped partner. Separating pairs causes "split pair" failure even if continuity tests pass!</p>
+            </div>
+            <p class="text-sm text-gray-400 mt-4">💡 <strong>Memory Aid:</strong> "Orange-Green-Blue-Brown" with whites before solids (except green pair splits for pins 3 & 6)</p>
+        </div>
+        `,
         quiz: {
             question: "In TIA-568B standard, which color goes on Pin 1?",
             options: [

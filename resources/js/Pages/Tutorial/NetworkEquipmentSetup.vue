@@ -16,6 +16,8 @@ const tutorialSlides = ref([
     {
         title: "Welcome to Network Equipment Setup Training!",
         text: "Ready to become a network infrastructure pro? I'm your FieldOps guide, and I'm here to teach you everything about setting up, configuring, and maintaining professional network equipment!\n\n🌐 This comprehensive training covers:\n\n🔧 Network equipment fundamentals (switches, routers, access points)\n📊 Rack mounting and cable management\n⚙️ Initial configuration and best practices\n🔒 Security hardening and VLANs\n📡 Wireless access point deployment\n🧪 Testing and troubleshooting\n💼 Professional documentation\n\nWhether you're setting up a small office or a large enterprise network, these skills are in MASSIVE demand. Let's get you certified!",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Professional network equipment rack - your future workspace"
     },
     {
         title: "Understanding Network Equipment Types",
@@ -44,6 +46,111 @@ const tutorialSlides = ref([
     {
         title: "Understanding Rack Units (U)",
         text: "Professional equipment is measured in 'rack units' - here's what you need to know:\n\n📏 RACK UNIT BASICS:\n\n• 1U = 1.75 inches (44.45mm) height\n• Standard 19\" wide mounting\n• Racks typically 42U tall (full height)\n• Also: 24U, 18U, 12U racks common\n\n📊 COMMON EQUIPMENT SIZES:\n\n• Patch panel: 1U\n• Network switch: 1U (typically)\n• Router/firewall: 1U-2U\n• Server: 1U (pizza box) to 4U\n• UPS: 2U-4U\n• Cable management: 1U-2U\n\n🔢 PLANNING RACK SPACE:\n\n1. List all equipment + U size\n2. Add 1U cable management between layers\n3. Add 20% buffer for future growth\n4. Leave 2U at top for cable routing\n5. Leave 2U at bottom for power\n\n📐 EXAMPLE RACK LAYOUT:\n• 2U: Top cable management\n• 1U: Patch panel\n• 1U: Cable management\n• 1U: 24-port PoE switch\n• 1U: Cable management\n• 1U: Firewall\n• ...remaining space...\n• 2U: UPS\n\nProper planning prevents rack disasters!",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Server rack with properly mounted network equipment",
+        customHtml: `
+        <div class="bg-gray-800 rounded-lg p-6 my-6">
+            <h3 class="text-xl font-bold text-orange-400 mb-4">📏 Common Equipment Rack Unit (U) Sizing</h3>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Equipment Type</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-center">Typical Size</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Height (inches)</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Example</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300">
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">24-Port Patch Panel</td>
+                        <td class="py-3 px-4 text-center font-mono font-bold text-green-400">1U</td>
+                        <td class="py-3 px-4 text-right font-mono">1.75"</td>
+                        <td class="py-3 px-4 text-sm text-gray-400">Cable termination</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">Network Switch (24-48 port)</td>
+                        <td class="py-3 px-4 text-center font-mono font-bold text-green-400">1U</td>
+                        <td class="py-3 px-4 text-right font-mono">1.75"</td>
+                        <td class="py-3 px-4 text-sm text-gray-400">Cisco Catalyst 2960</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">Cable Management</td>
+                        <td class="py-3 px-4 text-center font-mono font-bold text-yellow-400">1-2U</td>
+                        <td class="py-3 px-4 text-right font-mono">1.75-3.5"</td>
+                        <td class="py-3 px-4 text-sm text-gray-400">Horizontal organizers</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">Router / Firewall</td>
+                        <td class="py-3 px-4 text-center font-mono font-bold text-yellow-400">1-2U</td>
+                        <td class="py-3 px-4 text-right font-mono">1.75-3.5"</td>
+                        <td class="py-3 px-4 text-sm text-gray-400">Cisco ISR, FortiGate</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">Rack-Mount Server</td>
+                        <td class="py-3 px-4 text-center font-mono font-bold text-orange-400">1-4U</td>
+                        <td class="py-3 px-4 text-right font-mono">1.75-7"</td>
+                        <td class="py-3 px-4 text-sm text-gray-400">Dell PowerEdge</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">UPS (Battery Backup)</td>
+                        <td class="py-3 px-4 text-center font-mono font-bold text-orange-400">2-4U</td>
+                        <td class="py-3 px-4 text-right font-mono">3.5-7"</td>
+                        <td class="py-3 px-4 text-sm text-gray-400">APC Smart-UPS</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4">PDU (Power Distribution)</td>
+                        <td class="py-3 px-4 text-center font-mono font-bold text-green-400">0-1U</td>
+                        <td class="py-3 px-4 text-right font-mono">0-1.75"</td>
+                        <td class="py-3 px-4 text-sm text-gray-400">Vertical or horizontal</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="mt-6 bg-gray-900 rounded-lg p-4 border border-gray-700">
+                <h4 class="font-bold text-orange-400 mb-3">📐 Example 42U Rack Layout (Small Office)</h4>
+                <div class="space-y-1 font-mono text-sm">
+                    <div class="flex justify-between p-2 bg-gray-800 rounded">
+                        <span>42U (Top)</span><span class="text-gray-500">→ Empty (cable access)</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-gray-800 rounded">
+                        <span>41-40U</span><span class="text-orange-400">→ 2U Cable Management</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-green-500/20 rounded">
+                        <span>39U</span><span class="text-green-400">→ 1U Patch Panel (24-port)</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-gray-800 rounded">
+                        <span>38U</span><span class="text-orange-400">→ 1U Cable Management</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-green-500/20 rounded">
+                        <span>37U</span><span class="text-green-400">→ 1U PoE Switch (24-port)</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-gray-800 rounded">
+                        <span>36U</span><span class="text-orange-400">→ 1U Cable Management</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-green-500/20 rounded">
+                        <span>35U</span><span class="text-green-400">→ 1U Firewall/Router</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-gray-800 rounded">
+                        <span>34-20U</span><span class="text-gray-500">→ Reserved for Growth</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-blue-500/20 rounded">
+                        <span>19-16U</span><span class="text-blue-400">→ 4U Server (if needed)</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-gray-800 rounded">
+                        <span>15-5U</span><span class="text-gray-500">→ Reserved</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-yellow-500/20 rounded">
+                        <span>4-3U</span><span class="text-yellow-400">→ 2U UPS (Battery Backup)</span>
+                    </div>
+                    <div class="flex justify-between p-2 bg-gray-800 rounded">
+                        <span>2-1U</span><span class="text-gray-500">→ Empty (heat exhaust)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-400 mt-4">💡 <strong>Pro Tip:</strong> Always leave 20% of rack space empty for future expansion and proper airflow!</p>
+        </div>
+        `,
         quiz: {
             question: "How tall is 1 rack unit (1U)?",
             options: [
@@ -120,6 +227,100 @@ const tutorialSlides = ref([
     {
         title: "IP Addressing and Subnetting Basics",
         text: "Understanding IP addresses is fundamental to network setup:\n\n🌐 IP ADDRESSING ESSENTIALS:\n\n📍 **Private IP Ranges** (RFC 1918):\n• 10.0.0.0/8 (10.0.0.0 - 10.255.255.255)\n  - Large networks, 16 million hosts\n• 172.16.0.0/12 (172.16.0.0 - 172.31.255.255)\n  - Medium networks, 1 million hosts\n• 192.168.0.0/16 (192.168.0.0 - 192.168.255.255)\n  - Small networks, 65,536 hosts\n  - Most common for small business\n\n📊 **Common Subnet Masks:**\n• /24 = 255.255.255.0 (254 usable hosts)\n• /25 = 255.255.255.128 (126 hosts)\n• /26 = 255.255.255.192 (62 hosts)\n• /27 = 255.255.255.224 (30 hosts)\n• /28 = 255.255.255.240 (14 hosts)\n• /30 = 255.255.255.252 (2 hosts - point-to-point)\n\n🎯 **IP Planning Example:**\n\nNetwork: 192.168.10.0/24\n• .1 - Gateway/Router\n• .2-.9 - Network infrastructure (switches, APs)\n• .10-.99 - Servers\n• .100-.199 - Workstations (DHCP pool)\n• .200-.249 - Printers/devices\n• .250-.254 - Future use\n\n💡 **DHCP vs Static:**\n• Workstations: DHCP (dynamic)\n• Servers: Static IP\n• Network equipment: Static IP\n• Printers: Static IP (for mapping)\n• Phones: DHCP with reservation\n\nPlan your IP scheme BEFORE deploying!",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop&q=80",
+        imageCaption: "Network IP addressing and documentation",
+        customHtml: `
+        <div class="bg-gray-800 rounded-lg p-6 my-6">
+            <h3 class="text-xl font-bold text-orange-400 mb-4">🌐 Common Subnet Mask Reference</h3>
+            <table class="w-full text-left border-collapse mb-6">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <th class="py-3 px-4 text-orange-400 font-semibold">CIDR</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Subnet Mask</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Total IPs</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold text-right">Usable Hosts</th>
+                        <th class="py-3 px-4 text-orange-400 font-semibold">Common Use</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300">
+                    <tr class="border-b border-gray-700/50 bg-green-500/10">
+                        <td class="py-3 px-4 font-mono font-bold text-green-400">/24</td>
+                        <td class="py-3 px-4 font-mono">255.255.255.0</td>
+                        <td class="py-3 px-4 text-right font-mono">256</td>
+                        <td class="py-3 px-4 text-right font-mono text-green-400 font-bold">254</td>
+                        <td class="py-3 px-4 text-sm">Most common - small office</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4 font-mono">/25</td>
+                        <td class="py-3 px-4 font-mono">255.255.255.128</td>
+                        <td class="py-3 px-4 text-right font-mono">128</td>
+                        <td class="py-3 px-4 text-right font-mono">126</td>
+                        <td class="py-3 px-4 text-sm">Divided small networks</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4 font-mono">/26</td>
+                        <td class="py-3 px-4 font-mono">255.255.255.192</td>
+                        <td class="py-3 px-4 text-right font-mono">64</td>
+                        <td class="py-3 px-4 text-right font-mono">62</td>
+                        <td class="py-3 px-4 text-sm">Departmental subnets</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4 font-mono">/27</td>
+                        <td class="py-3 px-4 font-mono">255.255.255.224</td>
+                        <td class="py-3 px-4 text-right font-mono">32</td>
+                        <td class="py-3 px-4 text-right font-mono">30</td>
+                        <td class="py-3 px-4 text-sm">Small VLANs</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4 font-mono">/28</td>
+                        <td class="py-3 px-4 font-mono">255.255.255.240</td>
+                        <td class="py-3 px-4 text-right font-mono">16</td>
+                        <td class="py-3 px-4 text-right font-mono">14</td>
+                        <td class="py-3 px-4 text-sm">Tiny networks</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/50">
+                        <td class="py-3 px-4 font-mono">/30</td>
+                        <td class="py-3 px-4 font-mono">255.255.255.252</td>
+                        <td class="py-3 px-4 text-right font-mono">4</td>
+                        <td class="py-3 px-4 text-right font-mono">2</td>
+                        <td class="py-3 px-4 text-sm">Point-to-point links</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="bg-gray-900 rounded-lg p-4 border border-gray-700">
+                <h4 class="font-bold text-orange-400 mb-3">📋 Example IP Scheme: 192.168.10.0/24</h4>
+                <div class="space-y-2 font-mono text-sm">
+                    <div class="flex items-center gap-4 p-2 bg-blue-500/20 rounded">
+                        <span class="text-blue-400 font-bold w-32">192.168.10.1</span>
+                        <span class="text-gray-300">→ Gateway/Router</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-2 bg-green-500/20 rounded">
+                        <span class="text-green-400 font-bold w-32">192.168.10.2-9</span>
+                        <span class="text-gray-300">→ Infrastructure (Switches, APs, NVR)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-2 bg-purple-500/20 rounded">
+                        <span class="text-purple-400 font-bold w-32">192.168.10.10-99</span>
+                        <span class="text-gray-300">→ Servers (Static IPs)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-2 bg-orange-500/20 rounded">
+                        <span class="text-orange-400 font-bold w-32">192.168.10.100-199</span>
+                        <span class="text-gray-300">→ Workstations (DHCP Pool)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-2 bg-yellow-500/20 rounded">
+                        <span class="text-yellow-400 font-bold w-32">192.168.10.200-249</span>
+                        <span class="text-gray-300">→ Printers/IoT (Static or Reserved)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-2 bg-gray-700/50 rounded">
+                        <span class="text-gray-400 font-bold w-32">192.168.10.250-254</span>
+                        <span class="text-gray-300">→ Reserved for Future</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-400 mt-4">💡 <strong>Pro Tip:</strong> Document your IP scheme BEFORE deployment and keep it updated. Future-you will thank you!</p>
+        </div>
+        `,
         quiz: {
             question: "How many usable host addresses are in a /24 subnet?",
             options: [
