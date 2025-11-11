@@ -59,7 +59,7 @@ const getSectionTypeColor = (type) => {
                 </h2>
                 <div class="flex gap-2">
                     <Link
-                        :href="route('admin.products.content.create', product.id) + '?type=tutorial'"
+                        :href="route('admin.products.content.create', product.id) + '?quick=true'"
                         class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-500 transition"
                     >
                         Add Tutorial

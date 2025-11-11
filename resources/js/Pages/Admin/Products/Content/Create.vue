@@ -17,6 +17,7 @@ const props = defineProps({
 const page = usePage();
 const urlParams = new URLSearchParams(window.location.search);
 const isTutorial = urlParams.get('type') === 'tutorial';
+const quickAddMode = urlParams.get('quick') === 'true';
 
 const form = useForm({
     parent_id: props.parent?.id || null,
@@ -56,6 +57,10 @@ const submit = () => {
             <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-200">
+                        <div v-if="quickAddMode" class="mb-6 bg-purple-900 border border-purple-700 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold text-white mb-2">🚀 Quick Add Content</h3>
+                            <p class="text-purple-200 text-sm">Create a new section, then you'll be taken to the editor to immediately add your content (tutorials, PowerPoint, videos, or images).</p>
+                        </div>
                         <form @submit.prevent="submit" class="space-y-6">
                             <div>
                                 <InputLabel for="title" :value="isTutorial ? 'Tutorial Title' : (parent ? 'Section Title' : 'Chapter Title')" />
