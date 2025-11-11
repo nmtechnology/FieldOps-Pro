@@ -180,8 +180,7 @@ const discountInfo = computed(() => {
                 
                 <!-- Desktop Navigation Menu -->
                 <div class="hidden lg:flex items-center space-x-1">
-                    <Link v-if="featuredProduct" 
-                          :href="route('products.show', featuredProduct)" 
+                    <Link href="/landing" 
                           class="group relative px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors duration-200">
                         <span class="relative z-10">Training Guide</span>
                         <div class="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/10 rounded-lg transition-colors duration-200"></div>
@@ -239,8 +238,7 @@ const discountInfo = computed(() => {
                  class="lg:hidden absolute left-0 right-0 top-full bg-gray-900/95 backdrop-blur-lg border-t border-white/10 shadow-2xl z-[70]"
                  style="animation: slideDown 0.3s ease-out;">
                 <div class="px-4 py-6 space-y-3">
-                    <Link v-if="featuredProduct" 
-                          :href="route('products.show', featuredProduct)" 
+                    <Link href="/landing" 
                           class="block px-4 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all duration-200">
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
