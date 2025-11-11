@@ -184,7 +184,7 @@ const retryQuiz = () => {
                 <div class="bg-gray-900 rounded-xl border-2 border-orange-500/30 p-6 min-h-[300px] relative">
                     <!-- Typewriter Text -->
                     <div 
-                        class="text-gray-200 text-lg leading-relaxed whitespace-pre-wrap"
+                        class="text-gray-200 text-lg leading-relaxed whitespace-pre-wrap font-sans"
                         @click="skipTypewriter"
                     >
                         {{ displayedText }}
