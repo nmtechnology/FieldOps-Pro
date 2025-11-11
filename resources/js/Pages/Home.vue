@@ -5,6 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import CountdownTimer from '@/Components/CountdownTimer.vue';
 import PurchaseNotifications from '@/Components/PurchaseNotifications.vue';
+import TrustedBadge from '@/Components/TrustedBadge.vue';
 import { ref, computed } from 'vue';
 
 // For the mobile menu toggle
@@ -1448,6 +1449,9 @@ const discountInfo = computed(() => {
                 </p>
             </div>
         </footer>
+
+        <!-- Trusted Badge Footer -->
+        <TrustedBadge />
     </div>
 </template>
 
