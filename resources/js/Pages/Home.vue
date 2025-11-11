@@ -421,24 +421,24 @@ const discountInfo = computed(() => {
                     </div>
 
                     <!-- Right Content - Image with decorative elements -->
-                    <div class="relative hidden lg:block">
+                    <div class="relative mt-8 lg:mt-0">
                         <div class="relative">
                             <!-- Decorative gradient border -->
                             <div class="absolute -inset-4 bg-gradient-to-r from-orange-500 to-cyan-500 rounded-2xl blur-xl opacity-30 animate-pulse-slow"></div>
                             
                             <!-- Main image -->
                             <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                                <img class="w-full h-[600px] object-cover" src="/img/it-tech-at-the-fiber-rack.webp" alt="Field engineer working with low voltage equipment">
+                                <img class="w-full h-[300px] sm:h-[400px] lg:h-[600px] object-cover" src="/img/it-tech-at-the-fiber-rack.webp" alt="Field engineer working with low voltage equipment">
                                 
                                 <!-- Overlay badge -->
-                                <div class="absolute bottom-6 left-6 right-6 bg-gray-900/90 backdrop-blur-sm rounded-xl p-4 border border-orange-500/30">
-                                    <div class="flex items-center justify-between">
+                                <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 bg-gray-900/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-orange-500/30">
+                                    <div class="flex items-center justify-between gap-2 sm:gap-4">
                                         <div>
-                                            <div class="text-orange-400 font-bold text-lg">Start Earning Fast</div>
-                                            <div class="text-gray-300 text-sm">Complete training included</div>
+                                            <div class="text-orange-400 font-bold text-sm sm:text-base lg:text-lg">Start Earning Fast</div>
+                                            <div class="text-gray-300 text-xs sm:text-sm">Complete training included</div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="text-white font-bold text-2xl">$5K+</div>
+                                            <div class="text-white font-bold text-lg sm:text-xl lg:text-2xl">$5K+</div>
                                             <div class="text-gray-400 text-xs">Monthly Potential</div>
                                         </div>
                                     </div>
