@@ -428,7 +428,7 @@ const discountInfo = computed(() => {
                             
                             <!-- Main image -->
                             <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                                <img class="w-full h-[600px] object-cover" src="/public/img/it-tech-at-the-fiber-rack.webp" alt="Field engineer working with low voltage equipment">
+                                <img class="w-full h-[600px] object-cover" src="/img/it-tech-at-the-fiber-rack.webp" alt="Field engineer working with low voltage equipment">
                                 
                                 <!-- Overlay badge -->
                                 <div class="absolute bottom-6 left-6 right-6 bg-gray-900/90 backdrop-blur-sm rounded-xl p-4 border border-orange-500/30">
