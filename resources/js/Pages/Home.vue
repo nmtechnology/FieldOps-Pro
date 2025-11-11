@@ -761,13 +761,13 @@ const discountInfo = computed(() => {
                                     <div class="flex items-baseline gap-3 mb-2">
                                         <h4 class="text-lg font-medium text-white">Investment:</h4>
                                         <div class="flex items-baseline gap-2">
-                                            <span v-if="discountInfo" class="text-lg text-gray-400 line-through">${{ discountInfo.originalPrice }}</span>
-                                            <span class="text-2xl font-bold text-orange-400">${{ discountInfo ? discountInfo.discountedPrice : parseFloat(featuredProduct.price).toFixed(2) }}</span>
-                                            <span v-if="discountInfo" class="text-sm font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded">{{ discountInfo.discountPercentage }}% OFF</span>
+                                            <span v-if="discountInfo?.originalPrice" class="text-lg text-gray-400 line-through">${{ discountInfo.originalPrice }}</span>
+                                            <span class="text-2xl font-bold text-orange-400">${{ discountInfo?.discountedPrice || parseFloat(featuredProduct?.price || 0).toFixed(2) }}</span>
+                                            <span v-if="discountInfo?.discountPercentage" class="text-sm font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded">{{ discountInfo.discountPercentage }}% OFF</span>
                                         </div>
                                     </div>
                                     <p class="text-gray-300 text-sm mt-1">
-                                        <span v-if="discountInfo">Professional development that pays for itself - Limited time offer!</span>
+                                        <span v-if="discountInfo?.discountPercentage">Professional development that pays for itself - Limited time offer!</span>
                                         <span v-else>Professional development that pays for itself</span>
                                     </p>
                                     <div class="mt-4">
@@ -784,7 +784,7 @@ const discountInfo = computed(() => {
         </div>
 
         <!-- Pricing Tiers section -->
-        <PricingTiers :active-discount="activeDiscount" />
+        <!-- <PricingTiers :active-discount="activeDiscount" /> -->
 
         <!-- Side Hustle Benefits Section -->
         <div class="bg-gray-800 py-16 lg:py-24">
