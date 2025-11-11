@@ -72,6 +72,12 @@ const tutorialSlides = ref([
                 title: "BNC Compression Tool for Coax",
                 price: "$34.99",
                 url: "https://www.amazon.com/Klein-Tools-VDV212-015-Compression-Connectors/dp/B002D3B97U"
+            },
+            {
+                icon: "🛠️",
+                title: "Hi-Spec 45-Piece Network Tool Kit",
+                price: "$39.99",
+                url: "https://www.amazon.com/Hi-Spec-Network-Continuity-Screwdrivers-Strippers/dp/B013QT1SDE"
             }
         ],
         quiz: {
