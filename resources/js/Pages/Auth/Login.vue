@@ -179,6 +179,18 @@ const submit = () => {
                         Log in
                     </PrimaryButton>
                 </div>
+
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-300">
+                        Don't have an account yet?
+                        <Link
+                            :href="route('register')"
+                            class="text-orange-400 hover:text-orange-300 font-semibold underline transition-colors"
+                        >
+                            Register here
+                        </Link>
+                    </p>
+                </div>
             </form>
         </div>
     </div>
