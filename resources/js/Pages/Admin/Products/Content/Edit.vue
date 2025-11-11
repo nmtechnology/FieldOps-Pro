@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { Head, Link, useForm, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -36,6 +36,7 @@ const editingBlock = ref(null);
 const showDeleteBlockModal = ref(false);
 const blockToDelete = ref(null);
 const previewUrl = ref(null);
+const availableTutorials = ref([]);
 
 const submit = () => {
     form.put(route('admin.products.content.update', {
@@ -127,13 +128,26 @@ const getBlockTypeIcon = (type) => {
         heading: '📌',
         image: '🖼️',
         video: '🎥',
-        tutorial: '🎓'
+        tutorial: '🎓',
+        powerpoint: '📊',
+        document: '📄'
     };
     return icons[type] || '📄';
 };
 
 const isMediaBlock = computed(() => {
-    return blockForm.block_type === 'image' || blockForm.block_type === 'video';
+    return blockForm.block_type === 'image' || blockForm.block_type === 'video' || blockForm.block_type === 'powerpoint';
+});
+
+// Fetch available tutorials on mount
+onMounted(async () => {
+    try {
+        const response = await fetch(route('admin.api.tutorials'));
+        const data = await response.json();
+        availableTutorials.value = data.tutorials;
+    } catch (error) {
+        console.error('Failed to fetch tutorials:', error);
+    }
 });
 </script>
 
@@ -268,7 +282,8 @@ const isMediaBlock = computed(() => {
                                                 <option value="heading">📌 Heading</option>
                                                 <option value="text">📝 Text Paragraph</option>
                                                 <option value="image">🖼️ Image</option>
-                                                <option value="video">🎥 Video</option>
+                                                <option value="video">🎥 Video (MP4, WebM)</option>
+                                                <option value="powerpoint">📊 PowerPoint (PPTX)</option>
                                                 <option value="tutorial">🎓 Interactive Tutorial</option>
                                             </select>
                                         </div>
@@ -292,9 +307,9 @@ const isMediaBlock = computed(() => {
                                                 v-model="blockForm.tutorial_name"
                                                 required
                                             >
-                                                <option value="Field Technician Training">Field Technician Training (15 slides)</option>
-                                                <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (25 slides)</option>
-                                                <option value="Network Equipment Setup">Network Equipment Setup (26 slides)</option>
+                                                <option v-for="tutorial in availableTutorials" :key="tutorial.id" :value="tutorial.name">
+                                                    {{ tutorial.name }} ({{ tutorial.slides }} slides)
+                                                </option>
                                             </select>
                                         </div>
 
@@ -312,10 +327,12 @@ const isMediaBlock = computed(() => {
                                                 type="file"
                                                 class="mt-1 block w-full text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-orange-600 file:text-white hover:file:bg-orange-500 cursor-pointer"
                                                 @change="handleFileChange"
-                                                :accept="blockForm.block_type === 'image' ? 'image/webp,image/jpeg,image/png' : 'video/mp4,video/webm'"
+                                                :accept="blockForm.block_type === 'image' ? 'image/webp,image/jpeg,image/png' : blockForm.block_type === 'powerpoint' ? 'application/vnd.openxmlformats-officedocument.presentationml.presentation' : 'video/mp4,video/webm'"
                                             />
                                             <p class="mt-1 text-sm text-gray-400">
-                                                {{ blockForm.block_type === 'image' ? '🖼️ WebP, JPG, or PNG format' : '🎥 MP4 or WebM format' }}
+                                                <span v-if="blockForm.block_type === 'image'">🖼️ WebP, JPG, or PNG format</span>
+                                                <span v-else-if="blockForm.block_type === 'powerpoint'">📊 PowerPoint (.pptx) format (max 50MB)</span>
+                                                <span v-else>🎥 MP4 or WebM format</span>
                                             </p>
                                             
                                             <div v-if="block.media_path || previewUrl" class="mt-3">
@@ -330,6 +347,12 @@ const isMediaBlock = computed(() => {
                                                     controls
                                                     class="max-w-md rounded border border-gray-600"
                                                 ></video>
+                                                <div v-if="blockForm.block_type === 'powerpoint'" class="text-sm text-gray-300">
+                                                    📊 PowerPoint file: 
+                                                    <a :href="`/storage/${block.media_path}`" target="_blank" class="text-orange-400 hover:text-orange-300 underline">
+                                                        Download Presentation
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -387,6 +410,13 @@ const isMediaBlock = computed(() => {
                                                 ></video>
                                                 <p v-if="block.caption" class="text-sm text-gray-400 italic">{{ block.caption }}</p>
                                             </div>
+                                            <div v-else-if="block.block_type === 'powerpoint' && block.media_path" class="bg-green-900 border border-green-700 rounded-md p-4">
+                                                <p class="text-green-200 font-semibold mb-2">📊 PowerPoint Presentation</p>
+                                                <a :href="`/storage/${block.media_path}`" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm">
+                                                    Download Presentation
+                                                </a>
+                                                <p v-if="block.caption" class="text-sm text-gray-400 italic mt-2">{{ block.caption }}</p>
+                                            </div>
                                         </div>
                                         <div class="flex gap-2 ml-4">
                                             <button
@@ -423,14 +453,16 @@ const isMediaBlock = computed(() => {
                                         <option value="text">📝 Text Paragraph - Main Content</option>
                                         <option value="image">🖼️ Image - Upload Picture (WebP, JPG, PNG)</option>
                                         <option value="video">🎥 Video - Upload Video (MP4, WebM)</option>
-                                        <option value="tutorial">🎓 Interactive Tutorial - Field Tech Training</option>
+                                        <option value="powerpoint">📊 PowerPoint - Upload Presentation (.pptx)</option>
+                                        <option value="tutorial">🎓 Interactive Tutorial</option>
                                     </select>
                                     <p class="mt-2 text-sm text-gray-400">
                                         <span v-if="blockForm.block_type === 'heading'">Use for section titles and headers</span>
                                         <span v-else-if="blockForm.block_type === 'text'">Use for paragraphs and main content text</span>
                                         <span v-else-if="blockForm.block_type === 'image'">Use for screenshots, diagrams, and illustrations</span>
                                         <span v-else-if="blockForm.block_type === 'video'">Use for tutorial videos, demonstrations, and explanations</span>
-                                        <span v-else-if="blockForm.block_type === 'tutorial'">Interactive tutorial with 15 slides, quizzes, and certificate</span>
+                                        <span v-else-if="blockForm.block_type === 'powerpoint'">Upload PowerPoint presentations for students to download and review</span>
+                                        <span v-else-if="blockForm.block_type === 'tutorial'">Select an interactive tutorial with slides, quizzes, and certificates</span>
                                     </p>
                                 </div>
 
@@ -447,12 +479,11 @@ const isMediaBlock = computed(() => {
                                             v-model="blockForm.tutorial_name"
                                             required
                                         >
-                                            <option value="Field Technician Training">Field Technician Training (15 slides)</option>
-                                            <option value="Cat 6 Cable Installation">Cat 6 Cable Installation & Termination (25 slides)</option>
-                                            <option value="Network Equipment Setup">Network Equipment Setup (26 slides)</option>
-                                            <option value="CCTV Camera Troubleshooting">CCTV Camera Troubleshooting (30+ slides)</option>
+                                            <option v-for="tutorial in availableTutorials" :key="tutorial.id" :value="tutorial.name">
+                                                {{ tutorial.name }} ({{ tutorial.slides }} slides)
+                                            </option>
                                         </select>
-                                        <p class="mt-1 text-xs text-purple-300">More tutorials will be added here as you create them</p>
+                                        <p class="mt-1 text-xs text-purple-300">Select from available interactive tutorials</p>
                                     </div>
                                 </div>
 
@@ -470,7 +501,7 @@ const isMediaBlock = computed(() => {
                                 </div>
 
                                 <div v-if="isMediaBlock">
-                                    <InputLabel for="media_file" :value="blockForm.block_type === 'image' ? 'Upload Image' : 'Upload Video'" />
+                                    <InputLabel for="media_file" :value="blockForm.block_type === 'image' ? 'Upload Image' : blockForm.block_type === 'powerpoint' ? 'Upload PowerPoint' : 'Upload Video'" />
                                     
                                     <div v-if="blockForm.block_type === 'video'" class="mb-3 p-3 bg-blue-900 border border-blue-700 rounded-md">
                                         <p class="text-sm text-blue-200">
@@ -483,6 +514,17 @@ const isMediaBlock = computed(() => {
                                             <li>For longer videos, consider hosting on YouTube/Vimeo and embedding instead</li>
                                         </ul>
                                     </div>
+
+                                    <div v-if="blockForm.block_type === 'powerpoint'" class="mb-3 p-3 bg-green-900 border border-green-700 rounded-md">
+                                        <p class="text-sm text-green-200">
+                                            <strong>PowerPoint Upload Tips:</strong>
+                                        </p>
+                                        <ul class="text-xs text-green-300 mt-2 space-y-1 list-disc list-inside">
+                                            <li>PPTX format (PowerPoint 2007+)</li>
+                                            <li>Maximum file size: 50MB</li>
+                                            <li>Students will be able to download and review the presentation</li>
+                                        </ul>
+                                    </div>
                                     
                                     <input
                                         id="media_file"
@@ -490,10 +532,12 @@ const isMediaBlock = computed(() => {
                                         class="mt-1 block w-full text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-orange-600 file:text-white hover:file:bg-orange-500 cursor-pointer"
                                         @change="handleFileChange"
                                         required
-                                        :accept="blockForm.block_type === 'image' ? 'image/webp,image/jpeg,image/png' : 'video/mp4,video/webm'"
+                                        :accept="blockForm.block_type === 'image' ? 'image/webp,image/jpeg,image/png' : blockForm.block_type === 'powerpoint' ? 'application/vnd.openxmlformats-officedocument.presentationml.presentation' : 'video/mp4,video/webm'"
                                     />
                                     <p class="mt-1 text-sm text-gray-400">
-                                        {{ blockForm.block_type === 'image' ? '🖼️ WebP, JPG, or PNG format (max 50MB)' : '🎥 MP4 or WebM format (max 50MB)' }}
+                                        <span v-if="blockForm.block_type === 'image'">🖼️ WebP, JPG, or PNG format (max 50MB)</span>
+                                        <span v-else-if="blockForm.block_type === 'powerpoint'">📊 PowerPoint (.pptx) format (max 50MB)</span>
+                                        <span v-else>🎥 MP4 or WebM format (max 50MB)</span>
                                     </p>
                                     <InputError class="mt-2" :message="blockForm.errors.media_file" />
                                     
@@ -509,6 +553,9 @@ const isMediaBlock = computed(() => {
                                             controls
                                             class="max-w-md rounded border border-gray-600"
                                         ></video>
+                                        <div v-if="blockForm.block_type === 'powerpoint'" class="text-sm text-gray-300">
+                                            📊 PowerPoint file selected for upload
+                                        </div>
                                     </div>
                                 </div>
 

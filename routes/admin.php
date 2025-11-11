@@ -26,6 +26,9 @@ Route::middleware(['auth'])->group(function () {
     // API endpoint for dashboard stats
     Route::get('api/stats', [\App\Http\Controllers\Admin\DashboardController::class, 'stats'])->name('api.stats');
     
+    // API endpoint for available tutorials
+    Route::get('api/tutorials', [\App\Http\Controllers\TutorialListController::class, 'index'])->name('api.tutorials');
+    
     // Orders Management
     Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function () {
         Route::resource('orders', OrderController::class);
