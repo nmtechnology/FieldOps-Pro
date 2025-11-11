@@ -326,7 +326,7 @@ const discountInfo = computed(() => {
 
                         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
                             <span class="block text-white">Master the art of field engineering</span>
-                            <span class="block bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">Earn An Extra $2K-$5K+ Monthly Income</span>
+                            <span class="block bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">Earn An Extra $2K-$5K+ Monthly Income Doing This!</span>
                         </h1>
 
                         <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
