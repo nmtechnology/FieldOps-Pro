@@ -115,13 +115,58 @@
                                 <!-- Card Payment Form -->
                                 <div v-if="paymentMethod === 'card'" class="mt-4">
                                     <form @submit.prevent="processCardPayment">
-                                        <div class="mb-4">
-                                            <label for="state" class="block text-sm font-medium text-gray-300">State</label>
-                                            <select id="state" v-model="selectedState" @change="calculateTax" required
-                                                class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
-                                                <option value="">Select your state</option>
-                                                <option v-for="(name, code) in states" :key="code" :value="code">{{ name }}</option>
-                                            </select>
+                                        <!-- Account Information Section -->
+                                        <div class="mb-6 pb-6 border-b border-gray-700">
+                                            <h4 class="text-md font-semibold text-white mb-4">Account Information</h4>
+                                            
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                                <div>
+                                                    <label for="card-name" class="block text-sm font-medium text-gray-300">Full Name</label>
+                                                    <input type="text" id="card-name" v-model="cardForm.name" required
+                                                        class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                                                </div>
+                                                <div>
+                                                    <label for="card-email" class="block text-sm font-medium text-gray-300">Email</label>
+                                                    <input type="email" id="card-email" v-model="cardForm.email" required
+                                                        class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label for="card-phone" class="block text-sm font-medium text-gray-300">Phone Number</label>
+                                                <input type="tel" id="card-phone" v-model="cardForm.phone" required
+                                                    class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                                    placeholder="(555) 123-4567">
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label for="card-address" class="block text-sm font-medium text-gray-300">Street Address</label>
+                                                <input type="text" id="card-address" v-model="cardForm.address" required
+                                                    class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                                    placeholder="123 Main Street">
+                                            </div>
+
+                                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                                <div>
+                                                    <label for="card-city" class="block text-sm font-medium text-gray-300">City</label>
+                                                    <input type="text" id="card-city" v-model="cardForm.city" required
+                                                        class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                                                </div>
+                                                <div>
+                                                    <label for="card-state" class="block text-sm font-medium text-gray-300">State</label>
+                                                    <select id="card-state" v-model="selectedState" @change="calculateTax" required
+                                                        class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                                                        <option value="">Select state</option>
+                                                        <option v-for="(name, code) in states" :key="code" :value="code">{{ code }}</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label for="card-zip" class="block text-sm font-medium text-gray-300">ZIP Code</label>
+                                                    <input type="text" id="card-zip" v-model="cardForm.zipCode" required
+                                                        class="mt-1 block w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                                        placeholder="12345">
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                         <div class="mb-4">
@@ -131,7 +176,7 @@
                                         </div>
                                         
                                         <div class="mt-6">
-                                            <button type="submit" :disabled="isProcessing || !selectedState" 
+                                            <button type="submit" :disabled="isProcessing || !selectedState || !cardForm.name || !cardForm.email || !cardForm.phone || !cardForm.address" 
                                                 class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-base font-bold text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 transition-all duration-200 transform hover:scale-105">
                                                 <span v-if="isProcessing">Processing...</span>
                                                 <span v-else>Pay ${{ finalAmount.toFixed(2) }}</span>
@@ -247,6 +292,15 @@ export default defineComponent({
             selectedState: '',
             taxRate: 0,
             taxAmount: 0,
+            cardForm: {
+                name: '',
+                email: '',
+                phone: '',
+                address: '',
+                city: '',
+                state: '',
+                zipCode: ''
+            },
             achForm: {
                 name: '',
                 email: '',
@@ -347,6 +401,14 @@ export default defineComponent({
                     product_id: this.product.id,
                     state: this.selectedState,
                     discount_code: this.discount ? this.discountCode : null,
+                    // Account information
+                    name: this.cardForm.name,
+                    email: this.cardForm.email,
+                    phone: this.cardForm.phone,
+                    address: this.cardForm.address,
+                    city: this.cardForm.city,
+                    state_code: this.selectedState,
+                    zip_code: this.cardForm.zipCode
                 });
                 
                 const { client_secret } = response.data;
@@ -355,6 +417,17 @@ export default defineComponent({
                 const result = await this.stripe.confirmCardPayment(client_secret, {
                     payment_method: {
                         card: this.card,
+                        billing_details: {
+                            name: this.cardForm.name,
+                            email: this.cardForm.email,
+                            phone: this.cardForm.phone,
+                            address: {
+                                line1: this.cardForm.address,
+                                city: this.cardForm.city,
+                                state: this.selectedState,
+                                postal_code: this.cardForm.zipCode
+                            }
+                        }
                     }
                 });
                 
@@ -368,7 +441,7 @@ export default defineComponent({
                 }
             } catch (error) {
                 console.error('Payment error:', error);
-                document.getElementById('card-errors').textContent = 'An error occurred while processing your payment. Please try again.';
+                document.getElementById('card-errors').textContent = error.response?.data?.message || 'An error occurred while processing your payment. Please try again.';
                 this.isProcessing = false;
             }
         },
