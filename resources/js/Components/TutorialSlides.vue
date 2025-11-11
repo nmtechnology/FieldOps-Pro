@@ -169,6 +169,18 @@ const retryQuiz = () => {
 
             <!-- Dialogue Box -->
             <div class="p-8">
+                <!-- Image Display (ABOVE text for PowerPoint style) -->
+                <div v-if="currentSlideData.image" class="mb-6">
+                    <img 
+                        :src="currentSlideData.image" 
+                        :alt="currentSlideData.imageAlt || currentSlideData.title"
+                        class="w-full rounded-xl border-2 border-gray-700 shadow-lg"
+                    />
+                    <p v-if="currentSlideData.imageCaption" class="text-center text-gray-400 text-sm mt-2">
+                        {{ currentSlideData.imageCaption }}
+                    </p>
+                </div>
+
                 <div class="bg-gray-900 rounded-xl border-2 border-orange-500/30 p-6 min-h-[300px] relative">
                     <!-- Typewriter Text -->
                     <div 
@@ -183,18 +195,6 @@ const retryQuiz = () => {
                     <div v-if="isTyping" class="absolute bottom-4 right-4 text-xs text-gray-500 italic">
                         Click anywhere to skip typing...
                     </div>
-                </div>
-
-                <!-- Image Display -->
-                <div v-if="!isTyping && currentSlideData.image" class="mt-6">
-                    <img 
-                        :src="currentSlideData.image" 
-                        :alt="currentSlideData.imageAlt || currentSlideData.title"
-                        class="w-full rounded-xl border-2 border-gray-700 shadow-lg"
-                    />
-                    <p v-if="currentSlideData.imageCaption" class="text-center text-gray-400 text-sm mt-2">
-                        {{ currentSlideData.imageCaption }}
-                    </p>
                 </div>
 
                 <!-- Custom HTML Display (for tables, charts, etc.) -->

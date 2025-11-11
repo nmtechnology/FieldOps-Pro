@@ -144,7 +144,7 @@ const tutorialSlides = ref([
     {
         title: "Understanding PoE Power Budgets",
         text: "Let's dive deeper into PoE power budgets - this trips up many techs!\n\n💡 THE CONCEPT:\nEvery PoE switch has a TOTAL power budget. Add up all connected devices - if you exceed it, cameras won't power on!\n\n📊 VISUAL EXAMPLE:\nSwitch: 16 ports, 120W total budget\n\n✅ SCENARIO A - Works:\n• 6 cameras @ 15W each = 90W\n• 2 cameras @ 12W each = 24W\n• Total: 114W / 120W (96% used) ✓\n\n⚠️ SCENARIO B - Danger Zone:\n• 8 cameras @ 15W each = 120W\n• Total: 120W / 120W (100% used)\n• NO HEADROOM - any spike fails!\n\n❌ SCENARIO C - Failure:\n• 10 cameras @ 15W each = 150W\n• Exceeds 120W budget\n• Last 2 cameras won't power on!\n\n🎯 PROFESSIONAL TIP:\nAlways plan for 80% max usage (96W of 120W). This gives you headroom for power spikes!",
-        image: "https://i.imgur.com/9X3k7QH.png",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
         imageCaption: "PoE power budget visualization showing working vs failed scenarios"
     },
     {
@@ -168,7 +168,7 @@ const tutorialSlides = ref([
     {
         title: "Network Configuration Basics",
         text: "PoE cameras live on your network - understanding IP addressing is CRUCIAL!\n\n🌐 IP ADDRESS BASICS:\n\nEvery device needs a unique IP address in the same subnet.\n\n✅ CORRECT SETUP:\nNVR: 192.168.1.100\nCamera 1: 192.168.1.101\nCamera 2: 192.168.1.102\n(All in 192.168.1.x subnet) ✓\n\n❌ COMMON MISTAKE:\nNVR: 192.168.1.100\nCamera: 192.168.0.50\n(Different subnets - won't talk!) ✗\n\n🔧 DHCP vs STATIC:\n\n📡 DHCP (Dynamic):\n• Router assigns IPs automatically\n• Good: Easy setup\n• Bad: IPs can change, cameras disappear\n\n📌 STATIC (Fixed):\n• You manually set each IP\n• Good: IPs never change, reliable\n• Bad: Takes more setup time\n\n💡 PRO RECOMMENDATION:\nUse STATIC IPs for cameras. Document them all!",
-        image: "https://i.imgur.com/7yK4QZm.png",
+        image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&q=80",
         imageCaption: "IP address subnet configuration diagram for CCTV systems"
     },
     {
@@ -212,7 +212,7 @@ const tutorialSlides = ref([
     {
         title: "The Voltage Drop Calculator",
         text: "Voltage drop is the #1 killer of analog cameras! Let's master it.\n\n⚡ THE PROBLEM:\n12V at power supply → 9V at camera = Camera fails!\n\n🧮 VOLTAGE DROP FORMULA:\nDrop (V) = (2 × Length × Current × Resistance) ÷ 1000\n\nWhere:\n• Length = meters of cable\n• Current = amps camera draws\n• Resistance = Ω/km of wire gauge\n\n📊 WIRE RESISTANCE:\n• 18 AWG = 21 Ω/km\n• 16 AWG = 13 Ω/km\n• 14 AWG = 8 Ω/km\n\n💡 REAL EXAMPLE:\n• Cable: 150m run\n• Camera: 0.5A draw\n• Wire: 18 AWG (21 Ω/km)\n\nDrop = (2 × 150 × 0.5 × 21) ÷ 1000\nDrop = 3,150 ÷ 1000 = 3.15V\n\nCamera gets: 12V - 3.15V = 8.85V ❌\n(Minimum needed: 11V)\n\n✅ SOLUTION: Use 16 AWG wire!\nDrop = (2 × 150 × 0.5 × 13) ÷ 1000 = 1.95V\nCamera gets: 12V - 1.95V = 10.05V ❌ Still too low!\n\n✅ BEST SOLUTION: Use 14 AWG OR add mid-point power!",
-        image: "https://i.imgur.com/3QmK8Bx.png",
+        image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1200&q=80",
         imageCaption: "Voltage drop chart showing wire gauge vs cable length"
     },
     {
