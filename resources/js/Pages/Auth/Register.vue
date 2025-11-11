@@ -4,7 +4,9 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import MathPuzzle from '@/Components/MathPuzzle.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const form = useForm({
     name: '',
@@ -13,7 +15,14 @@ const form = useForm({
     password_confirmation: '',
 });
 
+const puzzleSolved = ref(false);
+
 const submit = () => {
+    if (!puzzleSolved.value) {
+        alert('Please solve the math puzzle first');
+        return;
+    }
+    
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
@@ -91,6 +100,9 @@ const submit = () => {
                     :message="form.errors.password_confirmation"
                 />
             </div>
+
+            <!-- Math Puzzle for Security -->
+            <MathPuzzle @verified="puzzleSolved = true" />
 
             <div class="mt-4 flex items-center justify-end">
                 <Link

@@ -5,7 +5,9 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import MathPuzzle from '@/Components/MathPuzzle.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 defineProps({
     canResetPassword: {
@@ -22,7 +24,14 @@ const form = useForm({
     remember: false,
 });
 
+const puzzleSolved = ref(false);
+
 const submit = () => {
+    if (!puzzleSolved.value) {
+        alert('Please solve the math puzzle first');
+        return;
+    }
+    
     form.post(route('login'), {
         onFinish: () => form.reset('password'),
     });
@@ -161,6 +170,9 @@ const submit = () => {
                         >
                     </label>
                 </div>
+
+                <!-- Math Puzzle for Security -->
+                <MathPuzzle @verified="puzzleSolved = true" />
 
                 <div class="mt-4 flex items-center justify-end">
                     <Link
