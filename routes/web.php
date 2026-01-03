@@ -65,15 +65,11 @@ Route::get('/', function() {
         return redirect()->route('dashboard');
     }
 
-    // If the visitor has not yet completed the human verification step, show the
-    // Welcome/Hero marketing page instead of forcing a redirect to login or the
-    // verification flow. This preserves a friendly landing experience for new
-    // visitors.
+    // If the visitor has not yet completed the human verification step,
+    // redirect them to the bot-check page so they complete verification first.
+    // This enforces the verification flow for new visitors.
     if (!session()->has('human_verified')) {
-        return Inertia::render('Hero', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-        ]);
+        return redirect()->route('bot-check');
     }
     
     // Get active products and featured product for the home page
