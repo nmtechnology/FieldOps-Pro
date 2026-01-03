@@ -53,6 +53,13 @@ Route::get('/bot-check', function(Illuminate\Http\Request $request) {
 
 // Home Page - Main advertising/product catalog page for verified visitors
 Route::get('/', function() {
+    // Debug: log each hit so we can see why visitors are redirected to /login
+    \Log::info('root route reached', [
+        'ip' => request()->ip(),
+        'auth' => auth()->check(),
+        'has_verified' => session()->has('human_verified'),
+    ]);
+
     // If logged in, redirect to dashboard - logged in users don't see the home page
     if (auth()->check()) {
         return redirect()->route('dashboard');
