@@ -3,9 +3,11 @@ import { onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
 
 onMounted(() => {
-    // Show loading animation for 2.5 seconds, then redirect to home
+    // Show loading animation for 2.5 seconds, then redirect to the requested page (redirect query param) or to home.
     setTimeout(() => {
-        router.visit('/');
+        const params = new URLSearchParams(window.location.search);
+        const redirectTo = params.get('redirect') || '/';
+        router.visit(redirectTo);
     }, 2500);
 });
 </script>

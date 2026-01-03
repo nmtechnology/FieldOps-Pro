@@ -158,8 +158,11 @@ Route::post('/verify', function(Illuminate\Http\Request $request) {
         'verified_value' => session()->get('human_verified')
     ]);
     
-    // Redirect to loading screen using Inertia redirect
-    return redirect()->route('loading-to-home');
+    // Redirect to loading screen using Inertia redirect.
+    // Prefer directing verified visitors to the featured product landing page.
+    $featuredProduct = \App\Models\Product::where('active', true)->first();
+    $redirectUrl = $featuredProduct ? route('products.show', $featuredProduct) : url('/');
+    return redirect()->route('loading-to-home', ['redirect' => $redirectUrl]);
 })->name('verify');
 
 // Track failed verification attempts
