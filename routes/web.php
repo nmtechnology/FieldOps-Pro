@@ -57,6 +57,17 @@ Route::get('/', function() {
     if (auth()->check()) {
         return redirect()->route('dashboard');
     }
+
+    // If the visitor has not yet completed the human verification step, show the
+    // Welcome/Hero marketing page instead of forcing a redirect to login or the
+    // verification flow. This preserves a friendly landing experience for new
+    // visitors.
+    if (!session()->has('human_verified')) {
+        return Inertia::render('Hero', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+        ]);
+    }
     
     // Get active products and featured product for the home page
     $products = \App\Models\Product::where('active', true)->get();
@@ -83,7 +94,7 @@ Route::get('/', function() {
         'guestCheckout' => true,
         'activeDiscount' => $activeDiscount,
     ]);
-})->middleware('verify.human')->name('home.index');
+})->name('home.index');
 
 // Hero/Welcome page - Simple landing page (shown after logout, etc)
 Route::get('/welcome', function() {
