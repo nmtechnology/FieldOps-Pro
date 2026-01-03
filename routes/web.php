@@ -144,6 +144,40 @@ Route::post('/verify', function(Illuminate\Http\Request $request) {
     return redirect()->route('loading-to-home');
 })->name('verify');
 
+// Track failed verification attempts
+Route::post('/verify-failed', function(Illuminate\Http\Request $request) {
+    try {
+        $trackingService = app(\App\Services\VisitorTrackingService::class);
+        $sessionId = $request->session()->getId();
+        
+        // Get or create visitor record
+        $visitor = \App\Models\VisitorLog::where('session_id', $sessionId)->first();
+        if (!$visitor) {
+            $visitor = $trackingService->trackVisitor($request);
+        }
+        
+        // Send failed attempt notification
+        $attempts = $request->input('attempts', 1);
+        $adminEmails = config('mail.admin_emails', ['purchases@fieldengineerpro.com', 'patrick@nmtechnology.us']);
+        
+        foreach ($adminEmails as $email) {
+            \Mail::to(trim($email))->send(new \App\Mail\VisitorFailedVerification($visitor, $attempts));
+        }
+        
+        \Log::warning('Visitor failed verification', [
+            'visitor_id' => $visitor->id,
+            'ip' => $visitor->ip_address,
+            'attempts' => $attempts,
+            'location' => $visitor->city . ', ' . $visitor->country,
+        ]);
+        
+        return response()->json(['status' => 'logged']);
+    } catch (\Exception $e) {
+        \Log::error('Failed to track failed verification: ' . $e->getMessage());
+        return response()->json(['status' => 'error'], 500);
+    }
+})->name('verify-failed');
+
 // Include auth and admin routes AFTER our public routes
 require __DIR__.'/auth.php';
 require __DIR__.'/admin_web.php';
@@ -167,6 +201,7 @@ Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'inde
 Route::prefix('guest')->name('guest.')->group(function() {
     Route::get('/checkout/{product}', [CheckoutController::class, 'guestCheckout'])->name('checkout');
     Route::post('/checkout/calculate-tax', [CheckoutController::class, 'calculateTax'])->name('checkout.calculate-tax');
+    Route::post('/checkout/create-payment-intent', [CheckoutController::class, 'processGuestPayment'])->name('create-payment-intent');
     Route::post('/process-payment', [CheckoutController::class, 'processGuestPayment'])->name('process-payment');
     Route::post('/coinbase-payment', [App\Http\Controllers\CoinbasePaymentController::class, 'guestCheckout'])->name('coinbase-payment');
     Route::get('/thank-you', [CheckoutController::class, 'guestThankYou'])->name('thank-you');

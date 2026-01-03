@@ -272,6 +272,18 @@ export default {
             } else {
                 this.showError = true;
                 
+                // Send failed attempt notification to server
+                fetch('/verify-failed', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        attempts: this.attempts
+                    })
+                }).catch(err => console.error('Failed to log verification failure:', err));
+                
                 // Reset after animation
                 setTimeout(() => {
                     this.showError = false;

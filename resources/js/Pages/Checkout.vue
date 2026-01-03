@@ -170,9 +170,9 @@
                                         </div>
                                         
                                         <div class="mb-4">
-                                            <label for="card-element" class="block text-sm font-medium text-gray-300 mb-2">Card Details</label>
-                                            <div id="card-element" class="border border-gray-600 rounded-md p-3 bg-gray-700"></div>
-                                            <div id="card-errors" class="mt-2 text-sm text-red-400" role="alert"></div>
+                                            <label for="payment-element" class="block text-sm font-medium text-gray-300 mb-2">Payment Details</label>
+                                            <div id="payment-element" class="border border-gray-600 rounded-md p-3 bg-gray-700"></div>
+                                            <div id="payment-errors" class="mt-2 text-sm text-red-400" role="alert"></div>
                                         </div>
                                         
                                         <!-- Terms & Conditions Acceptance -->
@@ -407,6 +407,12 @@ export default defineComponent({
                 zipCode: '',
                 acceptedTerms: false
             },
+            // Payment Element fields
+            clientSecret: null,
+            elements: null,
+            paymentElement: null,
+            paymentReady: false,
+            paymentMessage: '',
             achForm: {
                 name: '',
                 email: '',
@@ -456,25 +462,7 @@ export default defineComponent({
         loadStripe() {
             // Load Stripe.js
             this.stripe = Stripe(this.stripeKey);
-            
-            // Create card element
-            const elements = this.stripe.elements();
-            this.card = elements.create('card');
-            
-            // Mount card element
-            this.$nextTick(() => {
-                this.card.mount('#card-element');
-                
-                // Handle validation errors
-                this.card.addEventListener('change', event => {
-                    const displayError = document.getElementById('card-errors');
-                    if (event.error) {
-                        displayError.textContent = event.error.message;
-                    } else {
-                        displayError.textContent = '';
-                    }
-                });
-            });
+            // Payment Element will be created after a PaymentIntent (client secret) is returned from the server
         },
         async calculateTax() {
             if (!this.selectedState) {
@@ -501,54 +489,57 @@ export default defineComponent({
         async processCardPayment() {
             if (this.isProcessing) return;
             this.isProcessing = true;
-            
+
             try {
-                // Create payment intent
-                const response = await axios.post(route('process.payment'), {
-                    product_id: this.product.id,
-                    state: this.selectedState,
-                    discount_code: this.discount ? this.discountCode : null,
-                    // Account information
-                    name: this.cardForm.name,
-                    email: this.cardForm.email,
-                    phone: this.cardForm.phone,
-                    address: this.cardForm.address,
-                    city: this.cardForm.city,
-                    state_code: this.selectedState,
-                    zip_code: this.cardForm.zipCode
+                // If we don't yet have a client secret, create a PaymentIntent on the server
+                if (!this.clientSecret) {
+                    const response = await axios.post(route('process.payment'), {
+                        product_id: this.product.id,
+                        state: this.selectedState,
+                        discount_code: this.discount ? this.discountCode : null,
+                        // Account information
+                        name: this.cardForm.name,
+                        email: this.cardForm.email,
+                        phone: this.cardForm.phone,
+                        address: this.cardForm.address,
+                        city: this.cardForm.city,
+                        state_code: this.selectedState,
+                        zip_code: this.cardForm.zipCode
+                    });
+
+                    this.clientSecret = response.data.client_secret;
+                    this.orderId = response.data.order_id;
+
+                    // Initialize Payment Element
+                    this.elements = this.stripe.elements({ clientSecret: this.clientSecret });
+                    this.paymentElement = this.elements.create('payment');
+                    this.paymentElement.mount('#payment-element');
+                    this.paymentReady = true;
+                    this.paymentMessage = 'Payment form ready — enter your card details and click Pay again to complete the purchase.';
+
+                    // Show message to user and allow them to fill details
+                    document.getElementById('payment-errors').textContent = '';
+                    this.isProcessing = false;
+                    return;
+                }
+
+                // If paymentElement is mounted, confirm payment (this may redirect to 3DS if required)
+                const returnUrl = window.location.origin + route('checkout.thankyou', this.orderId);
+                const confirmResult = await this.stripe.confirmPayment({
+                    elements: this.elements,
+                    confirmParams: { return_url: returnUrl }
                 });
-                
-                const { client_secret } = response.data;
-                
-                // Confirm card payment
-                const result = await this.stripe.confirmCardPayment(client_secret, {
-                    payment_method: {
-                        card: this.card,
-                        billing_details: {
-                            name: this.cardForm.name,
-                            email: this.cardForm.email,
-                            phone: this.cardForm.phone,
-                            address: {
-                                line1: this.cardForm.address,
-                                city: this.cardForm.city,
-                                state: this.selectedState,
-                                postal_code: this.cardForm.zipCode
-                            }
-                        }
-                    }
-                });
-                
-                if (result.error) {
-                    // Show error to your customer
-                    document.getElementById('card-errors').textContent = result.error.message;
+
+                if (confirmResult.error) {
+                    document.getElementById('payment-errors').textContent = confirmResult.error.message;
                     this.isProcessing = false;
                 } else {
-                    // Payment succeeded - redirect to thank you page
-                    router.visit(route('checkout.thankyou', response.data.order_id));
+                    // For some payment methods, Stripe will redirect; if not, handle success here
+                    // (Most flows will redirect to the return_url upon successful confirmation)
                 }
             } catch (error) {
                 console.error('Payment error:', error);
-                document.getElementById('card-errors').textContent = error.response?.data?.message || 'An error occurred while processing your payment. Please try again.';
+                document.getElementById('payment-errors').textContent = error.response?.data?.message || 'An error occurred while processing your payment. Please try again.';
                 this.isProcessing = false;
             }
         },

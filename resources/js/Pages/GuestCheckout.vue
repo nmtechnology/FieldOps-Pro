@@ -277,15 +277,11 @@
                             <!-- Card Payment Form -->
                             <div v-if="paymentMethod === 'card'" class="space-y-6 lg:space-y-8">
                                 <div>
-                                    <label for="card-element" class="block text-sm lg:text-base font-bold text-gray-300 mb-2 lg:mb-3">
-                                        Card Information <span class="text-red-400">*</span>
+                                    <label for="payment-element" class="block text-sm lg:text-base font-bold text-gray-300 mb-2 lg:mb-3">
+                                        Payment Details <span class="text-red-400">*</span>
                                     </label>
-                                    <div id="card-element" class="border-2 border-gray-600 rounded-lg p-4 lg:p-5 bg-gray-900 focus-within:border-orange-500 transition-colors"></div>
-                                    <div id="card-errors" class="mt-2 text-sm text-red-400 flex items-center" role="alert">
-                                        <svg v-if="cardErrors" class="w-4 h-4 mr-1 flex-shrink-0 mt-0.5 sm:mt-0" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
+                                    <div id="payment-element" class="border-2 border-gray-600 rounded-lg p-4 lg:p-5 bg-gray-900 focus-within:border-orange-500 transition-colors"></div>
+                                    <div id="payment-errors" class="mt-2 text-sm text-red-400 flex items-center" role="alert"></div>
                                 </div>
                                 
                                 <!-- Security Badge -->
@@ -375,9 +371,15 @@ export default defineComponent({
             paymentMethod: 'card',
             isProcessing: false,
             stripe: null,
-            card: null,
-            cardErrors: '',
-            email: '',
+                // Payment Element state
+                clientSecret: null,
+                elements: null,
+                paymentElement: null,
+                paymentReady: false,
+                orderId: null,
+                card: null,
+                cardErrors: '',
+                email: '',
             selectedState: '',
             taxRate: 0,
             taxAmount: 0,
@@ -441,31 +443,8 @@ export default defineComponent({
                 // Load Stripe.js
                 this.stripe = window.Stripe(this.stripeKey);
                 
-                // Create card element
-                const elements = this.stripe.elements();
-                this.card = elements.create('card');
-                
-                // Mount card element
-                this.$nextTick(() => {
-                    this.card.mount('#card-element');
-                    
-                    // Handle validation errors
-                    this.card.addEventListener('change', event => {
-                        if (event.error) {
-                            this.cardErrors = event.error.message;
-                            const displayError = document.getElementById('card-errors');
-                            if (displayError) {
-                                displayError.textContent = event.error.message;
-                            }
-                        } else {
-                            this.cardErrors = '';
-                            const displayError = document.getElementById('card-errors');
-                            if (displayError) {
-                                displayError.textContent = '';
-                            }
-                        }
-                    });
-                });
+                // Payment Element will be created and mounted after the server returns a client_secret (PaymentIntent)
+                // No immediate card element is mounted here
             };
             
             initStripe();
@@ -482,32 +461,47 @@ export default defineComponent({
             this.isProcessing = true;
             
             try {
-                // Create payment method
-                const result = await this.stripe.createPaymentMethod({
-                    type: 'card',
-                    card: this.card,
-                    billing_details: {
+                // If we do not yet have a client_secret, create a PaymentIntent on the server
+                if (!this.clientSecret) {
+                    const response = await axios.post(route('guest.create-payment-intent'), {
+                        product_id: this.product.id,
                         email: this.email,
-                    },
-                });
-                
-                if (result.error) {
-                    document.getElementById('card-errors').textContent = result.error.message;
-                    this.isProcessing = false;
-                    return;
+                        state: this.selectedState,
+                        discount_code: this.discount ? this.discountCode : null,
+                    });
+
+                    if (response.data.client_secret) {
+                        this.clientSecret = response.data.client_secret;
+                        this.orderId = response.data.order_id;
+                        this.elements = this.stripe.elements({ clientSecret: this.clientSecret });
+                        this.paymentElement = this.elements.create('payment');
+                        this.paymentElement.mount('#payment-element');
+                        this.paymentReady = true;
+                        this.isProcessing = false;
+                        document.getElementById('payment-errors').textContent = '';
+                        return; // Ask user to complete the payment form and press Pay again
+                    } else {
+                        // Fallback - server completed processing and redirected server-side
+                        router.visit(route('guest.thank-you'));
+                        return;
+                    }
                 }
-                
-                // Process the payment with our server
-                await axios.post(route('guest.process-payment'), {
-                    product_id: this.product.id,
-                    payment_method_id: result.paymentMethod.id,
-                    email: this.email,
-                    state: this.selectedState,
-                    discount_code: this.discount ? this.discountCode : null,
-                });
-                
-                // Redirect to thank you page
-                router.visit(route('guest.thank-you'));
+
+                // If payment element is ready, confirm the payment (may redirect for 3DS)
+                if (this.paymentReady && this.clientSecret) {
+                    const returnUrl = window.location.origin + route('guest.thank-you');
+                    const confirmResult = await this.stripe.confirmPayment({
+                        elements: this.elements,
+                        confirmParams: { return_url: returnUrl }
+                    });
+
+                    if (confirmResult.error) {
+                        document.getElementById('payment-errors').textContent = confirmResult.error.message;
+                        this.isProcessing = false;
+                    } else {
+                        // Some flows redirect; otherwise handle success here
+                    }
+                }
             } catch (error) {
                 console.error('Payment error:', error);
                 document.getElementById('card-errors').textContent = error.response?.data?.message || 

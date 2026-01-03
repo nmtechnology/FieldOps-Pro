@@ -499,25 +499,39 @@ class CheckoutController extends Controller
             // Create a temporary guest order in the session
             $orderNumber = 'GUEST-' . Str::random(10);
             
-            // Create a payment intent
-            $paymentIntent = PaymentIntent::create([
-                'amount' => $totalAmount * 100, // Stripe uses cents
-                'currency' => 'usd',
-                'payment_method' => $validated['payment_method_id'],
-                'confirmation_method' => 'manual',
-                'confirm' => true,
-                'metadata' => [
-                    'product_id' => $product->id,
-                    'order_number' => $orderNumber,
-                    'guest_email' => $validated['email'],
-                    'buyer_state' => $validated['state'],
-                    'subtotal' => $subtotal,
-                    'tax_rate' => $taxRate,
-                    'tax_amount' => $taxAmount,
-                ],
-            ]);
+// Create a payment intent (confirmed immediately if a payment_method_id is provided)
+                $intentParams = [
+                    'amount' => (int)($totalAmount * 100), // Stripe uses cents
+                    'currency' => 'usd',
+                    'metadata' => [
+                        'product_id' => $product->id,
+                        'order_number' => $orderNumber,
+                        'guest_email' => $validated['email'],
+                        'buyer_state' => $validated['state'],
+                        'subtotal' => $subtotal,
+                        'tax_rate' => $taxRate,
+                        'tax_amount' => $taxAmount,
+                    ],
+                ];
+
+                // If a payment_method_id was sent (existing flow), confirm immediately
+                if (!empty($validated['payment_method_id'])) {
+                    $intentParams['payment_method'] = $validated['payment_method_id'];
+                    $intentParams['confirmation_method'] = 'manual';
+                    $intentParams['confirm'] = true;
+                }
+
+                $paymentIntent = PaymentIntent::create($intentParams);
             
             // Store guest purchase info in session
+            
+            // If no payment_method_id was provided, return the client_secret so the frontend can mount a Payment Element
+            if (empty($validated['payment_method_id'])) {
+                return response()->json([
+                    'client_secret' => $paymentIntent->client_secret,
+                    'order_id' => $order->id
+                ]);
+            }
             session([
                 'guest_purchase' => [
                     'email' => $validated['email'],

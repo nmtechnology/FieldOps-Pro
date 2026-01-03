@@ -17,10 +17,10 @@
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(249, 115, 22, 0.2);
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.2);
         }
         .header {
-            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: white;
             padding: 30px;
             text-align: center;
@@ -84,15 +84,20 @@
         }
         .badge {
             display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
+            padding: 4px 12px;
+            border-radius: 12px;
             font-size: 12px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            font-weight: 600;
+            background: #ef4444;
             color: white;
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        }
+        .alert-box {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #991b1b;
         }
         .footer {
             background: linear-gradient(135deg, #1e293b 0%, #111827 100%);
@@ -141,12 +146,17 @@
                     <rect x="22" y="44" width="20" height="8" fill="#dbeafe"/>
                 </svg>
             </div>
-            <h1>✅ New Verified Visitor</h1>
-            <p style="margin: 10px 0 0 0; opacity: 0.95; position: relative;">A visitor has successfully verified on <strong>FieldEngineer Pro</strong></p>
+            <h1>⚠️ Failed Verification Attempt</h1>
+            <p style="margin: 10px 0 0 0; opacity: 0.95; position: relative;">A visitor failed the math verification on <strong>FieldEngineer Pro</strong></p>
         </div>
         
         <div class="content">
-            <p><span class="badge">VERIFIED</span></p>
+            <div class="alert-box">
+                <strong>⚠️ Failed Attempt:</strong> This visitor submitted an incorrect answer to the math verification.
+                <br><strong>Attempts Made:</strong> {{ $attempts }}
+            </div>
+            
+            <p><span class="badge">SUSPICIOUS ACTIVITY</span></p>
             
             <h3 style="margin-top: 25px; margin-bottom: 15px; color: #333;">📍 Location Information</h3>
             <div class="info-grid">
@@ -225,7 +235,7 @@
             </div>
 
             <div class="timestamp">
-                <strong>Verified At:</strong> {{ $visitor->verified_at->format('F j, Y g:i A') }} ({{ $visitor->verified_at->diffForHumans() }})
+                <strong>Attempted At:</strong> {{ now()->format('F j, Y g:i A') }} ({{ now()->diffForHumans() }})
             </div>
         </div>
         
